@@ -24,8 +24,8 @@ const clip = new MotorCortex.HTMLClip({
     `,
     host: document.getElementById('clip'),
     containerParams: {
-        width: '600px',
-        height: '400px'
+        width: '1200px',
+        height: '900px'
     }
 });
 
@@ -33,6 +33,7 @@ const clip = new MotorCortex.HTMLClip({
 
 const newGraph = new MCGraphs.ProgressBar({
     // here goes your attrs
+    barCount: 3
 }, {
     selector: '#htmlclip'
 });
