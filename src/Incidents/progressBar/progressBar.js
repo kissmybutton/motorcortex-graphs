@@ -17,16 +17,17 @@ const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 export default class ProgressBar extends MotorCortex.HTMLClip{
     get html(){
         let list = "";
+        const barCount = this.attrs.data.length;
 
-        for (let i=0; i < this.attrs.barCount;i++) {
+        for (let i=0; i < barCount;i++) {
             list += `<div class ="row row-${i}">
+            <div class="bar-header">${this.attrs.data[i].name}</div>
             <div class="container-bar container-bar-${i}">
                 <div class="inner-bar inner-bar-${i}"></div>
             </div>
-            <div class="text text-${i}"></div>
+            <div class="text text-${i}">${this.attrs.data[i].value}</div>
         </div>`
         }
-        console.log(list)
         return `
         <div class="container">
             ${list}
@@ -44,6 +45,8 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                 background-color: transparent;
                 display: flex;
                 flex-direction: column;
+                font-family: 'Noto Sans', sans-serif;
+                color: white;
             }
             .row{
                 display: flex;
@@ -54,18 +57,17 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             }
             .container-bar{
                 position: absolute;
-                height: 1rem;
+                height: 2rem;
                 background: lightgray;
                 border-radius: 2rem;
-                padding-bottom: 1rem;
                 width: 20rem;
                 box-shadow: 2px 2px 5px gray;
             }
             .inner-bar{
                 position: relative;
                 background-color: blue;
-                height: 98%;
-                top: 50%;
+                height: 60%;
+                top: 21%;
                 border-radius: 2rem;
                 width: 95%;
                 margin-left: 0.5rem;
@@ -73,12 +75,16 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             }
             .text{
                 position: absolute;
-                top: 0.5rem;
-                left: 21rem;
-                color: white;
+                top: 0.25rem;
+                z-index: -1;
             }
-            .text::before{
-                content: "0%";
+            .text::after{
+                content: "%";
+            }
+            .bar-header{
+                position: absolute;
+                top: 0.25rem;
+                left: -7rem;
             }
         `;
     }
@@ -89,7 +95,10 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         // type: "google-font" and
         // src: the src of the google font e.g.:
         // https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap
-        return [];
+        return [{
+            type: 'google-font',
+            src: 'https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap'
+        }];
     }
 
     get audioSources(){
@@ -98,60 +107,88 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
     }
 
     buildTree(){
-        for (let i=0; i < this.attrs.barCount;i++) {
-        const slideIn = new MCAnime.Anime({
-            animatedAttrs: {
-                bottom: `${50 - (i * 5)}%`
-                
-              },
-              initialValues: {
-                bottom: `-${i * 4}rem`,
-              }
-            },
-            {
-              duration: 2000,
-              selector: `.row-${i}`,
-              easing: 'linear'
-            });
-
-            const expand_base = new MCAnime.Anime({
+        const barCount = this.attrs.data.length;
+        let sum = 0;
+        for (let i=1; i <= barCount;i++) {
+            sum += i;
+        }
+        const avg = sum / barCount;
+        for (let i=0; i < barCount;i++) {
+            const slideIn = new MCAnime.Anime({
                 animatedAttrs: {
-                    width: '20rem'
+                    bottom: `${50 + (avg - i) * 5 - 3.4}%`
                     
-                  },
-                  initialValues: {
-                    width:'0.2rem',
-                  }
+                },
+                initialValues: {
+                    bottom: `-${i * 2}rem`,
+                }
                 },
                 {
-                  duration: 1500,
-                  delay: 200 * i,
-                  selector: `.container-bar-${i}`,
-                  easing: 'linear'
+                duration: this.attrs.duration.slideInDuration ? this.attrs.duration.slideInDuration : 1,
+                selector: `.row-${i}`,
+                easing: 'linear'
                 });
 
+                const expand_base = new MCAnime.Anime({
+                    animatedAttrs: {
+                        width: '20rem'
+                        
+                    },
+                    initialValues: {
+                        width:'0.2rem',
+                    }
+                    },
+                    {
+                    duration: this.attrs.duration.expandBaseDuration ? this.attrs.duration.expandBaseDuration : 1,
+                    delay: 200 * i,
+                    selector: `.container-bar-${i}`,
+                    easing: 'linear'
+                    });
 
-            const expand = new MCAnime.Anime({
+
+                const expand_bar = new MCAnime.Anime({
+                    animatedAttrs: {
+                        width: `${this.attrs.data[i].value * 0.95}%`
+                            
+                    },
+                    initialValues: {
+                        width:'0%',
+                    }
+                    },
+                        {
+                        duration: this.attrs.duration.expandBarDuration ? this.attrs.duration.expandBarDuration : 1,
+                        delay: 200 * i,
+                        selector: `.inner-bar-${i}`,
+                        easing: 'linear'
+                        });
+
+                
+
+            this.addIncident(slideIn, 0);
+            this.addIncident(expand_base, this.attrs.duration.slideInDuration);
+            this.addIncident(expand_bar, this.attrs.duration.slideInDuration + this.attrs.duration.expandBaseDuration);
+
+        }
+
+        const expand_text = new MCAnime.Anime({
                 animatedAttrs: {
-                    width: '95%'
+                    left: '21rem',
+                    opacity: 1
                         
                 },
                 initialValues: {
-                    width:'0%',
+                    left:'15rem',
+                    opacity: 0
                 }
                 },
                     {
-                      duration: 2000,
-                      delay: 200 * i,
-                      selector: `.inner-bar-${i}`,
+                      duration: this.attrs.duration.showTextDuration ? this.attrs.duration.showTextDuration : 1,
+                      delay: 200 * barCount, 
+                      selector: `.text`,
                       easing: 'linear'
                     });
-
-        this.addIncident(slideIn, 1);
-        this.addIncident(expand_base, 2000);
-        this.addIncident(expand, 3500);
         
-                }
+        this.addIncident(expand_text, this.attrs.duration.slideInDuration + this.attrs.duration.expandBaseDuration + this.attrs.duration.expandBarDuration);
         
     }
 }
