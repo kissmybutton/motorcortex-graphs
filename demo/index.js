@@ -1,42 +1,43 @@
 import MotorCortex from '@kissmybutton/motorcortex';
+import Player from "@kissmybutton/motorcortex-player";
 import MotorCortexGraph from "../dist/bundle.umd";
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
+import * as data from './data/barChartData.json';
 
-import Player from "@kissmybutton/motorcortex-player";
 
 
 const clip = new MotorCortex.HTMLClip({
-    html: `<div class="container">
-        <div id="effect"></div>
-        <div id="htmlclip"></div>
-        <div id="combo"></div>
-        <div id="myclip"></div>
-    </div>`,
+    html: `
+        <div class="container">
+            <div id="barGraph"></div>
+        </div>`,
     css: `
         .container{
-            width: 600px,
-            height: 400px
-        }
-        .container>div{
-            width: 50%;
-            height: 50%;
+            width: 960px,
+            height: 720px,
         }
     `,
     host: document.getElementById('clip'),
     containerParams: {
-        width: '600px',
-        height: '400px'
+        width: '960px',
+        height: '720px'
     }
 });
 
 
 
-const newGraph = new MCGraphs.ProgressBar({
-    // here goes your attrs
+const newGraph = new MCGraphs.BarChartSimple({
+    data: data,
+    backgroundColor: "#bdbdbd",
+    axisColor: "black",
+    barColor: "#5c5c5c",
+    grid: true,
+    introDur: 1500,
 }, {
-    selector: '#htmlclip'
+    selector: '#barGraph',
 });
 
-clip.addIncident(newGraph, 0);
 
+clip.addIncident(newGraph, 0);
+clip.play();
 const player = new Player({clip});

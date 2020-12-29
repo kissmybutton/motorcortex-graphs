@@ -1,0 +1,15 @@
+{ 
+    "title": "Test Graph", 
+    "data": {
+        "point1": 10,
+        "point2": 20,
+        "point3": 30,
+        "point4": 40,
+        "point5": 50,
+        "point6": 60,
+        "point7": 70,
+        "point8": 80,
+        "point9": 90,
+        "point10": 100
+    } 
+}

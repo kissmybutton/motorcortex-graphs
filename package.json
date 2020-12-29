@@ -36,7 +36,9 @@
       "path": "cz-conventional-changelog"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@kissmybutton/motorcortex-anime": "^2.1.4"
+  },
   "peerDependencies": {
     "@kissmybutton/motorcortex": "6.1.0"
   },
