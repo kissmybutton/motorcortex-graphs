@@ -40,11 +40,9 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         // its environment.
         return `
             .container{
-                width: 100%;
                 height: 100%;
                 background-color: transparent;
                 display: flex;
-                flex-direction: column;
                 font-family: 'Noto Sans', sans-serif;
                 color: white;
             }
@@ -84,7 +82,10 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             .bar-header{
                 position: absolute;
                 top: 0.25rem;
-                left: -7rem;
+                left: -26rem;
+                display: flex;
+                justify-content: flex-end;
+                width: 25rem;
             }
         `;
     }
@@ -160,14 +161,11 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                         delay: 200 * i,
                         selector: `.inner-bar-${i}`,
                         easing: 'linear'
-                        });
-
-                
+                        });                
 
             this.addIncident(slideIn, 0);
             this.addIncident(expand_base, this.attrs.duration.slideInDuration);
             this.addIncident(expand_bar, this.attrs.duration.slideInDuration + this.attrs.duration.expandBaseDuration);
-
         }
 
         const expand_text = new MCAnime.Anime({
@@ -187,8 +185,25 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                       selector: `.text`,
                       easing: 'linear'
                     });
+
+                
+            const collapse_all = new MCAnime.Anime({
+                animatedAttrs: {
+                    opacity: 0,
+                },
+                },
+                {
+                    duration: this.attrs.duration.collapseDuration ? this.attrs.duration.collapseDuration : 1,
+                    selector: `.container`,
+                    easing: 'linear'
+                });
         
         this.addIncident(expand_text, this.attrs.duration.slideInDuration + this.attrs.duration.expandBaseDuration + this.attrs.duration.expandBarDuration);
+        this.addIncident(collapse_all, this.attrs.duration.slideInDuration + 
+            this.attrs.duration.expandBaseDuration +
+            this.attrs.duration.expandBarDuration +
+            this.attrs.duration.showTextDuration + 
+            this.attrs.duration.staticGraphDuration);
         
     }
 }

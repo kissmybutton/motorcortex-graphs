@@ -34,7 +34,15 @@ const clip = new MotorCortex.HTMLClip({
 const newGraph = new MCGraphs.ProgressBar({
     // here goes your attrs
     data: require('./data.json'),
-    duration: {slideInDuration: 2000, expandBaseDuration: 1500, expandBarDuration: 2000, showTextDuration: 500}
+    duration: {
+        slideInDuration: 2000,
+        expandBaseDuration: 1500,
+        expandBarDuration: 2000,
+        showTextDuration: 500,
+        staticGraphDuration: 4000,
+        collapseDuration: 2000
+    },
+
 }, {
     selector: '#htmlclip'
 });
