@@ -27,12 +27,24 @@ const clip = new MotorCortex.HTMLClip({
 
 
 const newGraph = new MCGraphs.BarChartSimple({
-    data: data,
-    backgroundColor: "#bdbdbd",
-    axisColor: "black",
-    barColor: "#5c5c5c",
+    data: data,  // work out data defaults
+        // - rounding 2 sig fig.
+        // - 
+    palette: {
+        // primary: "",
+        // secondary: "", 
+        // tertiary: "",
+        // font: "", 
+        // accent: "", //default yellow COMMON
+        background: "#D3CDCD", //default transparent COMMON
+    },
     grid: true,
-    introDur: 1500,
+    maxVal: 100, // if its 100 it simulates %.
+    timings: {
+        intro: 2000, // if no intro -> appears normally (no animation) defaults to 0
+        outtro: 2000, // if no outtro -> stays static defaults to 0
+        static: 1000, // defaults to 1000
+    },
 }, {
     selector: '#barGraph',
 });
