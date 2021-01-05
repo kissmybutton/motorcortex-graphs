@@ -2,44 +2,52 @@
     "title": "Test Graph", 
     "data": [
         {
-            "name": "point1",
+            "name": "JAN",
             "value": 100
         },
         {
-            "name": "point2",
+            "name": "FEB",
             "value": 200
         },
         {
-            "name": "point3",
+            "name": "MAR",
             "value": 300
         },
         {
-            "name": "point4",
+            "name": "APR",
             "value": 400
         },
         {
-            "name": "point5",
+            "name": "MAY",
             "value": 500
         },
         {
-            "name": "point6",
+            "name": "JUN",
             "value": 600
         },
         {
-            "name": "point7",
+            "name": "JUL",
             "value": 700
         },
         {
-            "name": "point8",
+            "name": "AUG",
             "value": 800
         },
         {
-            "name": "point9",
+            "name": "SEP",
             "value": 900
         },
         {
-            "name": "point10",
+            "name": "OCT",
             "value": 1000
+        },
+        {
+            "name": "NOV",
+            "value": 1100
+        },
+        {
+            "name": "DEC",
+            "value": 1200
         }
     ]
 }

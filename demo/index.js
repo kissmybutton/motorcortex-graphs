@@ -43,7 +43,7 @@ const newGraph = new MCGraphs.BarChartSimple({
     timings: {
         intro: 2000, // if no intro -> appears normally (no animation) defaults to 0
         outtro: 2000, // if no outtro -> stays static defaults to 0
-        static: 1000, // defaults to 1000
+        static: 2000, // defaults to 1000
     },
 }, {
     selector: '#barGraph',
@@ -52,4 +52,4 @@ const newGraph = new MCGraphs.BarChartSimple({
 
 clip.addIncident(newGraph, 0);
 clip.play();
-const player = new Player({clip});
+const player = new Player({clip, timeFormat: "ms", pointerEvents: true});
