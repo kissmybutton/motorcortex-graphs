@@ -1,15 +1,15 @@
 [
 	{
 		"name": "Percentage 1",
-		"value": 80
+		"value": 5
 	},
 	{
 		"name": "Percentage 2",
-		"value": 45
+		"value": 34
 	},
 	{
 		"name": "Percentage 3",
-		"value": 12
+		"value": 12.298374
 	},
 	{
 		"name": "Percentage 4",
@@ -17,6 +17,6 @@
 	},
 	{
 		"name": "Percentage 5",
-		"value": 3
+		"value": 10
 	}
 ]

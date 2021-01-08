@@ -24,8 +24,8 @@ const clip = new MotorCortex.HTMLClip({
     `,
     host: document.getElementById('clip'),
     containerParams: {
-        width: '1200px',
-        height: '900px'
+        width: '1024px',
+        height: '768px'
     }
 });
 
@@ -34,17 +34,30 @@ const clip = new MotorCortex.HTMLClip({
 const newGraph = new MCGraphs.ProgressBar({
     // here goes your attrs
     data: require('./data.json'),
-    duration: {
-        slideInDuration: 2000,
-        expandBaseDuration: 1500,
-        expandBarDuration: 2000,
-        showTextDuration: 500,
-        staticGraphDuration: 4000,
-        collapseDuration: 2000
+    timings: {
+        intro: 4000,
+        static: 0,
+        outro: 1000,
     },
-
+    palette: {
+        primary: "",
+        secondary: "", 
+        tertiary: "",
+        font: "",
+        accent: "", 
+        background: "#D3CDCD", 
+    },
+    font: {
+        url: 'https://fonts.googleapis.com/css2?family=Righteous&display=swap',
+        fontFamily: 'Righteous, cursive',
+        size: '1.2rem'
+    }
 }, {
-    selector: '#htmlclip'
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px',
+        height: '768px'
+    },
 });
 
 clip.addIncident(newGraph, 0);

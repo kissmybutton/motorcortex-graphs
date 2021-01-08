@@ -1,5 +1,6 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
+import * as DefaultStyle from '../../Defaults/colorPalette';
 
 const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 
@@ -16,77 +17,106 @@ const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
  */
 export default class ProgressBar extends MotorCortex.HTMLClip{
     get html(){
-        let list = "";
-        const barCount = this.attrs.data.length;
+        // let list = "";
 
-        for (let i=0; i < barCount;i++) {
-            list += `<div class ="row row-${i}">
-            <div class="bar-header">${this.attrs.data[i].name}</div>
-            <div class="container-bar container-bar-${i}">
-                <div class="inner-bar inner-bar-${i}"></div>
+        // for (let i=0; i < this.barCount;i++) {
+        //     list += `<div class ="row row-${i}">
+        //     <div class="bar-header">${this.attrs.data[i].name}</div>
+        //     <div class="container-bar container-bar-${i}">
+        //         <div class="inner-bar inner-bar-${i} ${this.attrs.data[i].value < this.criticalValue ? `extra-rounded-${i}` : ''}"></div>
+        //     </div>
+        //     <div class="text text-${i}">${Number.isInteger(this.attrs.data[i].value) ? this.attrs.data[i].value : this.attrs.data[i].value.toFixed(2)}</div>
+        // </div>`;
+        // }
+
+        let list = this.attrs.data.map((elem, index) => {
+            return <div class ={"row row-"+index}>
+            <div class="bar-header">{elem.name}</div>
+            <div class={"container-bar container-bar-"+index}>
+                <div class={"inner-bar inner-bar-"+ index + " " + (elem.value < this.criticalValue ? "extra-rounded-"+index : null)}></div>
             </div>
-            <div class="text text-${i}">${this.attrs.data[i].value}</div>
-        </div>`
-        }
-        return `
-        <div class="container">
-            ${list}
+            <div class={"text text-"+index}>{elem.value.toFixed(2)}</div>
         </div>
-        `
+        });
+        console.log(list);
+        return <div class="container">{list}</div>
     }
 
     get css(){
-        // just return the CSS you want to apply. It's totally isolated by 
-        // its environment.
+        let rows = '';
+
+        if(this.attrs.timings.intro) {
+            const avg = this.barSum / this.barCount;
+
+            this.attrs.data.forEach((elem, index) => {
+                rows += `.row-${index}{
+                    bottom: ${50 + (avg - index) * 100/this.barCount - 60/this.barCount * 2.15}%;
+                }
+                .inner-bar-${index}{
+                    width: ${elem.value.toFixed(2)}%;
+                }
+                .extra-rounded-${index}{
+                    height: 60%;
+                    top: 20%;
+
+                }`;
+            })
+        }
+        console.log(rows)
         return `
             .container{
                 height: 100%;
-                background-color: transparent;
+                background-color: ${this.attrs.palette.background ? this.attrs.palette.background : DefaultStyle.colorPalette.background};
                 display: flex;
-                font-family: 'Noto Sans', sans-serif;
-                color: white;
+                color: ${this.attrs.palette.font ? this.attrs.palette.font : DefaultStyle.colorPalette.font};
+                font-family: ${this.attrs.font.fontFamily? this.attrs.font.fontFamily : 'Staatliches, cursive'};
+                font-size: ${this.attrs.font.size ? this.attrs.font.size : '1.2rem'};
             }
             .row{
                 display: flex;
                 flex-direction: row;
                 position: absolute;
-                left: 50%;
-                margin-left: -10rem;
+                left: 20%;
+                align-items: center;
+                height: ${60/this.barCount}%;
+                width: 100%;
             }
             .container-bar{
                 position: absolute;
-                height: 2rem;
-                background: lightgray;
-                border-radius: 2rem;
-                width: 20rem;
+                height: 100%;
+                background: ${this.attrs.palette.secondary ? this.attrs.palette.secondary : DefaultStyle.colorPalette.darkGray};
+                border-radius: 16rem;
+                width: 60%;
                 box-shadow: 2px 2px 5px gray;
+                border: 0.2rem solid ${this.attrs.palette.accent ? this.attrs.palette.accent : DefaultStyle.colorPalette.accent};
+                z-index: 1;
             }
             .inner-bar{
                 position: relative;
-                background-color: blue;
-                height: 60%;
-                top: 21%;
-                border-radius: 2rem;
-                width: 95%;
-                margin-left: 0.5rem;
-                box-shadow: 2px 2px 5px gray;
+                background-color: ${this.attrs.palette.primary ? this.attrs.palette.primary : DefaultStyle.colorPalette.lightGray};
+                height: 102%;
+                border-radius: 16rem;
+                bottom: -1px;
+                z-index: 2;
+                top: -0.5px;
+                
             }
             .text{
-                position: absolute;
-                top: 0.25rem;
-                z-index: -1;
+                position: relative;
+                z-index: 0;
+                opacity: 1;
+                left: 62%;
             }
             .text::after{
                 content: "%";
             }
             .bar-header{
                 position: absolute;
-                top: 0.25rem;
-                left: -26rem;
-                display: flex;
-                justify-content: flex-end;
-                width: 25rem;
+                left: -21%;
+                text-align: right;
+                width: 20%;
             }
+            ${rows}
         `;
     }
 
@@ -98,7 +128,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         // https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap
         return [{
             type: 'google-font',
-            src: 'https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap'
+            src: this.attrs.font.url? this.attrs.font.url : 'https://fonts.googleapis.com/css2?family=Staatliches&display=swap'
         }];
     }
 
@@ -108,102 +138,130 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
     }
 
     buildTree(){
-        const barCount = this.attrs.data.length;
-        let sum = 0;
-        for (let i=1; i <= barCount;i++) {
-            sum += i;
-        }
-        const avg = sum / barCount;
-        for (let i=0; i < barCount;i++) {
-            const slideIn = new MCAnime.Anime({
-                animatedAttrs: {
-                    bottom: `${50 + (avg - i) * 5 - 3.4}%`
-                    
-                },
-                initialValues: {
-                    bottom: `-${i * 2}rem`,
-                }
-                },
-                {
-                duration: this.attrs.duration.slideInDuration ? this.attrs.duration.slideInDuration : 1,
-                selector: `.row-${i}`,
-                easing: 'linear'
-                });
+        const avg = this.barSum / this.barCount;
 
-                const expand_base = new MCAnime.Anime({
+        if (this.attrs.timings.intro) {
+            const slideInDuration = Math.floor(this.attrs.timings.intro * 0.33);
+            const expandBaseDuration = Math.floor(this.attrs.timings.intro * 0.25);
+            const expandBarDuration = Math.floor(this.attrs.timings.intro * 0.33);
+            const showTextDuration = Math.floor(this.attrs.timings.intro * 0.09);
+
+
+            for (let i=0; i < this.barCount;i++) {
+                const slideIn = new MCAnime.Anime({
                     animatedAttrs: {
-                        width: '20rem'
+                        bottom: `${50 + (avg - i) * 100/this.barCount - 60/this.barCount * 2.15}%`
                         
                     },
                     initialValues: {
-                        width:'0.2rem',
+                        bottom: `-${65/this.barCount}%`,
                     }
                     },
                     {
-                    duration: this.attrs.duration.expandBaseDuration ? this.attrs.duration.expandBaseDuration : 1,
-                    delay: 200 * i,
-                    selector: `.container-bar-${i}`,
+                    duration: slideInDuration,
+                    selector: `.row-${i}`,
                     easing: 'linear'
                     });
 
-
-                const expand_bar = new MCAnime.Anime({
-                    animatedAttrs: {
-                        width: `${this.attrs.data[i].value * 0.95}%`
+                    const expand_base = new MCAnime.Anime({
+                        animatedAttrs: {
+                            width: '60%'
                             
-                    },
-                    initialValues: {
-                        width:'0%',
-                    }
-                    },
+                        },
+                        initialValues: {
+                            width:'0.2%',
+                        }
+                        },
                         {
-                        duration: this.attrs.duration.expandBarDuration ? this.attrs.duration.expandBarDuration : 1,
-                        delay: 200 * i,
-                        selector: `.inner-bar-${i}`,
+                        duration: expandBaseDuration,
+                        delay: Math.round(200/this.attrs.timings.intro) * i,
+                        selector: `.container-bar-${i}`,
                         easing: 'linear'
-                        });                
+                        });
 
-            this.addIncident(slideIn, 0);
-            this.addIncident(expand_base, this.attrs.duration.slideInDuration);
-            this.addIncident(expand_bar, this.attrs.duration.slideInDuration + this.attrs.duration.expandBaseDuration);
-        }
 
-        const expand_text = new MCAnime.Anime({
+                    const expand_bar = new MCAnime.Anime({
+                        animatedAttrs: {
+                            width: `${this.attrs.data[i].value.toFixed(2)}%`
+                                
+                        },
+                        initialValues: {
+                            width:'0px',
+                        }
+                        },
+                            {
+                            duration: expandBarDuration,
+                            delay: Math.round(200/this.attrs.timings.intro) * i,
+                            selector: `.inner-bar-${i}`,
+                            easing: 'linear'
+                            });                
+
+                this.addIncident(slideIn, 0);
+                this.addIncident(expand_base, slideInDuration);
+                this.addIncident(expand_bar, slideInDuration + expandBaseDuration);
+            }
+
+            const expand_text = new MCAnime.Anime({
                 animatedAttrs: {
-                    left: '21rem',
+                    left: '62%',
                     opacity: 1
                         
                 },
                 initialValues: {
-                    left:'15rem',
+                    left:'58%',
                     opacity: 0
                 }
                 },
                     {
-                      duration: this.attrs.duration.showTextDuration ? this.attrs.duration.showTextDuration : 1,
-                      delay: 200 * barCount, 
-                      selector: `.text`,
-                      easing: 'linear'
+                    duration: showTextDuration,
+                    delay: Math.round(200/this.attrs.timings.intro) * this.barCount, 
+                    selector: `.text`,
+                    easing: 'linear'
                     });
 
+            this.addIncident(expand_text, slideInDuration + expandBaseDuration + expandBarDuration);
+        }
+
+        const staticGraph = new MCAnime.Anime({animatedAttrs: {}},{duration: this.attrs.timings.static ? this.attrs.timings.static : 1000, selector: '.container' });
+        this.addIncident(staticGraph, this.attrs.timings.intro)
                 
+        if (this.attrs.timings.outro) {    
             const collapse_all = new MCAnime.Anime({
-                animatedAttrs: {
-                    opacity: 0,
-                },
-                },
-                {
-                    duration: this.attrs.duration.collapseDuration ? this.attrs.duration.collapseDuration : 1,
-                    selector: `.container`,
-                    easing: 'linear'
-                });
+                    animatedAttrs: {
+                        opacity: 0,
+                    },
+                    },
+                    {
+                        duration: this.attrs.timings.outro,
+                        selector: `.container`,
+                        easing: 'linear'
+                    });
         
-        this.addIncident(expand_text, this.attrs.duration.slideInDuration + this.attrs.duration.expandBaseDuration + this.attrs.duration.expandBarDuration);
-        this.addIncident(collapse_all, this.attrs.duration.slideInDuration + 
-            this.attrs.duration.expandBaseDuration +
-            this.attrs.duration.expandBarDuration +
-            this.attrs.duration.showTextDuration + 
-            this.attrs.duration.staticGraphDuration);
+            this.addIncident(collapse_all, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1000));
+        }
+        
+    }
+
+    get barSum() {
+        let sum = 0;
+        for (let i=1; i <= this.barCount;i++) {
+            sum += i;
+        }
+        return sum;
+    }
+
+    get barCount() {
+        return this.attrs.data.length;
+    }
+
+    get criticalValue() {
+        if (this.barCount/10 === 1) {
+            return (this.barCount/10) * 10 
+        } else if (this.barCount/10 > 1) {
+            return ((this.barCount/10) - 1) * 10;
+        } else {
+            return ((this.barCount/10) + 1) * 10;
+        }
         
     }
 }
