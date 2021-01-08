@@ -1,5 +1,5 @@
 {
-	"name": "motorcortex-graphs",
+	"name": "@kissmybutton/motorcortex-graphs",
 	"version": "1.0.0",
 	"description": "A plugin for creating graphs for MotorCortex",
 	"main": "dist/bundle.cjs.js",
@@ -29,7 +29,8 @@
 		"test:prod": "npm run lint"
 	},
 	"keywords": [
-		"motorcortex"
+    "motorcortex",
+    "animation"
 	],
 	"config": {
 		"commitizen": {
