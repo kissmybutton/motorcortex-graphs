@@ -3,6 +3,7 @@ node_modules
 dist
 # demo/bundle.js
 
+demo/data/
 # Coverage
 coverage
 
