@@ -3,9 +3,12 @@ node_modules
 dist
 # demo/bundle.js
 
-demo/data/
 # Coverage
 coverage
+
+# TODO: Remove after demo creation
+demo/data.json
+demo/data/
 
 # Output folders
 build
