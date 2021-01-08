@@ -28,7 +28,9 @@
 		"test": "HERE GOES YOUR TEST TASK",
 		"test:prod": "npm run lint"
 	},
-	"keywords": [ "motorcortex" ],
+	"keywords": [
+		"motorcortex"
+	],
 	"config": {
 		"commitizen": {
 			"path": "cz-conventional-changelog"

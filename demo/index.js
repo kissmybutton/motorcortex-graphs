@@ -3,8 +3,6 @@ import Player from "@kissmybutton/motorcortex-player";
 import MotorCortexGraph from "../dist/bundle.umd";
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
-import Player from "@kissmybutton/motorcortex-player";
-
 // ***PROGRESS BAR***
 
 // const clip = new MotorCortex.HTMLClip({
@@ -37,9 +35,9 @@ import Player from "@kissmybutton/motorcortex-player";
 //     // here goes your attrs
 //     data: require('./data.json'),
 //     timings: {
-//         intro: 0,
-//         static: 0,
-//         outro: 0,
+//         intro: 1000,
+//         static: 1000,
+//         outro: 1000,
 //     },
 //     palette: {
 //         primary: "",
