@@ -41,7 +41,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                 }
                 .inner-bar-${index}{
                     width: ${elem.value.toFixed(2)}%;
-                }
+                }`
         });
 
         return `
