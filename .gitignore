@@ -6,6 +6,9 @@ dist
 # Coverage
 coverage
 
+# TODO: Remove after demo creation
+demo/data.json
+
 # Output folders
 build
 compiled
