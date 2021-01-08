@@ -35,9 +35,9 @@ const newGraph = new MCGraphs.ProgressBar({
     // here goes your attrs
     data: require('./data.json'),
     timings: {
-        intro: 4000,
+        intro: 0,
         static: 0,
-        outro: 1000,
+        outro: 0,
     },
     palette: {
         primary: "",

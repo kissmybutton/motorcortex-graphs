@@ -17,18 +17,6 @@ const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
  */
 export default class ProgressBar extends MotorCortex.HTMLClip{
     get html(){
-        // let list = "";
-
-        // for (let i=0; i < this.barCount;i++) {
-        //     list += `<div class ="row row-${i}">
-        //     <div class="bar-header">${this.attrs.data[i].name}</div>
-        //     <div class="container-bar container-bar-${i}">
-        //         <div class="inner-bar inner-bar-${i} ${this.attrs.data[i].value < this.criticalValue ? `extra-rounded-${i}` : ''}"></div>
-        //     </div>
-        //     <div class="text text-${i}">${Number.isInteger(this.attrs.data[i].value) ? this.attrs.data[i].value : this.attrs.data[i].value.toFixed(2)}</div>
-        // </div>`;
-        // }
-
         let list = this.attrs.data.map((elem, index) => {
             return <div class ={"row row-"+index}>
             <div class="bar-header">{elem.name}</div>
@@ -38,19 +26,18 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             <div class={"text text-"+index}>{elem.value.toFixed(2)}</div>
         </div>
         });
-        console.log(list);
+
         return <div class="container">{list}</div>
     }
 
     get css(){
         let rows = '';
 
-        if(this.attrs.timings.intro) {
-            const avg = this.barSum / this.barCount;
+        const avg = this.barSum / this.barCount;
 
-            this.attrs.data.forEach((elem, index) => {
-                rows += `.row-${index}{
-                    bottom: ${50 + (avg - index) * 100/this.barCount - 60/this.barCount * 2.15}%;
+        this.attrs.data.forEach((elem, index) => {
+           rows += `.row-${index}{
+                bottom: ${50 + (avg - index) * 100/this.barCount - 60/this.barCount * 2.15}%;
                 }
                 .inner-bar-${index}{
                     width: ${elem.value.toFixed(2)}%;
@@ -60,9 +47,8 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                     top: 20%;
 
                 }`;
-            })
-        }
-        console.log(rows)
+        });
+
         return `
             .container{
                 height: 100%;
