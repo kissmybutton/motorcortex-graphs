@@ -2,7 +2,7 @@ import MotorCortex from '@kissmybutton/motorcortex';
 import Player from "@kissmybutton/motorcortex-player";
 import MotorCortexGraph from "../dist/bundle.umd";
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
-import * as data from './data/barChartData.json';
+// import * as data from './data/barChartData.json';
 
 
 
