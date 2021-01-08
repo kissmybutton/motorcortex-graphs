@@ -3,6 +3,7 @@ node_modules
 dist
 demo
 
+demo/data/
 # Coverage
 coverage
 
