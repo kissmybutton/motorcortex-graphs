@@ -3,6 +3,9 @@ node_modules
 dist
 # demo/bundle.js
 
+#DemoFolder (until demo development)
+demo
+
 # Coverage
 coverage
 

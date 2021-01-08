@@ -9,83 +9,111 @@ import { colorPalette } from '../../Defaults/colorPalette';
 export default class BarChartSimple extends MotorCortex.HTMLClip{
     get html(){
         this.data = this.attrs.data.data;
-        let bars = ``;
-        this.dataPointsNum = 0;
+        this.title = this.attrs.data.title;
+        this.subtitle = this.attrs.data.subtitle;
         this.maxPoint = 0;
-
-        for (let datum of this.data) {
-            bars += `
-                <div class="bar-container" id="${datum.name}bar">
-                    <div class="bar-fill"></div>
-                </div>
-            `;
-            this.dataPointsNum++;
-            this.maxPoint = (this.maxPoint < datum.value) ? 
-                datum.value : this.maxPoint;
-        }
-
         this.gridLinesNum = this.attrs.gridLines ? 
             this.attrs.gridLines : 11;
+
+        let title = [];
+        for (let i in this.title) {
+            let letter = [];
+            if (this.title[i] === " ") {
+                letter.push(<div class="space-char letter-wrapper">-</div>);
+            } else {
+                letter.push(<div class="fontColorOn letter-wrapper">{this.title[i]}</div>);
+            }
+            
+            title.push(<div id={"letter-" + i} class="letter-container">{letter}</div>);
+        }
         
-        let gridLines = ``;
+        let subtitle = [];
+        for (let i in this.subtitle) {
+            let letter = [];
+            if (this.subtitle[i] === " ") {
+                letter.push(<div class="space-char letter-wrapper">-</div>);
+            } else {
+                letter.push(<div class="fontColorOn letter-wrapper">{this.subtitle[i]}</div>);
+            }
+            
+            subtitle.push(<div id={"letter-" + i} class="letter-container">{letter}</div>);
+        }
+
+        let gridLines = [];
         if (this.attrs.grid) {
             for (let i = 0; i < this.gridLinesNum; i++) {
-                gridLines += `
-                    <div class="gridLine" id="gridLine${i}"></div>
-                `;
+                gridLines.push(
+                    <div class="gridLine" id={"gridLine" + i}></div>
+                );
             };
         }
 
-        let xLabels = ``;
-        let datCount = 0;
-        for (let datum of this.data) {
-            let letCount = 0;
+        let bars = this.data.map( (datum) => {
+            this.maxPoint = (this.maxPoint < datum.value) ? 
+                datum.value : this.maxPoint;
 
-            let label = ``;
-            for (let item of datum.name) {
-                label += `
-                    <div id="letter-${datCount}-${letCount}" class="letter-container">
-                        <div class="letter-wrapper">${item}</div>
+            return (
+                <div class="bar-container" id={datum.name + "bar"}>
+                    <div class="bar-fill" id={datum.name + "-bar-fill"}></div>
+                </div>
+            );
+        });
+
+        let xLabels = [];
+        for (let i in this.data) {
+            let label = [];
+            for (let z in this.data[i].name) {
+                label.push(
+                    <div id={"letter-" + i + "-" + z} class="letter-container">
+                        <div class="letter-wrapper fontColorOn">{this.data[i].name[z]}</div>
                     </div>
-                `;
-                letCount++;
+                );
             }
-            xLabels += `
-                <div class="label-container" id="label-${datCount}">${label}</div>
-            `;
-            datCount++;
+
+            xLabels.push(
+                <div class="label-container" id={"label-" + i}>{label}</div>
+            );
         }
 
-        let barGraphHTML = `
+        let barGraphHTML = (
             <div class="container">
+                <div id="title-container">
+                    <div id="title-wrapper">{title}</div>
+                    <div id="subtitle-position-end">
+                        <div id="subtitle-wrapper">{subtitle}</div>
+                    </div>
+                </div>
+                <div id="title-back-wrapper">
+                    <div id="title-background"></div>
+                </div>
                 <div id="graph-container">
-                    <div id="graph">${bars}</div>
-                    <div id="gridlines">${gridLines}</div>
+                    <div id="graph">{bars}</div>
+                    <div id="gridlines">{gridLines}</div>
                 </div>
                 <div id="y-axis"></div>
                 <div id="x-axis"></div>
-                <div id="x-labels-container">${xLabels}</div>
+                <div id="x-labels-container">{xLabels}</div>
                 <div id="x-labels-back-wrapper">
                     <div id="x-labels-background"></div>
                 </div>
             </div>
-        `;
+        );
         
-        return barGraphHTML
+        return barGraphHTML;
     }
 
     get css() {
-        const primary = this.attrs.palette.primary ? 
+        const primaryC = this.attrs.palette.primary ? 
             this.attrs.palette.primary : colorPalette.gray;
-        const secondary = this.attrs.palette.secondary ? 
+        const secondaryC = this.attrs.palette.secondary ? 
             this.attrs.palette.secondary : colorPalette.lightGray;
-        const tertiary = this.attrs.palette.tertiary ? 
+        const tertiaryC = this.attrs.palette.tertiary ? 
             this.attrs.palette.tertiary : colorPalette.darkGray;
-        const font = this.attrs.palette.font ? 
+        const fontC = this.attrs.palette.font ? 
             this.attrs.palette.font : colorPalette.font;
-        const accent = this.attrs.palette.accent ? 
+        const accentC = this.attrs.palette.accent ? 
             this.attrs.palette.accent : colorPalette.accent;
-        const background = this.attrs.palette.background ? 
+        const backgroundC = this.attrs.palette.background ? 
             this.attrs.palette.background : colorPalette.background;
         
         let axisStyles = `
@@ -94,7 +122,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 height: 70%;
                 left: 14%;
                 top: 15%;
-                background-color: ${tertiary};
+                background-color: ${tertiaryC};
                 position: absolute;
             }
             
@@ -103,7 +131,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 height: 4px;
                 top: 85%;
                 left: 14%;
-                background-color: ${tertiary};
+                background-color: ${tertiaryC};
                 position: absolute;
             }
         `;
@@ -120,19 +148,25 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             .gridLine {
                 height: 3px;
                 width: 100%;
-                background-color: ${secondary};
+                background-color: ${secondaryC};
                 align-self: flex-end;
             }
         `;
 
         let barSizings = ``;
-        for (let datum in this.data) {
+        let barFills = ``;
+        this.data.map( (datum)=> {
             barSizings += `
-                #${this.data[datum].name}bar {
-                    height: ${(this.data[datum].value/this.maxPoint)*100}%;
-                }
-            `;
-        }
+                #${datum.name}bar {
+                    height: ${(datum.value.toFixed(2)/this.maxPoint)*100}%;
+                }`;
+            barFills += `
+                .${datum.name}-bar-fill {
+                    height: 100%;
+                }`;
+        });
+        
+        
 
         let barStyles = `
             #graph {
@@ -147,27 +181,163 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
 
             .bar-container{ 
                 align-self: flex-end;
-                width: ${(100/this.dataPointsNum)}%;
-                margin: 0% ${(10/this.dataPointsNum)+1}%;
+                width: ${(100/this.data.length)}%;
+                margin: 0% ${(10/this.data.length)+1}%;
                 height: 100%;
                 display: flex;
             }
 
             .bar-fill {
                 width: 100%;
-                height: 100%;
-                background-color: ${primary};
+                background-color: ${primaryC};
                 align-self: center;
             }
 
             ${barSizings}
+            ${barFills}
+        `;
+
+        let fontFamily = this.attrs.font.fontFamily ? 
+            this.attrs.font.fontFamily : "'Staatliches', cursive";
+        let fontSize = this.attrs.font.size ? this.attrs.font.size : "1.6rem";
+
+        let xLabels = `
+            #x-labels-background {
+                width: 100%;
+                height: 100%;
+                background-color: ${accentC};
+                position: relative;
+            }
+
+            #x-labels-back-wrapper {
+                width: 70%;
+                height: 5%;
+                top: 87%;
+                left: 16%;
+                position: absolute;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+
+            #x-labels-container {
+                font-family: ${fontFamily};
+                background-color: transparent;
+                width: 70%;
+                height: 5%;
+                top: 87%;
+                left: 16%;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                z-index: 1;
+                justify-content: space-around;
+            }
+
+
+            .label-container {
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+            }
+
+            .letter-wrapper {
+                font-size: ${fontSize};
+                display: flex;
+                flex-direction: column;
+                position: relative;
+            }
+            
+            .letter-container {
+                overflow: hidden;
+                position: relative;
+            }
         `;
         
-        let styleBlock = `
+        let title = `
+            #title-background {
+                width: 100%;
+                height: 100%;
+                background-color: ${accentC};
+                position: relative;
+            }
+
+            #title-back-wrapper {
+                width: 70%;
+                height: 5%;
+                top: 8%;
+                left: 16%;
+                position: absolute;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+
+            #title-container {
+                font-family: ${fontFamily};
+                background-color: transparent;
+                width: 70%;
+                height: 5%;
+                top: 8%;
+                left: 16%;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                z-index: 1;
+                justify-content: space-around;
+            }
+
+            #title-wrapper {
+                display: flex;
+                flex-grow: 2;
+                flex-wrap: nowrap;
+                overflow: hidden;
+                padding-left: 6px;
+            }
+
+            #subtitle-wrapper {
+                display: flex;
+            }
+
+            #subtitle-position-end {
+                display: flex;
+                flex-grow: 1;
+                padding-right: 6px;
+                flex-wrap: nowrap;
+                overflow: hidden;
+                justify-content: flex-end;
+            }   
+
+            .label-container {
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+            }
+
+            .letter-wrapper {
+                font-size: ${fontSize};
+                display: flex;
+                flex-direction: column;
+            }
+
+            .letter-container {
+                position: relative;
+            }
+        `;
+
+        let shared = `
+            .fontColorOn {
+                color: ${fontC};
+            }
+
+            .space-char {
+                visibility: hidden;
+            }
+        `;
+        
+        let mainStyleBlock = `
             .container {
                 width: 100%;
                 height: 100%;
-                background-color: ${background};
+                background-color: ${backgroundC};
                 display: flex;
             }
 
@@ -179,76 +349,22 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 position: absolute;
             }
 
-            #x-labels-background {
-                width: 100%;
-                height: 100%;
-                background-color: ${accent};
-                position: relative;
-                z-index: 1;
-            }
-
-            #x-labels-back-wrapper {
-                width: 70%;
-                height: 5%;
-                top: 87%;
-                left: 16%;
-                position: absolute;
-                display: flex;
-                flex-direction: row-reverse
-            }
-
-            #x-labels-container {
-                font-family: 'Staatliches', cursive;
-                background-color: transparent;
-                width: 70%;
-                height: 5%;
-                top: 87%;
-                left: 16%;
-                position: absolute;
-                display: flex;
-                align-items: center;
-                z-index: 2;
-                justify-content: space-around
-            }
-
-
-            .label-container {
-                display: flex;
-                flex-direction: row;
-                overflow: hidden;
-            }
-
-            .letter-wrapper {
-                font-size: 150%;
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .letter-container {
-                position: relative;
-            }
-
-
+            ${title}
             ${axisStyles}
             ${gridStyles}
             ${barStyles}
+            ${xLabels}
+            ${shared}
         `;
 
-        return styleBlock;
+        return mainStyleBlock;
     } 
 
     get fonts() {
-        return [
-            {
-                type: "google-font",
-                src: "https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
-            }
-        ];
-    }
-
-    get audioSources() {
-        // You can load sounds here to use on your Clip. Check documentation for details
-        return [];
+        return [{
+            type: "google-font",
+            src: `${this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap"}`
+        }];
     }
 
     buildTree() {
@@ -256,11 +372,12 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             this.attrs.timings.intro : 0;
         this.outtroDur = this.attrs.timings.outtro ? 
             this.attrs.timings.outtro : 0;
-        this.staticDur = this.attrs.timings.static ? 
+        this.staticDur = (this.attrs.timings.static !== null) ? 
             this.attrs.timings.static : 1000;
 
         // !!! INTRO !!!
         if (this.attrs.timings.intro) {
+            let textAnimDur = this.introDur * 0.75;
             const introGroup = new MotorCortex.Group();
 
             const axisCombo = new MotorCortex.Combo(
@@ -324,6 +441,99 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             );
             introGroup.addIncident(gridLinesAnim, this.introDur * 0.2);
 
+            const titlesAnim = new MotorCortex.Group();
+            titlesAnim.addIncident(
+                new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            width: "100%"
+                        },
+                        
+                        initialValues: {
+                            width: "0%"
+                        },
+                    },
+                    {
+                        selector: "#title-background",
+                        duration: this.introDur * 0.25,
+                        easing: "easeInOutQuad",
+                    }
+                ),
+                0
+            );
+
+            let titleDur = this.introDur * 0.7;
+            let titleLetterDur = titleDur * 2 / (this.title.length + 1)
+            let titleIncidents = [];
+            for (let i in this.title) {
+                titleIncidents.push({
+                    incidentClass: Anime.Anime,
+                    attrs: {
+                        animatedAttrs: {
+                            left: '0px',
+                            opacity: 1
+                        },
+                        initialValues: {
+                            left: '20px',
+                            opacity: 0
+                        },
+                    },
+                    props: {
+                        selector: `#letter-${i}`,
+                        duration: titleLetterDur,
+                        easing: "easeOutQuart",
+                    },
+                    position: Math.trunc(titleLetterDur * i / 2)
+                });
+            }
+
+            let titleCombo = new MotorCortex.Combo(
+                {
+                    incidents: titleIncidents
+                },
+                {
+                    selector: "#title-wrapper",
+                }
+            );
+            titlesAnim.addIncident(titleCombo, this.introDur * 0.25);
+
+            let subtitleDur = this.introDur * 0.8;
+            let subLetterDur = subtitleDur * 2 / (this.subtitle.length + 1);
+            let subIncidents = [];
+            for (let i in this.subtitle) {
+                subIncidents.push({
+                    incidentClass: Anime.Anime,
+                    attrs: {
+                        animatedAttrs: {
+                            left: '0px',
+                            opacity: 1
+                        },
+                        initialValues: {
+                            left: '20px',
+                            opacity: 0
+                        },
+                    },
+                    props: {
+                        selector: `#letter-${i}`,
+                        duration: subLetterDur,
+                        easing: "easeOutQuart",
+                    },
+                    position: Math.trunc(subLetterDur * i / 2)
+                });
+            }
+
+            let subtitleCombo = new MotorCortex.Combo(
+                {
+                    incidents: subIncidents
+                },
+                {
+                    selector: "#subtitle-wrapper",
+                }
+            );
+            titlesAnim.addIncident(subtitleCombo, this.introDur * 0.1);
+
+            introGroup.addIncident(titlesAnim, this.introDur * 0.05);
+
             const xLabelsAnim = new MotorCortex.Group();
             xLabelsAnim.addIncident(
                 new Anime.Anime(
@@ -338,41 +548,39 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     {
                         selector: "#x-labels-back-wrapper",
                         duration: this.introDur * 0.25,
-                        easing: "easeInOutQuad",
+                        easing: "easeInOutCubic",
                     }
                 ),
                 0
             );
 
-            let datCount = 0;   
-            let length = this.attrs.data.data.length;
-            let labelsAnimDur = this.introDur * 0.75;
-            let labelDur = labelsAnimDur*2 / (length+1);
-            for (let datum of this.data) {
-                let letCount = 0;
-                let labelLength = datum.name.length;
-                let letterDur = labelDur*2 / (labelLength+1)
-                let incidents =[];
-
-                for (let item of datum.name) {
+            let labelDur = textAnimDur * 2 / (this.data.length + 1);
+            
+            for (let i in this.data) {
+                let labelLength = this.data[i].name.length;
+                let letterDur = labelDur * 2 / (labelLength + 1)
+                
+                let incidents = [];
+                for (let z in this.data[i].name) {
                     incidents.push({
                         incidentClass: Anime.Anime,
                         attrs: {
                             animatedAttrs: {
-                                top: '0px'
+                                top: '0px',
+                                opacity: 1
                             },
                             initialValues: {
-                                top: '-30px'
+                                top: '-30px',
+                                opacity: 0
                             },
                         },
                         props: {
-                            selector: `#letter-${datCount}-${letCount}`,
+                            selector: `#letter-${i}-${z}`,
                             duration: Math.trunc(letterDur),
                             easing: "easeOutQuart",
                         },
-                        position: Math.trunc(letterDur*letCount/2)
+                        position: Math.trunc(letterDur * z / 2)
                     });
-                    letCount++;
                 }
                 
                 let datumCombo = new MotorCortex.Combo(
@@ -385,10 +593,8 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 );
                 xLabelsAnim.addIncident(
                     datumCombo, 
-                    (labelsAnimDur / (length+1))*datCount
+                    (textAnimDur / (this.data.length + 1)) * i
                 );
-
-                datCount++;
             }
             introGroup.addIncident(xLabelsAnim, this.introDur * 0.05)
 
@@ -427,6 +633,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
 
         // !!! OUTRO !!!
         if (this.attrs.timings.outtro) {
+            let textAnimDur = this.outtroDur * 0.75;
             const outtroGroup = new MotorCortex.Group();
 
             const axisComboOuttro = new MotorCortex.Combo(
@@ -445,7 +652,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                             props: {
                                 selector: '#x-axis',
                                 duration:  this.outtroDur * 0.2,
-                                easing: 'easeInQuart'
+                                easing: 'easeInQuad'
                             },
                             position: this.outtroDur * 0
                         }, {
@@ -461,7 +668,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                             props: {
                                 selector: '#y-axis',
                                 duration:  this.outtroDur * 0.3,
-                                easing: 'easeOutQuart'
+                                easing: 'easeOutQuad'
                             },
                             position: this.outtroDur * 0.2
                         }
@@ -472,7 +679,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 }
             );
             outtroGroup.addIncident(axisComboOuttro, this.outtroDur * 0.5);
-    
+
             const gridLinesOuttro = new Anime.Anime(
                 {
                     animatedAttrs: {
@@ -489,8 +696,101 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 }
             );
             outtroGroup.addIncident(gridLinesOuttro, this.outtroDur * 0.2);
+            
+            const titlesOuttro = new MotorCortex.Group();
+            titlesOuttro.addIncident(
+                new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            width: "0%"
+                        },
+                        initialValues: {
+                            width: "70%"
+                        },
+                    },
+                    {
+                        selector: "#title-back-wrapper",
+                        duration: this.outtroDur * 0.45,
+                        easing: "easeInOutQuad",
+                    }
+                ),
+                this.outtroDur * 0.4
+            );
+
+            let titleDur = this.outtroDur * 0.8;
+            let letterDur = titleDur * 2 / (this.title.length + 1)
+            let titleIncidents = [];
+            for (let i in this.title) {
+                titleIncidents.push({
+                    incidentClass: Anime.Anime,
+                    attrs: {
+                        animatedAttrs: {
+                            left: '20px',
+                            opacity: 0
+                        },
+                        initialValues: {
+                            left: '0px',
+                            opacity: 1
+                        },
+                    },
+                    props: {
+                        selector: `#letter-${i}`,
+                        duration: letterDur,
+                        easing: "easeOutQuart",
+                    },
+                    position: Math.trunc(letterDur * (this.title.length-i-1) / 2)
+                });
+            }
+            let titleCombo = new MotorCortex.Combo(
+                {
+                    incidents: titleIncidents
+                },
+                {
+                    selector: "#title-wrapper",
+                }
+            );
+            titlesOuttro.addIncident(titleCombo, this.outtroDur * 0.1);
+
+            let subtitleDur = this.outtroDur * 0.4;
+            let subLetterDur = subtitleDur * 2 / (this.subtitle.length + 1);
+            let subIncidents = [];
+            for (let i in this.subtitle) {
                 
-            outtroGroup.addIncident(
+                subIncidents.push({
+                    incidentClass: Anime.Anime,
+                    attrs: {
+                        animatedAttrs: {
+                            left: '20px',
+                            opacity: 0
+                        },
+                        initialValues: {
+                            left: '0px',
+                            opacity: 1
+                        },
+                    },
+                    props: {
+                        selector: `#letter-${i}`,
+                        duration: subLetterDur,
+                        easing: "easeOutQuart",
+                    },
+                    position: Math.trunc(subLetterDur * (this.subtitle.length-i-1) / 2)
+                });
+            }
+
+            let subtitleCombo = new MotorCortex.Combo(
+                {
+                    incidents: subIncidents
+                },
+                {
+                    selector: "#subtitle-wrapper",
+                }
+            );
+            titlesOuttro.addIncident(subtitleCombo, this.outtroDur * 0);
+            
+            outtroGroup.addIncident(titlesOuttro, this.outtroDur * 0.05);
+
+            const xLabelsOuttro = new MotorCortex.Group();
+            xLabelsOuttro.addIncident(
                 new Anime.Anime(
                     {
                         animatedAttrs: {
@@ -503,43 +803,38 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     {
                         selector: "#x-labels-background",
                         duration: this.outtroDur * 0.45,
-                        easing: "easeInOutQuad"
+                        easing: "easeInOutCubic"
                     }
                 ),
-                0.55*this.outtroDur
+                this.outtroDur * 0.4
             );
             
-            const xLabelsOuttro = new MotorCortex.Group();
+            let labelDur = textAnimDur * 2 / (this.data.length + 1);
+            for (let i in this.data) {
+                let labelLength = this.data[i].name.length;
+                let letterDur = labelDur * 2 / (labelLength + 1)
 
-            let datCount = 0;   
-            let length = this.attrs.data.data.length;
-            let labelsAnimDur = this.outtroDur * 0.75;
-            let labelDur = labelsAnimDur*2 / (length+1);
-            for (let datum of this.data) {
-                let letCount = 0;
-                let labelLength = datum.name.length;
-                let letterDur = labelDur*2 / (labelLength+1)
                 let incidents =[];
-
-                for (let item of datum.name) {
+                for (let z in this.data[i].name) {
                     incidents.push({
                         incidentClass: Anime.Anime,
                         attrs: {
                             animatedAttrs: {
+                                opacity: 0,
                                 top: '-30px'
                             },
                             initialValues: {
+                                opacity: 1,
                                 top: '0px'
                             },
                         },
                         props: {
-                            selector: `#letter-${datCount}-${letCount}`,
+                            selector: `#letter-${i}-${z}`,
                             duration: Math.trunc(letterDur),
-                            easing: "easeOutQuart",
+                            easing: "easeInQuart",
                         },
-                        position: Math.trunc(letterDur*letCount/2)
+                        position: Math.trunc(letterDur * z / 2)
                     });
-                    letCount++;
                 }
                 
                 let datumCombo = new MotorCortex.Combo(
@@ -552,46 +847,46 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 );
                 xLabelsOuttro.addIncident(
                     datumCombo, 
-                    (labelsAnimDur / (length+1))*datCount
+                    (textAnimDur / (this.data.length + 1)) * i
                 );
-
-                datCount++;
             }
-            outtroGroup.addIncident(xLabelsOuttro, this.introDur * 0.05);
+            outtroGroup.addIncident(xLabelsOuttro, this.outtroDur * 0.05);
 
+            let barOuttroDur = this.outtroDur * 0.7;
+            let barDur = barOuttroDur * 2 / (this.data.length + 1)
+            let barIncidents = [];
+            for (let i in this.data) {
+                barIncidents.push(
+                    {
+                        incidentClass: Anime.Anime,
+                        attrs: {
+                            animatedAttrs: {
+                                height: '0%'
+                            },
+                            initialAttrs: {
+                                height: '100%'
+                            },
+                        },
+                        props: {
+                            duration: this.outtroDur * 0.3,
+                            easing: "easeInOutCubic",
+                            selector: `#${this.data[i].name}-bar-fill`,
+                        },
+                        position: Math.trunc(subLetterDur * (this.data.length-i-1) / 2)
+                    }
+                )
+            }
             const barAnimationOuttro = new MotorCortex.Combo(
                 {
-                    incidents: [
-                        {
-                            incidentClass: Anime.Anime,
-                            attrs: {
-                                animatedAttrs: {
-                                    height: '0%'
-                                },
-                                initialValues: {
-                                    height: '100%'
-                                },
-                            },
-                            props: {
-                                duration: this.outtroDur * 0.3,
-                                easing: "easeInOutQuad"
-
-                            },
-                            position: 0
-                        }
-                    ]
+                    incidents: barIncidents
                 },
                 {
-                    selector: ".bar-fill",
-                    delay: `@stagger(0, ${this.outtroDur * 0.4})`
+                    selector: "#graph",
                 }
             );
             outtroGroup.addIncident(barAnimationOuttro, this.outtroDur * 0);
-    
-            this.addIncident(
-                outtroGroup, 
-                0 + this.introDur + this.staticDur
-            );
+
+            this.addIncident(outtroGroup, 0 + this.introDur + this.staticDur);
         }
 
         // !!!STATIC CONTROL!!!

@@ -27,9 +27,7 @@ const clip = new MotorCortex.HTMLClip({
 
 
 const newGraph = new MCGraphs.BarChartSimple({
-    data: data,  // work out data defaults
-        // - rounding 2 sig fig.
-        // - 
+    data: data,  
     palette: {
         // primary: "",
         // secondary: "", 
@@ -39,11 +37,16 @@ const newGraph = new MCGraphs.BarChartSimple({
         background: "#D3CDCD", //default transparent COMMON
     },
     grid: true,
+    font: {
+        // url: "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap",
+        // fontFamily: "'Source Code Pro', monospace",
+        // size: "",
+    },
     maxVal: 100, // if its 100 it simulates %.
     timings: {
-        intro: 2000, // if no intro -> appears normally (no animation) defaults to 0
-        outtro: 2000, // if no outtro -> stays static defaults to 0
-        static: 2000, // defaults to 1000
+        intro: 2000, // if no intro -> appears with no animation, defaults to 0
+        outtro: 2000, // if no outtro -> stays static, defaults to 0
+        static: 0, // defaults to 1000
     },
 }, {
     selector: '#barGraph',
