@@ -131,6 +131,12 @@ The `font` object is an optional object that contains three (3) values used for 
 | fontFamily | The font family to be used| Righteous, cursive | string|
 | size |The desired font size| 1.2rem | px/rem/em
 
+#### Options:
+The `options` object is an optional object what contains miscellaneous graph configurations.
+ | Name | Description | Default | Values |
+| --- | --- | --- | --- |
+| hidePercentage | Toggles the percentages next to the bars | false | boolean|
+
 ## Creating a Bar Chart Incident
 
 lorem ipsum
