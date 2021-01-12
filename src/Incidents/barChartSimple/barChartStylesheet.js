@@ -220,7 +220,7 @@ export default function buildCSS() {
             position: relative;
         }
     `;
-    
+    console.log(cssArgs.backgroundC)
     let mainStyleBlock = `
         .container {
             width: 100%;

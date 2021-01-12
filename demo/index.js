@@ -6,15 +6,15 @@ import * as progressBarData from './data/progressBarData.json';
 
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
-
 const clip = new MotorCortex.HTMLClip({
     html: `<div class="container">
         <div id="htmlclip"></div>
     </div>`,
     css: `
         .container{
-            width: 600px,
-            height: 400px
+            width: 1024px;
+            height: 768px;
+            background: #D3CDCD;
         }
         .container>div{
             width: 50%;
@@ -28,7 +28,7 @@ const clip = new MotorCortex.HTMLClip({
     }
 });
 
-const barChart1 = new MCGraphs.BarChartSimple({
+const barChart = new MCGraphs.BarChartSimple({
     data: barChartData,  
     timings: {
         intro: 2000,
@@ -36,7 +36,7 @@ const barChart1 = new MCGraphs.BarChartSimple({
         outtro: 2000,
     },
     palette: {
-        background: "#D3CDCD", 
+        background: "blue"
     },
 }, {
     selector: '#htmlclip',
@@ -45,27 +45,18 @@ const barChart1 = new MCGraphs.BarChartSimple({
         height: '768px'
     }
 });
-clip.addIncident(barChart1, 0);
+clip.addIncident(barChart, 0);
 
 const progressBar = new MCGraphs.ProgressBar({
     data: require('./data/progressBarData.json'),
     timings: {
         intro: 2000,
         static: 1500,
+        outtro: 2000,
     },
     palette: {
-        primary: "",
-        secondary: "", 
-        tertiary: "",
-        font: "",
-        accent: "", 
-        background: "#D3CDCD", 
+        background: "red"
     },
-    font: {
-        url: 'https://fonts.googleapis.com/css2?family=Righteous&display=swap',
-        fontFamily: 'Righteous, cursive',
-        size: '1.2rem'
-    }
 }, {
     selector: '#htmlclip',
     containerParams: {
