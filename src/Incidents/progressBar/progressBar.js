@@ -120,6 +120,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
 
     buildTree(){
         const avg = this.barSum / this.barCount;
+        this.opacityControl();
 
         if (this.attrs.timings.intro) {
             const slideInDuration = Math.floor(this.attrs.timings.intro * 0.33);
@@ -221,6 +222,41 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             this.addIncident(collapse_all, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1000));
         }
         
+    }
+    
+    // Static control
+    // Making the contents of this animation invisible before timestamp:0 
+    // and after timestamp: {totalDuration}
+    opacityControl() {
+        this.addIncident(
+            new MCAnime.Anime(
+                {
+                    animatedAttrs: {
+                        opacity: 1,
+                    },
+                    initialValues: {
+                        opacity: 0,
+                    }
+                }, {
+                    selector: `.container`,
+                    duration: 1,
+                }
+            ),
+            0    
+        );
+        this.addIncident(
+            new MCAnime.Anime(
+                {
+                    animatedAttrs: {
+                        opacity: 0,
+                    },
+                }, {
+                    selector: `.container`,
+                    duration: 1,
+                }
+            ),
+            this.attrs.timings.intro + this.attrs.timings.static + this.attrs.timings.outro  
+        );
     }
 
     get barSum() {

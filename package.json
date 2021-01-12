@@ -29,8 +29,8 @@
 		"test:prod": "npm run lint"
 	},
 	"keywords": [
-    "motorcortex",
-    "animation"
+		"motorcortex",
+		"animation"
 	],
 	"config": {
 		"commitizen": {
