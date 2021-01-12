@@ -244,19 +244,21 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             ),
             0    
         );
-        this.addIncident(
-            new MCAnime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 0,
-                    },
-                }, {
-                    selector: `.container`,
-                    duration: 1,
-                }
-            ),
-            this.attrs.timings.intro + this.attrs.timings.static + this.attrs.timings.outro  
-        );
+        if (!this.attrs.timings.outro) {
+            this.addIncident(
+                new MCAnime.Anime(
+                    {
+                        animatedAttrs: {
+                            opacity: 0,
+                        },
+                    }, {
+                        selector: `.container`,
+                        duration: 1,
+                    }
+                ),
+                this.attrs.timings.intro + this.attrs.timings.static - 1
+            );
+        }
     }
 
     get barSum() {

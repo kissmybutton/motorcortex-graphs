@@ -52,7 +52,6 @@ const progressBar = new MCGraphs.ProgressBar({
     timings: {
         intro: 2000,
         static: 1500,
-        outro: 2000,
     },
     palette: {
         primary: "",
@@ -74,7 +73,7 @@ const progressBar = new MCGraphs.ProgressBar({
         height: '768px'
     },
 });
-clip.addIncident(progressBar, 6000);
+clip.addIncident(progressBar, 5500);
 
 
 clip.play();

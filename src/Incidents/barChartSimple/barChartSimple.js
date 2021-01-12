@@ -4,13 +4,16 @@ const Anime = MotorCortex.loadPlugin(AnimePlugin);
 import { colorPalette } from '../../Defaults/colorPalette';
 import buildCSS  from './barChartStylesheet'; 
 
+
+
 /**
  * BAR CHART SIMPLE GRAPH: MotorCortex Implementation
  */
 export default class BarChartSimple extends MotorCortex.HTMLClip{
+    // Building HTML tree for incident
     get html(){
         this.buildVars();
-       
+        
         // Title modal html generation
         let title = [];
         for (let i in this.title) {
@@ -104,255 +107,20 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
         return barGraphHTML;
     }
 
+    // Build CSS rules for incident
     get css() {
-        //!!! buildCSS(this.tertiaryC);
-
-        let axisStyles = `
-            .y-axis {
-                width: 4px;
-                height: 70%;
-                left: 14%;
-                top: 15%;
-                background-color: ${this.tertiaryC};
-                position: absolute;
-            }
-            
-            .x-axis {
-                width: 74%;
-                height: 4px;
-                top: 85%;
-                left: 14%;
-                background-color: ${this.tertiaryC};
-                position: absolute;
-            }
-        `;
-        
-        let gridStyles = `
-            .gridlines {
-                width: 100%;
-                height: calc(100% + 3px);
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-            }
-
-            .gridLine {
-                height: 3px;
-                width: 100%;
-                background-color: ${this.secondaryC};
-                align-self: flex-end;
-            }
-        `;
-
-        let barSizings = ``;
-        let barFills = ``;
-        this.data.map( (datum)=> {
-            barSizings += `
-                #${datum.name}bar {
-                    height: ${(datum.value.toFixed(2)/this.maxPoint)*100}%;
-                }`;
-            barFills += `
-                .${datum.name}-bar-fill {
-                    height: 100%;
-                }`;
+        return buildCSS({
+            data: this.data,
+            maxPoint: this.maxPoint,
+            primaryC: this.primaryC,
+            secondaryC: this.secondaryC,
+            tertiaryC: this.tertiaryC,
+            accentC: this.accentC,
+            backgroundC: this.backgroundC,
+            fontC: this.fontC,
+            fontFamily: this.fontFamily,
+            fontSize: this.fontSize
         });
-        
-        let barStyles = `
-            .graph {
-                top: 0;
-                left: 0;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: space-around;
-                overflow: hidden;
-            }
-
-            .bar-container{ 
-                align-self: flex-end;
-                width: ${(100/this.data.length)}%;
-                margin: 0% ${(10/this.data.length)+1}%;
-                height: 100%;
-                display: flex;
-            }
-
-            .bar-fill {
-                width: 100%;
-                height: 100%;
-                background-color: ${this.primaryC};
-                align-self: center;
-            }
-
-            ${barSizings}
-            ${barFills}
-        `;
-        
-
-        let xLabels = `
-            .x-labels-background {
-                width: 100%;
-                height: 100%;
-                background-color: ${this.accentC};
-                position: relative;
-            }
-
-            .x-labels-back-wrapper {
-                width: 70%;
-                height: 5%;
-                top: 87%;
-                left: 16%;
-                position: absolute;
-                display: flex;
-                flex-direction: row-reverse;
-            }
-
-            .x-labels-container {
-                font-family: ${this.fontFamily};
-                background-color: transparent;
-                width: 70%;
-                height: 5%;
-                top: 87%;
-                left: 16%;
-                position: absolute;
-                display: flex;
-                align-items: center;
-                z-index: 1;
-                justify-content: space-around;
-            }
-
-
-            .label-container {
-                display: flex;
-                flex-direction: row;
-                overflow: hidden;
-            }
-
-            .letter-wrapper {
-                font-size: ${this.fontSize};
-                display: flex;
-                flex-direction: column;
-                position: relative;
-            }
-            
-            .letter-container {
-                overflow: hidden;
-                position: relative;
-            }
-        `;
-        
-        let title = `
-            .title-background {
-                width: 100%;
-                height: 100%;
-                background-color: ${this.accentC};
-                position: relative;
-            }
-
-            .title-back-wrapper {
-                width: 70%;
-                height: 5%;
-                top: 8%;
-                left: 16%;
-                position: absolute;
-                display: flex;
-                flex-direction: row-reverse;
-            }
-
-            .title-container {
-                font-family: ${this.fontFamily};
-                background-color: transparent;
-                width: 70%;
-                height: 5%;
-                top: 8%;
-                left: 16%;
-                position: absolute;
-                display: flex;
-                align-items: center;
-                z-index: 1;
-                justify-content: space-around;
-            }
-
-            .title-wrapper {
-                display: flex;
-                flex-grow: 2;
-                flex-wrap: nowrap;
-                overflow: hidden;
-                padding-left: 6px;
-            }
-
-            .subtitle-wrapper {
-                display: flex;
-            }
-
-            .subtitle-position-end {
-                display: flex;
-                flex-grow: 1;
-                padding-right: 6px;
-                flex-wrap: nowrap;
-                overflow: hidden;
-                justify-content: flex-end;
-            }   
-
-            .label-container {
-                display: flex;
-                flex-direction: row;
-                overflow: hidden;
-            }
-
-            .letter-wrapper {
-                font-size: ${this.fontSize};
-                display: flex;
-                flex-direction: column;
-            }
-
-            .letter-container {
-                position: relative;
-            }
-        `;
-
-        let shared = `
-            .fontColorOn {
-                color: ${this.fontC};
-            }
-
-            .space-char {
-                visibility: hidden;
-            }
-
-            .accent-background {
-                width: 100%;
-                height: 100%;
-                background-color: ${this.accentC};
-                position: relative;
-            }
-        `;
-        
-        let mainStyleBlock = `
-            .container {
-                width: 100%;
-                height: 100%;
-                background-color: ${this.backgroundC};
-                display: flex;
-            }
-
-            .graph-container {
-                left: 16%;
-                top: 17%;
-                width: 70%;
-                height: 63%;
-                position: absolute;
-            }
-
-            ${title}
-            ${axisStyles}
-            ${gridStyles}
-            ${barStyles}
-            ${xLabels}
-            ${shared}
-        `;
-
-        return mainStyleBlock;
     } 
 
     // Font API call (only google fonts API supported)
@@ -936,8 +704,9 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     duration: 1,
                 }
             ),
-            this.attrs.timings.intro + this.attrs.timings.static + this.attrs.timings.outro  
+            this.introDur + this.staticDur + this.outtroDur 
         );
+        console.log(this.introDur + this.staticDur + this.outtroDur)
     }
 
     buildVars() {
