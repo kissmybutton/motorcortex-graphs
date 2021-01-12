@@ -36,7 +36,7 @@ const barChart = new MCGraphs.BarChartSimple({
         outtro: 2000,
     },
     palette: {
-        background: "blue"
+        background: "#D3CDCD"
     },
 }, {
     selector: '#htmlclip',
@@ -55,7 +55,7 @@ const progressBar = new MCGraphs.ProgressBar({
         outtro: 2000,
     },
     palette: {
-        background: "red"
+        background: "#D3CDCD"
     },
 }, {
     selector: '#htmlclip',
