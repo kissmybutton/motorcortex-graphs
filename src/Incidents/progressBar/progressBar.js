@@ -23,7 +23,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             <div class={"container-bar container-bar-"+index}>
                 <div class={"inner-bar inner-bar-"+ index + " " + (elem.value < this.criticalValue ? "extra-rounded-"+index : null)}></div>
             </div>
-            <div class={"text text-"+index}>{elem.value.toFixed(2)}</div>
+            <div class={"text text-"+index}>{ !this.attrs.options?.hidePercentage ? (elem.value > 0 ? elem.value.toFixed(2) : 0) : null}</div>
         </div>
         });
 
@@ -47,11 +47,11 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         return `
             .container{
                 height: 100%;
-                background-color: ${this.attrs.palette.background ? this.attrs.palette.background : DefaultStyle.colorPalette.background};
+                background-color: ${this.attrs.palette?.background ? this.attrs.palette.background : DefaultStyle.colorPalette.background};
                 display: flex;
-                color: ${this.attrs.palette.font ? this.attrs.palette.font : DefaultStyle.colorPalette.font};
-                font-family: ${this.attrs.font.fontFamily? this.attrs.font.fontFamily : 'Staatliches, cursive'};
-                font-size: ${this.attrs.font.size ? this.attrs.font.size : '1.2rem'};
+                color: ${this.attrs.palette?.font ? this.attrs.palette.font : DefaultStyle.colorPalette.font};
+                font-family: ${this.attrs.font?.fontFamily? this.attrs.font.fontFamily : 'Staatliches, cursive'};
+                font-size: ${this.attrs.font?.size ? this.attrs?.font.size : '1.2rem'};
             }
             .row{
                 display: flex;
@@ -65,18 +65,19 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             .container-bar{
                 position: absolute;
                 height: 100%;
-                background: ${this.attrs.palette.secondary ? this.attrs.palette.secondary : DefaultStyle.colorPalette.darkGray};
-                border-radius: 16rem;
+                background: ${this.attrs.palette?.secondary ? this.attrs.palette.secondary : DefaultStyle.colorPalette.darkGray};
+                border-radius: 3rem;
                 width: 60%;
                 box-shadow: 2px 2px 5px gray;
-                border: 0.2rem solid ${this.attrs.palette.accent ? this.attrs.palette.accent : DefaultStyle.colorPalette.accent};
+                border: 0.2rem solid ${this.attrs.palette?.accent ? this.attrs.palette.accent : DefaultStyle.colorPalette.accent};
                 z-index: 1;
+                overflow: hidden;
             }
             .inner-bar{
                 position: relative;
-                background-color: ${this.attrs.palette.primary ? this.attrs.palette.primary : DefaultStyle.colorPalette.lightGray};
+                background-color: ${this.attrs.palette?.primary ? this.attrs.palette.primary : DefaultStyle.colorPalette.lightGray};
                 height: 102%;
-                border-radius: 16rem;
+                border-radius: 3rem;
                 bottom: -1px;
                 z-index: 2;
                 top: -0.5px;
@@ -88,9 +89,10 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                 opacity: 1;
                 left: 62%;
             }
+            ${!this.attrs.options?.hidePercentage ? `
             .text::after{
                 content: "%";
-            }
+            }` : ''}
             .bar-header{
                 position: absolute;
                 left: -21%;
@@ -109,7 +111,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         // https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap
         return [{
             type: 'google-font',
-            src: this.attrs.font.url? this.attrs.font.url : 'https://fonts.googleapis.com/css2?family=Staatliches&display=swap'
+            src: this.attrs.font?.url? this.attrs.font.url : 'https://fonts.googleapis.com/css2?family=Staatliches&display=swap'
         }];
     }
 
@@ -121,7 +123,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
     buildTree(){
         const avg = this.barSum / this.barCount;
 
-        if (this.attrs.timings.intro) {
+        if (this.attrs.timings?.intro) {
             const slideInDuration = Math.floor(this.attrs.timings.intro * 0.33);
             const expandBaseDuration = Math.floor(this.attrs.timings.intro * 0.25);
             const expandBarDuration = Math.floor(this.attrs.timings.intro * 0.33);

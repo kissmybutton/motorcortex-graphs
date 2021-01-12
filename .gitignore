@@ -9,6 +9,7 @@ coverage
 # TODO: Remove after demo creation
 demo/data.json
 demo/data/
+demo/barChartData.json
 
 # Output folders
 build

@@ -7,25 +7,18 @@ const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
 // const clip = new MotorCortex.HTMLClip({
 //     html: `<div class="container">
-//         <div id="effect"></div>
 //         <div id="htmlclip"></div>
-//         <div id="combo"></div>
-//         <div id="myclip"></div>
 //     </div>`,
 //     css: `
 //         .container{
-//             width: 600px,
-//             height: 400px
-//         }
-//         .container>div{
-//             width: 50%;
-//             height: 50%;
+//             width: 1024px;
+//             height: 768px;
 //         }
 //     `,
 //     host: document.getElementById('clip'),
 //     containerParams: {
-//         width: '1024px',
-//         height: '768px'
+//         width: '1200px',
+//         height: '900px'
 //     }
 // });
 
@@ -51,12 +44,15 @@ const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 //         url: 'https://fonts.googleapis.com/css2?family=Righteous&display=swap',
 //         fontFamily: 'Righteous, cursive',
 //         size: '1.2rem'
+//     },
+//     options: {
+//         hidePercentage: true,
 //     }
 // }, {
 //     selector: '#htmlclip',
 //     containerParams: {
-//         width: '1024px',
-//         height: '768px'
+//         width: '1200px',
+//         height: '900px'
 //     },
 // });
 
@@ -67,7 +63,7 @@ const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
 // ***BARCHART***
 
-// import * as data from './data/barChartData.json';
+// import * as data from './barChartData.json';
 
 
 
@@ -115,6 +111,10 @@ const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 //     },
 // }, {
 //     selector: '#barGraph',
+//     containerParams: {
+//         width: '960px',
+//         height: '720px'
+//     }
 // });
 
 
