@@ -1,6 +1,6 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
-import * as DefaultStyle from '../../Defaults/colorPalette';
+import buildCSS  from './progressBarStylesheet.ts'; 
 
 const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 
@@ -23,7 +23,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             <div class={"container-bar container-bar-"+index}>
                 <div class={"inner-bar inner-bar-"+ index + " " + (elem.value < this.criticalValue ? "extra-rounded-"+index : null)}></div>
             </div>
-            <div class={"text text-"+index}>{ !this.attrs.options?.hidePercentage ? (elem.value > 0 ? elem.value.toFixed(2) : 0) : null}</div>
+            <div class={"text text-"+index}>{!this.attrs.options?.hidePercentage ? ((elem.value > 0 ? elem.value.toFixed(2) : 0)+"%") : null}</div>
         </div>
         });
 
@@ -31,93 +31,22 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
     }
 
     get css(){
-        let rows = '';
-
-        const avg = this.barSum / this.barCount;
-
-        this.attrs.data.forEach((elem, index) => {
-           rows += `.row-${index}{
-                bottom: ${50 + (avg - index) * 100/this.barCount - 60/this.barCount * 2.15}%;
-                }
-                .inner-bar-${index}{
-                    width: ${elem.value.toFixed(2)}%;
-                }`
-        });
-
-        return `
-            .container{
-                height: 100%;
-                background-color: ${this.attrs.palette?.background ? this.attrs.palette.background : DefaultStyle.colorPalette.background};
-                display: flex;
-                color: ${this.attrs.palette?.font ? this.attrs.palette.font : DefaultStyle.colorPalette.font};
-                font-family: ${this.attrs.font?.fontFamily? this.attrs.font.fontFamily : 'Staatliches, cursive'};
-                font-size: ${this.attrs.font?.size ? this.attrs?.font.size : '1.2rem'};
-            }
-            .row{
-                display: flex;
-                flex-direction: row;
-                position: absolute;
-                left: 20%;
-                align-items: center;
-                height: ${60/this.barCount}%;
-                width: 100%;
-            }
-            .container-bar{
-                position: absolute;
-                height: 100%;
-                background: ${this.attrs.palette?.secondary ? this.attrs.palette.secondary : DefaultStyle.colorPalette.darkGray};
-                border-radius: 3rem;
-                width: 60%;
-                box-shadow: 2px 2px 5px gray;
-                border: 0.2rem solid ${this.attrs.palette?.accent ? this.attrs.palette.accent : DefaultStyle.colorPalette.accent};
-                z-index: 1;
-                overflow: hidden;
-            }
-            .inner-bar{
-                position: relative;
-                background-color: ${this.attrs.palette?.primary ? this.attrs.palette.primary : DefaultStyle.colorPalette.lightGray};
-                height: 102%;
-                border-radius: 3rem;
-                bottom: -1px;
-                z-index: 2;
-                top: -0.5px;
-                
-            }
-            .text{
-                position: relative;
-                z-index: 0;
-                opacity: 1;
-                left: 62%;
-            }
-            ${!this.attrs.options?.hidePercentage ? `
-            .text::after{
-                content: "%";
-            }` : ''}
-            .bar-header{
-                position: absolute;
-                left: -21%;
-                text-align: right;
-                width: 20%;
-            }
-            ${rows}
-        `;
+        let cssArgs = {
+            barSum: this.barSum,
+            barCount: this.barCount,
+            data: this.attrs.data,
+            palette: this.attrs.palette ? this.attrs.palette : {},
+            font: this.attrs.font ? this.attrs.font : {},
+            options: this.attrs.options ? this.attrs.options : {},
+        }
+        return buildCSS(cssArgs)
     }
 
     get fonts(){
-        // you can load google fonts on your clip by adding objects on the
-        // array it returns. Each object must have two keys:
-        // type: "google-font" and
-        // src: the src of the google font e.g.:
-        // https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap
         return [{
             type: 'google-font',
             src: this.attrs.font?.url? this.attrs.font.url : 'https://fonts.googleapis.com/css2?family=Staatliches&display=swap'
         }];
-    }
-
-    get audioSources(){
-        // You can load sounds here to use on your Clip. Check documentation for details
-        return [];
     }
 
     buildTree(){

@@ -33,7 +33,7 @@ const barChart = new MCGraphs.BarChartSimple({
     timings: {
         intro: 2000,
         static: 1500,
-        outtro: 2000,
+        outro: 2000,
     },
     palette: {
         background: "#D3CDCD"
@@ -52,7 +52,7 @@ const progressBar = new MCGraphs.ProgressBar({
     timings: {
         intro: 2000,
         static: 1500,
-        outtro: 2000,
+        outro: 2000,
     },
     palette: {
         background: "#D3CDCD"

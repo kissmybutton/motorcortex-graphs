@@ -137,7 +137,7 @@ The `options` object is an optional object what contains miscellaneous graph con
 | --- | --- | --- | --- |
 | hidePercentage | Toggles the percentages next to the bars | false | boolean|
 
-## Bar Chart Incident
+## Creating A Bar Chart Incident
 
 To create a bar chart, the necessary attribute parameter is the data object. The remaining parameters implement customization of the graph and are all optional.
 
@@ -160,7 +160,7 @@ const newGraph = new MCGraphs.BarChartSimple({
     grid: true,
     timings: {
         intro: 1000,
-        outtro: 1000, 
+        outro: 1000, 
         static: 1000, 
     },
 }, {
@@ -186,15 +186,15 @@ The Bar Chart Incident can take the following attributes:
 
 #### Data:
 
-An object that contains the parameters with which to display the data in the graph.
+An object that contains the parameters with which to display the data in the graph. The dataPoint array is a required entry, but all the rest are optional.
 
-| Parameter | Description | Type | Required |
-| --------- |:-----------| :----:| :------: |
-| title | The title of the graph (left) | `string` | No |
-| subtitle | The subtitle of the graph (right) | `string` | No |
-| showGrid | Toggle of grid line background | `boolean` | No |
-| maxValue | The max value for the y-axis of the graph | `integer` | No |
-| data | The datapoint array for the graph (example below) | `Array[datapoint]` | Yes |  
+| Name | Description | Type |
+| --------- |:-----------| :----:|
+| title | The title of the graph (left) | `string` |
+| subtitle | The subtitle of the graph (right) | `string` |
+| showGrid | Toggle of grid line background | `boolean` |
+| maxValue | The max value for the y-axis of the graph | `integer` |
+| data | The datapoint array for the graph (example below) | `Array[datapoint]` |  
 
 Example data:
 ```json
@@ -224,9 +224,9 @@ Example data:
 #### Datapoints:
 The data array of the graph contains `datapoint` objects. These Objects contain two (2) key-value pairs. These key value pairs are:
 
-| Key | Value Type | Description |
+| Key | Description | Value Type |
 | --------- |:-----------| :----: |
-| name | The name (label) of the bar | `string` |
+| name | The name (label) of the bar (up to 3 letters) | `string` |
 | value | The value (y-axis) of the bar (2 significal digits) | `number` |
 
 #### Timings:
@@ -236,7 +236,7 @@ The `timings` object is an *optional* attribute that contains three (3) paramete
 | --------- |:-----------| :----| ------: |
 | intro | Duration of the intro animation | `0` | ms |
 | static | Duration of the time that the graph should stay on screen | `1000` | ms |
-| outtro | Duration of the outtro animation | `0` | ms |
+| outro | Duration of the outro animation | `0` | ms |
 
 #### Palette:
 The `palette` object is an optional parameter used to customize the colors used in the graph. The colors that can be set are:

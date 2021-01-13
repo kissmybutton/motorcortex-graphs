@@ -2,7 +2,7 @@ import MotorCortex from '@kissmybutton/motorcortex';
 import AnimePlugin from '@kissmybutton/motorcortex-anime';
 const Anime = MotorCortex.loadPlugin(AnimePlugin);
 import { colorPalette } from '../../Defaults/colorPalette';
-import buildCSS  from './barChartStylesheet'; 
+import buildCSS  from './barChartStylesheet.ts'; 
 
 
 
@@ -48,23 +48,14 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             );
         };
 
-        //  Bars html generation with data parameter as reference
-        let bars = this.data.map( (datum) => {
-            this.maxPoint = (this.maxPoint < datum.value) ? 
-                datum.value : this.maxPoint;
-
-            return (
-                <div class="bar-container" id={datum.name + "bar"}>
-                    <div class="bar-fill" id={datum.name + "-bar-fill"}></div>
-                </div>
-            );
-        });
-        this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint;
-
         // X-axis labels html generation with data parameter as reference
         let xLabels = [];
         for (let i in this.data) {
             let label = [];
+
+            if (this.data[i].name.length > 3) {
+                this.data[i].name = this.data[i].name.slice(0, 3);
+            }
             for (let z in this.data[i].name) {
                 let cssClasses = 
                 label.push(
@@ -79,6 +70,19 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             );
         }
 
+//  Bars html generation with data parameter as reference
+let bars = this.data.map( (datum) => {
+    this.maxPoint = (this.maxPoint < datum.value) ? 
+        datum.value : this.maxPoint;
+
+    return (
+        <div class={datum.name + "-bar"}>
+            <div class="bar-fill" id={datum.name + "-bar-fill"}></div>
+        </div>
+    );
+});
+this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint;
+
         // MAIN HTML TREE
         let barGraphHTML = (
             <div class="container">
@@ -89,7 +93,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     </div>
                 </div>
                 <div class="title-back-wrapper">
-                    <div class="title-background"></div>
+                    <div class="title-background block-background"></div>
                 </div>
                 <div class="graph-container">
                     <div class="graph">{bars}</div>
@@ -99,7 +103,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 <div class="x-axis"></div>
                 <div class="x-labels-container">{xLabels}</div>
                 <div class="x-labels-back-wrapper">
-                    <div class="x-labels-background"></div>
+                    <div class="x-labels-background block-background"></div>
                 </div>
             </div>
         );
@@ -398,12 +402,12 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
         }
 
         // OUTRO CONTROL
-        if (this.attrs.timings.outtro) {
-            let textAnimDur = this.outtroDur * 0.75;
-            const outtroGroup = new MotorCortex.Group();
+        if (this.attrs.timings.outro) {
+            let textAnimDur = this.outroDur * 0.75;
+            const outroGroup = new MotorCortex.Group();
 
             // Axis Outro Control
-            const axisComboOuttro = new MotorCortex.Combo(
+            const axisCombooutro = new MotorCortex.Combo(
                 {
                     incidents: [
                         {
@@ -418,10 +422,10 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                             },
                             props: {
                                 selector: '.x-axis',
-                                duration:  this.outtroDur * 0.2,
+                                duration:  this.outroDur * 0.2,
                                 easing: 'easeInQuad'
                             },
-                            position: this.outtroDur * 0
+                            position: this.outroDur * 0
                         }, {
                             incidentClass: Anime.Anime,
                             attrs: {
@@ -434,10 +438,10 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                             },
                             props: {
                                 selector: '.y-axis',
-                                duration:  this.outtroDur * 0.3,
+                                duration:  this.outroDur * 0.3,
                                 easing: 'easeOutQuad'
                             },
-                            position: this.outtroDur * 0.2
+                            position: this.outroDur * 0.2
                         }
                     ]
                 },
@@ -445,10 +449,10 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     selector: ".container",
                 }
             );
-            outtroGroup.addIncident(axisComboOuttro, this.outtroDur * 0.5);
+            outroGroup.addIncident(axisCombooutro, this.outroDur * 0.5);
 
             // GridLines Outro Control
-            const gridLinesOuttro = new Anime.Anime(
+            const gridLinesoutro = new Anime.Anime(
                 {
                     animatedAttrs: {
                         width : '0%'
@@ -460,14 +464,14 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 {
                     selector: ".gridlines",
                     easing: 'easeInOutQuad',
-                    duration: this.outtroDur * 0.5,
+                    duration: this.outroDur * 0.5,
                 }
             );
-            outtroGroup.addIncident(gridLinesOuttro, this.outtroDur * 0.2);
+            outroGroup.addIncident(gridLinesoutro, this.outroDur * 0.2);
             
             // Title Bar Outro Control
-            const titlesOuttro = new MotorCortex.Group();
-            titlesOuttro.addIncident(
+            const titlesoutro = new MotorCortex.Group();
+            titlesoutro.addIncident(
                 new Anime.Anime(
                     {
                         animatedAttrs: {
@@ -479,15 +483,15 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     },
                     {
                         selector: ".title-back-wrapper",
-                        duration: this.outtroDur * 0.45,
+                        duration: this.outroDur * 0.45,
                         easing: "easeInOutQuad",
                     }
                 ),
-                this.outtroDur * 0.4
+                this.outroDur * 0.4
             );
             
             // Main Title Outro: letter animation control
-            let titleDur = this.outtroDur * 0.8;
+            let titleDur = this.outroDur * 0.8;
             let letterDur = titleDur * 2 / (this.title.length + 1)
             let titleIncidents = [];
             for (let i in this.title) {
@@ -519,10 +523,10 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     selector: ".title-wrapper",
                 }
             );
-            titlesOuttro.addIncident(titleCombo, this.outtroDur * 0.1);
+            titlesoutro.addIncident(titleCombo, this.outroDur * 0.1);
 
             // Subtitle Outro: letter animation control
-            let subtitleDur = this.outtroDur * 0.4;
+            let subtitleDur = this.outroDur * 0.4;
             let subLetterDur = subtitleDur * 2 / (this.subtitle.length + 1);
             let subIncidents = [];
             for (let i in this.subtitle) {
@@ -556,12 +560,12 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     selector: ".subtitle-wrapper",
                 }
             );
-            titlesOuttro.addIncident(subtitleCombo, this.outtroDur * 0);            
-            outtroGroup.addIncident(titlesOuttro, this.outtroDur * 0.05);
+            titlesoutro.addIncident(subtitleCombo, this.outroDur * 0);            
+            outroGroup.addIncident(titlesoutro, this.outroDur * 0.05);
 
             // Labels (xAxis) Outro Control
-            const xLabelsOuttro = new MotorCortex.Group();
-            xLabelsOuttro.addIncident(
+            const xLabelsoutro = new MotorCortex.Group();
+            xLabelsoutro.addIncident(
                 new Anime.Anime(
                     {
                         animatedAttrs: {
@@ -573,11 +577,11 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     },
                     {
                         selector: ".x-labels-background",
-                        duration: this.outtroDur * 0.45,
+                        duration: this.outroDur * 0.45,
                         easing: "easeInOutCubic"
                     }
                 ),
-                this.outtroDur * 0.4
+                this.outroDur * 0.4
             );
             
             // Labels (xAxis) Outro: letter animation control
@@ -617,16 +621,16 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                         selector: ".label-container",
                     }
                 );
-                xLabelsOuttro.addIncident(
+                xLabelsoutro.addIncident(
                     datumCombo, 
                     (textAnimDur / (this.data.length + 1)) * i
                 );
             }
-            outtroGroup.addIncident(xLabelsOuttro, this.outtroDur * 0.05);
+            outroGroup.addIncident(xLabelsoutro, this.outroDur * 0.05);
 
-            // Bar Outtro Control
-            let barOuttroDur = this.outtroDur * 0.7;
-            let barDur = barOuttroDur * 2 / (this.data.length + 1)
+            // Bar outro Control
+            let baroutroDur = this.outroDur * 0.7;
+            let barDur = baroutroDur * 2 / (this.data.length + 1)
             let barIncidents = [];
             for (let i in this.data) {
                 barIncidents.push(
@@ -641,7 +645,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                             },
                         },
                         props: {
-                            duration: this.outtroDur * 0.3,
+                            duration: this.outroDur * 0.3,
                             easing: "easeInOutCubic",
                             selector: `#${this.data[i].name}-bar-fill`,
                         },
@@ -649,7 +653,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     }
                 )
             }
-            const barAnimationOuttro = new MotorCortex.Combo(
+            const barAnimationoutro = new MotorCortex.Combo(
                 {
                     incidents: barIncidents
                 },
@@ -657,9 +661,9 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     selector: ".graph",
                 }
             );
-            outtroGroup.addIncident(barAnimationOuttro, this.outtroDur * 0);
+            outroGroup.addIncident(barAnimationoutro, this.outroDur * 0);
 
-            this.addIncident(outtroGroup, 0 + this.introDur + this.staticDur);
+            this.addIncident(outroGroup, 0 + this.introDur + this.staticDur);
         }
 
         // STATIC DURATION CONTROL
@@ -704,7 +708,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     duration: 1,
                 }
             ),
-            this.introDur + this.staticDur + this.outtroDur 
+            this.introDur + this.staticDur + this.outroDur 
         );
     }
 
@@ -744,8 +748,8 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             this.attrs.timings : {};
         this.introDur = this.attrs.timings.intro ? 
             this.attrs.timings.intro : 0;
-        this.outtroDur = this.attrs.timings.outtro ? 
-            this.attrs.timings.outtro : 0;
+        this.outroDur = this.attrs.timings.outro ? 
+            this.attrs.timings.outro : 0;
         if (this.attrs.timings.static === 0) {
             this.staticDur = 0;
         } else {
