@@ -1,21 +1,20 @@
 import MotorCortex from '@kissmybutton/motorcortex';
-import MotorCortexGraph from "../dist/bundle.umd";
-const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
-
 import Player from "@kissmybutton/motorcortex-player";
+import MotorCortexGraph from "../dist/bundle.umd";
+import * as barChartData from './data/barChartData.json';
+import * as progressBarData from './data/progressBarData.json';
 
+const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
 const clip = new MotorCortex.HTMLClip({
     html: `<div class="container">
-        <div id="effect"></div>
         <div id="htmlclip"></div>
-        <div id="combo"></div>
-        <div id="myclip"></div>
     </div>`,
     css: `
         .container{
-            width: 600px,
-            height: 400px
+            width: 1024px;
+            height: 768px;
+            background: #D3CDCD;
         }
         .container>div{
             width: 50%;
@@ -24,19 +23,49 @@ const clip = new MotorCortex.HTMLClip({
     `,
     host: document.getElementById('clip'),
     containerParams: {
-        width: '600px',
-        height: '400px'
+        width: '1024px',
+        height: '768px'
     }
 });
 
-
-
-const newGraph = new MCGraphs.ProgressBar({
-    // here goes your attrs
+const barChart = new MCGraphs.BarChartSimple({
+    data: barChartData,  
+    timings: {
+        intro: 2000,
+        static: 1500,
+        outro: 2000,
+    },
+    palette: {
+        background: "#D3CDCD"
+    },
 }, {
-    selector: '#htmlclip'
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px', 
+        height: '768px'
+    }
 });
+clip.addIncident(barChart, 0);
 
-clip.addIncident(newGraph, 0);
+const progressBar = new MCGraphs.ProgressBar({
+    data: require('./data/progressBarData.json'),
+    timings: {
+        intro: 2000,
+        static: 1500,
+        outro: 2000,
+    },
+    palette: {
+        background: "#D3CDCD"
+    },
+}, {
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px',
+        height: '768px'
+    },
+});
+clip.addIncident(progressBar, 5500);
 
-const player = new Player({clip});
+
+clip.play();
+const player = new Player({clip, timeFormat: "ms", pointerEvents: true});
