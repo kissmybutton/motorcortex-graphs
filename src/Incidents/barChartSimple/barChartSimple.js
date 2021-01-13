@@ -2,7 +2,7 @@ import MotorCortex from '@kissmybutton/motorcortex';
 import AnimePlugin from '@kissmybutton/motorcortex-anime';
 const Anime = MotorCortex.loadPlugin(AnimePlugin);
 import { colorPalette } from '../../Defaults/colorPalette';
-import buildCSS  from './barChartStylesheet.ts'; 
+import buildCSS  from './barChartStylesheet'; 
 
 
 

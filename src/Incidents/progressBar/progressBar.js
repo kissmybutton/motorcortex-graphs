@@ -1,6 +1,6 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
-import buildCSS  from './progressBarStylesheet.ts'; 
+import buildCSS from './progressBarStyleSheet'; 
 
 const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 

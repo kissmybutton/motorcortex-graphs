@@ -22,7 +22,6 @@ export default function buildCSS(cssArgs) {
             left: "14%",
             background: cssArgs.tertiaryC,
             position: "absolute",
-
         },
         gridlines: {
             width: "100%",
