@@ -6,5 +6,3 @@ export const colorPalette = {
     "accent": "#FFD800", 
     "background": "transparent"
 }
-
-export default colorPalette;
