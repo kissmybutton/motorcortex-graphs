@@ -4,7 +4,14 @@ export const colorPalette = {
     "darkGray": "#434243",
     "font": "#100300",
     "accent": "#FFD800", 
-    "background": "transparent"
+    "background": "transparent",
+    "pieColors": [
+        'pink',
+        'lightblue',
+        'orange',
+        'red',
+        'blue'
+    ]
 }
 
 export default colorPalette;

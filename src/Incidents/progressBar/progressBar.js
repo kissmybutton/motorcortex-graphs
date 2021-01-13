@@ -115,11 +115,6 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         }];
     }
 
-    get audioSources(){
-        // You can load sounds here to use on your Clip. Check documentation for details
-        return [];
-    }
-
     buildTree(){
         const avg = this.barSum / this.barCount;
 

@@ -1,5 +1,6 @@
 import BarChartSimple from './Incidents/barChartSimple/barChartSimple';
 import ProgressBar from './Incidents/progressBar/progressBar';
+import PieChart from './Incidents/pieChart/pieChart';
 
 export default {
   npm_name: "motorcortex-graphs", // !! make sure the name of your plugin is identical to the name of your package.json !!
@@ -26,5 +27,13 @@ export default {
         height: "900px"
       }
     },
+    {
+      exportable: PieChart,
+      name: "PieChart",
+      originalDims: {
+        width: "1200px",
+        height: "900px"
+      }
+    }
   ]
 };
