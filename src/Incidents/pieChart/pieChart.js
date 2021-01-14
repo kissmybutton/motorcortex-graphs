@@ -1,6 +1,8 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
+import { configs } from 'eslint-plugin-prettier';
 import * as DefaultStyle from '../../Defaults/colorPalette';
+import buildCSS from './pieChartStylesheet';
 
 const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 
@@ -19,39 +21,19 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
     get html() {
         return <div class="container">
-            <h1 class="title">{this.attrs.data.title}</h1> 
+            <h1 class="title">{this.attrs.data.title ? this.attrs.data.title : '' }</h1> 
             <div class="piechart"></div> 
         </div>
     }
 
     get css(){
-        return `
-        .container{
-            background-color: transparent;
-            width: 100%;
-            height: 100%;
-            display:flex;
-            justify-content: center; 
-            align-items: center; 
-            flex:direction: column;
-            font-family: ${this.attrs.font?.fontFamily? this.attrs.font.fontFamily : 'Staatliches, cursive'};
-            font-size: ${this.attrs.font?.size ? this.attrs?.font.size : '1.6rem'};
+        let cssArgs = {
+            data: this.attrs.data,
+            palette: this.attrs.palette ? this.attrs.palette : {},
+            font: this.attrs.font ? this.attrs.font : {},
+            radiusString: this.createRadiusString()
         }
-        .title{
-            color: white;
-            align-self: flex-start;
-            top: -1rem;
-            position: relative;
-        }
-        .piechart { 
-            display: block; 
-            position: absolute; 
-            width: calc(80% * 0.75); 
-            height: 80%; 
-            border-radius: 50%; 
-            background-image: conic-gradient(${this.createRadiusString()}); 
-        } 
-        `
+        return buildCSS(cssArgs);
     }
 
     get fonts(){
@@ -62,6 +44,8 @@ export default class PieChart extends MotorCortex.HTMLClip{
     }
 
     buildTree(){
+        // console.log(this.createRadiusString())
+        this.opacityControl();
         if (this.attrs.timings?.intro) {
             const fadeInDuration = Math.round(this.attrs.timings?.intro * 0.2);
             const rotateDuration = Math.round(this.attrs.timings?.intro * 0.8);
@@ -116,7 +100,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
     createRadiusString() {
         let gradientString = '';
         this.radiusValues.forEach((elem, i) => {
-            gradientString += `${DefaultStyle.colorPalette.pieColors[i]} 0 ${elem}deg ${this.attrs.data.data.length - 1 === i ? '' : ', '}`
+            gradientString += `${this.attrs.data.data[i].color? this.attrs.data.data[i].color : this.generateColor(i)} 0 ${elem}deg ${this.attrs.data.data.length - 1 === i ? '' : ', '}`
         });
         return gradientString;
     }
@@ -128,7 +112,51 @@ export default class PieChart extends MotorCortex.HTMLClip{
             return this.calculateRadius(this.attrs.data.data[index-1], index-1) + (elem.value/100) * 360;
     }
 
+    generateColor(index) {
+        if (index > DefaultStyle.colorPalette.pieColors.length - 1) {
+            return DefaultStyle.colorPalette.pieColors[Math.floor(Math.random() * Math.floor(DefaultStyle.colorPalette.pieColors.length))];
+        }
+        return DefaultStyle.colorPalette.pieColors[index];
+    }
+
     get radiusValues() {
         return this.attrs.data.data.map((elem, index) =>  this.calculateRadius(elem, index));
+    }
+
+    // Static control
+    // Making the contents of this animation invisible before timestamp:0 
+    // and after timestamp: {totalDuration}
+    opacityControl() {
+        this.addIncident(
+            new MCAnime.Anime(
+                {
+                    animatedAttrs: {
+                        opacity: 1,
+                    },
+                    initialValues: {
+                        opacity: 0,
+                    }
+                }, {
+                    selector: `.container`,
+                    duration: 1,
+                }
+            ),
+            0    
+        );
+        if (!this.attrs.timings.outro) {
+            this.addIncident(
+                new MCAnime.Anime(
+                    {
+                        animatedAttrs: {
+                            opacity: 0,
+                        },
+                    }, {
+                        selector: `.container`,
+                        duration: 1,
+                    }
+                ),
+                this.attrs.timings.intro + this.attrs.timings.static - 1
+            );
+        }
     }
 }

@@ -48,7 +48,7 @@ const barChart = new MCGraphs.BarChartSimple({
 clip.addIncident(barChart, 0);
 
 const progressBar = new MCGraphs.ProgressBar({
-    data: progressBarData,
+    data: require('./data/progressBarData.json'),
     timings: {
         intro: 2000,
         static: 1500,
@@ -67,11 +67,10 @@ const progressBar = new MCGraphs.ProgressBar({
 clip.addIncident(progressBar, 5500);
 
 const pieChart = new MCGraphs.PieChart({
-    data: require('./data.json'),
+    data: require('./data/pieChartData.json'),
     timings: {
-        intro: 2000,
-        static: 4000,
-        outro: 1000
+        static: 1500,
+        outro: 2000
     }
 },{
     selector: '#htmlclip',

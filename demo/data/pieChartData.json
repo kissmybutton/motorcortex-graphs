@@ -1,0 +1,50 @@
+{
+	"title": "My Pie Chart",
+	"data": [
+		{
+			"name": "Percentage 1",
+			"value": 15,
+			"color": ""
+		},
+		{
+			"name": "Percentage 2",
+			"value": 15,
+			"color": ""
+		},
+		{
+			"name": "Percentage 3",
+			"value": 10,
+			"color": ""
+		},
+		{
+			"name": "Percentage 4",
+			"value": 5,
+			"color": ""
+		},
+		{
+			"name": "Percentage 5",
+			"value": 20,
+			"color": ""
+		},
+		{
+			"name": "Percentage 3",
+			"value": 10,
+			"color": ""
+		},
+		{
+			"name": "Percentage 4",
+			"value": 5,
+			"color": ""
+		},
+		{
+			"name": "Percentage 5",
+			"value": 20,
+			"color": ""
+		},
+		{
+			"name": "Percentage 1",
+			"value": 100,
+			"color": "transparent"
+		}
+	]
+}
