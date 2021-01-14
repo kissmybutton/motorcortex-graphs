@@ -26,6 +26,11 @@ const clip = new MotorCortex.HTMLClip({
 
 const newGraph = new MCGraphs.PieChart({
     data: require('./data.json'),
+    timings: {
+        intro: 2000,
+        static: 4000,
+        outro: 1000
+    }
 },{
     selector: '#htmlclip',
     containerParams: {
