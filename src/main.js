@@ -12,8 +12,8 @@ export default {
       // also so your Incidents are directly embedable to DonkeyClip
     //   attributesValidationRules: {},
       originalDims: {
-        width: "800px",
-        height: "600px"
+        width: "1200px",
+        height: "900px"
       }
     },
     {

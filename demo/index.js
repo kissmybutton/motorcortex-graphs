@@ -1,9 +1,10 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import Player from "@kissmybutton/motorcortex-player";
 import MotorCortexGraph from "../dist/bundle.umd";
-const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
+import * as barChartData from './data/barChartData.json';
+import * as progressBarData from './data/progressBarData.json';
 
-// ***PROGRESS BAR***
+const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
 const clip = new MotorCortex.HTMLClip({
     html: `<div class="container">
@@ -13,18 +14,59 @@ const clip = new MotorCortex.HTMLClip({
         .container{
             width: 1024px;
             height: 768px;
+            background: #D3CDCD;
+        }
+        .container>div{
+            width: 50%;
+            height: 50%;
         }
     `,
     host: document.getElementById('clip'),
     containerParams: {
-        width: '1200px',
-        height: '900px'
+        width: '1024px',
+        height: '768px'
     }
 });
 
+const barChart = new MCGraphs.BarChartSimple({
+    data: barChartData,  
+    timings: {
+        intro: 2000,
+        static: 1500,
+        outro: 2000,
+    },
+    palette: {
+        background: "#D3CDCD"
+    },
+}, {
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px', 
+        height: '768px'
+    }
+});
+clip.addIncident(barChart, 0);
 
+const progressBar = new MCGraphs.ProgressBar({
+    data: progressBarData,
+    timings: {
+        intro: 2000,
+        static: 1500,
+        outro: 2000,
+    },
+    palette: {
+        background: "#D3CDCD"
+    },
+}, {
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px',
+        height: '768px'
+    },
+});
+clip.addIncident(progressBar, 5500);
 
-const newGraph = new MCGraphs.PieChart({
+const pieChart = new MCGraphs.PieChart({
     data: require('./data.json'),
     timings: {
         intro: 2000,
@@ -34,73 +76,13 @@ const newGraph = new MCGraphs.PieChart({
 },{
     selector: '#htmlclip',
     containerParams: {
-        width: '1200px',
-        height: '900px'
+        width: '1024px',
+        height: '768px'
     },
 });
 
-clip.addIncident(newGraph, 0);
+clip.addIncident(pieChart, 11000);
+
+
 clip.play();
-const player = new Player({clip});
-
-
-// ***BARCHART***
-
-// import * as data from './barChartData.json';
-
-
-
-// const clip = new MotorCortex.HTMLClip({
-//     html: `
-//         <div class="container">
-//             <div id="barGraph"></div>
-//         </div>`,
-//     css: `
-//         .container{
-//             width: 960px,
-//             height: 720px,
-//         }
-//     `,
-//     host: document.getElementById('clip'),
-//     containerParams: {
-//         width: '960px',
-//         height: '720px'
-//     }
-// });
-
-
-
-// const newGraph = new MCGraphs.BarChartSimple({
-//     data: data,  
-//     palette: {
-//         // primary: "",
-//         // secondary: "", 
-//         // tertiary: "",
-//         // font: "", 
-//         // accent: "", //default yellow COMMON
-//         // background: "#D3CDCD", //default transparent COMMON
-//     },
-//     grid: true,
-//     font: {
-//         // url: "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap",
-//         // fontFamily: "'Source Code Pro', monospace",
-//         // size: "",
-//     },
-//     maxVal: 100, // if its 100 it simulates %.
-//     timings: {
-//         intro: 2000, // if no intro -> appears with no animation, defaults to 0
-//         outtro: 2000, // if no outtro -> stays static, defaults to 0
-//         static: 0, // defaults to 1000
-//     },
-// }, {
-//     selector: '#barGraph',
-//     containerParams: {
-//         width: '960px',
-//         height: '720px'
-//     }
-// });
-
-
-// clip.addIncident(newGraph, 0);
-// clip.play();
-// const player = new Player({clip, timeFormat: "ms", pointerEvents: true});
+const player = new Player({clip, timeFormat: "ms", pointerEvents: true});
