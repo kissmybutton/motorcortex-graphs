@@ -1,6 +1,5 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
-import { configs } from 'eslint-plugin-prettier';
 import * as DefaultStyle from '../../Defaults/colorPalette';
 import buildCSS from './pieChartStylesheet';
 
