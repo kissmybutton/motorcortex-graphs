@@ -69,6 +69,7 @@ clip.addIncident(progressBar, 5500);
 const pieChart = new MCGraphs.PieChart({
     data: require('./data/pieChartData.json'),
     timings: {
+        intro: 2000,
         static: 1500,
         outro: 2000
     }
@@ -83,5 +84,5 @@ const pieChart = new MCGraphs.PieChart({
 clip.addIncident(pieChart, 11000);
 
 
-clip.play();
+
 const player = new Player({clip, timeFormat: "ms", pointerEvents: true});

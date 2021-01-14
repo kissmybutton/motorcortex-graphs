@@ -8,6 +8,7 @@ export default function buildCSS(cssArgs) {
 
     const styles = {
         container: {
+            opcaity: 1,
             "background-color": "transparent",
             width: "100%",
             height: "100%",
@@ -30,12 +31,12 @@ export default function buildCSS(cssArgs) {
             width: 'calc(80% * 0.75)',
             height: '80%',
             'border-radius': '50%',
-            'background-image': `conic-gradient(${cssArgs.radiusSting})`
+            'background-image': `conic-gradient(${cssArgs.radiusString})`
         } 
 
     }
 
-    // console.log(cssArgs.radiusSting);
+    console.log(cssArgs.radiusSting);
 
     const styleSheet = jss.createStyleSheet(styles).toString();
 

@@ -43,7 +43,8 @@ export default class PieChart extends MotorCortex.HTMLClip{
     }
 
     buildTree(){
-        // console.log(this.createRadiusString())
+        console.log(this.createRadiusString(false))
+        console.log(this.createRadiusString(true))
         this.opacityControl();
         if (this.attrs.timings?.intro) {
             const fadeInDuration = Math.round(this.attrs.timings?.intro * 0.2);
@@ -69,7 +70,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
             const rotateIn = new MCAnime.Anime({
                 animatedAttrs: {
-                    "background-image": `conic-gradient(${this.createRadiusString()})`, 
+                    "background-image": `conic-gradient(${this.createRadiusString(false)})`, 
                 },
                 initialValues: {
                 "background-image": `conic-gradient(black 0deg)`,
@@ -94,13 +95,32 @@ export default class PieChart extends MotorCortex.HTMLClip{
         });
 
         this.addIncident(staticPie, this.attrs.timings?.intro ? this.attrs.timings?.intro : 0);
+
+
+        if (this.attrs.timings.outro) {
+            const rotateOut = new MCAnime.Anime({
+                animatedAttrs: {
+                    "background-image": `conic-gradient(${this.createRadiusString(true)})`, 
+                },
+                initialValues: {
+                    "background-image": `conic-gradient(black 0deg)`,
+                    }
+            },
+            {
+                duration: this.attrs.timings.outro,
+                selector: `.piechart`,
+                easing: 'linear'
+            });
+            this.addIncident(rotateOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static)
+        }
     }
 
-    createRadiusString() {
+    createRadiusString(outro) {
         let gradientString = '';
         this.radiusValues.forEach((elem, i) => {
-            gradientString += `${this.attrs.data.data[i].color? this.attrs.data.data[i].color : this.generateColor(i)} 0 ${elem}deg ${this.attrs.data.data.length - 1 === i ? '' : ', '}`
+            gradientString += `${this.attrs.data.data[i].color? this.attrs.data.data[i].color : this.generateColor(i)} 0 ${elem}deg ${(this.attrs.data.data.length - 1 === i) && outro ? '' : ', '}`
         });
+        gradientString = outro? 'transparent 0 360deg, ' + gradientString   : gradientString + 'transparent 0 360deg';
         return gradientString;
     }
 
