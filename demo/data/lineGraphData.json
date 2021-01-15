@@ -1,0 +1,32 @@
+{ 
+    "title": "INFOGRAPHIC 05", 
+    "subtitle": "Subtitle 2021", 
+    "showGrid": true,
+    "maxValue": 1800,
+    "data": [
+        {
+            "name": "2016",
+            "value": 56
+        },
+        {
+            "name": "2017",
+            "value": 43
+        },
+        {
+            "name": "2018",
+            "value": 61
+        },
+        {
+            "name": "2019",
+            "value": 10
+        },
+        {
+            "name": "2020",
+            "value": 3
+        },
+        {
+            "name": "2021",
+            "value": 74
+        }
+    ]
+}

@@ -39,6 +39,7 @@
 	},
 	"dependencies": {
 		"@kissmybutton/motorcortex-anime": "^2.1.4",
+		"@kissmybutton/motorcortex-svgdraw": "0.0.2",
 		"jss": "^10.5.0"
 	},
 	"peerDependencies": {
