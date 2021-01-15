@@ -21,9 +21,13 @@ export default function buildCSS(cssArgs) {
         },
         title: {
             color: 'white',
-           ' align-self': 'flex-start',
+           'align-self': 'flex-start',
             top: '-1rem',
-            position: 'relative'
+            position: 'relative',
+            display: 'flex',
+            "justify-content": "center", 
+            "align-items": "center",
+            "flex:direction": "row",
         },
         piechart: { 
             display: 'block',
@@ -32,11 +36,20 @@ export default function buildCSS(cssArgs) {
             height: '80%',
             'border-radius': '50%',
             'background-image': `conic-gradient(${cssArgs.radiusString})`
-        } 
-
-    }
-
-    console.log(cssArgs.radiusSting);
+        },
+        space: {
+            "min-width": cssArgs.font?.size ? `calc(${cssArgs.font.size} * 0.5)` : '0.8rem',
+        },
+        char: {
+            position: 'relative'
+        }
+    };
+    
+    [...cssArgs.data.title].forEach((char, i) => {
+        styles['char-'+i] = {
+            position: 'relative'
+        }
+    });
 
     const styleSheet = jss.createStyleSheet(styles).toString();
 

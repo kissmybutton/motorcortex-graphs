@@ -72,6 +72,9 @@ const pieChart = new MCGraphs.PieChart({
         intro: 2000,
         static: 1500,
         outro: 2000
+    },
+    font: {
+        size: '1.6rem'
     }
 },{
     selector: '#htmlclip',
