@@ -6,11 +6,11 @@ export const colorPalette = {
     "accent": "#FFD800", 
     "background": "transparent",
     "pieColors": [
-        'pink',
-        'lightblue',
-        'orange',
-        'red',
-        'blue'
+        'rgb(117,112,110)',
+        'rgb(255,216,0)',
+        'rgb(67,66,67)',
+        'rgb(178,177,174)',
+        'rgb(255,255,255)'
     ]
 }
 

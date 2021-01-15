@@ -1,4 +1,5 @@
 import jss, { createGenerateId } from 'jss';
+import * as DefaultStyle from '../../Defaults/colorPalette';
 
 export default function buildCSS(cssArgs) {
     const createGenerateId = () => {
@@ -18,9 +19,9 @@ export default function buildCSS(cssArgs) {
             "flex:direction": "column",
             "font-family": `${cssArgs.font?.fontFamily? cssArgs.font.fontFamily : 'Staatliches, cursive'}`,
             "font-size": `${cssArgs.font?.size ? cssArgs.font.size : '1.6rem'}`,
+            color: cssArgs.palette.font ? cssArgs.palette.font : DefaultStyle.colorPalette.font,
         },
         title: {
-            color: 'white',
            'align-self': 'flex-start',
             top: '-1rem',
             position: 'relative',

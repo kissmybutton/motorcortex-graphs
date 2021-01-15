@@ -43,31 +43,28 @@ export default class PieChart extends MotorCortex.HTMLClip{
     }
 
     buildTree(){
-        console.log(this.createRadiusString(false))
-        console.log(this.createRadiusString(true))
-        console.log(this.buildTitle());
-        this.opacityControl();
+        
         if (this.attrs.timings?.intro) {
             const fadeInDuration = Math.round(this.attrs.timings?.intro * 0.2);
             const rotateDuration = Math.round(this.attrs.timings?.intro * 0.8);
             const titleInDuration = Math.round(this.attrs.timings?.intro * 0.4);
 
-            const fadein = new MCAnime.Anime({
+            const fadeIn = new MCAnime.Anime({
                 animatedAttrs: {
                     opacity: 1, 
                 },
                 initialValues: {
-                opacity: 0,
+                    opacity: 0,
                 }
             },
             {
                 duration: fadeInDuration,
-                selector: `.container`,
+                selector: '.container',
                 easing: 'linear'
             }
             )
 
-            this.addIncident(fadein, 0);
+            this.addIncident(fadeIn, 0);
 
             if (this.attrs.data.title) {
                 [...this.attrs.data.title].forEach((char, index) => {
@@ -88,27 +85,29 @@ export default class PieChart extends MotorCortex.HTMLClip{
                         selector: `.char-${index}`,
                         easing: 'easeOutCubic'
                         });
-                    this.addIncident(titleIn, fadeInDuration + Math.round(titleInDuration/this.attrs.data.title.length) * index);
+                    this.addIncident(titleIn, Math.round(titleInDuration/this.attrs.data.title.length) * index);
                 })
             }
 
-
+            console.log(this.createRadiusString());
             const rotateIn = new MCAnime.Anime({
                 animatedAttrs: {
-                    "background-image": `conic-gradient(${this.createRadiusString(false)})`, 
+                    "background-image": `conic-gradient(${this.createRadiusString(false)})` 
                 },
                 initialValues: {
                 "background-image": `conic-gradient(black 0deg)`,
+
                 }
             },
             {
                 duration: rotateDuration,
                 selector: `.piechart`,
-                easing: 'easeOutCubic'
+                easing: 'linear'
             }
             );
-            console.log(rotateIn);
-            this.addIncident(rotateIn, fadeInDuration);
+            this.addIncident(rotateIn, titleInDuration);
+        } else {
+            this.opacityControl();
         }
 
         const staticPie = new MCAnime.Anime({
@@ -123,16 +122,19 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
 
         if (this.attrs.timings?.outro) {
-            const rotateOutDuration = Math.round(this.attrs.timings?.outro * 0.8);
-            const fadeOutDuration = Math.round(this.attrs.timings?.outro * 0.2);
+            const rotateOutDuration = Math.round(this.attrs.timings?.outro);
+            const fadeOutDuration = Math.round(this.attrs.timings?.outro);
             const rotateOut = new MCAnime.Anime({
                 animatedAttrs: {
-                    "background-image": `conic-gradient(${this.createRadiusString(false)})`, 
+                    "background-image": `conic-gradient(${this.createRadiusString(true)})`, 
                 },
+                initialValues: {
+                    "background-image": `conic-gradient(rgb(255,255,255) 0deg, rgb(0,0,0) 360deg)`
+                }
             },
             {
                 duration: rotateOutDuration,
-                selector: `.piechart`,
+                selector: '.piechart',
                 easing: 'linear'
             });
             this.addIncident(rotateOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static)
@@ -150,7 +152,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
                 duration: fadeOutDuration,
                 easing: 'linear'
             })
-            this.addIncident(fadeOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static + rotateOutDuration)
+            this.addIncident(fadeOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static)
         }
     }
 
@@ -159,7 +161,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
         this.radiusValues.forEach((elem, i) => {
             gradientString += `${this.attrs.data.data[i].color? this.attrs.data.data[i].color : this.generateColor(i)} 0 ${elem}deg ${(this.attrs.data.data.length - 1 === i) && outro ? '' : ', '}`
         });
-        gradientString = outro? 'transparent 0 360deg, ' + gradientString   : gradientString + 'transparent 0';
+        gradientString = outro? 'rgba(0,0,0,0) 0 360deg, ' + gradientString  : gradientString + 'rgba(0,0,0,0) 0 360deg';
         return gradientString;
     }
 
