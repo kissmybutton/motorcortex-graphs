@@ -29,23 +29,33 @@ const clip = new MotorCortex.HTMLClip({
     }
 });
 
-const lineGraph = new MCGraphs.LineGraph({
-    data: lineGraphData,  
-    timings: {
-        intro: 5000,
-        static: 1000,
-        outro: 5000,
-    },
-    palette: {
-        background: "#D3CDCD"
-    },
-}, {
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1224px', 
-        height: '768px'
+const lineGraph = new MCGraphs.LineGraph(
+    {
+        data: lineGraphData,  
+        timings: {
+            intro: 5000,
+            static: 1000,
+            // outro: 5000,
+        },
+        palette: {
+            background: "#D3CDCD"
+        },
+    }, {
+        selector: '#htmlclip',
+        // containerParams: {
+        //     width: '1200px', 
+        //     height: '900px'
+        // }
+        containerParams: {
+            width: '1224px', 
+            height: '768px'
+        }
+        // containerParams: {
+        //     width: '400px', 
+        //     height: '300px',
+        // }
     }
-});
+);
 clip.addIncident(lineGraph, 0);
 
 // const barChart = new MCGraphs.BarChartSimple({

@@ -45,19 +45,74 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
 
             dataSteles.push(
-                <div id={"stele-" + this.data[i].name}class="data-stele">{stele}</div>
+                <div id={"stele-" + i}class="data-stele">{stele}</div>
             );
         }
 
         // Graph Lines SVG hmtl generation
-        let graphLines = [];
-        graphLines.push(
-            <svg class="lines-container">
+        let lineGroups = [];
+        for (let l = 0; l < this.dataSetsNum; l++) {
+            let linePaths = [];
+            for (let i = 0; i < this.data.length; i++) {
+                let lineSegment = [];
+                let xPoint1 = (100 / (this.data.length*2)) + (100 / (this.data.length*2)) * (i*2);
+                let yPoint1 = (this.data[i].values[l] * 100) / this.maxPoint;
+                if (i !== this.data.length-1) {
+                    let xPoint2 = (100 / (this.data.length*2)) + (100 / (this.data.length*2)) * ((i+1)*2);
+                    let yPoint2 = (this.data[(i+1)].values[l] * 100) / this.maxPoint;
 
+                    lineSegment.push(
+                        <path 
+                            id={`line-${l}-${i}`}
+                            class={`line-segment line-${l}`}
+                            d={
+                                `M ${xPoint1} ${100 - yPoint1}` + 
+                                `L ${xPoint2} ${100 - yPoint2}`
+                            } 
+                            stroke={this.tertiaryC} 
+                            stroke-width="7"
+                            stroke-linecap="round"
+                            vector-effect='non-scaling-stroke'
+                            fill="none"
+                        />
+                    );
+                } 
+
+                let r = 1.5;
+                let rx = r * this.aspectRatio;
+                let ry = r;
+                lineSegment.push(
+                    <ellipse  
+                        id={`point${l}-${i}`}
+                        class={`point${l}`}
+                        cx={`${xPoint1}`} cy={`${100 - yPoint1}`} 
+                        rx={rx} ry={ry}
+                        fill={this.accentC} 
+                        stroke={this.accentC} 
+                        vector-effect='non-scaling-stroke'
+                    />
+                );
+                linePaths.push(<g>{lineSegment}</g>);
+            }
+            lineGroups.push(<g>{linePaths}</g>);
+        }
+
+        let lines = [];
+        lines.push(
+            <svg 
+                viewbox="0 0 100 100"
+                preserveAspectRatio="none"
+                class="lines-container" 
+                >
+                {lineGroups}
             </svg>
         )
 
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // X-axis labels html generation with data parameter as reference
+        let graphLabels = [];
         let xLabels = [];
         for (let i in this.data) {
             let label = [];
@@ -66,7 +121,6 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                 this.data[i].name = this.data[i].name.slice(0, 4);
             }
             for (let z in this.data[i].name) {
-                let cssClasses = 
                 label.push(
                     <div id={"letter-" + i + "-" + z} class="letter-container">
                         <div class="letter-wrapper-label fontColorOn">{this.data[i].name[z]}</div>
@@ -79,16 +133,19 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             );
         }
        
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // MAIN HTML TREE
         let lineGraphHTML = (
             <div class="container">
                 <div class="title-container">
                     <div class="title-wrapper">{title}</div>
                 </div>
-                <div class="graph-container">
-                    {graphLines}
-                </div>
+                <div class="graph-background"></div>
                 <div class="dataStele-container">{dataSteles}</div>
+                {lines}
+                <div class="graph-labels-container">{graphLabels}</div>
                 <div class="x-labels-container">{xLabels}</div>
                 <div class="x-labels-back-wrapper">
                     <div class="block-background"></div>
@@ -126,7 +183,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
 
     // MotorCortex Animation generation and
     buildTree() {
-        this.opacityControl();
+        // this.opacityControl();
 
 
          // INTRO CONTROL
@@ -145,7 +202,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         },
                     },
                     {
-                        selector: ".graph-container",
+                        selector: ".graph-background",
                         duration: Math.trunc(this.introDur * 0.2),
                         easing: "easeInOutQuart",
                     }
@@ -265,7 +322,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             let blockDur = (steleDur * blockOverlapIndex) / (this.steleBlockNum + 1);
             for (let i in this.data) {
                 let steleGroup = new MotorCortex.Group({
-                    selector: `#stele-${this.data[i].name}`
+                    selector: `#stele-${i}`
                 });
                 let blockCombo = new MotorCortex.Combo(
                     {
@@ -298,6 +355,19 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
             introGroup.addIncident(stelesIntro, Math.trunc(this.introDur * 0.45));
 
+            // Path Intro Animation
+            let pathAnimation = new SVGD.Draw(
+                {
+                    animatedAttrs: {
+                        cover: 1
+                    }, 
+                }, {
+                    selector: '#line-0-0',
+                    duration: this.introDur * 0.7
+                }
+            );
+            // introGroup.addIncident(pathAnimation, this.introDur * 0.2)
+
             this.addIncident(introGroup, 0);
         }
 
@@ -318,7 +388,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         },
                     },
                     {
-                        selector: ".graph-container",
+                        selector: ".graph-background",
                         duration: Math.trunc(this.outroDur * 0.2),
                         easing: "easeInOutQuart",
                     }
@@ -440,7 +510,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             let blockDur = (steleDur * blockOverlapIndex) / (this.steleBlockNum + 1);
             for (let i in this.data) {
                 let steleGroup = new MotorCortex.Group({
-                    selector: `#stele-${this.data[i].name}`
+                    selector: `#stele-${i}`
                 });
                 let blockCombo = new MotorCortex.Combo(
                     {
@@ -524,9 +594,41 @@ export default class LineGraph extends MotorCortex.HTMLClip{
 
     buildVars() {
         this.data = this.attrs.data.data;
+
+        this.sizeParams = {};
+        this.props.containerParams = this.props.containerParams ? 
+            this.props.containerParams : {};
+        this.sizeParams.width = this.props.containerParams.width ? 
+            this.props.containerParams.width :
+            `${1200}px`;
+        this.sizeParams.height = this.props.containerParams.height ? 
+            this.props.containerParams.height :
+            `${900}px`;
+        this.sizeParams.width = 
+            parseInt(this.sizeParams.width.substr(
+                0, this.sizeParams.width.length - 2
+            )); 
+        this.sizeParams.height = 
+            parseInt(this.sizeParams.height.substr(
+                0, this.sizeParams.height.length - 2
+            )); 
+        this.aspectRatio = 
+            (this.sizeParams.height * 0.58) / (this.sizeParams.width * 0.76);
+        
+        this.dataSetsNum = 0;
+        this.maxPoint = 0;
+        for (let datum of this.data) {
+            if (datum.values.length > this.dataSetsNum) {
+                this.dataSetsNum = datum.values.length;
+            }
+            if (Math.max(...datum.values) > this.maxPoint) {
+                this.maxPoint = Math.max(...datum.values);
+            }
+        } 
+        this.maxPoint = this.attrs.data.maxValue ? 
+            this.attrs.data.maxValue : this.maxPoint;
         this.title = this.attrs.data.title;
         this.words = this.title.split(" ");
-        this.maxPoint = 0;
         this.steleBlockNum = 26;
 
         this.attrs.palette = this.attrs.palette ? 

@@ -5,7 +5,6 @@ export default function buildCSS(cssArgs) {
         return rule => rule.key
     }
     jss.setup({createGenerateId});
-
     const styles = {
         "title-container": {
             background: "transparent",
@@ -32,7 +31,7 @@ export default function buildCSS(cssArgs) {
             position: "relative",
             "font-size": "190%",
         },
-        "graph-container": {
+        "graph-background": {
             left: "10%",
             top: "15%",
             width: "80%",
@@ -41,16 +40,20 @@ export default function buildCSS(cssArgs) {
             background: cssArgs.secondaryC,
         },
         "lines-container": {
-            width: "100%",
-            height: "100%",
-            "z-index": "1",
-        },
-        "dataStele-container": {
-            width: "76%",
+            width: `76%`,
             height: "58%",
             top: "19%",
             left: "12%",
             position: "relative",
+            "z-index": "1",
+            overflow: "visible"
+        },
+        "dataStele-container": {
+            width: `76%`,
+            height: "58%",
+            top: "19%",
+            left: "12%",
+            position: "absolute",
             display: "flex",
             "align-items": "center",
             "justify-content": "space-around",
@@ -70,7 +73,7 @@ export default function buildCSS(cssArgs) {
             background: cssArgs.primaryC,
         },
         "x-labels-back-wrapper": {
-            width: "76%",
+            width: `76%`,
             height: "6%",
             top: "78%",
             left: "12%",
@@ -86,7 +89,7 @@ export default function buildCSS(cssArgs) {
         },
         "x-labels-container": {
             background: "transparent",
-            width: "76%",
+            width: `76%`,
             height: "6%",
             top: "78%",
             left: "12%",
@@ -117,29 +120,31 @@ export default function buildCSS(cssArgs) {
         "space-char": {
             visibility: "hidden",
         },
+        "line-segment": {
+            // "stroke-dasharray": "100", 
+            // "stroke-dashoffset": "0",
+        },
         container: {
             width: "100%",
             height: "100%",
-            background: cssArgs.backgroundC,            
-            "font-family": cssArgs.fontFamily,
             display: "flex",
+            // background: cssArgs.backgroundC,
+            background: "transparent",
+            "font-family": cssArgs.fontFamily,
             "font-size": cssArgs.fontSizeTitle,
         }
     };
 
     cssArgs.data.map( (datum) => {
-        styles[`${datum.name}-bar`] = {
-            "align-self": "flex-end",
-            width: `${(100/cssArgs.data.length)}%`,
-            margin: `0% ${(10/cssArgs.data.length)+1}%`,
-            height: "100%",
-            display: "flex",
-        };
-        styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/cssArgs.maxPoint)*100}%`;
+        // styles[`${datum.name}-bar`] = {
+        //     "align-self": "flex-end",
+        //     width: `${(100/cssArgs.data.length)}%`,
+        //     margin: `0% ${(10/cssArgs.data.length)+1}%`,
+        //     height: "100%",
+        //     display: "flex",
+        // };
+        // // styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/cssArgs.maxPoint)*100}%`;
 
-        styles[`${datum.name}-bar-fill`] = {
-            height: "100%",
-        };
     });
     const styleSheet = jss.createStyleSheet(styles).toString();
 
