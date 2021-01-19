@@ -1,6 +1,7 @@
 import BarChartSimple from './Incidents/barChartSimple/barChartSimple';
 import ProgressBar from './Incidents/progressBar/progressBar';
 import LineGraph from './Incidents/lineGraph/lineGraph';
+import config from './incident_config'
 
 export default {
   npm_name: "motorcortex-graphs", // !! make sure the name of your plugin is identical to the name of your package.json !!
@@ -32,10 +33,10 @@ export default {
       name: "LineGraph",
       // define your attributeValidationRules so MotorCortex can automatically validate them on instantiation 
       // also so your Incidents are directly embedable to DonkeyClip
-    //   attributesValidationRules: {},
+      // attributesValidationRules: {},
       originalDims: {
-        width: "1244px",
-        height: "768px"
+        width: `${config.lineGraph.originalDims.width}px`,
+        height: `${config.lineGraph.originalDims.height}px`
       }
     },
   ]

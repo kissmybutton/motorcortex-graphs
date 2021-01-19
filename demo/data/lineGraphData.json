@@ -6,27 +6,27 @@
     "data": [
         {
             "name": "2016",
-            "values": [56]
+            "values": [56, 63]
         },
         {
             "name": "2017",
-            "values": [43]
+            "values": [43, 89]
         },
         {
             "name": "2018",
-            "values": [61]
+            "values": [61, 11]
         },
         {
             "name": "2019",
-            "values": [10]
+            "values": [10, 17]
         },
         {
             "name": "2020",
-            "values": [3]
+            "values": [3, 97]
         },
         {
             "name": "2021",
-            "values": [74]
+            "values": [74, 7]
         }
     ]
 }

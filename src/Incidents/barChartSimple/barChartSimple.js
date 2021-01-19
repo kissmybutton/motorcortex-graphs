@@ -57,6 +57,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 this.data[i].name = this.data[i].name.slice(0, 4);
             }
             for (let z in this.data[i].name) {
+                let cssClasses = 
                 label.push(
                     <div id={"letter-" + i + "-" + z} class="letter-container">
                         <div class="letter-wrapper fontColorOn">{this.data[i].name[z]}</div>

@@ -1,11 +1,13 @@
+import { colorPalette } from '../../Defaults/colorPalette';
+import buildCSS  from './lineGraphStylesheet'; 
+import config from '../../incident_config'
 import MotorCortex from '@kissmybutton/motorcortex';
 import AnimePlugin from '@kissmybutton/motorcortex-anime';
 import SVGDDef from "@kissmybutton/motorcortex-svgdraw";
 const Anime = MotorCortex.loadPlugin(AnimePlugin);
 const SVGD = MotorCortex.loadPlugin(SVGDDef);
 
-import { colorPalette } from '../../Defaults/colorPalette';
-import buildCSS  from './lineGraphStylesheet'; 
+
 
 
 
@@ -55,41 +57,38 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             let linePaths = [];
             for (let i = 0; i < this.data.length; i++) {
                 let lineSegment = [];
-                let xPoint1 = (100 / (this.data.length*2)) + (100 / (this.data.length*2)) * (i*2);
-                let yPoint1 = (this.data[i].values[l] * 100) / this.maxPoint;
-                if (i !== this.data.length-1) {
-                    let xPoint2 = (100 / (this.data.length*2)) + (100 / (this.data.length*2)) * ((i+1)*2);
-                    let yPoint2 = (this.data[(i+1)].values[l] * 100) / this.maxPoint;
+                let xPoint1 = (this.steleWidth / 2) + (this.spaceAround) + ((i) * ((2 * this.spaceAround) + this.steleWidth));                
+                let yPoint1 = this.linesHeight - ((this.data[i].values[l] * this.linesHeight) / this.maxPoint); 
 
+                if (i !== this.data.length-1) {
+                    let xPoint2 = (this.steleWidth / 2) + (this.spaceAround) + ((i+1) * ((2 * this.spaceAround) + this.steleWidth));                
+                    let yPoint2 = this.linesHeight - ((this.data[i+1].values[l] * this.linesHeight) / this.maxPoint); 
+
+                    // Dataline Generation
                     lineSegment.push(
                         <path 
                             id={`line-${l}-${i}`}
                             class={`line-segment line-${l}`}
                             d={
-                                `M ${xPoint1} ${100 - yPoint1}` + 
-                                `L ${xPoint2} ${100 - yPoint2}`
+                                `M ${xPoint1} ${yPoint1}` + 
+                                `L ${xPoint2} ${yPoint2}`
                             } 
                             stroke={this.tertiaryC} 
-                            stroke-width="7"
+                            stroke-width={`0.65%`}
                             stroke-linecap="round"
-                            vector-effect='non-scaling-stroke'
                             fill="none"
                         />
                     );
                 } 
 
-                let r = 1.5;
-                let rx = r * this.aspectRatio;
-                let ry = r;
+                // Datapoint Generation
                 lineSegment.push(
-                    <ellipse  
-                        id={`point${l}-${i}`}
-                        class={`point${l}`}
-                        cx={`${xPoint1}`} cy={`${100 - yPoint1}`} 
-                        rx={rx} ry={ry}
+                    <circle
+                        id={`point-${l}-${i}`}
+                        class={`point-${l} datapoint`}
+                        cx={`${xPoint1}`} cy={`${yPoint1}`} 
                         fill={this.accentC} 
                         stroke={this.accentC} 
-                        vector-effect='non-scaling-stroke'
                     />
                 );
                 linePaths.push(<g>{lineSegment}</g>);
@@ -100,35 +99,33 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         let lines = [];
         lines.push(
             <svg 
-                preserveAspectRatio="none"
-                viewbox="0 0 100 100"
-                class="lines-container" 
-                >
+                class="lines-container"
+                viewbox={`0 0 ${this.linesWidth} ${this.linesHeight}`}> 
                 {lineGroups}
             </svg>
-        )
+        );
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // Graph labels html generation with data parameters as reference
-        let graphLabels = [];
-        for (let l = 0; l < this.dataSetsNum; l++) {
-            let labelGraph = [];
-            for (let i = 0; i < this.data.length; i++) {
-                graphLabels.push (
-                    <div class="inner-label-container" id={"innerLabel"}>
-                        <div class="inner-label">
-                            {`${this.data[i].name} ${this.percentage ? "%" : ""}`}
-                        </div>
-                    </div>
-                );
-            }
-        }
+        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // // Graph labels html generation with data parameters as reference
+        // let graphLabels = [];
+        // for (let l = 0; l < this.dataSetsNum; l++) {
+        //     let labelGraph = [];
+        //     for (let i = 0; i < this.data.length; i++) {
+        //         graphLabels.push (
+        //             <div class="inner-label-container" id={"innerLabel"}>
+        //                 <div class="inner-label">
+        //                     {`${this.data[i].name} ${this.percentage ? "%" : ""}`}
+        //                 </div>
+        //             </div>
+        //         );
+        //     }
+        // }
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // X-axis labels html generation with data parameter as reference
         let xLabels = [];
@@ -158,8 +155,8 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                 </div>
                 <div class="graph-background"></div>
                 <div class="dataStele-container">{dataSteles}</div>
-                {lines}
-                <div class="graph-labels-container">{graphLabels}</div>
+                <div class="svg-container">{lines}</div>
+                {/* <div class="graph-labels-container">{graphLabels}</div> */}
                 <div class="x-labels-container">{xLabels}</div>
                 <div class="x-labels-back-wrapper">
                     <div class="block-background"></div>
@@ -173,6 +170,8 @@ export default class LineGraph extends MotorCortex.HTMLClip{
     // Build CSS rules for incident
     get css() {
         return buildCSS({
+            linesWidth: this.linesWidth,
+            linesHeight: this.linesHeight,
             data: this.data,
             maxPoint: this.maxPoint,
             primaryC: this.primaryC,
@@ -362,7 +361,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     },
                     {
                         selector: `.stele-block-${i}`,
-                        delay: `@stagger(0, ${Math.trunc(steleDur - blockDur)}, 0, easeOutCubic)`,
+                        delay: `@stagger(0, ${Math.trunc(steleDur - blockDur)}, 0, easeOutQuad)`,
                     }
                 );
 
@@ -371,21 +370,54 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
             introGroup.addIncident(stelesIntro, Math.trunc(this.introDur * 0.45));
 
-            // Path Intro Animation
-            let pathAnimation = new SVGD.Draw(
-                {
-                    animatedAttrs: {
-                        cover: 1
-                    }, 
-                    initialValues: {
-                        cover: 0
-                    },
-                }, {
-                    selector: '.line-0',
-                    duration: this.introDur * 0.7
+            // Graph Intro Animation
+            let segmentDur = (this.introDur / this.data.length);
+            let pointDur = segmentDur * 0.25;
+            let pathDur = segmentDur * 0.8;
+
+            let pathAnimGroup = new MotorCortex.Group();
+            let pointAnimGroup = new MotorCortex.Group();
+            for (let l = 0; l < this.dataSetsNum; l++) {
+                for (let i = 0; i < this.data.length; i++) {
+                    // Path Intro Animation
+                    if (i !== this.data.length-1) {
+                        let pathAnimation = new SVGD.Draw(
+                            {
+                                animatedAttrs: {
+                                    cover: 1
+                                }, 
+                                initialValues: {
+                                    cover: 0
+                                },
+                            }, {
+                                selector: `#line-${l}-${i}`,
+                                duration: Math.trunc(pathDur),
+                                easing: "easeInOutQuad",
+                            }
+                        );
+                        pathAnimGroup.addIncident(pathAnimation, Math.trunc((segmentDur * i) + (segmentDur * 0.2)));
+                    }
+    
+                    // Points Intro Animation
+                    let pointAnimation = new Anime.Anime(
+                        {
+                            animatedAttrs: {
+                                opacity: 1
+                            }, 
+                            initialValues: {
+                                opacity: 0
+                            },
+                        }, {
+                            selector: `#point-${l}-${i}`,
+                            duration: Math.trunc(pointDur),
+                            easeing: "easeInQuart",
+                        }
+                    );
+                    pointAnimGroup.addIncident(pointAnimation, Math.trunc(segmentDur * i));
                 }
-            );
-            introGroup.addIncident(pathAnimation, this.introDur * 0.2)
+            }
+            introGroup.addIncident(pathAnimGroup, pointDur);
+            introGroup.addIncident(pointAnimGroup, 0);
 
             this.addIncident(introGroup, 0);
         }
@@ -415,7 +447,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                 Math.trunc(this.outroDur * 0.8)
             );
 
-            // Main Title Intro Animation
+            // Main Title Outro Animation
             const titlesAnim = new MotorCortex.Group();
             let titleDur = this.outroDur * 0.13;
             let titleIncidents = [];
@@ -440,7 +472,6 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     position: Math.trunc(titleDur / this.words.length * (this.words.length-1-i))
                 });
             }
-
             let titleCombo = new MotorCortex.Combo(
                 {
                     incidents: titleIncidents
@@ -476,7 +507,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                 labelsDur * 0
             );
 
-            // Labels Intro Animation
+            // Labels Outro Animation
             let textAnimDur = this.outroDur * 0.2;
             let labelDur = textAnimDur * 3 / (this.data.length + 2);
             for (let i in this.data) {
@@ -518,7 +549,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
             outroGroup.addIncident(xLabelsAnim, this.outroDur - labelsDur);
 
-            // Data Stele outro animation
+            // Data Stele Outro Animation
             const stelesOutro = new MotorCortex.Group();
 
             let stelesFullDur = this.outroDur * 0.3;
@@ -553,7 +584,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     },
                     {
                         selector: `.stele-block-${i}`,
-                        delay: `@stagger(0, ${Math.trunc(steleDur - blockDur)}, 0, easeOutCubic, omni, true)`,
+                        delay: `@stagger(0, ${Math.trunc(steleDur - blockDur)}, 0, easeOutQuad, omni, true)`,
                     }
                 );
 
@@ -561,6 +592,61 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                 stelesOutro.addIncident(steleGroup,  (this.data.length - 1 - i) * steleDelay);
             }
             outroGroup.addIncident(stelesOutro, this.outroDur * 0.25);
+
+            // Graph outro Animation
+            let segmentDur = (this.outroDur / this.data.length);
+            let pointDur = segmentDur * 0.25;
+            let pathDur = segmentDur * 0.8;
+
+            let pathAnimGroup = new MotorCortex.Group();
+            let pointAnimGroup = new MotorCortex.Group();
+            for (let l = 0; l < this.dataSetsNum; l++) {
+                for (let i = 0; i < this.data.length; i++) {
+                    // Path outro Animation
+                    if (i !== this.data.length-1) {
+                        let pathAnimation = new SVGD.Draw(
+                            {
+                                animatedAttrs: {
+                                    cover: 0
+                                }, 
+                                initialValues: {
+                                    cover: 1
+                                },
+                            }, {
+                                selector: `#line-${l}-${i}`,
+                                duration: Math.trunc(pathDur),
+                                easing: "easeInOutQuad",
+                            }
+                        );
+                        pathAnimGroup.addIncident(
+                            pathAnimation, 
+                            Math.trunc((segmentDur * (this.data.length - 2 - i)) + (segmentDur * 0.2))
+                        );
+                    }
+    
+                    // Points outro Animation
+                    let pointAnimation = new Anime.Anime(
+                        {
+                            animatedAttrs: {
+                                opacity: 0
+                            }, 
+                            initialValues: {
+                                opacity: 1
+                            },
+                        }, {
+                            selector: `#point-${l}-${i}`,
+                            duration: Math.trunc(pointDur),
+                            easeing: "easeOutCubic",
+                        }
+                    );
+                    pointAnimGroup.addIncident(
+                        pointAnimation, 
+                        Math.trunc(segmentDur * (this.data.length - 1 - i))
+                    );
+                }
+            }
+            outroGroup.addIncident(pathAnimGroup, pointDur);
+            outroGroup.addIncident(pointAnimGroup, 0);
 
             this.addIncident(outroGroup, 0 + this.introDur  + this.staticDur);
         }
@@ -612,28 +698,16 @@ export default class LineGraph extends MotorCortex.HTMLClip{
     }
 
     buildVars() {
+        // Data init
         this.data = this.attrs.data.data;
 
-        this.sizeParams = {};
-        this.props.containerParams = this.props.containerParams ? 
-            this.props.containerParams : {};
-        this.sizeParams.width = this.props.containerParams.width ? 
-            this.props.containerParams.width :
-            `${1200}px`;
-        this.sizeParams.height = this.props.containerParams.height ? 
-            this.props.containerParams.height :
-            `${900}px`;
-        this.sizeParams.width = 
-            parseInt(this.sizeParams.width.substr(
-                0, this.sizeParams.width.length - 2
-            )); 
-        this.sizeParams.height = 
-            parseInt(this.sizeParams.height.substr(
-                0, this.sizeParams.height.length - 2
-            )); 
-        this.aspectRatio = 
-            (this.sizeParams.height * 0.58) / (this.sizeParams.width * 0.76);
-        
+        // Sizing and position controls
+        this.linesWidth = config.lineGraph.originalDims.width * 0.76;
+        this.linesHeight = config.lineGraph.originalDims.height * 0.58;
+        this.steleWidth = this.linesWidth * 0.01;
+        this.spaceAround = (this.linesWidth - (this.steleWidth * this.data.length)) / (this.data.length * 2);
+    
+        // Data process
         this.dataSetsNum = 0;
         this.maxPoint = 0;
         for (let datum of this.data) {
@@ -652,6 +726,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         this.words = this.title.split(" ");
         this.steleBlockNum = 26;
 
+        // Colors control
         this.attrs.palette = this.attrs.palette ? 
             this.attrs.palette : {};
         this.primaryC = this.attrs.palette.primary ? 
@@ -669,19 +744,19 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         this.backgroundC = this.attrs.palette.background ? 
             this.attrs.palette.background : colorPalette.background;
 
+        // Fonts control
         this.attrs.font = this.attrs.font ? 
             this.attrs.font : {};
-    
         this.fontFamily = this.attrs.font.fontFamily ? 
             this.attrs.font.fontFamily : "'Staatliches', cursive";
         this.fontSizeLabel = this.attrs.font.size ? 
             this.attrs.font.size : "1.7rem";
-        
         this.fontSizeTitle = "200%";
         this.fontSizeInner = "80%";
         this.url = this.attrs.font.url ? 
             this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap";
 
+        // Timeline control
         this.attrs.timings = this.attrs.timings ? 
             this.attrs.timings : {};
         this.introDur = this.attrs.timings.intro ? 

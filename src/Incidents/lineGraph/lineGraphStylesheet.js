@@ -39,14 +39,24 @@ export default function buildCSS(cssArgs) {
             position: "absolute",
             background: cssArgs.secondaryC,
         },
-        "lines-container": {
+        "svg-container": {
             width: `76%`,
-            height: "58%",
+            height: `58%`,
             top: "19%",
             left: "12%",
             position: "relative",
             "z-index": "1",
             overflow: "visible"
+        },
+        "lines-container": {
+            width: `100%`,
+            height: `100%`,
+            "min-height": "100%",
+            "min-width": "100%",
+            overflow: "visible"
+        },
+        datapoint: {
+            r: "0.65%"
         },
         "dataStele-container": {
             width: `76%`,
@@ -82,8 +92,9 @@ export default function buildCSS(cssArgs) {
         },
         "inner-label-container": {
             background: cssArgs.quaternaryC,
+            display: "inline-block",
             opacity: "0.6",
-            width: "8%",
+            width: "10%",
             left: "50%",
             display: "flex",
             "justify-content": "center",
@@ -147,7 +158,7 @@ export default function buildCSS(cssArgs) {
         container: {
             width: "100%",
             height: "100%",
-            display: "flex",
+            // display: "flex",
             // background: cssArgs.backgroundC,
             background: "transparent",
             "font-family": cssArgs.fontFamily,
@@ -155,17 +166,17 @@ export default function buildCSS(cssArgs) {
         }
     };
 
-    cssArgs.data.map( (datum) => {
-        // styles[`${datum.name}-bar`] = {
-        //     "align-self": "flex-end",
-        //     width: `${(100/cssArgs.data.length)}%`,
-        //     margin: `0% ${(10/cssArgs.data.length)+1}%`,
-        //     height: "100%",
-        //     display: "flex",
-        // };
-        // // styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/cssArgs.maxPoint)*100}%`;
+    // cssArgs.data.map( (datum) => {
+    //     styles[`${datum.name}-bar`] = {
+    //         "align-self": "flex-end",
+    //         width: `${(100/cssArgs.data.length)}%`,
+    //         margin: `0% ${(10/cssArgs.data.length)+1}%`,
+    //         height: "100%",
+    //         display: "flex",
+    //     };
+    //     // styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/cssArgs.maxPoint)*100}%`;
 
-    });
+    // });
     const styleSheet = jss.createStyleSheet(styles).toString();
 
     return styleSheet;
