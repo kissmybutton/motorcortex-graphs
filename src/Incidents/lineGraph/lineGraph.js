@@ -100,8 +100,8 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         let lines = [];
         lines.push(
             <svg 
-                viewbox="0 0 100 100"
                 preserveAspectRatio="none"
+                viewbox="0 0 100 100"
                 class="lines-container" 
                 >
                 {lineGroups}
@@ -111,31 +111,45 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // X-axis labels html generation with data parameter as reference
+        // Graph labels html generation with data parameters as reference
         let graphLabels = [];
+        for (let l = 0; l < this.dataSetsNum; l++) {
+            let labelGraph = [];
+            for (let i = 0; i < this.data.length; i++) {
+                graphLabels.push (
+                    <div class="inner-label-container" id={"innerLabel"}>
+                        <div class="inner-label">
+                            {`${this.data[i].name} ${this.percentage ? "%" : ""}`}
+                        </div>
+                    </div>
+                );
+            }
+        }
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        // X-axis labels html generation with data parameter as reference
         let xLabels = [];
         for (let i in this.data) {
-            let label = [];
+            let labelX = [];
 
             if (this.data[i].name.length > 4) {
                 this.data[i].name = this.data[i].name.slice(0, 4);
             }
             for (let z in this.data[i].name) {
-                label.push(
+                labelX.push(
                     <div id={"letter-" + i + "-" + z} class="letter-container">
                         <div class="letter-wrapper-label fontColorOn">{this.data[i].name[z]}</div>
                     </div>
                 );
             }
-
             xLabels.push(
-                <div class="label-container" id={"label-" + i}>{label}</div>
+                <div class="label-container" id={"label-" + i}>{labelX}</div>
             );
         }
        
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // MAIN HTML TREE
         let lineGraphHTML = (
             <div class="container">
@@ -164,12 +178,14 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             primaryC: this.primaryC,
             secondaryC: this.secondaryC,
             tertiaryC: this.tertiaryC,
+            quaternaryC: this.quaternaryC,
             accentC: this.accentC,
             backgroundC: this.backgroundC,
             fontC: this.fontC,
             fontFamily: this.fontFamily,
             fontSizeTitle: this.fontSizeTitle,
             fontSizeLabel: this.fontSizeLabel,
+            fontSizeInner: this.fontSizeInner,
         });
     } 
 
@@ -361,12 +377,15 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     animatedAttrs: {
                         cover: 1
                     }, 
+                    initialValues: {
+                        cover: 0
+                    },
                 }, {
-                    selector: '#line-0-0',
+                    selector: '.line-0',
                     duration: this.introDur * 0.7
                 }
             );
-            // introGroup.addIncident(pathAnimation, this.introDur * 0.2)
+            introGroup.addIncident(pathAnimation, this.introDur * 0.2)
 
             this.addIncident(introGroup, 0);
         }
@@ -627,6 +646,8 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         } 
         this.maxPoint = this.attrs.data.maxValue ? 
             this.attrs.data.maxValue : this.maxPoint;
+        this.percentage = this.attrs.data.percentage ? 
+            this.attrs.data.percentage : false;
         this.title = this.attrs.data.title;
         this.words = this.title.split(" ");
         this.steleBlockNum = 26;
@@ -639,6 +660,8 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             this.attrs.palette.secondary : colorPalette.lightGray;
         this.tertiaryC = this.attrs.palette.tertiary ? 
             this.attrs.palette.tertiary : colorPalette.darkGray;
+        this.quaternaryC = this.attrs.palette.quaternary ? 
+            this.attrs.palette.quaternary : colorPalette.whiteBack;
         this.fontC = this.attrs.palette.font ? 
             this.attrs.palette.font : colorPalette.font;
         this.accentC = this.attrs.palette.accent ? 
@@ -654,7 +677,8 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         this.fontSizeLabel = this.attrs.font.size ? 
             this.attrs.font.size : "1.7rem";
         
-        this.fontSizeTitle = "200%"
+        this.fontSizeTitle = "200%";
+        this.fontSizeInner = "80%";
         this.url = this.attrs.font.url ? 
             this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap";
 

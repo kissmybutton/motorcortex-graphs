@@ -72,6 +72,26 @@ export default function buildCSS(cssArgs) {
             opacity: "0.8",
             background: cssArgs.primaryC,
         },
+        "graph-labels-container": {
+            width: `76%`,
+            height: "58%",
+            top: "19%",
+            left: "12%",
+            position: "absolute",
+            "z-index": "2",
+        },
+        "inner-label-container": {
+            background: cssArgs.quaternaryC,
+            opacity: "0.6",
+            width: "8%",
+            left: "50%",
+            display: "flex",
+            "justify-content": "center",
+        },
+        "inner-label": {
+            "font-size": cssArgs.fontSizeInner,
+            opacity: "1",
+        },
         "x-labels-back-wrapper": {
             width: `76%`,
             height: "6%",
