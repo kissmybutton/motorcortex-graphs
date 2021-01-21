@@ -1,6 +1,6 @@
 import jss, { createGenerateId } from 'jss';
 
-export default function buildCSS(cssArgs) {
+export default function buildCSS(barChart) {
     const createGenerateId = () => {
         return rule => rule.key
     }
@@ -12,7 +12,7 @@ export default function buildCSS(cssArgs) {
             height: "70%",
             left: "14%",
             top: "15%",
-            background: cssArgs.tertiaryC,
+            background: barChart.tertiaryC,
             position: "absolute",
         },
         "x-axis": {
@@ -20,7 +20,7 @@ export default function buildCSS(cssArgs) {
             height: "4px",
             top: "85%",
             left: "14%",
-            background: cssArgs.tertiaryC,
+            background: barChart.tertiaryC,
             position: "absolute",
         },
         gridlines: {
@@ -33,7 +33,7 @@ export default function buildCSS(cssArgs) {
         gridLine: {
             height: "3px",
             width: "100%",
-            background: cssArgs.secondaryC,
+            background: barChart.secondaryC,
             "align-self": "flex-end",
         },
         graph: {
@@ -48,21 +48,21 @@ export default function buildCSS(cssArgs) {
         },
         "bar-container": { 
             "align-self": "flex-end",
-            width: `${(100/cssArgs.data.length)}%`,
-            margin: `0% ${(10/cssArgs.data.length)+1}%`,
+            width: `${(100/barChart.data.length)}%`,
+            margin: `0% ${(10/barChart.data.length)+1}%`,
             height: "100%",
             display: "flex",
         },
         "bar-fill": {
             width: "100%",
             height: "100%",
-            background: cssArgs.primaryC,
+            background: barChart.primaryC,
             "align-self": "center",
         },
         "block-background": {
             width: "100%",
             height: "100%",
-            background: cssArgs.accentC,
+            background: barChart.accentC,
             position: "relative",
         },
         "x-labels-back-wrapper": {
@@ -75,7 +75,7 @@ export default function buildCSS(cssArgs) {
             "flex-direction": "row-reverse",
         },
         "x-labels-container": {
-            "font-family": cssArgs.fontFamily,
+            "font-family": barChart.fontFamily,
             background: "transparent",
             width: "70%",
             height: "5%",
@@ -88,7 +88,7 @@ export default function buildCSS(cssArgs) {
             "justify-content": "space-around",
         },
         "letter-wrapper": {
-            "font-size": cssArgs.fontSize,
+            "font-size": barChart.fontSize,
             display: "flex",
             "flex-direction": "column",
             position: "relative",
@@ -107,7 +107,7 @@ export default function buildCSS(cssArgs) {
             "flex-direction": "row-reverse",
         },
         "title-container": {
-            "font-family": cssArgs.fontFamily,
+            "font-family": barChart.fontFamily,
             background: "transparent",
             width: "70%",
             height: "5%",
@@ -145,7 +145,7 @@ export default function buildCSS(cssArgs) {
         container: {
             width: "100%",
             height: "100%",
-            background: cssArgs.backgroundC,
+            background: barChart.backgroundC,
             display: "flex",
         },
         "graph-container": {
@@ -156,7 +156,7 @@ export default function buildCSS(cssArgs) {
             position: "absolute",
         },
         fontColorOn: {
-            color: cssArgs.fontC,
+            color: barChart.fontC,
         },
         "space-char": {
             visibility: "hidden",
@@ -164,20 +164,20 @@ export default function buildCSS(cssArgs) {
         "accent-background": {
             width: "100%",
             height: "100%",
-            background: cssArgs.accentC,
+            background: barChart.accentC,
             position: "relative",
         }
     };
 
-    cssArgs.data.map( (datum) => {
+    barChart.data.map( (datum) => {
         styles[`${datum.name}-bar`] = {
             "align-self": "flex-end",
-            width: `${(100/cssArgs.data.length)}%`,
-            margin: `0% ${(10/cssArgs.data.length)+1}%`,
+            width: `${(100/barChart.data.length)}%`,
+            margin: `0% ${(10/barChart.data.length)+1}%`,
             height: "100%",
             display: "flex",
         };
-        styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/cssArgs.maxPoint)*100}%`;
+        styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/barChart.maxPoint)*100}%`;
 
         styles[`${datum.name}-bar-fill`] = {
             height: "100%",

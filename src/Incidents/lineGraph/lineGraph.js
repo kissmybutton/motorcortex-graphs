@@ -4,9 +4,10 @@ import config from '../../incident_config'
 import MotorCortex from '@kissmybutton/motorcortex';
 import AnimePlugin from '@kissmybutton/motorcortex-anime';
 import SVGDDef from "@kissmybutton/motorcortex-svgdraw";
+import TDCAMDef from "@kissmybutton/motorcortex-2dcam";
 const Anime = MotorCortex.loadPlugin(AnimePlugin);
 const SVGD = MotorCortex.loadPlugin(SVGDDef);
-
+const TDCAM = MotorCortex.loadPlugin(TDCAMDef);
 
 
 
@@ -57,18 +58,18 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             let linePaths = [];
             for (let i = 0; i < this.data.length; i++) {
                 let lineSegment = [];
-                let xPoint1 = (this.steleWidth / 2) + (this.spaceAround) + ((i) * ((2 * this.spaceAround) + this.steleWidth));                
-                let yPoint1 = this.linesHeight - ((this.data[i].values[l] * this.linesHeight) / this.maxPoint); 
+                let xPoint1 = this.findPointX(i);     
+                let yPoint1 = this.findPointY(i, l);     
 
                 if (i !== this.data.length-1) {
-                    let xPoint2 = (this.steleWidth / 2) + (this.spaceAround) + ((i+1) * ((2 * this.spaceAround) + this.steleWidth));                
-                    let yPoint2 = this.linesHeight - ((this.data[i+1].values[l] * this.linesHeight) / this.maxPoint); 
-
+                    let xPoint2 = this.findPointX(i + 1);     
+                    let yPoint2 = this.findPointY(i + 1, l); 
+                    
                     // Dataline Generation
                     lineSegment.push(
                         <path 
                             id={`line-${l}-${i}`}
-                            class={`line-segment line-${l}`}
+                            class={`line-${l}`}
                             d={
                                 `M ${xPoint1} ${yPoint1}` + 
                                 `L ${xPoint2} ${yPoint2}`
@@ -87,6 +88,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         id={`point-${l}-${i}`}
                         class={`point-${l} datapoint`}
                         cx={`${xPoint1}`} cy={`${yPoint1}`} 
+                        r={`${this.r}%`}
                         fill={this.accentC} 
                         stroke={this.accentC} 
                     />
@@ -105,27 +107,28 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             </svg>
         );
 
-        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // // Graph labels html generation with data parameters as reference
-        // let graphLabels = [];
-        // for (let l = 0; l < this.dataSetsNum; l++) {
-        //     let labelGraph = [];
-        //     for (let i = 0; i < this.data.length; i++) {
-        //         graphLabels.push (
-        //             <div class="inner-label-container" id={"innerLabel"}>
-        //                 <div class="inner-label">
-        //                     {`${this.data[i].name} ${this.percentage ? "%" : ""}`}
-        //                 </div>
-        //             </div>
-        //         );
-        //     }
-        // }
+        // Graph labels html generation with data parameters as reference
+        let labelGroups = [];
+        for (let l = 0; l < this.dataSetsNum; l++) {
+            let graphLabels = [];
+            for (let i = 0; i < this.data.length; i++) {
+                graphLabels.push (
+                    <div 
+                        class={`label-${this.data[i].name}-${l} inner-label-container`}
+                        id={`label-${this.data[i].name}-${l} inner-label-container`}>
+                        <div class="inner-label">
+                            {`${this.data[i].values[l]} ${this.unit}`}
+                        </div>
+                    </div>
+                );
 
-        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            }
+            labelGroups.push(
+                <div class={`line-${l}-label-container`}>
+                    {graphLabels}
+                </div>
+            );
+        }
 
         // X-axis labels html generation with data parameter as reference
         let xLabels = [];
@@ -150,17 +153,20 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         // MAIN HTML TREE
         let lineGraphHTML = (
             <div class="container">
-                <div class="title-container">
-                    <div class="title-wrapper">{title}</div>
+                <div class="viewport">
+                    <div class="title-container">
+                        <div class="title-wrapper">{title}</div>
+                    </div>
+                    <div class="graph-background"></div>
+                    <div class="dataStele-container">{dataSteles}</div>
+                    <div class="svg-container">{lines}</div>
+                    <div class="graph-labels-container">{labelGroups}</div>
+                    <div class="x-labels-container">{xLabels}</div>
+                    <div class="x-labels-back-wrapper">
+                        <div class="block-background"></div>
+                    </div>
                 </div>
-                <div class="graph-background"></div>
-                <div class="dataStele-container">{dataSteles}</div>
-                <div class="svg-container">{lines}</div>
-                {/* <div class="graph-labels-container">{graphLabels}</div> */}
-                <div class="x-labels-container">{xLabels}</div>
-                <div class="x-labels-back-wrapper">
-                    <div class="block-background"></div>
-                </div>
+                
             </div>
         );
         
@@ -169,23 +175,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
 
     // Build CSS rules for incident
     get css() {
-        return buildCSS({
-            linesWidth: this.linesWidth,
-            linesHeight: this.linesHeight,
-            data: this.data,
-            maxPoint: this.maxPoint,
-            primaryC: this.primaryC,
-            secondaryC: this.secondaryC,
-            tertiaryC: this.tertiaryC,
-            quaternaryC: this.quaternaryC,
-            accentC: this.accentC,
-            backgroundC: this.backgroundC,
-            fontC: this.fontC,
-            fontFamily: this.fontFamily,
-            fontSizeTitle: this.fontSizeTitle,
-            fontSizeLabel: this.fontSizeLabel,
-            fontSizeInner: this.fontSizeInner,
-        });
+        return buildCSS(this);
     } 
 
     // Font API call (only google fonts API supported)
@@ -200,7 +190,6 @@ export default class LineGraph extends MotorCortex.HTMLClip{
     buildTree() {
         // this.opacityControl();
 
-
          // INTRO CONTROL
          if (this.attrs.timings.intro) {
             const introGroup = new MotorCortex.Group();
@@ -210,7 +199,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                 new Anime.Anime(
                     {
                         animatedAttrs: {
-                            height: "66%"
+                            height: "70%"
                         },
                         initialValues: {
                             height: "0%"
@@ -370,14 +359,15 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
             introGroup.addIncident(stelesIntro, Math.trunc(this.introDur * 0.45));
 
-            // Graph Intro Animation
+            // Graph SVG & Labels Intro Animation
             let segmentDur = (this.introDur / this.data.length);
-            let pointDur = segmentDur * 0.25;
+            let pointDur = segmentDur * 0.35;
             let pathDur = segmentDur * 0.8;
 
             let pathAnimGroup = new MotorCortex.Group();
             let pointAnimGroup = new MotorCortex.Group();
             for (let l = 0; l < this.dataSetsNum; l++) {
+                let gLabelGroup = new MotorCortex.Group();
                 for (let i = 0; i < this.data.length; i++) {
                     // Path Intro Animation
                     if (i !== this.data.length-1) {
@@ -402,22 +392,87 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     let pointAnimation = new Anime.Anime(
                         {
                             animatedAttrs: {
-                                opacity: 1
+                                opacity: 1,
+                                r: this.r,
                             }, 
                             initialValues: {
-                                opacity: 0
+                                opacity: 0,
+                                r: 0,
                             },
                         }, {
                             selector: `#point-${l}-${i}`,
                             duration: Math.trunc(pointDur),
-                            easeing: "easeInQuart",
+                            easing: "easeInQuart",
                         }
                     );
-                    pointAnimGroup.addIncident(pointAnimation, Math.trunc(segmentDur * i));
+                    pointAnimGroup.addIncident(
+                        pointAnimation,
+                        Math.trunc(segmentDur * i)
+                    );
+                
+                    // Graph Label Intro Animation
+                    let targetTop = this.findPointY(i, l) - (this.linesHeight * 0.083);
+                    let topOffset = targetTop + this.linesHeight * 0.07 / 2;
+                
+                    let targetWidth = ((10 / 2 * this.data.length) > 10) ?
+                        10 : (10 / 2 * this.data.length);
+                        targetWidth = (targetWidth < 6) ? 6 : targetWidth;
+                    
+                    let targetLeft = this.findPointX(i) 
+                        - ((targetWidth * this.linesWidth / 100) * 0.5);
+                    let leftOffset = targetLeft + this.linesWidth * (targetWidth/100) / 2;
+                          
+                    let gLabelAnimation = new Anime.Anime(
+                        {
+                            animatedAttrs: {
+                                opacity: 0.6,
+                                width: `${targetWidth}%`,
+                                "min-width": `${targetWidth}%`,
+                                height: `7%`,
+                                top: `${targetTop}px`,
+                                left: `${targetLeft}px`,
+                                "font-size": this.fontSizeInner,
+                            }, 
+                            initialValues: {
+                                opacity: 0,
+                                width: "0%",
+                                "min-width": `0%`,
+                                height: `0%`,
+                                top: `${topOffset}px`,
+                                left: `${leftOffset}px`,
+                                "font-size": 0,
+                            },
+                        }, {
+                            selector: `.label-${this.data[i].name}-${l}`,
+                            duration: Math.trunc(pointDur),
+                            easeing: "easeInOutCubic",
+                        }
+                    );
+                    gLabelGroup.addIncident(
+                        gLabelAnimation, 
+                        Math.trunc((segmentDur * i) + (pointDur * 0.2))
+                    );
                 }
+                introGroup.addIncident(gLabelGroup, 0);
             }
-            introGroup.addIncident(pathAnimGroup, pointDur);
+            introGroup.addIncident(pathAnimGroup, Math.trunc(pointDur));
             introGroup.addIncident(pointAnimGroup, 0);
+
+            // Zoom Intro Animation
+            const zoomInit = new TDCAM.ZoomTo({
+                animatedAttrs: {
+                    position: {
+                        x: 100, 
+                        y: 100, 
+                        zoom: 10
+                    },
+                },
+            }, {
+                selector: '.viewport',
+                duration: 4000,
+                easing: 'easeInOutSine'
+            });
+            introGroup.addIncident(zoomInit, 0);
 
             this.addIncident(introGroup, 0);
         }
@@ -435,7 +490,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                             height: "0%"
                         },
                         initialValues: {
-                            height: "66%"
+                            height: "70%"
                         },
                     },
                     {
@@ -593,7 +648,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
             outroGroup.addIncident(stelesOutro, this.outroDur * 0.25);
 
-            // Graph outro Animation
+            // Graph SVG & Labels Outro Animation
             let segmentDur = (this.outroDur / this.data.length);
             let pointDur = segmentDur * 0.25;
             let pathDur = segmentDur * 0.8;
@@ -601,6 +656,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             let pathAnimGroup = new MotorCortex.Group();
             let pointAnimGroup = new MotorCortex.Group();
             for (let l = 0; l < this.dataSetsNum; l++) {
+                let gLabelGroup = new MotorCortex.Group();
                 for (let i = 0; i < this.data.length; i++) {
                     // Path outro Animation
                     if (i !== this.data.length-1) {
@@ -628,10 +684,12 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     let pointAnimation = new Anime.Anime(
                         {
                             animatedAttrs: {
-                                opacity: 0
-                            }, 
+                                opacity: 0,
+                                r: 0,
+                            },
                             initialValues: {
-                                opacity: 1
+                                opacity: 1,
+                                r: this.r,
                             },
                         }, {
                             selector: `#point-${l}-${i}`,
@@ -643,7 +701,51 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         pointAnimation, 
                         Math.trunc(segmentDur * (this.data.length - 1 - i))
                     );
+
+                    // Graph Label Outro Animation
+                    let targetTop = this.findPointY(i, l) - (this.linesHeight * 0.083);
+                    let topOffset = targetTop + this.linesHeight * 0.07 / 2;
+                
+                    let targetWidth = ((10 / 2 * this.data.length) > 10) ?
+                        10 : (10 / 2 * this.data.length);
+                        targetWidth = (targetWidth < 6) ? 6 : targetWidth;
+                    
+                    let targetLeft = this.findPointX(i) 
+                        - ((targetWidth * this.linesWidth / 100) * 0.5);
+                    let leftOffset = targetLeft + this.linesWidth * (targetWidth/100) / 2;
+                    
+                    let gLabelAnimation = new Anime.Anime(
+                        {
+                            animatedAttrs: {
+                                opacity: 0,
+                                width: "0%",
+                                "min-width": `0%`,
+                                height: `0%`,
+                                top: `${topOffset}px`,
+                                left: `${leftOffset}px`,
+                                "font-size": 0,
+                            },
+                            initialValues: {
+                                opacity: 0.6,
+                                width: `${targetWidth}%`,
+                                "min-width": `${targetWidth}%`,
+                                height: `7%`,
+                                top: `${targetTop}px`,
+                                left: `${targetLeft}px`,
+                                "font-size": this.fontSizeInner,
+                            }, 
+                        }, {
+                            selector: `.label-${this.data[i].name}-${l}`,
+                            duration: Math.trunc(pointDur),
+                            easeing: "easeInOutCubic",
+                        }
+                    );
+                    gLabelGroup.addIncident(
+                        gLabelAnimation, 
+                        Math.trunc(segmentDur * (this.data.length - 1 - i) + (pointDur * 0.2))
+                    );
                 }
+                outroGroup.addIncident(gLabelGroup, 0);
             }
             outroGroup.addIncident(pathAnimGroup, pointDur);
             outroGroup.addIncident(pointAnimGroup, 0);
@@ -660,6 +762,10 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
         );
         this.addIncident(staticIncident, this.introDur);
+
+
+        // Hover control
+        // console.log(this)
     }
 
     // Static control
@@ -702,12 +808,19 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         this.data = this.attrs.data.data;
 
         // Sizing and position controls
-        this.linesWidth = config.lineGraph.originalDims.width * 0.76;
-        this.linesHeight = config.lineGraph.originalDims.height * 0.58;
+        this.graphScale = {
+            width: 0.76,
+            height: 0.58,
+        }
+        this.linesWidth = config.lineGraph.originalDims.width * this.graphScale.width;
+        this.linesHeight = config.lineGraph.originalDims.height * this.graphScale.height;
         this.steleWidth = this.linesWidth * 0.01;
         this.spaceAround = (this.linesWidth - (this.steleWidth * this.data.length)) / (this.data.length * 2);
+        this.r = 0.65;
     
-        // Data process
+        // Data processing
+        this.title = this.attrs.data.title;
+        this.words = this.title.split(" ");
         this.dataSetsNum = 0;
         this.maxPoint = 0;
         for (let datum of this.data) {
@@ -720,11 +833,27 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         } 
         this.maxPoint = this.attrs.data.maxValue ? 
             this.attrs.data.maxValue : this.maxPoint;
-        this.percentage = this.attrs.data.percentage ? 
-            this.attrs.data.percentage : false;
-        this.title = this.attrs.data.title;
-        this.words = this.title.split(" ");
-        this.steleBlockNum = 26;
+        this.hover = this.attrs.data.hover ? 
+            this.attrs.data.hover : false;
+        this.hover = (this.dataSetsNum !== 1) ? 
+            true : this.hover;
+        this.trace = this.attrs.data.trace ? 
+            this.attrs.data.trace : false;
+        this.trace = (this.dataSetsNum !==1) ?
+            false : this.trace;
+        this.unit = this.attrs.data.unit ? 
+            this.attrs.data.unit : "%";
+        this.interval = this.attrs.data.interval ? 
+            this.attrs.data.interval : 5;
+        this.steleBlockNum = (this.maxPoint / this.interval) + 1;
+        
+        // Global access data process functions 
+        this.findPointX = (datapoint) => {
+            return (this.steleWidth / 2) + (this.spaceAround) + ((datapoint) * ((2 * this.spaceAround) + this.steleWidth));                
+        };
+        this.findPointY = (datapoint, line) => {
+            return this.linesHeight - ((this.data[datapoint].values[line] * this.linesHeight) / this.maxPoint); 
+        };
 
         // Colors control
         this.attrs.palette = this.attrs.palette ? 

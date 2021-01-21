@@ -113,18 +113,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
 
     // Build CSS rules for incident
     get css() {
-        return buildCSS({
-            data: this.data,
-            maxPoint: this.maxPoint,
-            primaryC: this.primaryC,
-            secondaryC: this.secondaryC,
-            tertiaryC: this.tertiaryC,
-            accentC: this.accentC,
-            backgroundC: this.backgroundC,
-            fontC: this.fontC,
-            fontFamily: this.fontFamily,
-            fontSize: this.fontSize
-        });
+        return buildCSS(this);
     } 
 
     // Font API call (only google fonts API supported)

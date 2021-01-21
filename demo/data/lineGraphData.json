@@ -1,32 +1,34 @@
 { 
     "title": "INFOGRAPHIC 05", 
-    "subtitle": "Subtitle 2021", 
     "showGrid": true,
+    "interval": 4,
     "maxValue": 100,
+    "unit": "%",
+    "hover": true,
     "data": [
         {
             "name": "2016",
-            "values": [56, 63]
+            "values": [56]
         },
         {
             "name": "2017",
-            "values": [43, 89]
+            "values": [43]
         },
         {
             "name": "2018",
-            "values": [61, 11]
+            "values": [61]
         },
         {
             "name": "2019",
-            "values": [10, 17]
+            "values": [10]
         },
         {
             "name": "2020",
-            "values": [3, 97]
+            "values": [0]
         },
         {
             "name": "2021",
-            "values": [74, 7]
+            "values": [74]
         }
     ]
-}
+}   

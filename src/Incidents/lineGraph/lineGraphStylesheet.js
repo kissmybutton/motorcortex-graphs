@@ -1,16 +1,27 @@
 import jss, { createGenerateId } from 'jss';
 
-export default function buildCSS(cssArgs) {
+export default function buildCSS(lineGraph) {
     const createGenerateId = () => {
         return rule => rule.key
     }
     jss.setup({createGenerateId});
     const styles = {
+        container: {
+            width: "100%",
+            height: "100%",
+            background: lineGraph.backgroundC,
+            "font-family": lineGraph.fontFamily,
+            "font-size": lineGraph.fontSizeTitle,
+        },
+        viewport: {
+            width: "100%",
+            height: "100%",
+        },
         "title-container": {
             background: "transparent",
             width: "70%",
             height: "10%",
-            top: "10%",
+            top: "8%",
             left: "8%",
             position: "absolute",
             display: "flex",
@@ -33,16 +44,16 @@ export default function buildCSS(cssArgs) {
         },
         "graph-background": {
             left: "10%",
-            top: "15%",
+            top: "13%",
             width: "80%",
-            height: "66%",
+            height: "70%",
             position: "absolute",
-            background: cssArgs.secondaryC,
+            background: lineGraph.secondaryC,
         },
         "svg-container": {
             width: `76%`,
             height: `58%`,
-            top: "19%",
+            top: "21%",
             left: "12%",
             position: "relative",
             "z-index": "1",
@@ -56,12 +67,11 @@ export default function buildCSS(cssArgs) {
             overflow: "visible"
         },
         datapoint: {
-            r: "0.65%"
         },
         "dataStele-container": {
             width: `76%`,
             height: "58%",
-            top: "19%",
+            top: "21%",
             left: "12%",
             position: "absolute",
             display: "flex",
@@ -78,35 +88,22 @@ export default function buildCSS(cssArgs) {
         },
         "stele-block": {
             width: "100%",
-            height: "5px",
+            height: `${Math.trunc(lineGraph.linesHeight * (0.26 / lineGraph.steleBlockNum))}px`,
+            "max-height": "5px",
             opacity: "0.8",
-            background: cssArgs.primaryC,
+            background: lineGraph.primaryC,
         },
         "graph-labels-container": {
             width: `76%`,
             height: "58%",
-            top: "19%",
+            top: "21%",
             left: "12%",
             position: "absolute",
-            "z-index": "2",
-        },
-        "inner-label-container": {
-            background: cssArgs.quaternaryC,
-            display: "inline-block",
-            opacity: "0.6",
-            width: "10%",
-            left: "50%",
-            display: "flex",
-            "justify-content": "center",
-        },
-        "inner-label": {
-            "font-size": cssArgs.fontSizeInner,
-            opacity: "1",
         },
         "x-labels-back-wrapper": {
             width: `76%`,
             height: "6%",
-            top: "78%",
+            top: "80%",
             left: "12%",
             position: "absolute",
             display: "flex",
@@ -115,14 +112,14 @@ export default function buildCSS(cssArgs) {
         "block-background": {
             width: "100%",
             height: "100%",
-            background: cssArgs.accentC,
+            background: lineGraph.accentC,
             position: "relative",
         },
         "x-labels-container": {
             background: "transparent",
             width: `76%`,
             height: "6%",
-            top: "78%",
+            top: "80%",
             left: "12%",
             position: "absolute",
             display: "flex",
@@ -146,38 +143,65 @@ export default function buildCSS(cssArgs) {
             position: "relative",
         },
         fontColorOn: {
-            color: cssArgs.fontC,
+            color: lineGraph.fontC,
         },
         "space-char": {
             visibility: "hidden",
         },
-        "line-segment": {
-            // "stroke-dasharray": "100", 
-            // "stroke-dashoffset": "0",
+        "inner-label": {
+            opacity: "1",
+            display: "flex",
+            "justify-content": "center",
+            "align-items": "center",
         },
-        container: {
-            width: "100%",
-            height: "100%",
-            // display: "flex",
-            // background: cssArgs.backgroundC,
-            background: "transparent",
-            "font-family": cssArgs.fontFamily,
-            "font-size": cssArgs.fontSizeTitle,
-        }
+        "inner-label-container": {
+            background: lineGraph.quaternaryC,
+            "font-size": lineGraph.fontSizeInner,
+            opacity: "0.6",
+            width: `${10 / 2 * lineGraph.data.length}%`,
+            "min-width": `6%`,
+            "max-width": `10%`,
+            height: "7%",
+            position: "absolute",
+        },
     };
 
-    // cssArgs.data.map( (datum) => {
-    //     styles[`${datum.name}-bar`] = {
-    //         "align-self": "flex-end",
-    //         width: `${(100/cssArgs.data.length)}%`,
-    //         margin: `0% ${(10/cssArgs.data.length)+1}%`,
-    //         height: "100%",
-    //         display: "flex",
-    //     };
-    //     // styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/cssArgs.maxPoint)*100}%`;
+    for (let l = 0; l < lineGraph.dataSetsNum; l++) {
+        styles[`line-${l}-label-container`] = {
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            "z-index": `${2 + l}`,
+        };
 
-    // });
-    const styleSheet = jss.createStyleSheet(styles).toString();
+        for (let i = 0; i < lineGraph.data.length; i++) {
+            let targetTop = lineGraph.findPointY(i, l) 
+                - (lineGraph.linesHeight * 0.083);
+
+            let fullWidth = ((10 / 2 * lineGraph.data.length) > 10) ?
+                10 : (10 / 2 * lineGraph.data.length);
+            fullWidth = (fullWidth < 6) ? 6 : fullWidth;
+            let targetLeft = lineGraph.findPointX(i) 
+                - ((fullWidth * lineGraph.linesWidth / 100) * 0.5);
+
+            styles[`label-${lineGraph.data[i].name}-${l}`] = {
+                top: `${targetTop}px`,
+                left: `${targetLeft}px`,
+            };
+        }
+
+    }
+    let styleSheet = jss.createStyleSheet(styles).toString();
+
+    for (let l = 0; l < lineGraph.dataSetsNum; l++) {
+        for (let i = 0; i < lineGraph.data.length; i++) {
+            styleSheet += `
+                #point-${l}-${i}:hover + #label-${lineGraph.data[i].name}-${l} {
+                    background-color: red;
+                }
+            `;
+        }
+    }
 
     return styleSheet;
 }
