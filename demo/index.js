@@ -37,13 +37,10 @@ const lineGraph = new MCGraphs.LineGraph({
     // MAX 16 datapoints
 
     timings: {
-        intro: 7000,
-        static: 1000,
-        // static: 0,
-        outro: 7000,
-    },
-    palette: {
-        // background: "#D3CDCD"
+        // intro: 7000,
+        // static: 1000,
+        static: 0,
+        // outro: 7000,
     },
 }, {
     selector: '#htmlclip',

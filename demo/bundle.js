@@ -1,14 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 313:
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse("[{\"name\":\"Percentage 1\",\"value\":5},{\"name\":\"Percentage 2\",\"value\":34},{\"name\":\"Percentage 3\",\"value\":12.298374},{\"name\":\"Percentage 4\",\"value\":100},{\"name\":\"Percentage 5\",\"value\":45}]");
-
-/***/ }),
-
 /***/ 573:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -33,7 +25,7 @@ var n=a.default,r=!1,o=gC,s="locals",u=["delimiter","scope","context","debug","c
 
 /***/ }),
 
-/***/ 296:
+/***/ 59:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48,11 +40,14 @@ var motorcortex_player_umd_default = /*#__PURE__*/__webpack_require__.n(motorcor
 var bundle_umd = __webpack_require__(34);
 var bundle_umd_default = /*#__PURE__*/__webpack_require__.n(bundle_umd);
 ;// CONCATENATED MODULE: ./data/barChartData.json
-const barChartData_namespaceObject = JSON.parse("{\"title\":\"Test Graph\",\"subtitle\":\"Subtitle 2021\",\"showGrid\":true,\"maxValue\":1800,\"data\":[{\"name\":\"JAN\",\"value\":100},{\"name\":\"FEB\",\"value\":200},{\"name\":\"MAR\",\"value\":300},{\"name\":\"APR\",\"value\":400},{\"name\":\"MAY\",\"value\":500},{\"name\":\"JUN\",\"value\":600},{\"name\":\"JUL\",\"value\":700},{\"name\":\"AUG\",\"value\":800},{\"name\":\"SEP\",\"value\":900},{\"name\":\"OCT\",\"value\":1000},{\"name\":\"NOV\",\"value\":1100},{\"name\":\"DEC\",\"value\":1200}]}");
-var data_barChartData_namespaceObject = /*#__PURE__*/__webpack_require__.t(barChartData_namespaceObject, 2);
-// EXTERNAL MODULE: ./data/progressBarData.json
-var progressBarData = __webpack_require__(313);
+const barChartData_namespaceObject = {};
+;// CONCATENATED MODULE: ./data/progressBarData.json
+const progressBarData_namespaceObject = [];
+;// CONCATENATED MODULE: ./data/lineGraphData.json
+const lineGraphData_namespaceObject = JSON.parse("{\"title\":\"INFOGRAPHIC 05\",\"showGrid\":true,\"interval\":4,\"maxValue\":100,\"unit\":\"%\",\"hover\":true,\"data\":[{\"name\":\"2016\",\"values\":[56]},{\"name\":\"2017\",\"values\":[43]},{\"name\":\"2018\",\"values\":[61]},{\"name\":\"2019\",\"values\":[10]},{\"name\":\"2020\",\"values\":[3]},{\"name\":\"2021\",\"values\":[74]}]}");
+var data_lineGraphData_namespaceObject = /*#__PURE__*/__webpack_require__.t(lineGraphData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./index.js
+
 
 
 
@@ -61,49 +56,68 @@ var progressBarData = __webpack_require__(313);
 var MCGraphs = motorcortex_umd_default().loadPlugin((bundle_umd_default()));
 var clip = new (motorcortex_umd_default()).HTMLClip({
   html: "<div class=\"container\">\n        <div id=\"htmlclip\"></div>\n    </div>",
-  css: "\n        .container{\n            width: 1024px;\n            height: 768px;\n            background: #D3CDCD;\n        }\n        .container>div{\n            width: 50%;\n            height: 50%;\n        }\n    ",
+  css: "\n        .container{\n            width: 1224px;\n            height: 768px;\n            background: #D3CDCD;\n        }\n        .container::hover{\n            background: \"blue;\n        }\n        .container>div{\n            width: 50%;\n            height: 50%;\n        }\n    ",
   host: document.getElementById('clip'),
   containerParams: {
-    width: '1024px',
+    width: '1224px',
     height: '768px'
   }
 });
-var barChart = new MCGraphs.BarChartSimple({
-  data: data_barChartData_namespaceObject,
+var lineGraph = new MCGraphs.LineGraph({
+  data: data_lineGraphData_namespaceObject,
+  // MAX 16 datapoints
   timings: {
-    intro: 2000,
-    static: 1500,
-    outro: 2000
+    intro: 7000,
+    // static: 1000,
+    static: 0 // outro: 7000,
+
   },
-  palette: {
-    background: "#D3CDCD"
+  palette: {// background: "#D3CDCD"
   }
 }, {
   selector: '#htmlclip',
   containerParams: {
-    width: '1024px',
+    width: '1224px',
     height: '768px'
   }
 });
-clip.addIncident(barChart, 0);
-var progressBar = new MCGraphs.ProgressBar({
-  data: __webpack_require__(313),
-  timings: {
-    intro: 2000,
-    static: 1500,
-    outro: 2000
-  },
-  palette: {
-    background: "#D3CDCD"
-  }
-}, {
-  selector: '#htmlclip',
-  containerParams: {
-    width: '1024px',
-    height: '768px'
-  }
-});
-clip.addIncident(progressBar, 5500);
+clip.addIncident(lineGraph, 0); // const barChart = new MCGraphs.BarChartSimple({
+//     data: barChartData,  
+//     timings: {
+//         intro: 2000,
+//         static: 1500,
+//         outro: 2000,
+//     },
+//     palette: {
+//         background: "#D3CDCD"
+//     },
+// }, {
+//     selector: '#htmlclip',
+//     containerParams: {
+//         width: '1024px', 
+//         height: '768px'
+//     }
+// });
+// clip.addIncident(barChart, 0);
+// const progressBar = new MCGraphs.ProgressBar({
+//     data: require('./data/progressBarData.json'),
+//     timings: {
+//         intro: 2000,
+//         static: 1500,
+//         outro: 2000,
+//     },
+//     palette: {
+//         background: "#D3CDCD"
+//     },
+// }, {
+//     selector: '#htmlclip',
+//     containerParams: {
+//         width: '1024px',
+//         height: '768px'
+//     },
+// });
+// clip.addIncident(progressBar, 5500);
+
 clip.play();
 var player = new (motorcortex_player_umd_default())({
   clip: clip,
@@ -146,11 +160,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function o(t, e, n) {
+  function a(t, e, n) {
     return e && r(t.prototype, e), n && r(t, n), t;
   }
 
-  function s(t, e) {
+  function o(t, e) {
     if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
     t.prototype = Object.create(e && e.prototype, {
       constructor: {
@@ -161,8 +175,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }), e && l(t, e);
   }
 
-  function a(t) {
-    return (a = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+  function s(t) {
+    return (s = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
       return t.__proto__ || Object.getPrototypeOf(t);
     })(t);
   }
@@ -195,10 +209,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return function () {
       var n,
-          i = a(t);
+          i = s(t);
 
       if (e) {
-        var r = a(this).constructor;
+        var r = s(this).constructor;
         n = Reflect.construct(i, arguments, r);
       } else n = i.apply(this, arguments);
 
@@ -206,22 +220,50 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     };
   }
 
-  function p(t, e) {
-    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+  function h(t) {
+    return function (t) {
+      if (Array.isArray(t)) return p(t);
+    }(t) || function (t) {
+      if ("undefined" != typeof Symbol && Symbol.iterator in Object(t)) return Array.from(t);
+    }(t) || d(t) || function () {
+      throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }();
   }
 
   function d(t, e) {
+    if (t) {
+      if ("string" == typeof t) return p(t, e);
+      var n = Object.prototype.toString.call(t).slice(8, -1);
+      return "Object" === n && t.constructor && (n = t.constructor.name), "Map" === n || "Set" === n ? Array.from(t) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? p(t, e) : void 0;
+    }
+  }
+
+  function p(t, e) {
+    (null == e || e > t.length) && (e = t.length);
+
+    for (var n = 0, i = new Array(e); n < e; n++) {
+      i[n] = t[n];
+    }
+
+    return i;
+  }
+
+  function f(t, e) {
+    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+  }
+
+  function y(t, e) {
     for (var n = 0; n < e.length; n++) {
       var i = e[n];
       i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
     }
   }
 
-  function h(t, e, n) {
-    return e && d(t.prototype, e), n && d(t, n), t;
+  function g(t, e, n) {
+    return e && y(t.prototype, e), n && y(t, n), t;
   }
 
-  function f(t, e, n) {
+  function m(t, e, n) {
     return e in t ? Object.defineProperty(t, e, {
       value: n,
       enumerable: !0,
@@ -230,7 +272,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }) : t[e] = n, t;
   }
 
-  function y(t, e) {
+  function v(t, e) {
     var n = Object.keys(t);
 
     if (Object.getOwnPropertySymbols) {
@@ -243,7 +285,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function g(t, e) {
+  function b(t, e) {
     if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
     t.prototype = Object.create(e && e.prototype, {
       constructor: {
@@ -251,22 +293,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         writable: !0,
         configurable: !0
       }
-    }), e && v(t, e);
+    }), e && x(t, e);
   }
 
-  function m(t) {
-    return (m = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+  function w(t) {
+    return (w = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
       return t.__proto__ || Object.getPrototypeOf(t);
     })(t);
   }
 
-  function v(t, e) {
-    return (v = Object.setPrototypeOf || function (t, e) {
+  function x(t, e) {
+    return (x = Object.setPrototypeOf || function (t, e) {
       return t.__proto__ = e, t;
     })(t, e);
   }
 
-  function b() {
+  function O() {
     if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
     if (Reflect.construct.sham) return !1;
     if ("function" == typeof Proxy) return !0;
@@ -278,54 +320,54 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function w(t, e) {
+  function k(t, e) {
     return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
       if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
       return t;
     }(t) : e;
   }
 
-  function x(t) {
+  function M(t) {
     return function () {
       var e,
-          n = m(t);
+          n = w(t);
 
-      if (b()) {
-        var i = m(this).constructor;
+      if (O()) {
+        var i = w(this).constructor;
         e = Reflect.construct(n, arguments, i);
       } else e = n.apply(this, arguments);
 
-      return w(this, e);
+      return k(this, e);
     };
   }
 
-  var k = {},
-      O = {
+  var P = {},
+      D = {
     duration: 1e3,
     round: 0
   },
-      C = ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skew", "skewX", "skewY", "perspective"],
-      S = {
+      S = ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skew", "skewX", "skewY", "perspective"],
+      C = {
     CSS: {}
   };
 
-  function P(t, e, n) {
+  function I(t, e, n) {
     return Math.min(Math.max(t, e), n);
   }
 
-  function R(t, e) {
+  function A(t, e) {
     return t.indexOf(e) > -1;
   }
 
-  var D = {
+  var E = {
     arr: function arr(t) {
       return Array.isArray(t);
     },
     obj: function obj(t) {
-      return R(Object.prototype.toString.call(t), "Object");
+      return A(Object.prototype.toString.call(t), "Object");
     },
     pth: function pth(t) {
-      return D.obj(t) && t.hasOwnProperty("totalLength");
+      return E.obj(t) && t.hasOwnProperty("totalLength");
     },
     svg: function svg(t) {
       return t instanceof SVGElement;
@@ -334,7 +376,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return t instanceof HTMLInputElement;
     },
     dom: function dom(t) {
-      return t.nodeType || D.svg(t);
+      return t.nodeType || E.svg(t);
     },
     str: function str(t) {
       return "string" == typeof t;
@@ -355,13 +397,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return /^hsl/.test(t);
     },
     col: function col(t) {
-      return D.hex(t) || D.rgb(t) || D.hsl(t);
+      return E.hex(t) || E.rgb(t) || E.hsl(t);
     },
     key: function key(t) {
-      return !k.hasOwnProperty(t) && !O.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
+      return !P.hasOwnProperty(t) && !D.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
     }
   },
-      I = {
+      R = {
     linear: function linear() {
       return function (t) {
         return t;
@@ -369,25 +411,25 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   };
 
-  function M(t, e) {
-    for (var n = t.length, i = arguments.length >= 2 ? arguments[1] : void 0, r = [], o = 0; o < n; o++) {
-      if (o in t) {
-        var s = t[o];
-        e.call(i, s, o, t) && r.push(s);
+  function j(t, e) {
+    for (var n = t.length, i = arguments.length >= 2 ? arguments[1] : void 0, r = [], a = 0; a < n; a++) {
+      if (a in t) {
+        var o = t[a];
+        e.call(i, o, a, t) && r.push(o);
       }
     }
 
     return r;
   }
 
-  function E(t) {
+  function V(t) {
     return t.reduce(function (t, e) {
-      return t.concat(D.arr(e) ? E(e) : e);
+      return t.concat(E.arr(e) ? V(e) : e);
     }, []);
   }
 
-  function A(t) {
-    return D.arr(t) ? t : (D.str(t) && (t = function (t) {
+  function T(t) {
+    return E.arr(t) ? t : (E.str(t) && (t = function (t) {
       try {
         return document.querySelectorAll(t);
       } catch (t) {
@@ -396,13 +438,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }(t) || t), t instanceof NodeList || t instanceof HTMLCollection ? [].slice.call(t) : [t]);
   }
 
-  function j(t, e) {
+  function z(t, e) {
     return t.some(function (t) {
       return t === e;
     });
   }
 
-  function V(t) {
+  function N(t) {
     var e = {};
 
     for (var n in t) {
@@ -412,8 +454,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return e;
   }
 
-  function T(t, e) {
-    var n = V(t);
+  function _(t, e) {
+    var n = N(t);
 
     for (var i in t) {
       n[i] = e.hasOwnProperty(i) ? e[i] : t[i];
@@ -422,87 +464,87 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function N(t, e) {
-    var n = V(t);
+  function L(t, e) {
+    var n = N(t);
 
     for (var i in e) {
-      n[i] = D.und(t[i]) ? e[i] : t[i];
+      n[i] = E.und(t[i]) ? e[i] : t[i];
     }
 
     return n;
   }
 
-  function B(t) {
-    return D.rgb(t) ? (n = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(e = t)) ? "rgba(" + n[1] + ",1)" : e : D.hex(t) ? function (t) {
+  function G(t) {
+    return E.rgb(t) ? (n = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(e = t)) ? "rgba(" + n[1] + ",1)" : e : E.hex(t) ? function (t) {
       var e = t.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (t, e, n, i) {
         return e + e + n + n + i + i;
       }),
           n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);
       return "rgba(" + parseInt(n[1], 16) + "," + parseInt(n[2], 16) + "," + parseInt(n[3], 16) + ",1)";
-    }(t) : D.hsl(t) ? function (t) {
+    }(t) : E.hsl(t) ? function (t) {
       var e,
           n,
           i,
           r = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(t) || /hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*([\d.]+)\)/g.exec(t),
-          o = parseInt(r[1], 10) / 360,
-          s = parseInt(r[2], 10) / 100,
-          a = parseInt(r[3], 10) / 100,
+          a = parseInt(r[1], 10) / 360,
+          o = parseInt(r[2], 10) / 100,
+          s = parseInt(r[3], 10) / 100,
           l = r[4] || 1;
 
       function u(t, e, n) {
         return n < 0 && (n += 1), n > 1 && (n -= 1), n < 1 / 6 ? t + 6 * (e - t) * n : n < .5 ? e : n < 2 / 3 ? t + (e - t) * (2 / 3 - n) * 6 : t;
       }
 
-      if (0 == s) e = n = i = a;else {
-        var c = a < .5 ? a * (1 + s) : a + s - a * s,
-            p = 2 * a - c;
-        e = u(p, c, o + 1 / 3), n = u(p, c, o), i = u(p, c, o - 1 / 3);
+      if (0 == o) e = n = i = s;else {
+        var c = s < .5 ? s * (1 + o) : s + o - s * o,
+            h = 2 * s - c;
+        e = u(h, c, a + 1 / 3), n = u(h, c, a), i = u(h, c, a - 1 / 3);
       }
       return "rgba(" + 255 * e + "," + 255 * n + "," + 255 * i + "," + l + ")";
     }(t) : void 0;
     var e, n;
   }
 
-  function _(t) {
+  function B(t) {
     var e = /[+-]?\d*\.?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(%|px|pt|em|rem|in|cm|mm|ex|ch|pc|vw|vh|vmin|vmax|deg|rad|turn)?$/.exec(t);
     if (e) return e[1];
   }
 
-  function L(t, e) {
-    return D.fnc(t) ? t(e.target, e.id, e.total) : t;
+  function F(t, e) {
+    return E.fnc(t) ? t(e.target, e.id, e.total) : t;
   }
 
-  function G(t, e) {
+  function X(t, e) {
     return t.getAttribute(e);
   }
 
-  function z(t, e, n) {
-    if (j([n, "deg", "rad", "turn"], _(e))) return e;
-    var i = S.CSS[e + n];
-    if (!D.und(i)) return i;
+  function Y(t, e, n) {
+    if (z([n, "deg", "rad", "turn"], B(e))) return e;
+    var i = C.CSS[e + n];
+    if (!E.und(i)) return i;
     var r = document.createElement(t.tagName),
-        o = t.parentNode && t.parentNode !== document ? t.parentNode : document.body;
-    o.appendChild(r), r.style.position = "absolute", r.style.width = 100 + n;
-    var s = 100 / r.offsetWidth;
-    o.removeChild(r);
-    var a = s * parseFloat(e);
-    return S.CSS[e + n] = a, a;
+        a = t.parentNode && t.parentNode !== document ? t.parentNode : document.body;
+    a.appendChild(r), r.style.position = "absolute", r.style.width = 100 + n;
+    var o = 100 / r.offsetWidth;
+    a.removeChild(r);
+    var s = o * parseFloat(e);
+    return C.CSS[e + n] = s, s;
   }
 
-  function F(t, e, n) {
+  function W(t, e, n) {
     if (e in t.style) {
       var i = e.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
           r = t.style[e] || getComputedStyle(t).getPropertyValue(i) || "0";
-      return n ? z(t, r, n) : r;
+      return n ? Y(t, r, n) : r;
     }
   }
 
-  function q(t, e) {
-    return D.dom(t) && !D.inp(t) && (G(t, e) || D.svg(t) && t[e]) ? "attribute" : D.dom(t) && j(C, e) ? "transform" : D.dom(t) && "transform" !== e && F(t, e) ? "css" : null != t[e] ? "object" : void 0;
+  function Q(t, e) {
+    return E.dom(t) && !E.inp(t) && (X(t, e) || E.svg(t) && t[e]) ? "attribute" : E.dom(t) && z(S, e) ? "transform" : E.dom(t) && "transform" !== e && W(t, e) ? "css" : null != t[e] ? "object" : void 0;
   }
 
-  function Y(t) {
-    if (D.dom(t)) {
+  function q(t) {
+    if (E.dom(t)) {
       for (var e, n = t.style.transform || "", i = /(\w+)\(([^)]*)\)/g, r = new Map(); e = i.exec(n);) {
         r.set(e[1], e[2]);
       }
@@ -511,72 +553,70 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function X(t, e, n, i) {
-    var r = R(e, "scale") ? 1 : 0 + function (t) {
-      return R(t, "translate") || "perspective" === t ? "px" : R(t, "rotate") || R(t, "skew") ? "deg" : void 0;
+  function H(t, e, n, i) {
+    var r = A(e, "scale") ? 1 : 0 + function (t) {
+      return A(t, "translate") || "perspective" === t ? "px" : A(t, "rotate") || A(t, "skew") ? "deg" : void 0;
     }(e),
-        o = Y(t).get(e) || r;
-    return n && (n.transforms.list.set(e, o), n.transforms.last = e), i ? z(t, o, i) : o;
+        a = q(t).get(e) || r;
+    return n && (n.transforms.list.set(e, a), n.transforms.last = e), i ? Y(t, a, i) : a;
   }
 
-  function Q(t, e, n, i) {
-    switch (q(t, e)) {
+  function Z(t, e, n, i) {
+    switch (Q(t, e)) {
       case "transform":
-        return X(t, e, i, n);
+        return H(t, e, i, n);
 
       case "css":
-        return F(t, e, n);
+        return W(t, e, n);
 
       case "attribute":
-        return G(t, e);
+        return X(t, e);
 
       default:
         return t[e] || 0;
     }
   }
 
-  function W(t, e) {
+  function J(t, e) {
     var n = /^(\*=|\+=|-=)/.exec(t);
     if (!n) return t;
-    var i = _(t) || 0,
+    var i = B(t) || 0,
         r = parseFloat(e),
-        o = parseFloat(t.replace(n[0], ""));
+        a = parseFloat(t.replace(n[0], ""));
 
     switch (n[0][0]) {
       case "+":
-        return r + o + i;
+        return r + a + i;
 
       case "-":
-        return r - o + i;
+        return r - a + i;
 
       case "*":
-        return r * o + i;
+        return r * a + i;
     }
   }
 
-  function J(t, e) {
-    if (D.col(t)) return B(t);
+  function $(t, e) {
+    if (E.col(t)) return G(t);
     if (/\s/g.test(t)) return t;
-
-    var n = _(t),
+    var n = B(t),
         i = n ? t.substr(0, t.length - n.length) : t;
-
     return e ? i + e : i;
   }
 
-  function $(t, e) {
+  function U(t, e) {
     var n = /[+-]?\d*\.?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g,
-        i = J(D.pth(t) ? t.totalLength : t, e) + "";
+        i = $(E.pth(t) ? t.totalLength : t, e) + "";
     return {
       original: i,
       numbers: i.match(n) ? i.match(n).map(Number) : [0],
-      strings: D.str(t) || e ? i.split(n) : []
+      strings: E.str(t) || e ? i.split(n) : []
     };
   }
 
-  function Z(t) {
+  function K(t) {
     var e = function (t) {
-      return M(t ? E(D.arr(t) ? t.map(A) : A(t)) : [], function (t, e, n) {
+      return j(t ? V(E.arr(t) ? t.map(T) : T(t)) : [], function (t, e, n) {
         return n.indexOf(t) === e;
       });
     }(t);
@@ -587,60 +627,60 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         id: n,
         total: e.length,
         transforms: {
-          list: Y(t)
+          list: q(t)
         }
       };
     });
   }
 
-  function H(t, e) {
-    var n = V(e);
+  function tt(t, e) {
+    var n = N(e);
 
-    if (D.arr(t)) {
+    if (E.arr(t)) {
       var i = t.length;
-      2 === i && !D.obj(t[0]) ? t = {
+      2 === i && !E.obj(t[0]) ? t = {
         value: t
-      } : D.fnc(e.duration) || (n.duration = e.duration / i);
+      } : E.fnc(e.duration) || (n.duration = e.duration / i);
     }
 
-    return (D.arr(t) ? t : [t]).map(function (t, e) {
-      return D.obj(t) && !D.pth(t) ? t : {
+    return (E.arr(t) ? t : [t]).map(function (t, e) {
+      return E.obj(t) && !E.pth(t) ? t : {
         value: t
       };
     }).map(function (t) {
-      return N(t, n);
+      return L(t, n);
     });
   }
 
-  function U(t, e) {
+  function et(t, e) {
     var n;
     return t.tweens.map(function (i) {
       var r = function (t, e) {
         var n = {};
 
         for (var i in t) {
-          var r = L(t[i], e);
-          D.arr(r) && 1 === (r = r.map(function (t) {
-            return L(t, e);
+          var r = F(t[i], e);
+          E.arr(r) && 1 === (r = r.map(function (t) {
+            return F(t, e);
           })).length && (r = r[0]), n[i] = r;
         }
 
         return n.duration = parseFloat(n.duration), n;
       }(i, e),
-          o = r.value,
-          s = D.arr(o) ? o[1] : o,
-          a = _(s),
-          l = Q(e.target, t.name, a, e),
+          a = r.value,
+          o = E.arr(a) ? a[1] : a,
+          s = B(o),
+          l = Z(e.target, t.name, s, e),
           u = n ? n.to.original : l,
-          c = D.arr(o) ? o[0] : u,
-          p = _(c) || _(l),
-          d = a || p;
+          c = E.arr(a) ? a[0] : u,
+          h = B(c) || B(l),
+          d = s || h;
 
-      return D.und(s) && (s = u), r.from = $(c, d), r.to = $(W(s, c), d), r.start = n ? n.end : 0, r.end = r.start + r.duration, r.isPath = !1, r.isColor = D.col(r.from.original), r.isColor && (r.round = 1), n = r, r;
+      return E.und(o) && (o = u), r.from = U(c, d), r.to = U(J(o, c), d), r.start = n ? n.end : 0, r.end = r.start + r.duration, r.isPath = !1, r.isColor = E.col(r.from.original), r.isColor && (r.round = 1), n = r, r;
     });
   }
 
-  var K = {
+  var nt = {
     css: function css(t, e, n) {
       return t.style[e] = n;
     },
@@ -652,37 +692,36 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     },
     transform: function transform(t, e, n, i, r) {
       if (i.list.set(e, n), e === i.last || r) {
-        var o = "";
+        var a = "";
         i.list.forEach(function (t, e) {
-          o += e + "(" + t + ") ";
-        }), t.style.transform = o;
+          a += e + "(" + t + ") ";
+        }), t.style.transform = a;
       }
     }
   };
 
-  function tt(t, e) {
-    Z(t).forEach(function (t) {
+  function it(t, e) {
+    K(t).forEach(function (t) {
       for (var n in e) {
-        var i = L(e[n], t),
+        var i = F(e[n], t),
             r = t.target,
-            o = _(i),
-            s = Q(r, n, o, t),
-            a = W(J(i, o || _(s)), s),
-            l = q(r, n);
-
-        K[l](r, n, a, t.transforms, !0);
+            a = B(i),
+            o = Z(r, n, a, t),
+            s = J($(i, a || B(o)), o),
+            l = Q(r, n);
+        nt[l](r, n, s, t.transforms, !0);
       }
     });
   }
 
-  function et(t, e) {
-    return M(E(t.map(function (t) {
+  function rt(t, e) {
+    return j(V(t.map(function (t) {
       return e.map(function (e) {
         return function (t, e) {
-          var n = q(t.target, e.name);
+          var n = Q(t.target, e.name);
 
           if (n) {
-            var i = U(e, t),
+            var i = et(e, t),
                 r = i[i.length - 1];
             return {
               type: n,
@@ -695,48 +734,48 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }(t, e);
       });
     })), function (t) {
-      return !D.und(t);
+      return !E.und(t);
     });
   }
 
-  var nt = 0;
+  var at = 0;
 
-  function it(t) {
-    var e = T(k, t),
-        n = T(O, t),
+  function ot(t) {
+    var e = _(P, t),
+        n = _(D, t),
         i = function (t, e) {
       var n = [];
 
       for (var i in e) {
-        D.key(i) && n.push({
+        E.key(i) && n.push({
           name: i,
-          tweens: H(e[i], t)
+          tweens: tt(e[i], t)
         });
       }
 
       return n;
     }(n, t),
-        r = Z(t.targets),
-        o = et(r, i),
-        s = function (t, e) {
+        r = K(t.targets),
+        a = rt(r, i),
+        o = function (t, e) {
       var n = t.length,
           i = {};
       return i.duration = n ? Math.max.apply(Math, t.map(function (t) {
         return t.duration;
       })) : e.duration, i;
-    }(o, n),
-        a = nt;
+    }(a, n),
+        s = at;
 
-    return nt++, N(e, {
-      id: a,
+    return at++, L(e, {
+      id: s,
       children: [],
       animatables: r,
-      animations: o,
-      duration: s.duration
+      animations: a,
+      duration: o.duration
     });
   }
 
-  function rt(t) {
+  function st(t) {
     void 0 === t && (t = {});
     var e,
         n = 0,
@@ -749,158 +788,158 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return t.finished = e, e;
     }
 
-    var o = it(t);
-    r(o);
+    var a = ot(t);
+    r(a);
 
-    function s(t, e) {
+    function o(t, e) {
       e && e.seek(t);
     }
 
-    function a(t) {
-      var a = o.duration,
+    function s(t) {
+      var s = a.duration,
           l = t;
-      o.progress = P(l / a * 100, 0, 100), o.reversePlayback = l < o.currentTime, e && function (t) {
-        if (o.reversePlayback) for (var i = n; i--;) {
-          s(t, e[i]);
+      a.progress = I(l / s * 100, 0, 100), a.reversePlayback = l < a.currentTime, e && function (t) {
+        if (a.reversePlayback) for (var i = n; i--;) {
+          o(t, e[i]);
         } else for (var r = 0; r < n; r++) {
-          s(t, e[r]);
+          o(t, e[r]);
         }
-      }(l), !o.began && o.currentTime > 0 && (o.began = !0), function (t) {
-        for (var e = 0, n = o.animations, i = n.length; e < i;) {
+      }(l), !a.began && a.currentTime > 0 && (a.began = !0), function (t) {
+        for (var e = 0, n = a.animations, i = n.length; e < i;) {
           var r = n[e],
-              s = r.animatable,
-              a = r.tweens,
-              l = a.length - 1,
-              u = a[l];
-          l && (u = M(a, function (e) {
+              o = r.animatable,
+              s = r.tweens,
+              l = s.length - 1,
+              u = s[l];
+          l && (u = j(s, function (e) {
             return t < e.end;
           })[0] || u);
 
-          for (var c = P(t - u.start, 0, u.duration) / u.duration, p = u.to.strings, d = u.round, h = [], f = u.to.numbers.length, y = void 0, g = 0; g < f; g++) {
+          for (var c = I(t - u.start, 0, u.duration) / u.duration, h = u.to.strings, d = u.round, p = [], f = u.to.numbers.length, y = void 0, g = 0; g < f; g++) {
             var m = void 0,
                 v = u.to.numbers[g],
                 b = u.from.numbers[g] || 0;
-            m = b + c * (v - b), d && (u.isColor && g > 2 || (m = Math.round(m * d) / d)), h.push(m);
+            m = b + c * (v - b), d && (u.isColor && g > 2 || (m = Math.round(m * d) / d)), p.push(m);
           }
 
-          var w = p.length;
+          var w = h.length;
 
           if (w) {
-            y = p[0];
+            y = h[0];
 
             for (var x = 0; x < w; x++) {
-              p[x];
-              var k = p[x + 1],
-                  O = h[x];
-              isNaN(O) || (y += k ? O + k : O + " ");
+              h[x];
+              var O = h[x + 1],
+                  k = p[x];
+              isNaN(k) || (y += O ? k + O : k + " ");
             }
-          } else y = h[0];
+          } else y = p[0];
 
-          K[r.type](s.target, r.property, y, s.transforms), r.currentValue = y, e++;
+          nt[r.type](o.target, r.property, y, o.transforms), r.currentValue = y, e++;
         }
-      }(l), o.currentTime = P(l, 0, a), t >= a && (o.paused = !0, o.completed || (o.completed = !0, !o.passThrough && "Promise" in window && (i(), r(o))));
+      }(l), a.currentTime = I(l, 0, s), t >= s && (a.paused = !0, a.completed || (a.completed = !0, !a.passThrough && "Promise" in window && (i(), r(a))));
     }
 
-    return o.reset = function () {
-      o.passThrough = !1, o.currentTime = 0, o.progress = 0, o.paused = !0, o.began = !1, o.completed = !1, o.reversePlayback = !1, e = o.children;
+    return a.reset = function () {
+      a.passThrough = !1, a.currentTime = 0, a.progress = 0, a.paused = !0, a.began = !1, a.completed = !1, a.reversePlayback = !1, e = a.children;
 
       for (var t = n = e.length; t--;) {
-        o.children[t].reset();
+        a.children[t].reset();
       }
-    }, o.set = function (t, e) {
-      return tt(t, e), o;
-    }, o.seek = function (t) {
-      a(t);
-    }, o.reset(), o;
+    }, a.set = function (t, e) {
+      return it(t, e), a;
+    }, a.seek = function (t) {
+      s(t);
+    }, a.reset(), a;
   }
 
-  function ot(t, e) {
+  function lt(t, e) {
     return Math.sqrt(Math.pow(e.x - t.x, 2) + Math.pow(e.y - t.y, 2));
   }
 
-  function st(t) {
+  function ut(t) {
     for (var e, n = t.points, i = 0, r = 0; r < n.numberOfItems; r++) {
-      var o = n.getItem(r);
-      r > 0 && (i += ot(e, o)), e = o;
+      var a = n.getItem(r);
+      r > 0 && (i += lt(e, a)), e = a;
     }
 
     return i;
   }
 
-  function at(t) {
+  function ct(t) {
     if (t.getTotalLength) return t.getTotalLength();
 
     switch (t.tagName.toLowerCase()) {
       case "circle":
         return function (t) {
-          return 2 * Math.PI * G(t, "r");
+          return 2 * Math.PI * X(t, "r");
         }(t);
 
       case "rect":
         return function (t) {
-          return 2 * G(t, "width") + 2 * G(t, "height");
+          return 2 * X(t, "width") + 2 * X(t, "height");
         }(t);
 
       case "line":
         return function (t) {
-          return ot({
-            x: G(t, "x1"),
-            y: G(t, "y1")
+          return lt({
+            x: X(t, "x1"),
+            y: X(t, "y1")
           }, {
-            x: G(t, "x2"),
-            y: G(t, "y2")
+            x: X(t, "x2"),
+            y: X(t, "y2")
           });
         }(t);
 
       case "polyline":
-        return st(t);
+        return ut(t);
 
       case "polygon":
         return function (t) {
           var e = t.points;
-          return st(t) + ot(e.getItem(e.numberOfItems - 1), e.getItem(0));
+          return ut(t) + lt(e.getItem(e.numberOfItems - 1), e.getItem(0));
         }(t);
     }
   }
 
-  function lt(t, e) {
+  function ht(t, e) {
     var n = e || {},
         i = n.el || function (t) {
-      for (var e = t.parentNode; D.svg(e) && D.svg(e.parentNode);) {
+      for (var e = t.parentNode; E.svg(e) && E.svg(e.parentNode);) {
         e = e.parentNode;
       }
 
       return e;
     }(t),
         r = i.getBoundingClientRect(),
-        o = G(i, "viewBox"),
-        s = r.width,
-        a = r.height,
-        l = n.viewBox || (o ? o.split(" ") : [0, 0, s, a]);
+        a = X(i, "viewBox"),
+        o = r.width,
+        s = r.height,
+        l = n.viewBox || (a ? a.split(" ") : [0, 0, o, s]);
 
     return {
       el: i,
       viewBox: l,
       x: l[0] / 1,
       y: l[1] / 1,
-      w: s,
-      h: a,
+      w: o,
+      h: s,
       vW: l[2],
       vH: l[3]
     };
   }
 
-  rt.version = "3.1.0", rt.get = Q, rt.set = tt, rt.convertPx = z, rt.penner = I, rt.path = function (t) {
+  st.version = "3.1.0", st.get = Z, st.set = it, st.convertPx = Y, st.penner = R, st.path = function (t) {
     return {
       el: t,
-      svg: lt(t),
-      totalLength: at(t),
+      svg: ht(t),
+      totalLength: ct(t),
       deltaCorrections: {
         x: 4,
         y: 5
       }
     };
-  }, rt.getPathProgress = function (t, e, n) {
+  }, st.getPathProgress = function (t, e, n) {
     function i(n) {
       void 0 === n && (n = 0);
       var i = e * t.totalLength,
@@ -908,50 +947,50 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return t.el.getPointAtLength(r);
     }
 
-    var r = lt(t.el, t.svg),
-        o = i(),
-        s = i(-1),
-        a = i(1),
+    var r = ht(t.el, t.svg),
+        a = i(),
+        o = i(-1),
+        s = i(1),
         l = n ? 1 : r.w / r.vW,
         u = n ? 1 : r.h / r.vH;
     return {
-      x: (o.x - r.x) * l,
-      y: (o.y - r.y) * u,
-      angle: 180 * Math.atan2(a.y - s.y, a.x - s.x) / Math.PI
+      x: (a.x - r.x) * l,
+      y: (a.y - r.y) * u,
+      angle: 180 * Math.atan2(s.y - o.y, s.x - o.x) / Math.PI
     };
   };
-  var ut = rt,
-      ct = {
+  var dt = st,
+      pt = {
     transform: ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skewX", "skewY", "perspective"]
   };
-  var pt = ["cm", "mm", "in", "px", "pt", "pc", "em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax", "%"],
-      dt = ["deg", "rad", "grad", "turn"],
-      ht = "measurement",
-      ft = "color",
-      yt = {
+  var ft = ["cm", "mm", "in", "px", "pt", "pc", "em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax", "%"],
+      yt = ["deg", "rad", "grad", "turn"],
+      gt = "measurement",
+      mt = "color",
+      vt = {
     npm_name: "@kissmybutton/motorcortex-anime",
     incidents: [{
       exportable: function (t) {
-        g(n, t);
-        var e = x(n);
+        b(n, t);
+        var e = M(n);
 
         function n() {
-          return p(this, n), e.apply(this, arguments);
+          return f(this, n), e.apply(this, arguments);
         }
 
-        return h(n, [{
+        return g(n, [{
           key: "onGetContext",
           value: function value() {
             var t = {};
-            if (Object.prototype.hasOwnProperty.call(ct, this.attributeKey)) for (var e = ct[this.attributeKey], n = 0; n < e.length; n++) {
+            if (Object.prototype.hasOwnProperty.call(pt, this.attributeKey)) for (var e = pt[this.attributeKey], n = 0; n < e.length; n++) {
               Object.prototype.hasOwnProperty.call(this.targetValue, e[n]) && (t[e[n]] = [this.getInitialValue()[e[n]], this.targetValue[e[n]]]);
             } else t[this.attributeKey] = [this.getInitialValue(), this.targetValue];
-            this.target = ut(function (t) {
+            this.target = dt(function (t) {
               for (var e = 1; e < arguments.length; e++) {
                 var n = null != arguments[e] ? arguments[e] : {};
-                e % 2 ? y(Object(n), !0).forEach(function (e) {
-                  f(t, e, n[e]);
-                }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : y(Object(n)).forEach(function (e) {
+                e % 2 ? v(Object(n), !0).forEach(function (e) {
+                  m(t, e, n[e]);
+                }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : v(Object(n)).forEach(function (e) {
                   Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e));
                 });
               }
@@ -968,35 +1007,34 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           key: "getScratchValue",
           value: function value() {
             if ("transform" === this.attributeKey) {
-              for (var t = {}, e = ct[this.attributeKey], n = function (t, e) {
+              for (var t = {}, e = pt[this.attributeKey], n = function (t, e) {
                 var n = t.getComputedStyle(e).transform;
-                if ("" === n || "none" === n) return {};
-                var i,
-                    r,
-                    o,
-                    s,
-                    a,
-                    l,
-                    u,
-                    c,
-                    p = n.split("(")[1].split(")")[0].split(",");
-                return i = p, r = Math.atan2(i[1], i[0]), o = Math.pow(i[0], 2) + Math.pow(i[1], 2), s = Math.pow(i[2], 2) + Math.pow(i[3], 2), a = Math.sqrt(o), l = (i[0] * i[3] - i[2] * i[1]) / a, u = Math.atan2(i[0] * i[2] + i[1] * i[3], o), c = Math.atan2(i[1] * i[3] + i[0] * i[2], s), {
-                  rotate: r / (Math.PI / 180) + "deg",
-                  scaleX: a,
-                  scaleY: l,
-                  skewX: (1 === o ? u / (Math.PI / 180) : 0) + "deg",
-                  skewY: (1 === s ? c / (Math.PI / 180) : 0) + "deg",
-                  translateX: i[4] + "px",
-                  translateY: i[5] + "px"
-                };
+                return "" === n || "none" === n ? {} : function (t) {
+                  var e = Math.atan2(t[1], t[0]),
+                      n = Math.pow(t[0], 2) + Math.pow(t[1], 2),
+                      i = Math.pow(t[2], 2) + Math.pow(t[3], 2),
+                      r = Math.sqrt(n),
+                      a = (t[0] * t[3] - t[2] * t[1]) / r,
+                      o = Math.atan2(t[0] * t[2] + t[1] * t[3], n),
+                      s = Math.atan2(t[1] * t[3] + t[0] * t[2], i);
+                  return {
+                    rotate: e / (Math.PI / 180) + "deg",
+                    scaleX: r,
+                    scaleY: a,
+                    skewX: (1 === n ? o / (Math.PI / 180) : 0) + "deg",
+                    skewY: (1 === i ? s / (Math.PI / 180) : 0) + "deg",
+                    translateX: t[4] + "px",
+                    translateY: t[5] + "px"
+                  };
+                }(n.split("(")[1].split(")")[0].split(","));
               }(this.context.window, this.element), i = 0; i < e.length; i++) {
-                Object.prototype.hasOwnProperty.call(n, e[i]) ? t[e[i]] = n[e[i]] : t[e[i]] = ut.get(this.element, e[i]);
+                Object.prototype.hasOwnProperty.call(n, e[i]) ? t[e[i]] = n[e[i]] : t[e[i]] = dt.get(this.element, e[i]);
               }
 
               return t;
             }
 
-            return ut.get(this.element, this.attributeKey);
+            return dt.get(this.element, this.attributeKey);
           }
         }, {
           key: "onProgress",
@@ -1012,11 +1050,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           props: {
             background: {
               optional: !0,
-              type: ft
+              type: mt
             },
             backgroundColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             backgroundPosition: {
               optional: !0,
@@ -1036,53 +1074,53 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderBottomColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderBottomLeftRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderBottomRightRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderBottomWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderEndEndRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderEndStartRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderImageOutset: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             borderImageSlice: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             borderImageWidth: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             borderLeft: {
@@ -1091,17 +1129,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderLeftColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderLeftWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderRight: {
               optional: !0,
@@ -1109,22 +1147,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderRightColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderRightWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderStartEndRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderStartStartRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderTop: {
               optional: !0,
@@ -1132,32 +1170,32 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderTopColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderTopLeftRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderTopRightRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderTopWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             borderWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             bottom: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             boxShadow: {
               optional: !0,
@@ -1165,11 +1203,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             caretColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             color: {
               optional: !0,
-              type: ft
+              type: mt
             },
             columnCount: {
               optional: !0,
@@ -1179,8 +1217,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             columnGap: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             columnRule: {
               optional: !0,
@@ -1188,12 +1226,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             columnRuleColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             columnRuleWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             columns: {
               optional: !0,
@@ -1203,8 +1241,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             columnWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             flex: {
               optional: !0,
@@ -1214,8 +1252,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             flexBasis: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             flexGrow: {
               optional: !0,
@@ -1235,18 +1273,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             fontSize: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             fontSizeAdjust: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             fontStretch: {
               optional: !0,
-              type: ht,
+              type: gt,
               units: ["%"]
             },
             fontWeight: {
@@ -1255,85 +1293,85 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             gap: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             gridColumnGap: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             gridGap: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             gridRowGap: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             gridTemplateColumns: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             gridTemplateRows: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             height: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             inset: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             insetBlock: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             insetBlockEnd: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             insetBlockStart: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             insetInline: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             insetInlineEnd: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             insetInlineStart: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             left: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             letterSpacing: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             lineClamp: {
               optional: !0,
@@ -1343,8 +1381,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             lineHeight: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             margin: {
@@ -1353,28 +1391,28 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             marginBottom: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             marginLeft: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             marginRight: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             marginTop: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             maskBorder: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             maskPosition: {
@@ -1387,14 +1425,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             maxHeight: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             maxWidth: {
               optional: !0,
-              type: ht,
-              units: pt,
+              type: gt,
+              units: ft,
               min: 0
             },
             objectPosition: {
@@ -1403,8 +1441,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             offset: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             offsetAnchor: {
               optional: !0,
@@ -1412,8 +1450,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             offsetDistance: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             offsetPath: {
               optional: !0,
@@ -1425,8 +1463,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             offsetRotate: {
               optional: !0,
-              type: ht,
-              units: dt
+              type: gt,
+              units: yt
             },
             opacity: {
               optional: !0,
@@ -1445,72 +1483,72 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             outlineColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             outlineOffset: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             outlineRadius: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             outlineRadiusBottomleft: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             outlineRadiusBottomright: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             outlineRadiusTopleft: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             outlineRadiusTopright: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             outlineWidth: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             padding: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             paddingBottom: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             paddingLeft: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             paddingRight: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             paddingTop: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             perspective: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             perspectiveOrigin: {
               optional: !0,
@@ -1518,18 +1556,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             right: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             rotate: {
               optional: !0,
-              type: ht,
-              units: dt
+              type: gt,
+              units: yt
             },
             rowGap: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scale: {
               optional: !0,
@@ -1538,117 +1576,117 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             scrollbarColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             scrollMargin: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginBlock: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginBlockEnd: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginBlockStart: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginBottom: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginInline: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginInlineEnd: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginInlineStart: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginLeft: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginRight: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollMarginTop: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPadding: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingBlock: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingBlockEnd: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingBlockStart: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingBottom: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingInline: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingInlineEnd: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingInlineStart: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingLeft: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingRight: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollPaddingTop: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             scrollSnapCoordinate: {
               optional: !0,
@@ -1656,8 +1694,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             scrollSnapDestination: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             shapeImageThreshold: {
               optional: !0,
@@ -1665,8 +1703,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             shapeMargin: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             shapeOutside: {
               optional: !0,
@@ -1682,12 +1720,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             textDecorationColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textDecorationThickness: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             textEmphasis: {
               optional: !0,
@@ -1695,16 +1733,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             textEmphasisColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textFillColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textIndent: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             textShadow: {
               optional: !0,
@@ -1716,55 +1754,55 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             textStrokeColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textUnderlineOffset: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             top: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             transform: {
               optional: !0,
               type: "object",
               props: {
                 translateX: {
-                  type: ht,
-                  units: pt,
+                  type: gt,
+                  units: ft,
                   optional: !0
                 },
                 translateY: {
-                  type: ht,
-                  units: pt,
+                  type: gt,
+                  units: ft,
                   optional: !0
                 },
                 translateZ: {
-                  type: ht,
-                  units: pt,
+                  type: gt,
+                  units: ft,
                   optional: !0
                 },
                 rotate: {
-                  type: ht,
-                  units: dt,
+                  type: gt,
+                  units: yt,
                   optional: !0
                 },
                 rotateX: {
-                  type: ht,
-                  units: dt,
+                  type: gt,
+                  units: yt,
                   optional: !0
                 },
                 rotateY: {
-                  type: ht,
-                  units: dt,
+                  type: gt,
+                  units: yt,
                   optional: !0
                 },
                 rotateZ: {
-                  type: ht,
-                  units: dt,
+                  type: gt,
+                  units: yt,
                   optional: !0
                 },
                 scale: {
@@ -1788,18 +1826,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                   optional: !0
                 },
                 skewX: {
-                  type: ht,
-                  units: dt,
+                  type: gt,
+                  units: yt,
                   optional: !0
                 },
                 skewY: {
-                  type: ht,
-                  units: dt,
+                  type: gt,
+                  units: yt,
                   optional: !0
                 },
                 perspective: {
-                  type: ht,
-                  units: pt,
+                  type: gt,
+                  units: ft,
                   optional: !0
                 }
               }
@@ -1818,13 +1856,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             width: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             wordSpacing: {
               optional: !0,
-              type: ht,
-              units: pt
+              type: gt,
+              units: ft
             },
             zIndex: {
               optional: !0,
@@ -1833,7 +1871,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             zoom: {
               optional: !0,
-              type: ht,
+              type: gt,
               units: ["%"],
               min: 0
             }
@@ -1848,19 +1886,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             type: "string"
           },
           width: {
-            type: ht,
-            units: pt
+            type: gt,
+            units: ft
           },
           wordSpacing: {
-            type: ht,
-            units: pt
+            type: gt,
+            units: ft
           },
           zIndex: {
             type: "number",
             integer: !0
           },
           zoom: {
-            type: ht,
+            type: gt,
             units: ["%"],
             min: 0
           }
@@ -1868,23 +1906,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }, {
       exportable: function (t) {
-        g(n, t);
-        var e = x(n);
+        b(n, t);
+        var e = M(n);
 
         function n() {
-          return p(this, n), e.apply(this, arguments);
+          return f(this, n), e.apply(this, arguments);
         }
 
-        return h(n, [{
+        return g(n, [{
           key: "onGetContext",
           value: function value() {
             var t = this.context.getElements(this.targetValue.pathElement)[0];
-            this.path = ut.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
+            this.path = dt.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
           }
         }, {
           key: "onProgress",
           value: function value(t) {
-            var e = ut.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
+            var e = dt.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
                 n = "\n            translateX(".concat(e.x, "px) \n            translateY(").concat(e.y, "px) \n            rotate(").concat(e.angle, "deg)\n        ");
             this.element.style.transform = n;
           }
@@ -1907,17 +1945,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }
       }
     }],
-    compositeAttributes: ct
+    compositeAttributes: pt
   },
-      gt = "#75706E",
-      mt = "#B2B1AE",
-      vt = "#434243",
-      bt = "#100300",
-      wt = "#FFD800",
-      xt = "transparent";
+      bt = "#75706E",
+      wt = "#B2B1AE",
+      xt = "#434243",
+      Ot = "#EEEEEE",
+      kt = "#100300",
+      Mt = "#FFD800",
+      Pt = "transparent";
 
-  function kt() {
-    return (kt = Object.assign || function (t) {
+  function Dt() {
+    return (Dt = Object.assign || function (t) {
       for (var e = 1; e < arguments.length; e++) {
         var n = arguments[e];
 
@@ -1930,16 +1969,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }).apply(this, arguments);
   }
 
-  var Ot = "function" == typeof Symbol && "symbol" == _typeof(Symbol.iterator) ? function (t) {
+  var St = "function" == typeof Symbol && "symbol" == _typeof(Symbol.iterator) ? function (t) {
     return _typeof(t);
   } : function (t) {
     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : _typeof(t);
   },
-      Ct = "object" === ("undefined" == typeof window ? "undefined" : Ot(window)) && "object" === ("undefined" == typeof document ? "undefined" : Ot(document)) && 9 === document.nodeType,
-      St = "production" === "production";
+      Ct = "object" === ("undefined" == typeof window ? "undefined" : St(window)) && "object" === ("undefined" == typeof document ? "undefined" : St(document)) && 9 === document.nodeType,
+      It = "production" === "production";
 
-  function Pt(t, e) {
-    if (!St) {
+  function At(t, e) {
+    if (!It) {
       if (t) return;
       var n = "Warning: " + e;
       "undefined" != typeof console && console.warn(n);
@@ -1950,66 +1989,66 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function Rt(t, e) {
+  function Et(t, e) {
     for (var n = 0; n < e.length; n++) {
       var i = e[n];
       i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
     }
   }
 
-  function Dt(t, e, n) {
-    return e && Rt(t.prototype, e), n && Rt(t, n), t;
+  function Rt(t, e, n) {
+    return e && Et(t.prototype, e), n && Et(t, n), t;
   }
 
-  function It(t, e) {
+  function jt(t, e) {
     t.prototype = Object.create(e.prototype), t.prototype.constructor = t, t.__proto__ = e;
   }
 
-  function Mt(t) {
+  function Vt(t) {
     if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     return t;
   }
 
-  var Et = {}.constructor;
+  var Tt = {}.constructor;
 
-  function At(t) {
+  function zt(t) {
     if (null == t || "object" != _typeof(t)) return t;
-    if (Array.isArray(t)) return t.map(At);
-    if (t.constructor !== Et) return t;
+    if (Array.isArray(t)) return t.map(zt);
+    if (t.constructor !== Tt) return t;
     var e = {};
 
     for (var n in t) {
-      e[n] = At(t[n]);
+      e[n] = zt(t[n]);
     }
 
     return e;
   }
 
-  function jt(t, e, n) {
+  function Nt(t, e, n) {
     void 0 === t && (t = "unnamed");
     var i = n.jss,
-        r = At(e),
-        o = i.plugins.onCreateRule(t, r, n);
-    return o || ("@" === t[0] && "production" !== "production" && Pt(!1, "[JSS] Unknown rule " + t), null);
+        r = zt(e),
+        a = i.plugins.onCreateRule(t, r, n);
+    return a || ("@" === t[0] && "production" !== "production" && At(!1, "[JSS] Unknown rule " + t), null);
   }
 
-  var Vt = function Vt(t, e) {
+  var _t = function _t(t, e) {
     for (var n = "", i = 0; i < t.length && "!important" !== t[i]; i++) {
       n && (n += e), n += t[i];
     }
 
     return n;
   },
-      Tt = function Tt(t, e) {
+      Lt = function Lt(t, e) {
     if (void 0 === e && (e = !1), !Array.isArray(t)) return t;
     var n = "";
     if (Array.isArray(t[0])) for (var i = 0; i < t.length && "!important" !== t[i]; i++) {
-      n && (n += ", "), n += Vt(t[i], " ");
-    } else n = Vt(t, ", ");
+      n && (n += ", "), n += _t(t[i], " ");
+    } else n = _t(t, ", ");
     return e || "!important" !== t[t.length - 1] || (n += " !important"), n;
   };
 
-  function Nt(t, e) {
+  function Gt(t, e) {
     for (var n = "", i = 0; i < e; i++) {
       n += "  ";
     }
@@ -2022,34 +2061,34 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var i = "";
     if (!e) return i;
     var r = n.indent,
-        o = void 0 === r ? 0 : r,
-        s = e.fallbacks;
-    if (t && o++, s) if (Array.isArray(s)) for (var a = 0; a < s.length; a++) {
-      var l = s[a];
+        a = void 0 === r ? 0 : r,
+        o = e.fallbacks;
+    if (t && a++, o) if (Array.isArray(o)) for (var s = 0; s < o.length; s++) {
+      var l = o[s];
 
       for (var u in l) {
         var c = l[u];
-        null != c && (i && (i += "\n"), i += "" + Nt(u + ": " + Tt(c) + ";", o));
+        null != c && (i && (i += "\n"), i += "" + Gt(u + ": " + Lt(c) + ";", a));
       }
-    } else for (var p in s) {
-      var d = s[p];
-      null != d && (i && (i += "\n"), i += "" + Nt(p + ": " + Tt(d) + ";", o));
+    } else for (var h in o) {
+      var d = o[h];
+      null != d && (i && (i += "\n"), i += "" + Gt(h + ": " + Lt(d) + ";", a));
     }
 
-    for (var h in e) {
-      var f = e[h];
-      null != f && "fallbacks" !== h && (i && (i += "\n"), i += "" + Nt(h + ": " + Tt(f) + ";", o));
+    for (var p in e) {
+      var f = e[p];
+      null != f && "fallbacks" !== p && (i && (i += "\n"), i += "" + Gt(p + ": " + Lt(f) + ";", a));
     }
 
-    return (i || n.allowEmpty) && t ? (i && (i = "\n" + i + "\n"), Nt(t + " {" + i, --o) + Nt("}", o)) : i;
+    return (i || n.allowEmpty) && t ? (i && (i = "\n" + i + "\n"), Gt(t + " {" + i, --a) + Gt("}", a)) : i;
   }
 
-  var _t = /([[\].#*$><+~=|^:(),"'`\s])/g,
-      Lt = "undefined" != typeof CSS && CSS.escape,
-      Gt = function Gt(t) {
-    return Lt ? Lt(t) : t.replace(_t, "\\$1");
+  var Ft = /([[\].#*$><+~=|^:(),"'`\s])/g,
+      Xt = "undefined" != typeof CSS && CSS.escape,
+      Yt = function Yt(t) {
+    return Xt ? Xt(t) : t.replace(Ft, "\\$1");
   },
-      zt = function () {
+      Wt = function () {
     function t(t, e, n) {
       this.type = "style", this.key = void 0, this.isProcessed = !1, this.style = void 0, this.renderer = void 0, this.renderable = void 0, this.options = void 0;
       var i = n.sheet,
@@ -2063,27 +2102,27 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       if (!i && this.style[t] === e) return this;
       var r = e;
       n && !1 === n.process || (r = this.options.jss.plugins.onChangeValue(e, t, this));
-      var o = null == r || !1 === r,
-          s = (t in this.style);
-      if (o && !s && !i) return this;
-      var a = o && s;
-      if (a ? delete this.style[t] : this.style[t] = r, this.renderable && this.renderer) return a ? this.renderer.removeProperty(this.renderable, t) : this.renderer.setProperty(this.renderable, t, r), this;
+      var a = null == r || !1 === r,
+          o = (t in this.style);
+      if (a && !o && !i) return this;
+      var s = a && o;
+      if (s ? delete this.style[t] : this.style[t] = r, this.renderable && this.renderer) return s ? this.renderer.removeProperty(this.renderable, t) : this.renderer.setProperty(this.renderable, t, r), this;
       var l = this.options.sheet;
-      return l && l.attached && "production" !== "production" && Pt(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
+      return l && l.attached && "production" !== "production" && At(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
     }, t;
   }(),
-      Ft = function (t) {
+      Qt = function (t) {
     function e(e, n, i) {
       var r;
       (r = t.call(this, e, n, i) || this).selectorText = void 0, r.id = void 0, r.renderable = void 0;
-      var o = i.selector,
-          s = i.scoped,
-          a = i.sheet,
+      var a = i.selector,
+          o = i.scoped,
+          s = i.sheet,
           l = i.generateId;
-      return o ? r.selectorText = o : !1 !== s && (r.id = l(Mt(Mt(r)), a), r.selectorText = "." + Gt(r.id)), r;
+      return a ? r.selectorText = a : !1 !== o && (r.id = l(Vt(Vt(r)), s), r.selectorText = "." + Yt(r.id)), r;
     }
 
-    It(e, t);
+    jt(e, t);
     var n = e.prototype;
     return n.applyTo = function (t) {
       var e = this.renderer;
@@ -2102,17 +2141,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
       for (var e in this.style) {
         var n = this.style[e];
-        "object" != _typeof(n) ? t[e] = n : Array.isArray(n) && (t[e] = Tt(n));
+        "object" != _typeof(n) ? t[e] = n : Array.isArray(n) && (t[e] = Lt(n));
       }
 
       return t;
     }, n.toString = function (t) {
       var e = this.options.sheet,
-          n = !!e && e.options.link ? kt({}, t, {
+          n = !!e && e.options.link ? Dt({}, t, {
         allowEmpty: !0
       }) : t;
       return Bt(this.selectorText, this.style, n);
-    }, Dt(e, [{
+    }, Rt(e, [{
       key: "selector",
       set: function set(t) {
         if (t !== this.selectorText) {
@@ -2126,23 +2165,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this.selectorText;
       }
     }]), e;
-  }(zt),
+  }(Wt),
       qt = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return "@" === t[0] || n.parent && "keyframes" === n.parent.type ? null : new Ft(t, e, n);
+      return "@" === t[0] || n.parent && "keyframes" === n.parent.type ? null : new Qt(t, e, n);
     }
   },
-      Yt = {
+      Ht = {
     indent: 1,
     children: !0
   },
-      Xt = /@([\w-]+)/,
-      Qt = function () {
+      Zt = /@([\w-]+)/,
+      Jt = function () {
     function t(t, e, n) {
       this.type = "conditional", this.at = void 0, this.key = void 0, this.query = void 0, this.rules = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t;
-      var i = t.match(Xt);
+      var i = t.match(Zt);
 
-      for (var r in this.at = i ? i[1] : "unknown", this.query = n.name || "@" + this.at, this.options = n, this.rules = new ye(kt({}, n, {
+      for (var r in this.at = i ? i[1] : "unknown", this.query = n.name || "@" + this.at, this.options = n, this.rules = new be(Dt({}, n, {
         parent: this
       })), e) {
         this.rules.add(r, e[r]);
@@ -2160,35 +2199,35 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var i = this.rules.add(t, e, n);
       return i ? (this.options.jss.plugins.onProcessRule(i), i) : null;
     }, e.toString = function (t) {
-      if (void 0 === t && (t = Yt), null == t.indent && (t.indent = Yt.indent), null == t.children && (t.children = Yt.children), !1 === t.children) return this.query + " {}";
+      if (void 0 === t && (t = Ht), null == t.indent && (t.indent = Ht.indent), null == t.children && (t.children = Ht.children), !1 === t.children) return this.query + " {}";
       var e = this.rules.toString(t);
       return e ? this.query + " {\n" + e + "\n}" : "";
     }, t;
   }(),
-      Wt = /@media|@supports\s+/,
-      Jt = {
+      $t = /@media|@supports\s+/,
+      Ut = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return Wt.test(t) ? new Qt(t, e, n) : null;
+      return $t.test(t) ? new Jt(t, e, n) : null;
     }
   },
-      $t = {
+      Kt = {
     indent: 1,
     children: !0
   },
-      Zt = /@keyframes\s+([\w-]+)/,
-      Ht = function () {
+      te = /@keyframes\s+([\w-]+)/,
+      ee = function () {
     function t(t, e, n) {
       this.type = "keyframes", this.at = "@keyframes", this.key = void 0, this.name = void 0, this.id = void 0, this.rules = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0;
-      var i = t.match(Zt);
+      var i = t.match(te);
       i && i[1] ? this.name = i[1] : (this.name = "noname",  false && 0), this.key = this.type + "-" + this.name, this.options = n;
       var r = n.scoped,
-          o = n.sheet,
-          s = n.generateId;
+          a = n.sheet,
+          o = n.generateId;
 
-      for (var a in this.id = !1 === r ? this.name : Gt(s(this, o)), this.rules = new ye(kt({}, n, {
+      for (var s in this.id = !1 === r ? this.name : Yt(o(this, a)), this.rules = new be(Dt({}, n, {
         parent: this
       })), e) {
-        this.rules.add(a, e[a], kt({}, n, {
+        this.rules.add(s, e[s], Dt({}, n, {
           parent: this
         }));
       }
@@ -2197,29 +2236,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
 
     return t.prototype.toString = function (t) {
-      if (void 0 === t && (t = $t), null == t.indent && (t.indent = $t.indent), null == t.children && (t.children = $t.children), !1 === t.children) return this.at + " " + this.id + " {}";
+      if (void 0 === t && (t = Kt), null == t.indent && (t.indent = Kt.indent), null == t.children && (t.children = Kt.children), !1 === t.children) return this.at + " " + this.id + " {}";
       var e = this.rules.toString(t);
       return e && (e = "\n" + e + "\n"), this.at + " " + this.id + " {" + e + "}";
     }, t;
   }(),
-      Ut = /@keyframes\s+/,
-      Kt = /\$([\w-]+)/g,
-      te = function te(t, e) {
-    return "string" == typeof t ? t.replace(Kt, function (t, n) {
+      ne = /@keyframes\s+/,
+      ie = /\$([\w-]+)/g,
+      re = function re(t, e) {
+    return "string" == typeof t ? t.replace(ie, function (t, n) {
       return n in e ? e[n] : ( false && 0, t);
     }) : t;
   },
-      ee = function ee(t, e, n) {
+      ae = function ae(t, e, n) {
     var i = t[e],
-        r = te(i, n);
+        r = re(i, n);
     r !== i && (t[e] = r);
   },
-      ne = {
+      oe = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return "string" == typeof t && Ut.test(t) ? new Ht(t, e, n) : null;
+      return "string" == typeof t && ne.test(t) ? new ee(t, e, n) : null;
     },
     onProcessStyle: function onProcessStyle(t, e, n) {
-      return "style" === e.type && n ? ("animation-name" in t && ee(t, "animation-name", n.keyframes), "animation" in t && ee(t, "animation", n.keyframes), t) : t;
+      return "style" === e.type && n ? ("animation-name" in t && ae(t, "animation-name", n.keyframes), "animation" in t && ae(t, "animation", n.keyframes), t) : t;
     },
     onChangeValue: function onChangeValue(t, e, n) {
       var i = n.options.sheet;
@@ -2228,14 +2267,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       switch (e) {
         case "animation":
         case "animation-name":
-          return te(t, i.keyframes);
+          return re(t, i.keyframes);
 
         default:
           return t;
       }
     }
   },
-      ie = function (t) {
+      se = function (t) {
     function e() {
       for (var e, n = arguments.length, i = new Array(n), r = 0; r < n; r++) {
         i[r] = arguments[r];
@@ -2244,20 +2283,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return (e = t.call.apply(t, [this].concat(i)) || this).renderable = void 0, e;
     }
 
-    return It(e, t), e.prototype.toString = function (t) {
+    return jt(e, t), e.prototype.toString = function (t) {
       var e = this.options.sheet,
-          n = !!e && e.options.link ? kt({}, t, {
+          n = !!e && e.options.link ? Dt({}, t, {
         allowEmpty: !0
       }) : t;
       return Bt(this.key, this.style, n);
     }, e;
-  }(zt),
-      re = {
+  }(Wt),
+      le = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return n.parent && "keyframes" === n.parent.type ? new ie(t, e, n) : null;
+      return n.parent && "keyframes" === n.parent.type ? new se(t, e, n) : null;
     }
   },
-      oe = function () {
+      ue = function () {
     function t(t, e, n) {
       this.type = "font-face", this.at = "@font-face", this.key = void 0, this.style = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t, this.style = e, this.options = n;
     }
@@ -2274,13 +2313,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return Bt(this.at, this.style, t);
     }, t;
   }(),
-      se = /@font-face/,
-      ae = {
+      ce = /@font-face/,
+      he = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return se.test(t) ? new oe(t, e, n) : null;
+      return ce.test(t) ? new ue(t, e, n) : null;
     }
   },
-      le = function () {
+      de = function () {
     function t(t, e, n) {
       this.type = "viewport", this.at = "@viewport", this.key = void 0, this.style = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t, this.style = e, this.options = n;
     }
@@ -2289,12 +2328,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return Bt(this.key, this.style, t);
     }, t;
   }(),
-      ue = {
+      pe = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return "@viewport" === t || "@-ms-viewport" === t ? new le(t, e, n) : null;
+      return "@viewport" === t || "@-ms-viewport" === t ? new de(t, e, n) : null;
     }
   },
-      ce = function () {
+      fe = function () {
     function t(t, e, n) {
       this.type = "simple", this.key = void 0, this.value = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t, this.value = e, this.options = n;
     }
@@ -2311,24 +2350,24 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return this.key + " " + this.value + ";";
     }, t;
   }(),
-      pe = {
+      ye = {
     "@charset": !0,
     "@import": !0,
     "@namespace": !0
   },
-      de = [qt, Jt, ne, re, ae, ue, {
+      ge = [qt, Ut, oe, le, he, pe, {
     onCreateRule: function onCreateRule(t, e, n) {
-      return t in pe ? new ce(t, e, n) : null;
+      return t in ye ? new fe(t, e, n) : null;
     }
   }],
-      he = {
+      me = {
     process: !0
   },
-      fe = {
+      ve = {
     force: !0,
     process: !0
   },
-      ye = function () {
+      be = function () {
     function t(t) {
       this.map = {}, this.raw = {}, this.index = [], this.counter = 0, this.options = void 0, this.classes = void 0, this.keyframes = void 0, this.options = t, this.classes = t.classes, this.keyframes = t.keyframes;
     }
@@ -2337,30 +2376,30 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return e.add = function (t, e, n) {
       var i = this.options,
           r = i.parent,
-          o = i.sheet,
-          s = i.jss,
-          a = i.Renderer,
+          a = i.sheet,
+          o = i.jss,
+          s = i.Renderer,
           l = i.generateId,
           u = i.scoped,
-          c = kt({
+          c = Dt({
         classes: this.classes,
         parent: r,
-        sheet: o,
-        jss: s,
-        Renderer: a,
+        sheet: a,
+        jss: o,
+        Renderer: s,
         generateId: l,
         scoped: u,
         name: t,
         keyframes: this.keyframes,
         selector: void 0
       }, n),
-          p = t;
-      t in this.raw && (p = t + "-d" + this.counter++), this.raw[p] = e, p in this.classes && (c.selector = "." + Gt(this.classes[p]));
-      var d = jt(p, e, c);
+          h = t;
+      t in this.raw && (h = t + "-d" + this.counter++), this.raw[h] = e, h in this.classes && (c.selector = "." + Yt(this.classes[h]));
+      var d = Nt(h, e, c);
       if (!d) return null;
       this.register(d);
-      var h = void 0 === c.index ? this.index.length : c.index;
-      return this.index.splice(h, 0, d), d;
+      var p = void 0 === c.index ? this.index.length : c.index;
+      return this.index.splice(p, 0, d), d;
     }, e.get = function (t) {
       return this.map[t];
     }, e.remove = function (t) {
@@ -2371,53 +2410,53 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var t = this.options.jss.plugins;
       this.index.slice(0).forEach(t.onProcessRule, t);
     }, e.register = function (t) {
-      this.map[t.key] = t, t instanceof Ft ? (this.map[t.selector] = t, t.id && (this.classes[t.key] = t.id)) : t instanceof Ht && this.keyframes && (this.keyframes[t.name] = t.id);
+      this.map[t.key] = t, t instanceof Qt ? (this.map[t.selector] = t, t.id && (this.classes[t.key] = t.id)) : t instanceof ee && this.keyframes && (this.keyframes[t.name] = t.id);
     }, e.unregister = function (t) {
-      delete this.map[t.key], t instanceof Ft ? (delete this.map[t.selector], delete this.classes[t.key]) : t instanceof Ht && delete this.keyframes[t.name];
+      delete this.map[t.key], t instanceof Qt ? (delete this.map[t.selector], delete this.classes[t.key]) : t instanceof ee && delete this.keyframes[t.name];
     }, e.update = function () {
       var t, e, n;
       if ("string" == typeof (arguments.length <= 0 ? void 0 : arguments[0]) ? (t = arguments.length <= 0 ? void 0 : arguments[0], e = arguments.length <= 1 ? void 0 : arguments[1], n = arguments.length <= 2 ? void 0 : arguments[2]) : (e = arguments.length <= 0 ? void 0 : arguments[0], n = arguments.length <= 1 ? void 0 : arguments[1], t = null), t) this.updateOne(this.map[t], e, n);else for (var i = 0; i < this.index.length; i++) {
         this.updateOne(this.index[i], e, n);
       }
     }, e.updateOne = function (e, n, i) {
-      void 0 === i && (i = he);
+      void 0 === i && (i = me);
       var r = this.options,
-          o = r.jss.plugins,
-          s = r.sheet;
+          a = r.jss.plugins,
+          o = r.sheet;
       if (e.rules instanceof t) e.rules.update(n, i);else {
-        var a = e,
-            l = a.style;
+        var s = e,
+            l = s.style;
 
-        if (o.onUpdate(n, e, s, i), i.process && l && l !== a.style) {
-          for (var u in o.onProcessStyle(a.style, a, s), a.style) {
-            var c = a.style[u];
-            c !== l[u] && a.prop(u, c, fe);
+        if (a.onUpdate(n, e, o, i), i.process && l && l !== s.style) {
+          for (var u in a.onProcessStyle(s.style, s, o), s.style) {
+            var c = s.style[u];
+            c !== l[u] && s.prop(u, c, ve);
           }
 
-          for (var p in l) {
-            var d = a.style[p],
-                h = l[p];
-            null == d && d !== h && a.prop(p, null, fe);
+          for (var h in l) {
+            var d = s.style[h],
+                p = l[h];
+            null == d && d !== p && s.prop(h, null, ve);
           }
         }
       }
     }, e.toString = function (t) {
       for (var e = "", n = this.options.sheet, i = !!n && n.options.link, r = 0; r < this.index.length; r++) {
-        var o = this.index[r].toString(t);
-        (o || i) && (e && (e += "\n"), e += o);
+        var a = this.index[r].toString(t);
+        (a || i) && (e && (e += "\n"), e += a);
       }
 
       return e;
     }, t;
   }(),
-      ge = function () {
+      we = function () {
     function t(t, e) {
-      for (var n in this.options = void 0, this.deployed = void 0, this.attached = void 0, this.rules = void 0, this.renderer = void 0, this.classes = void 0, this.keyframes = void 0, this.queue = void 0, this.attached = !1, this.deployed = !1, this.classes = {}, this.keyframes = {}, this.options = kt({}, e, {
+      for (var n in this.options = void 0, this.deployed = void 0, this.attached = void 0, this.rules = void 0, this.renderer = void 0, this.classes = void 0, this.keyframes = void 0, this.queue = void 0, this.attached = !1, this.deployed = !1, this.classes = {}, this.keyframes = {}, this.options = Dt({}, e, {
         sheet: this,
         parent: this,
         classes: this.classes,
         keyframes: this.keyframes
-      }), e.Renderer && (this.renderer = new e.Renderer(this)), this.rules = new ye(this.options), t) {
+      }), e.Renderer && (this.renderer = new e.Renderer(this)), this.rules = new be(this.options), t) {
         this.rules.add(n, t[n]);
       }
 
@@ -2463,7 +2502,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return this.rules.toString(t);
     }, t;
   }(),
-      me = function () {
+      xe = function () {
     function t() {
       this.plugins = {
         internal: [],
@@ -2526,7 +2565,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }));
     }, t;
   }(),
-      ve = new (function () {
+      Oe = new (function () {
     function t() {
       this.registry = [];
     }
@@ -2549,43 +2588,43 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var n,
             i,
             r = {},
-            o = Object.keys(t);
+            a = Object.keys(t);
 
-        for (i = 0; i < o.length; i++) {
-          n = o[i], e.indexOf(n) >= 0 || (r[n] = t[n]);
+        for (i = 0; i < a.length; i++) {
+          n = a[i], e.indexOf(n) >= 0 || (r[n] = t[n]);
         }
 
         return r;
-      }(e, ["attached"]), r = "", o = 0; o < this.registry.length; o++) {
-        var s = this.registry[o];
-        null != n && s.attached !== n || (r && (r += "\n"), r += s.toString(i));
+      }(e, ["attached"]), r = "", a = 0; a < this.registry.length; a++) {
+        var o = this.registry[a];
+        null != n && o.attached !== n || (r && (r += "\n"), r += o.toString(i));
       }
 
       return r;
-    }, Dt(t, [{
+    }, Rt(t, [{
       key: "index",
       get: function get() {
         return 0 === this.registry.length ? 0 : this.registry[this.registry.length - 1].options.index;
       }
     }]), t;
   }())(),
-      be = "undefined" != typeof window && window.Math == Math ? window : "undefined" != typeof self && self.Math == Math ? self : Function("return this")(),
-      we = "2f1acc6c3a606b082e5eef5e54414ffb";
+      ke = "undefined" != typeof window && window.Math == Math ? window : "undefined" != typeof self && self.Math == Math ? self : Function("return this")(),
+      Me = "2f1acc6c3a606b082e5eef5e54414ffb";
 
-  null == be[we] && (be[we] = 0);
+  null == ke[Me] && (ke[Me] = 0);
 
-  var xe = be[we]++,
-      ke = function ke(t) {
+  var Pe = ke[Me]++,
+      De = function De(t) {
     void 0 === t && (t = {});
     var e = 0;
     return function (n, i) {
-      (e += 1) > 1e10 && "production" !== "production" && Pt(!1, "[JSS] You might have a memory leak. Rule counter is at " + e + ".");
+      (e += 1) > 1e10 && "production" !== "production" && At(!1, "[JSS] You might have a memory leak. Rule counter is at " + e + ".");
       var r = "",
-          o = "";
-      return i && (i.options.classNamePrefix && (o = i.options.classNamePrefix), null != i.options.jss.id && (r = String(i.options.jss.id))), t.minify ? "" + (o || "c") + xe + r + e : o + n.key + "-" + xe + (r ? "-" + r : "") + "-" + e;
+          a = "";
+      return i && (i.options.classNamePrefix && (a = i.options.classNamePrefix), null != i.options.jss.id && (r = String(i.options.jss.id))), t.minify ? "" + (a || "c") + Pe + r + e : a + n.key + "-" + Pe + (r ? "-" + r : "") + "-" + e;
     };
   },
-      Oe = function Oe(t) {
+      Se = function Se(t) {
     var e;
     return function () {
       return e || (e = t()), e;
@@ -2598,10 +2637,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return "";
     }
   },
-      Se = function Se(t, e, n) {
+      Ie = function Ie(t, e, n) {
     try {
       var i = n;
-      if (Array.isArray(n) && (i = Tt(n, !0), "!important" === n[n.length - 1])) return t.style.setProperty(e, i, "important"), !0;
+      if (Array.isArray(n) && (i = Lt(n, !0), "!important" === n[n.length - 1])) return t.style.setProperty(e, i, "important"), !0;
       t.attributeStyleMap ? t.attributeStyleMap.set(e, i) : t.style.setProperty(e, i);
     } catch (t) {
       return !1;
@@ -2609,22 +2648,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return !0;
   },
-      Pe = function Pe(t, e) {
+      Ae = function Ae(t, e) {
     try {
       t.attributeStyleMap ? t.attributeStyleMap.delete(e) : t.style.removeProperty(e);
     } catch (t) {
        false && 0;
     }
   },
-      Re = function Re(t, e) {
+      Ee = function Ee(t, e) {
     return t.selectorText = e, t.selectorText === e;
   },
-      De = Oe(function () {
+      Re = Se(function () {
     return document.querySelector("head");
   });
 
-  function Ie(t) {
-    var e = ve.registry;
+  function je(t) {
+    var e = Oe.registry;
 
     if (e.length > 0) {
       var n = function (t, e) {
@@ -2657,7 +2696,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     if (i && "string" == typeof i) {
       var r = function (t) {
-        for (var e = De(), n = 0; n < e.childNodes.length; n++) {
+        for (var e = Re(), n = 0; n < e.childNodes.length; n++) {
           var i = e.childNodes[n];
           if (8 === i.nodeType && i.nodeValue.trim() === t) return i;
         }
@@ -2675,12 +2714,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return !1;
   }
 
-  var Me,
-      Ee = Oe(function () {
+  var Ve,
+      Te = Se(function () {
     var t = document.querySelector('meta[property="csp-nonce"]');
     return t ? t.getAttribute("content") : null;
   }),
-      Ae = function Ae(t, e, n) {
+      ze = function ze(t, e, n) {
     try {
       if ("insertRule" in t) t.insertRule(e, n);else if ("appendRule" in t) {
         t.appendRule(e);
@@ -2691,21 +2730,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return t.cssRules[n];
   },
-      je = function je(t, e) {
+      Ne = function Ne(t, e) {
     var n = t.cssRules.length;
     return void 0 === e || e > n ? n : e;
   },
-      Ve = function () {
+      _e = function () {
     function t(t) {
-      this.getPropertyValue = Ce, this.setProperty = Se, this.removeProperty = Pe, this.setSelector = Re, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && ve.add(t), this.sheet = t;
+      this.getPropertyValue = Ce, this.setProperty = Ie, this.removeProperty = Ae, this.setSelector = Ee, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && Oe.add(t), this.sheet = t;
       var e,
           n = this.sheet ? this.sheet.options : {},
           i = n.media,
           r = n.meta,
-          o = n.element;
-      this.element = o || ((e = document.createElement("style")).textContent = "\n", e), this.element.setAttribute("data-jss", ""), i && this.element.setAttribute("media", i), r && this.element.setAttribute("data-meta", r);
-      var s = Ee();
-      s && this.element.setAttribute("nonce", s);
+          a = n.element;
+      this.element = a || ((e = document.createElement("style")).textContent = "\n", e), this.element.setAttribute("data-jss", ""), i && this.element.setAttribute("media", i), r && this.element.setAttribute("data-meta", r);
+      var o = Te();
+      o && this.element.setAttribute("nonce", o);
     }
 
     var e = t.prototype;
@@ -2713,12 +2752,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       if (!this.element.parentNode && this.sheet) {
         !function (t, e) {
           var n = e.insertionPoint,
-              i = Ie(e);
+              i = je(e);
           if (!1 !== i && i.parent) i.parent.insertBefore(t, i.node);else if (n && "number" == typeof n.nodeType) {
             var r = n,
-                o = r.parentNode;
-            o ? o.insertBefore(t, r.nextSibling) :  false && 0;
-          } else De().appendChild(t);
+                a = r.parentNode;
+            a ? a.insertBefore(t, r.nextSibling) :  false && 0;
+          } else Re().appendChild(t);
         }(this.element, this.sheet.options);
         var t = Boolean(this.sheet && this.sheet.deployed);
         this.hasInsertedRules && t && (this.hasInsertedRules = !1, this.deploy());
@@ -2741,23 +2780,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             r = n;
 
         if ("conditional" === t.type || "keyframes" === t.type) {
-          var o = je(n, e);
-          if (!1 === (r = Ae(n, i.toString({
+          var a = Ne(n, e);
+          if (!1 === (r = ze(n, i.toString({
             children: !1
-          }), o))) return !1;
-          this.refCssRule(t, o, r);
+          }), a))) return !1;
+          this.refCssRule(t, a, r);
         }
 
         return this.insertRules(i.rules, r), r;
       }
 
-      var s = t.toString();
-      if (!s) return !1;
-      var a = je(n, e),
-          l = Ae(n, s, a);
-      return !1 !== l && (this.hasInsertedRules = !0, this.refCssRule(t, a, l), l);
+      var o = t.toString();
+      if (!o) return !1;
+      var s = Ne(n, e),
+          l = ze(n, o, s);
+      return !1 !== l && (this.hasInsertedRules = !0, this.refCssRule(t, s, l), l);
     }, e.refCssRule = function (t, e, n) {
-      t.renderable = n, t.options.parent instanceof ge && (this.cssRules[e] = n);
+      t.renderable = n, t.options.parent instanceof we && (this.cssRules[e] = n);
     }, e.deleteRule = function (t) {
       var e = this.element.sheet,
           n = this.indexOf(t);
@@ -2771,22 +2810,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return this.element.sheet.cssRules;
     }, t;
   }(),
-      Te = 0,
-      Ne = new (function () {
+      Le = 0,
+      Ge = new (function () {
     function t(t) {
-      this.id = Te++, this.version = "10.5.0", this.plugins = new me(), this.options = {
+      this.id = Le++, this.version = "10.5.0", this.plugins = new xe(), this.options = {
         id: {
           minify: !1
         },
-        createGenerateId: ke,
-        Renderer: Ct ? Ve : null,
+        createGenerateId: De,
+        Renderer: Ct ? _e : null,
         plugins: []
-      }, this.generateId = ke({
+      }, this.generateId = De({
         minify: !1
       });
 
-      for (var e = 0; e < de.length; e++) {
-        this.plugins.use(de[e], {
+      for (var e = 0; e < ge.length; e++) {
+        this.plugins.use(ge[e], {
           queue: "internal"
         });
       }
@@ -2796,12 +2835,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     var e = t.prototype;
     return e.setup = function (t) {
-      return void 0 === t && (t = {}), t.createGenerateId && (this.options.createGenerateId = t.createGenerateId), t.id && (this.options.id = kt({}, this.options.id, t.id)), (t.createGenerateId || t.id) && (this.generateId = this.options.createGenerateId(this.options.id)), null != t.insertionPoint && (this.options.insertionPoint = t.insertionPoint), "Renderer" in t && (this.options.Renderer = t.Renderer), t.plugins && this.use.apply(this, t.plugins), this;
+      return void 0 === t && (t = {}), t.createGenerateId && (this.options.createGenerateId = t.createGenerateId), t.id && (this.options.id = Dt({}, this.options.id, t.id)), (t.createGenerateId || t.id) && (this.generateId = this.options.createGenerateId(this.options.id)), null != t.insertionPoint && (this.options.insertionPoint = t.insertionPoint), "Renderer" in t && (this.options.Renderer = t.Renderer), t.plugins && this.use.apply(this, t.plugins), this;
     }, e.createStyleSheet = function (t, e) {
       void 0 === e && (e = {});
       var n = e.index;
-      "number" != typeof n && (n = 0 === ve.index ? 0 : ve.index + 1);
-      var i = new ge(t, kt({}, e, {
+      "number" != typeof n && (n = 0 === Oe.index ? 0 : Oe.index + 1);
+      var i = new we(t, Dt({}, e, {
         jss: this,
         generateId: e.generateId || this.generateId,
         insertionPoint: this.options.insertionPoint,
@@ -2810,16 +2849,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }));
       return this.plugins.onProcessSheet(i), i;
     }, e.removeStyleSheet = function (t) {
-      return t.detach(), ve.remove(t), this;
+      return t.detach(), Oe.remove(t), this;
     }, e.createRule = function (t, e, n) {
       if (void 0 === e && (e = {}), void 0 === n && (n = {}), "object" == _typeof(t)) return this.createRule(void 0, t, e);
-      var i = kt({}, n, {
+      var i = Dt({}, n, {
         name: t,
         jss: this,
         Renderer: this.options.Renderer
       });
       i.generateId || (i.generateId = this.generateId), i.classes || (i.classes = {}), i.keyframes || (i.keyframes = {});
-      var r = jt(t, e, i);
+      var r = Nt(t, e, i);
       return r && this.plugins.onProcessRule(r), r;
     }, e.use = function () {
       for (var t = this, e = arguments.length, n = new Array(e), i = 0; i < e; i++) {
@@ -2830,18 +2869,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         t.plugins.use(e);
       }), this;
     }, t;
-  }())(Me);
+  }())(Ve);
 
-  var Be = n.default.loadPlugin(yt),
-      _e = function (t) {
-    s(r, t);
+  var Be = n.default.loadPlugin(vt),
+      Fe = function (t) {
+    o(r, t);
     var e = c(r);
 
     function r() {
       return i(this, r), e.apply(this, arguments);
     }
 
-    return o(r, [{
+    return a(r, [{
       key: "buildTree",
       value: function value() {
         if (this.opacityControl(), this.attrs.timings.intro) {
@@ -2860,10 +2899,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".y-axis",
-                duration: .2 * this.introDur,
+                duration: Math.trunc(.2 * this.introDur),
                 easing: "easeInQuad"
               },
-              position: 0 * this.introDur
+              position: Math.trunc(0 * this.introDur)
             }, {
               incidentClass: Be.Anime,
               attrs: {
@@ -2876,10 +2915,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".x-axis",
-                duration: .3 * this.introDur,
+                duration: Math.trunc(.3 * this.introDur),
                 easing: "easeOutQuad"
               },
-              position: .2 * this.introDur
+              position: Math.trunc(.2 * this.introDur)
             }]
           }, {
             selector: ".container"
@@ -2894,12 +2933,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".gridLine",
-            duration: .5 * this.introDur,
+            duration: Math.trunc(.5 * this.introDur),
             easing: "easeOutQuad"
           });
-          e.addIncident(r, .2 * this.introDur);
-          var o = new n.default.Group();
-          o.addIncident(new Be.Anime({
+          e.addIncident(r, Math.trunc(.2 * this.introDur));
+          var a = new n.default.Group();
+          a.addIncident(new Be.Anime({
             animatedAttrs: {
               width: "100%"
             },
@@ -2908,14 +2947,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".title-background",
-            duration: .25 * this.introDur,
+            duration: Math.trunc(.25 * this.introDur),
             easing: "easeInOutQuad"
           }), 0);
-          var s = 2 * (.7 * this.introDur) / (this.title.length + 1),
-              a = [];
+          var o = 2 * (.7 * this.introDur) / (this.title.length + 1),
+              s = [];
 
           for (var l in this.title) {
-            a.push({
+            s.push({
               incidentClass: Be.Anime,
               attrs: {
                 animatedAttrs: {
@@ -2929,24 +2968,24 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(l),
-                duration: s,
+                duration: Math.trunc(o),
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(s * l / 2)
+              position: Math.trunc(o * l / 2)
             });
           }
 
           var u = new n.default.Combo({
-            incidents: a
+            incidents: s
           }, {
             selector: ".title-wrapper"
           });
-          o.addIncident(u, .25 * this.introDur);
+          a.addIncident(u, Math.trunc(.25 * this.introDur));
           var c = 2 * (.8 * this.introDur) / (this.subtitle.length + 1),
-              p = [];
+              h = [];
 
           for (var d in this.subtitle) {
-            p.push({
+            h.push({
               incidentClass: Be.Anime,
               attrs: {
                 animatedAttrs: {
@@ -2960,19 +2999,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(d),
-                duration: c,
+                duration: Math.trunc(c),
                 easing: "easeOutQuart"
               },
               position: Math.trunc(c * d / 2)
             });
           }
 
-          var h = new n.default.Combo({
-            incidents: p
+          var p = new n.default.Combo({
+            incidents: h
           }, {
             selector: ".subtitle-wrapper"
           });
-          o.addIncident(h, .1 * this.introDur), e.addIncident(o, .05 * this.introDur);
+          a.addIncident(p, Math.trunc(.1 * this.introDur)), e.addIncident(a, Math.trunc(.05 * this.introDur));
           var f = new n.default.Group();
           f.addIncident(new Be.Anime({
             animatedAttrs: {
@@ -2983,7 +3022,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".x-labels-back-wrapper",
-            duration: .25 * this.introDur,
+            duration: Math.trunc(.25 * this.introDur),
             easing: "easeInOutCubic"
           }), 0);
           var y = 2 * t / (this.data.length + 1);
@@ -3019,10 +3058,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }, {
               selector: ".label-container"
             });
-            f.addIncident(w, t / (this.data.length + 1) * g);
+            f.addIncident(w, Math.trunc(t / (this.data.length + 1) * g));
           }
 
-          e.addIncident(f, .05 * this.introDur);
+          e.addIncident(f, Math.trunc(.05 * this.introDur));
           var x = new n.default.Combo({
             incidents: [{
               incidentClass: Be.Anime,
@@ -3035,22 +3074,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                duration: .3 * this.introDur,
+                duration: Math.trunc(.3 * this.introDur),
                 easing: "easeInOutQuad"
               },
               position: 0
             }]
           }, {
             selector: ".bar-fill",
-            delay: "@stagger(0, ".concat(.4 * this.introDur, ")")
+            delay: "@stagger(0, ".concat(Math.trunc(.4 * this.introDur), ")")
           });
-          e.addIncident(x, .3 * this.introDur), this.addIncident(e, 0 * this.introDur);
+          e.addIncident(x, Math.trunc(.3 * this.introDur)), this.addIncident(e, 0 * this.introDur);
         }
 
         if (this.attrs.timings.outro) {
-          var k = .75 * this.outroDur,
-              O = new n.default.Group(),
-              C = new n.default.Combo({
+          var O = .75 * this.outroDur,
+              k = new n.default.Group(),
+              M = new n.default.Combo({
             incidents: [{
               incidentClass: Be.Anime,
               attrs: {
@@ -3063,7 +3102,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".x-axis",
-                duration: .2 * this.outroDur,
+                duration: Math.trunc(.2 * this.outroDur),
                 easing: "easeInQuad"
               },
               position: 0 * this.outroDur
@@ -3079,16 +3118,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".y-axis",
-                duration: .3 * this.outroDur,
+                duration: Math.trunc(.3 * this.outroDur),
                 easing: "easeOutQuad"
               },
-              position: .2 * this.outroDur
+              position: Math.trunc(.2 * this.outroDur)
             }]
           }, {
             selector: ".container"
           });
-          O.addIncident(C, .5 * this.outroDur);
-          var S = new Be.Anime({
+          k.addIncident(M, Math.trunc(.5 * this.outroDur));
+          var P = new Be.Anime({
             animatedAttrs: {
               width: "0%"
             },
@@ -3098,11 +3137,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, {
             selector: ".gridlines",
             easing: "easeInOutQuad",
-            duration: .5 * this.outroDur
+            duration: Math.trunc(.5 * this.outroDur)
           });
-          O.addIncident(S, .2 * this.outroDur);
-          var P = new n.default.Group();
-          P.addIncident(new Be.Anime({
+          k.addIncident(P, Math.trunc(.2 * this.outroDur));
+          var D = new n.default.Group();
+          D.addIncident(new Be.Anime({
             animatedAttrs: {
               width: "0%"
             },
@@ -3111,14 +3150,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".title-back-wrapper",
-            duration: .45 * this.outroDur,
+            duration: Math.trunc(.45 * this.outroDur),
             easing: "easeInOutQuad"
-          }), .4 * this.outroDur);
-          var R = 2 * (.8 * this.outroDur) / (this.title.length + 1),
-              D = [];
+          }), Math.trunc(.4 * this.outroDur));
+          var S = 2 * (.8 * this.outroDur) / (this.title.length + 1),
+              C = [];
 
           for (var I in this.title) {
-            D.push({
+            C.push({
               incidentClass: Be.Anime,
               attrs: {
                 animatedAttrs: {
@@ -3132,24 +3171,24 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(I),
-                duration: R,
+                duration: Math.trunc(S),
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(R * (this.title.length - I - 1) / 2)
+              position: Math.trunc(S * (this.title.length - I - 1) / 2)
             });
           }
 
-          var M = new n.default.Combo({
-            incidents: D
+          var A = new n.default.Combo({
+            incidents: C
           }, {
             selector: ".title-wrapper"
           });
-          P.addIncident(M, .1 * this.outroDur);
+          D.addIncident(A, Math.trunc(.1 * this.outroDur));
           var E = 2 * (.4 * this.outroDur) / (this.subtitle.length + 1),
-              A = [];
+              R = [];
 
           for (var j in this.subtitle) {
-            A.push({
+            R.push({
               incidentClass: Be.Anime,
               attrs: {
                 animatedAttrs: {
@@ -3163,7 +3202,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(j),
-                duration: E,
+                duration: Math.trunc(E),
                 easing: "easeOutQuart"
               },
               position: Math.trunc(E * (this.subtitle.length - j - 1) / 2)
@@ -3171,11 +3210,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }
 
           var V = new n.default.Combo({
-            incidents: A
+            incidents: R
           }, {
             selector: ".subtitle-wrapper"
           });
-          P.addIncident(V, 0 * this.outroDur), O.addIncident(P, .05 * this.outroDur);
+          D.addIncident(V, Math.trunc(0 * this.outroDur)), k.addIncident(D, Math.trunc(.05 * this.outroDur));
           var T = new n.default.Group();
           T.addIncident(new Be.Anime({
             animatedAttrs: {
@@ -3186,16 +3225,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".x-labels-background",
-            duration: .45 * this.outroDur,
+            duration: Math.trunc(.45 * this.outroDur),
             easing: "easeInOutCubic"
           }), .4 * this.outroDur);
-          var N = 2 * k / (this.data.length + 1);
+          var z = 2 * O / (this.data.length + 1);
 
-          for (var B in this.data) {
-            var _ = 2 * N / (this.data[B].name.length + 1),
+          for (var N in this.data) {
+            var _ = 2 * z / (this.data[N].name.length + 1),
                 L = [];
 
-            for (var G in this.data[B].name) {
+            for (var G in this.data[N].name) {
               L.push({
                 incidentClass: Be.Anime,
                 attrs: {
@@ -3209,7 +3248,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                   }
                 },
                 props: {
-                  selector: "#letter-".concat(B, "-").concat(G),
+                  selector: "#letter-".concat(N, "-").concat(G),
                   duration: Math.trunc(_),
                   easing: "easeInQuart"
                 },
@@ -3217,19 +3256,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               });
             }
 
-            var z = new n.default.Combo({
+            var B = new n.default.Combo({
               incidents: L
             }, {
               selector: ".label-container"
             });
-            T.addIncident(z, k / (this.data.length + 1) * B);
+            T.addIncident(B, Math.trunc(O / (this.data.length + 1) * N));
           }
 
-          O.addIncident(T, .05 * this.outroDur);
+          k.addIncident(T, Math.trunc(.05 * this.outroDur));
           this.outroDur, this.data.length;
           var F = [];
 
-          for (var q in this.data) {
+          for (var X in this.data) {
             F.push({
               incidentClass: Be.Anime,
               attrs: {
@@ -3241,11 +3280,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                duration: .3 * this.outroDur,
+                duration: Math.trunc(.3 * this.outroDur),
                 easing: "easeInOutCubic",
-                selector: "#".concat(this.data[q].name, "-bar-fill")
+                selector: "#".concat(this.data[X].name, "-bar-fill")
               },
-              position: Math.trunc(E * (this.data.length - q - 1) / 2)
+              position: Math.trunc(E * (this.data.length - X - 1) / 2)
             });
           }
 
@@ -3254,16 +3293,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, {
             selector: ".graph"
           });
-          O.addIncident(Y, 0 * this.outroDur), this.addIncident(O, 0 + this.introDur + this.staticDur);
+          k.addIncident(Y, 0 * this.outroDur), this.addIncident(k, 0 + this.introDur + this.staticDur);
         }
 
-        var X = new Be.Anime({
+        var W = new Be.Anime({
           animatedAttrs: {}
         }, {
           selector: ".container",
           duration: this.staticDur
         });
-        this.addIncident(X, this.introDur);
+        this.addIncident(W, this.introDur);
       }
     }, {
       key: "opacityControl",
@@ -3290,7 +3329,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "buildVars",
       value: function value() {
-        this.data = this.attrs.data.data, this.title = this.attrs.data.title, this.subtitle = this.attrs.data.subtitle, this.maxPoint = 0, this.gridLinesNum = this.attrs.data.showGrid ? 11 : 0, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : gt, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : mt, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : vt, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : bt, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : wt, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : xt, this.attrs.font = this.attrs.font ? this.attrs.font : {}, this.fontFamily = this.attrs.font.fontFamily ? this.attrs.font.fontFamily : "'Staatliches', cursive", this.fontSize = this.attrs.font.size ? this.attrs.font.size : "1.7rem", this.url = this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap", this.attrs.timings = this.attrs.timings ? this.attrs.timings : {}, this.introDur = this.attrs.timings.intro ? this.attrs.timings.intro : 0, this.outroDur = this.attrs.timings.outro ? this.attrs.timings.outro : 0, 0 === this.attrs.timings.static ? this.staticDur = 0 : this.staticDur = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
+        this.data = this.attrs.data.data, this.title = this.attrs.data.title, this.subtitle = this.attrs.data.subtitle, this.maxPoint = 0, this.gridLinesNum = this.attrs.data.showGrid ? 11 : 0, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : bt, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : wt, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : xt, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : kt, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : Mt, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : Pt, this.attrs.font = this.attrs.font ? this.attrs.font : {}, this.fontFamily = this.attrs.font.fontFamily ? this.attrs.font.fontFamily : "'Staatliches', cursive", this.fontSize = this.attrs.font.size ? this.attrs.font.size : "1.7rem", this.url = this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap", this.attrs.timings = this.attrs.timings ? this.attrs.timings : {}, this.introDur = this.attrs.timings.intro ? this.attrs.timings.intro : 0, this.outroDur = this.attrs.timings.outro ? this.attrs.timings.outro : 0, 0 === this.attrs.timings.static ? this.staticDur = 0 : this.staticDur = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
       }
     }, {
       key: "html",
@@ -3311,18 +3350,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, r));
         }
 
-        var o = [];
+        var a = [];
 
-        for (var s in this.subtitle) {
-          var a = [];
-          " " === this.subtitle[s] ? a.push(n.default.utils.createDOMElement("div", {
+        for (var o in this.subtitle) {
+          var s = [];
+          " " === this.subtitle[o] ? s.push(n.default.utils.createDOMElement("div", {
             class: "space-char letter-wrapper"
-          }, "-")) : a.push(n.default.utils.createDOMElement("div", {
+          }, "-")) : s.push(n.default.utils.createDOMElement("div", {
             class: "fontColorOn letter-wrapper"
-          }, this.subtitle[s])), o.push(n.default.utils.createDOMElement("div", {
-            id: "letter-" + s,
+          }, this.subtitle[o])), a.push(n.default.utils.createDOMElement("div", {
+            id: "letter-" + o,
             class: "letter-container"
-          }, a));
+          }, s));
         }
 
         for (var l = [], u = 0; u < this.gridLinesNum; u++) {
@@ -3334,21 +3373,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         var c = [];
 
-        for (var p in this.data) {
+        for (var h in this.data) {
           var d = [];
 
-          for (var h in this.data[p].name.length > 3 && (this.data[p].name = this.data[p].name.slice(0, 3)), this.data[p].name) {
+          for (var p in this.data[h].name.length > 4 && (this.data[h].name = this.data[h].name.slice(0, 4)), this.data[h].name) {
             d.push(n.default.utils.createDOMElement("div", {
-              id: "letter-" + p + "-" + h,
+              id: "letter-" + h + "-" + p,
               class: "letter-container"
             }, n.default.utils.createDOMElement("div", {
               class: "letter-wrapper fontColorOn"
-            }, this.data[p].name[h])));
+            }, this.data[h].name[p])));
           }
 
           c.push(n.default.utils.createDOMElement("div", {
             class: "label-container",
-            id: "label-" + p
+            id: "label-" + h
           }, d));
         }
 
@@ -3370,7 +3409,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           class: "subtitle-position-end"
         }, n.default.utils.createDOMElement("div", {
           class: "subtitle-wrapper"
-        }, o))), n.default.utils.createDOMElement("div", {
+        }, a))), n.default.utils.createDOMElement("div", {
           class: "title-back-wrapper"
         }, n.default.utils.createDOMElement("div", {
           class: "title-background block-background"
@@ -3396,7 +3435,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       key: "css",
       get: function get() {
         return function (t) {
-          Ne.setup({
+          Ge.setup({
             createGenerateId: function createGenerateId() {
               return function (t) {
                 return t.key;
@@ -3445,7 +3484,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             "bar-container": {
               "align-self": "flex-end",
-              width: 100 / t.data.length + "%",
+              width: "".concat(100 / t.data.length, "%"),
               margin: "0% ".concat(10 / t.data.length + 1, "%"),
               height: "100%",
               display: "flex"
@@ -3566,28 +3605,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           };
           return t.data.map(function (n) {
-            e[n.name + "-bar"] = {
+            e["".concat(n.name, "-bar")] = {
               "align-self": "flex-end",
-              width: 100 / t.data.length + "%",
+              width: "".concat(100 / t.data.length, "%"),
               margin: "0% ".concat(10 / t.data.length + 1, "%"),
               height: "100%",
               display: "flex"
-            }, e[n.name + "-bar"].height = n.value.toFixed(2) / t.maxPoint * 100 + "%", e[n.name + "-bar-fill"] = {
+            }, e["".concat(n.name, "-bar")].height = "".concat(n.value.toFixed(2) / t.maxPoint * 100, "%"), e["".concat(n.name, "-bar-fill")] = {
               height: "100%"
             };
-          }), Ne.createStyleSheet(e).toString();
-        }({
-          data: this.data,
-          maxPoint: this.maxPoint,
-          primaryC: this.primaryC,
-          secondaryC: this.secondaryC,
-          tertiaryC: this.tertiaryC,
-          accentC: this.accentC,
-          backgroundC: this.backgroundC,
-          fontC: this.fontC,
-          fontFamily: this.fontFamily,
-          fontSize: this.fontSize
-        });
+          }), Ge.createStyleSheet(e).toString();
+        }(this);
       }
     }, {
       key: "fonts",
@@ -3600,109 +3628,1197 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), r;
   }(n.default.HTMLClip);
 
-  var Le = n.default.loadPlugin(yt);
+  var Xe = n.default.loadPlugin(vt),
+      Ye = function (t) {
+    o(r, t);
+    var e = c(r);
+
+    function r() {
+      return i(this, r), e.apply(this, arguments);
+    }
+
+    return a(r, [{
+      key: "buildTree",
+      value: function value() {
+        var t,
+            e = this.barSum / this.barCount;
+
+        if (this.opacityControl(), null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
+          for (var n = Math.floor(.33 * this.attrs.timings.intro), i = Math.floor(.25 * this.attrs.timings.intro), r = Math.floor(.33 * this.attrs.timings.intro), a = Math.floor(.09 * this.attrs.timings.intro), o = 0; o < this.barCount; o++) {
+            var s = new Xe.Anime({
+              animatedAttrs: {
+                bottom: "".concat(50 + 100 * (e - o) / this.barCount - 60 / this.barCount * 2.15, "%")
+              },
+              initialValues: {
+                bottom: "-".concat(65 / this.barCount, "%")
+              }
+            }, {
+              duration: n,
+              selector: ".row-".concat(o),
+              easing: "linear"
+            }),
+                l = new Xe.Anime({
+              animatedAttrs: {
+                width: "60%"
+              },
+              initialValues: {
+                width: "0.2%"
+              }
+            }, {
+              duration: i,
+              delay: Math.round(200 / this.attrs.timings.intro) * o,
+              selector: ".container-bar-".concat(o),
+              easing: "linear"
+            }),
+                u = new Xe.Anime({
+              animatedAttrs: {
+                width: "".concat(this.attrs.data[o].value.toFixed(2), "%")
+              },
+              initialValues: {
+                width: "0px"
+              }
+            }, {
+              duration: r,
+              delay: Math.round(200 / this.attrs.timings.intro) * o,
+              selector: ".inner-bar-".concat(o),
+              easing: "linear"
+            });
+            this.addIncident(s, 0), this.addIncident(l, n), this.addIncident(u, n + i);
+          }
+
+          var c = new Xe.Anime({
+            animatedAttrs: {
+              left: "62%",
+              opacity: 1
+            },
+            initialValues: {
+              left: "58%",
+              opacity: 0
+            }
+          }, {
+            duration: a,
+            delay: Math.round(200 / this.attrs.timings.intro) * this.barCount,
+            selector: ".text",
+            easing: "linear"
+          });
+          this.addIncident(c, n + i + r);
+        }
+
+        var h = new Xe.Anime({
+          animatedAttrs: {}
+        }, {
+          duration: this.attrs.timings.static ? this.attrs.timings.static : 1e3,
+          selector: ".container"
+        });
+
+        if (this.addIncident(h, this.attrs.timings.intro), this.attrs.timings.outro) {
+          var d = new Xe.Anime({
+            animatedAttrs: {
+              opacity: 0
+            }
+          }, {
+            duration: this.attrs.timings.outro,
+            selector: ".container",
+            easing: "linear"
+          });
+          this.addIncident(d, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1e3));
+        }
+      }
+    }, {
+      key: "opacityControl",
+      value: function value() {
+        this.addIncident(new Xe.Anime({
+          animatedAttrs: {
+            opacity: 1
+          },
+          initialValues: {
+            opacity: 0
+          }
+        }, {
+          selector: ".container",
+          duration: 1
+        }), 0), this.attrs.timings.outro || this.addIncident(new Xe.Anime({
+          animatedAttrs: {
+            opacity: 0
+          }
+        }, {
+          selector: ".container",
+          duration: 1
+        }), this.attrs.timings.intro + this.attrs.timings.static - 1);
+      }
+    }, {
+      key: "html",
+      get: function get() {
+        var t = this,
+            e = this.attrs.data.map(function (e, i) {
+          var r;
+          return n.default.utils.createDOMElement("div", {
+            class: "row row-" + i
+          }, n.default.utils.createDOMElement("div", {
+            class: "bar-header"
+          }, e.name), n.default.utils.createDOMElement("div", {
+            class: "container-bar container-bar-" + i
+          }, n.default.utils.createDOMElement("div", {
+            class: "inner-bar inner-bar-" + i + " " + (e.value < t.criticalValue ? "extra-rounded-" + i : null)
+          })), n.default.utils.createDOMElement("div", {
+            class: "text text-" + i
+          }, null !== (r = t.attrs.options) && void 0 !== r && r.hidePercentage ? null : (e.value > 0 ? e.value.toFixed(2) : 0) + "%"));
+        });
+        return n.default.utils.createDOMElement("div", {
+          class: "container"
+        }, e);
+      }
+    }, {
+      key: "css",
+      get: function get() {
+        return function (t) {
+          Ge.setup({
+            createGenerateId: function createGenerateId() {
+              return function (t) {
+                return t.key;
+              };
+            }
+          });
+          var e = {
+            container: {
+              height: "100%",
+              background: t.palette.background ? t.palette.background : Pt,
+              display: "flex",
+              color: t.palette.font ? t.palette.font : kt,
+              "font-family": t.font.fontFamily ? t.font.fontFamily : "'Staatliches', cursive",
+              "font-size": t.font.size ? t.font.size : "1.2rem"
+            },
+            row: {
+              display: "flex",
+              "flex-direction": "row",
+              position: "absolute",
+              left: "20%",
+              "align-items": "center",
+              height: "".concat(60 / t.barCount, "%"),
+              width: "100%"
+            },
+            "container-bar": {
+              position: "absolute",
+              height: "100%",
+              background: t.palette.secondary ? t.palette.secondary : xt,
+              "border-radius": "4rem",
+              width: "60%",
+              "box-shadow": "2px 2px 5px gray",
+              border: "0.2rem solid ".concat(t.palette.accent ? t.palette.accent : Mt),
+              "z-index": "1",
+              overflow: "hidden"
+            },
+            "inner-bar": {
+              position: "relative",
+              background: t.palette.primary ? t.palette.primary : wt,
+              height: "102%",
+              "border-radius": "4rem",
+              bottom: "-1px",
+              "z-index": "2px",
+              top: "-0.5px"
+            },
+            text: {
+              position: "relative",
+              "z-index": "0",
+              opacity: "1",
+              left: "62%"
+            },
+            "bar-header": {
+              position: "absolute",
+              left: "-21%",
+              "text-align": "right",
+              width: "20%"
+            }
+          },
+              n = t.barSum / t.barCount;
+          return t.data.forEach(function (i, r) {
+            e["row-".concat(r)] = {
+              bottom: "".concat(50 + 100 * (n - r) / t.barCount - 60 / t.barCount * 2.15, "%")
+            }, e["inner-bar-".concat(r)] = {
+              width: "".concat(i.value.toFixed(2), "%")
+            };
+          }), Ge.createStyleSheet(e).toString();
+        }({
+          barSum: this.barSum,
+          barCount: this.barCount,
+          data: this.attrs.data,
+          palette: this.attrs.palette ? this.attrs.palette : {},
+          font: this.attrs.font ? this.attrs.font : {},
+          options: this.attrs.options ? this.attrs.options : {}
+        });
+      }
+    }, {
+      key: "fonts",
+      get: function get() {
+        var t;
+        return [{
+          type: "google-font",
+          src: null !== (t = this.attrs.font) && void 0 !== t && t.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+        }];
+      }
+    }, {
+      key: "barSum",
+      get: function get() {
+        for (var t = 0, e = 1; e <= this.barCount; e++) {
+          t += e;
+        }
+
+        return t;
+      }
+    }, {
+      key: "barCount",
+      get: function get() {
+        return this.attrs.data.length;
+      }
+    }, {
+      key: "criticalValue",
+      get: function get() {
+        return this.barCount / 10 == 1 ? this.barCount / 10 * 10 : this.barCount / 10 > 1 ? 10 * (this.barCount / 10 - 1) : 10 * (this.barCount / 10 + 1);
+      }
+    }]), r;
+  }(n.default.HTMLClip);
+
+  var We = {
+    originalDims: {
+      width: 1224,
+      height: 768
+    }
+  };
+
+  function Qe(t, e) {
+    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+  }
+
+  function qe(t) {
+    return (qe = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+      return t.__proto__ || Object.getPrototypeOf(t);
+    })(t);
+  }
+
+  function He(t, e) {
+    return (He = Object.setPrototypeOf || function (t, e) {
+      return t.__proto__ = e, t;
+    })(t, e);
+  }
+
+  function Ze(t, e) {
+    return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
+      if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      return t;
+    }(t) : e;
+  }
+
+  function Je(t) {
+    var e = function () {
+      if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+      if (Reflect.construct.sham) return !1;
+      if ("function" == typeof Proxy) return !0;
+
+      try {
+        return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+      } catch (t) {
+        return !1;
+      }
+    }();
+
+    return function () {
+      var n,
+          i = qe(t);
+
+      if (e) {
+        var r = qe(this).constructor;
+        n = Reflect.construct(i, arguments, r);
+      } else n = i.apply(this, arguments);
+
+      return Ze(this, n);
+    };
+  }
+
+  var $e = {
+    npm_name: "@kissmybutton/motorcortex-svgdraw",
+    incidents: [{
+      exportable: function (t) {
+        !function (t, e) {
+          if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+          t.prototype = Object.create(e && e.prototype, {
+            constructor: {
+              value: t,
+              writable: !0,
+              configurable: !0
+            }
+          }), e && He(t, e);
+        }(r, n.default.Effect);
+        var e,
+            i = Je(r);
+
+        function r() {
+          return Qe(this, r), i.apply(this, arguments);
+        }
+
+        return (e = [{
+          key: "getScratchValue",
+          value: function value() {
+            return this.pathLength = Math.ceil(this.element.getTotalLength()), this.element.style.strokeDasharray = this.pathLength + " " + this.pathLength, this.element.style.strokeDashoffset = this.pathLength, 0;
+          }
+        }, {
+          key: "onGetContext",
+          value: function value() {
+            this.pathLength = Math.ceil(this.element.getTotalLength());
+          }
+        }, {
+          key: "onProgress",
+          value: function value(t, e) {
+            var n = (this.targetValue - this.initialValue) * t + this.initialValue;
+            this.element.style.strokeDashoffset = Math.ceil(this.pathLength * (1 - n));
+          }
+        }]) && function (t, e) {
+          for (var n = 0; n < e.length; n++) {
+            var i = e[n];
+            i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
+          }
+        }(r.prototype, e), r;
+      }(),
+      name: "Draw",
+      attributesValidationRules: {
+        animatedAttrs: {
+          type: "object",
+          props: {
+            cover: {
+              type: "number",
+              min: 0,
+              max: 1
+            }
+          }
+        }
+      }
+    }]
+  };
+
+  function Ue(t, e) {
+    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+  }
+
+  function Ke(t, e) {
+    for (var n = 0; n < e.length; n++) {
+      var i = e[n];
+      i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
+    }
+  }
+
+  function tn(t, e, n) {
+    return e && Ke(t.prototype, e), n && Ke(t, n), t;
+  }
+
+  function en(t, e, n) {
+    return e in t ? Object.defineProperty(t, e, {
+      value: n,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : t[e] = n, t;
+  }
+
+  function nn(t, e) {
+    var n = Object.keys(t);
+
+    if (Object.getOwnPropertySymbols) {
+      var i = Object.getOwnPropertySymbols(t);
+      e && (i = i.filter(function (e) {
+        return Object.getOwnPropertyDescriptor(t, e).enumerable;
+      })), n.push.apply(n, i);
+    }
+
+    return n;
+  }
+
+  function rn(t) {
+    for (var e = 1; e < arguments.length; e++) {
+      var n = null != arguments[e] ? arguments[e] : {};
+      e % 2 ? nn(Object(n), !0).forEach(function (e) {
+        en(t, e, n[e]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : nn(Object(n)).forEach(function (e) {
+        Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e));
+      });
+    }
+
+    return t;
+  }
+
+  function an(t, e) {
+    if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+    t.prototype = Object.create(e && e.prototype, {
+      constructor: {
+        value: t,
+        writable: !0,
+        configurable: !0
+      }
+    }), e && function (t, e) {
+      (Object.setPrototypeOf || function (t, e) {
+        return t.__proto__ = e, t;
+      })(t, e);
+    }(t, e);
+  }
+
+  function on(t) {
+    return (on = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+      return t.__proto__ || Object.getPrototypeOf(t);
+    })(t);
+  }
+
+  function sn(t, e) {
+    return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
+      if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      return t;
+    }(t) : e;
+  }
+
+  function ln(t) {
+    var e = function () {
+      if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+      if (Reflect.construct.sham) return !1;
+      if ("function" == typeof Proxy) return !0;
+
+      try {
+        return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+      } catch (t) {
+        return !1;
+      }
+    }();
+
+    return function () {
+      var n,
+          i = on(t);
+
+      if (e) {
+        var r = on(this).constructor;
+        n = Reflect.construct(i, arguments, r);
+      } else n = i.apply(this, arguments);
+
+      return sn(this, n);
+    };
+  }
+
+  var un = function () {
+    function t(e) {
+      Ue(this, t), this.el = e, this.matrix = this._getMatrix(e), this.viewportCenter = this._getViewPortCenter(), this.idlePosition = this._getIdlePosition();
+    }
+
+    return tn(t, [{
+      key: "_getMatrix",
+      value: function value(t) {
+        return function (t) {
+          var e,
+              n,
+              i,
+              r,
+              a,
+              o,
+              s,
+              l,
+              u = window.getComputedStyle(t).transform;
+          return "" === u || "none" === u ? {} : (e = u.split("(")[1].split(")")[0].split(","), n = Math.atan2(e[1], e[0]), i = Math.pow(e[0], 2) + Math.pow(e[1], 2), r = Math.pow(e[2], 2) + Math.pow(e[3], 2), a = Math.sqrt(i), o = (e[0] * e[3] - e[2] * e[1]) / a, s = Math.atan2(e[0] * e[2] + e[1] * e[3], i), l = Math.atan2(e[1] * e[3] + e[0] * e[2], r), {
+            rotate: n / (Math.PI / 180) + "deg",
+            scaleX: a,
+            scaleY: o,
+            skewX: (1 === i ? s / (Math.PI / 180) : 0) + "deg",
+            skewY: (1 === r ? l / (Math.PI / 180) : 0) + "deg",
+            translateX: e[4] + "px",
+            translateY: e[5] + "px"
+          });
+        }(t);
+      }
+    }, {
+      key: "_getViewPortCenter",
+      value: function value() {
+        var t = this.el.parentNode;
+        return {
+          x: parseFloat(getComputedStyle(t, null).width.replace("px", "")) / 2,
+          y: parseFloat(getComputedStyle(t, null).height.replace("px", "")) / 2
+        };
+      }
+    }, {
+      key: "_getIdlePosition",
+      value: function value() {
+        var t = this.el,
+            e = t.getBoundingClientRect(),
+            n = t.parentNode.getBoundingClientRect();
+        return {
+          x: e.left - n.left,
+          y: e.top - n.top
+        };
+      }
+    }, {
+      key: "calcXYZoom",
+      value: function value() {
+        var t = this.matrix,
+            e = this.idlePosition,
+            n = this.viewportCenter,
+            i = n.x - e.x,
+            r = n.y - e.y;
+        return rn(rn({}, {
+          x: i / t.scaleX,
+          y: r / t.scaleY
+        }), {}, {
+          zoom: t.scaleX
+        });
+      }
+    }, {
+      key: "createProgressFunction",
+      value: function value(t) {
+        var e = this._xyzoomToTranslate(t.start),
+            n = this._xyzoomToTranslate(t.target),
+            i = Math.atan(Math.abs(n.y - e.y) / Math.abs(n.x - e.x)),
+            r = Math.sqrt(Math.pow(n.y - e.y, 2) + Math.pow(n.x - e.x, 2)),
+            a = 1,
+            o = 1;
+
+        return n.x < e.x && (a = -1), n.y < e.y && (o = -1), function (t) {
+          var s = t * r;
+          return {
+            translateX: a * s * Math.cos(i) + e.x,
+            translateY: o * s * Math.sin(i) + e.y,
+            scale: (n.scale - e.scale) * t + e.scale
+          };
+        };
+      }
+    }, {
+      key: "_xyzoomToTranslate",
+      value: function value(t) {
+        var e = t.zoom * t.x,
+            n = t.zoom * t.y,
+            i = this.viewportCenter.x - e,
+            r = this.viewportCenter.y - n;
+        return {
+          x: i - this.idlePosition.x,
+          y: r - this.idlePosition.y,
+          scale: t.zoom
+        };
+      }
+    }, {
+      key: "createPathProgressFunction",
+      value: function value(t, e) {
+        var n = this,
+            i = function i(t) {};
+
+        t.transitionDuration > 0 && (i = this.createProgressFunction({
+          start: e,
+          target: {
+            x: t.startPoint.x,
+            y: t.startPoint.y,
+            zoom: e.zoom
+          }
+        }));
+        var r = t.transitionDuration / (t.transitionDuration + t.alongPathDuration),
+            a = t.alongPathDuration / (t.transitionDuration + t.alongPathDuration),
+            o = (t.endTo - t.startFrom) * t.pathLength;
+        return function (s) {
+          if (t.transitionDuration > 0 && s < r) return i(s / r);
+
+          var l = (s - r) / a,
+              u = (t.zoom - e.zoom) * l + e.zoom,
+              c = l * o + t.startFrom * t.pathLength,
+              h = t.path.getPointAtLength(c),
+              d = n._xyzoomToTranslate({
+            x: h.x,
+            y: h.y,
+            zoom: u
+          });
+
+          return {
+            translateX: d.x,
+            translateY: d.y,
+            scale: d.scale
+          };
+        };
+      }
+    }]), t;
+  }(),
+      cn = function (t) {
+    an(i, n.default.Effect);
+    var e = ln(i);
+
+    function i() {
+      return Ue(this, i), e.apply(this, arguments);
+    }
+
+    return tn(i, [{
+      key: "getScratchValue",
+      value: function value() {
+        return this.adaptor.calcXYZoom();
+      }
+    }, {
+      key: "onGetContext",
+      value: function value() {
+        this.progressMethod = this.adaptor.createProgressFunction({
+          start: this.initialValue,
+          target: this.targetValue
+        });
+      }
+    }, {
+      key: "onProgress",
+      value: function value(t, e) {
+        var n = this.progressMethod(t);
+        this.element.style.transform = "translateX(".concat(n.translateX, "px) translateY(").concat(n.translateY, "px) scaleX(").concat(n.scale, ") scaleY(").concat(n.scale, ")");
+      }
+    }, {
+      key: "adaptor",
+      get: function get() {
+        return this._adaptor || (this._adaptor = new un(this.element)), this._adaptor;
+      }
+    }]), i;
+  }(),
+      hn = {
+    npm_name: "@kissmybutton/motorcortex-2dcam",
+    incidents: [{
+      exportable: cn,
+      name: "ZoomTo",
+      attributesValidationRules: {
+        animatedAttrs: {
+          type: "object",
+          props: {
+            position: {
+              type: "object",
+              props: {
+                x: {
+                  type: "number",
+                  optional: !0,
+                  min: 0
+                },
+                y: {
+                  type: "number",
+                  optional: !0,
+                  min: 0
+                },
+                zoom: {
+                  type: "number",
+                  optional: !0,
+                  min: 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }, {
+      exportable: function (t) {
+        an(n, cn);
+        var e = ln(n);
+
+        function n() {
+          return Ue(this, n), e.apply(this, arguments);
+        }
+
+        return tn(n, [{
+          key: "onInitialise",
+          value: function value() {
+            var t = this.props.duration,
+                e = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            e.setAttributeNS(null, "d", this.targetValue.path), this.data = {
+              path: e,
+              finalPoint: null,
+              startPoint: null,
+              zoom: this.targetValue.zoom,
+              pathLength: e.getTotalLength(),
+              startFrom: this.attrs.from ? this.attrs.from : 0,
+              endTo: this.attrs.to ? this.attrs.to : 1,
+              transitionDuration: this.attrs.transition ? this.attrs.transition : 0,
+
+              get alongPathDuration() {
+                return t - this.transitionDuration;
+              }
+
+            }, this.data.finalPoint = e.getPointAtLength(this.data.endTo * this.data.pathLength), this.data.startPoint = e.getPointAtLength(this.data.startFrom * this.data.pathLength), this.targetValue.x = this.data.finalPoint.x, this.targetValue.y = this.data.finalPoint.y;
+          }
+        }, {
+          key: "onGetContext",
+          value: function value() {
+            this.data.zoom = this.targetValue.zoom, this.progressMethod = this.adaptor.createPathProgressFunction(this.data, this.initialValue);
+          }
+        }]), n;
+      }(),
+      name: "FollowPath",
+      attributesValidationRules: {
+        animatedAttrs: {
+          type: "object",
+          props: {
+            position: {
+              type: "object",
+              props: {
+                path: {
+                  type: "string",
+                  optional: !1
+                },
+                zoom: {
+                  type: "number",
+                  optional: !0,
+                  min: 0
+                }
+              }
+            }
+          }
+        },
+        transition: {
+          type: "number",
+          integer: !0,
+          min: 0,
+          optional: !0
+        },
+        from: {
+          type: "number",
+          min: 0,
+          max: 1,
+          optional: !0
+        },
+        to: {
+          type: "number",
+          min: 0,
+          max: 1,
+          optional: !0
+        }
+      }
+    }],
+    compositeAttributes: {
+      position: ["x", "y", "zoom", "path"]
+    }
+  },
+      dn = n.default.loadPlugin(vt),
+      pn = n.default.loadPlugin($e),
+      fn = n.default.loadPlugin(hn);
+
   return {
     npm_name: "motorcortex-graphs",
     incidents: [{
+      exportable: Ye,
+      name: "ProgressBar",
+      originalDims: {
+        width: "1200px",
+        height: "900px"
+      }
+    }, {
+      exportable: Fe,
+      name: "BarChartSimple",
+      originalDims: {
+        width: "1200px",
+        height: "900px"
+      }
+    }, {
       exportable: function (t) {
-        s(r, t);
+        o(r, t);
         var e = c(r);
 
         function r() {
           return i(this, r), e.apply(this, arguments);
         }
 
-        return o(r, [{
+        return a(r, [{
           key: "buildTree",
           value: function value() {
-            var t,
-                e = this.barSum / this.barCount;
+            if (this.attrs.timings.intro) {
+              var t = new n.default.Group(),
+                  e = (new n.default.Group(), .13 * this.introDur),
+                  i = [];
 
-            if (this.opacityControl(), null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
-              for (var n = Math.floor(.33 * this.attrs.timings.intro), i = Math.floor(.25 * this.attrs.timings.intro), r = Math.floor(.33 * this.attrs.timings.intro), o = Math.floor(.09 * this.attrs.timings.intro), s = 0; s < this.barCount; s++) {
-                var a = new Le.Anime({
-                  animatedAttrs: {
-                    bottom: "".concat(50 + 100 * (e - s) / this.barCount - 60 / this.barCount * 2.15, "%")
+              for (var r in this.words) {
+                i.push({
+                  incidentClass: dn.Anime,
+                  attrs: {
+                    animatedAttrs: {
+                      top: "0px",
+                      opacity: 1
+                    },
+                    initialValues: {
+                      top: "-50px",
+                      opacity: 0
+                    }
                   },
-                  initialValues: {
-                    bottom: "-".concat(65 / this.barCount, "%")
-                  }
-                }, {
-                  duration: n,
-                  selector: ".row-".concat(s),
-                  easing: "linear"
-                }),
-                    l = new Le.Anime({
-                  animatedAttrs: {
-                    width: "60%"
+                  props: {
+                    selector: "#word-".concat(r),
+                    duration: Math.trunc(e / this.words.length),
+                    easing: "easeInOutQuart"
                   },
-                  initialValues: {
-                    width: "0.2%"
-                  }
-                }, {
-                  duration: i,
-                  delay: Math.round(200 / this.attrs.timings.intro) * s,
-                  selector: ".container-bar-".concat(s),
-                  easing: "linear"
-                }),
-                    u = new Le.Anime({
-                  animatedAttrs: {
-                    width: "".concat(this.attrs.data[s].value.toFixed(2), "%")
-                  },
-                  initialValues: {
-                    width: "0px"
-                  }
-                }, {
-                  duration: r,
-                  delay: Math.round(200 / this.attrs.timings.intro) * s,
-                  selector: ".inner-bar-".concat(s),
-                  easing: "linear"
+                  position: Math.trunc(e / this.words.length * r)
                 });
-                this.addIncident(a, 0), this.addIncident(l, n), this.addIncident(u, n + i);
               }
 
-              var c = new Le.Anime({
+              new n.default.Combo({
+                incidents: i
+              }, {
+                selector: ".title-wrapper"
+              });
+              var a = new n.default.Group(),
+                  o = .2 * this.introDur,
+                  s = 3 * o / (this.data.length + 2);
+
+              for (var l in this.data) {
+                var u = s / 2,
+                    c = [];
+
+                for (var h in this.data[l].name) {
+                  c.push({
+                    incidentClass: dn.Anime,
+                    attrs: {
+                      animatedAttrs: {
+                        opacity: 1
+                      },
+                      initialValues: {
+                        opacity: 0
+                      }
+                    },
+                    props: {
+                      selector: "#letter-".concat(l, "-").concat(h),
+                      duration: Math.trunc(.015 * this.introDur),
+                      easing: "easeInOutQuart"
+                    },
+                    position: Math.trunc(s - u)
+                  }), u /= 2;
+                }
+
+                var d = new n.default.Combo({
+                  incidents: c
+                }, {
+                  selector: ".label-container"
+                });
+                a.addIncident(d, Math.trunc(.14 * this.introDur + o / (this.data.length + 1) * (this.data.length - l - 1)));
+              }
+
+              var p = new n.default.Group(),
+                  f = 5 * (.3 * this.introDur) / (this.data.length + 1),
+                  y = f / 5,
+                  g = 3 * f / (this.steleBlockNum + 1);
+
+              for (var m in this.data) {
+                var v = new n.default.Group({
+                  selector: "#stele-".concat(m)
+                }),
+                    b = new n.default.Combo({
+                  incidents: [{
+                    incidentClass: dn.Anime,
+                    attrs: {
+                      animatedAttrs: {
+                        opacity: 1
+                      },
+                      initialValues: {
+                        opacity: 0
+                      }
+                    },
+                    props: {
+                      duration: Math.trunc(g)
+                    },
+                    position: 0
+                  }]
+                }, {
+                  selector: ".stele-block-".concat(m),
+                  delay: "@stagger(0, ".concat(Math.trunc(f - g), ", 0, easeOutQuad)")
+                });
+                v.addIncident(b, 0), p.addIncident(v, Math.trunc(m * y));
+              }
+
+              for (var w = this.introDur / this.data.length, x = .35 * w, O = .8 * w, k = new n.default.Group(), M = new n.default.Group(), P = 0; P < this.dataSetsNum; P++) {
+                for (var D = new n.default.Group(), S = 0; S < this.data.length; S++) {
+                  if (S !== this.data.length - 1) {
+                    var C = new pn.Draw({
+                      animatedAttrs: {
+                        cover: 1
+                      },
+                      initialValues: {
+                        cover: 0
+                      }
+                    }, {
+                      selector: "#line-".concat(P, "-").concat(S),
+                      duration: Math.trunc(O),
+                      easing: "easeInOutQuad"
+                    });
+                    k.addIncident(C, Math.trunc(w * S + .2 * w));
+                  }
+
+                  var I = new dn.Anime({
+                    animatedAttrs: {
+                      opacity: 1,
+                      r: this.r
+                    },
+                    initialValues: {
+                      opacity: 0,
+                      r: 0
+                    }
+                  }, {
+                    selector: "#point-".concat(P, "-").concat(S),
+                    duration: Math.trunc(x),
+                    easing: "easeInQuart"
+                  });
+                  M.addIncident(I, Math.trunc(w * S));
+                  var A = this.findPointY(S, P) - .083 * this.linesHeight,
+                      E = A + .07 * this.linesHeight / 2,
+                      R = 5 * this.data.length > 10 ? 10 : 5 * this.data.length;
+                  R = R < 6 ? 6 : R;
+                  var j = this.findPointX(S) - R * this.linesWidth / 100 * .5,
+                      V = j + this.linesWidth * (R / 100) / 2,
+                      T = new dn.Anime({
+                    animatedAttrs: {
+                      opacity: .6,
+                      width: "".concat(R, "%"),
+                      "min-width": "".concat(R, "%"),
+                      height: "7%",
+                      top: "".concat(A, "px"),
+                      left: "".concat(j, "px"),
+                      "font-size": this.fontSizeInner
+                    },
+                    initialValues: {
+                      opacity: 0,
+                      width: "0%",
+                      "min-width": "0%",
+                      height: "0%",
+                      top: "".concat(E, "px"),
+                      left: "".concat(V, "px"),
+                      "font-size": 0
+                    }
+                  }, {
+                    selector: ".label-".concat(this.data[S].name, "-").concat(P),
+                    duration: Math.trunc(x),
+                    easeing: "easeInOutCubic"
+                  });
+                  D.addIncident(T, Math.trunc(w * S + .2 * x));
+                }
+              }
+
+              var z = new fn.ZoomTo({
                 animatedAttrs: {
-                  left: "62%",
-                  opacity: 1
+                  position: {
+                    x: 100,
+                    y: 100,
+                    zoom: 2
+                  }
                 },
                 initialValues: {
-                  left: "58%",
-                  opacity: 0
+                  position: {
+                    x: 0,
+                    y: 0,
+                    zoom: 1
+                  }
                 }
               }, {
-                duration: o,
-                delay: Math.round(200 / this.attrs.timings.intro) * this.barCount,
-                selector: ".text",
-                easing: "linear"
+                selector: ".viewport",
+                duration: 4e3,
+                easing: "easeInOutSine",
+                id: "zoom_incident"
               });
-              this.addIncident(c, n + i + r);
+              console.log(this.addIncident(z, 0)), console.log(this), this.addIncident(t, 0);
             }
 
-            var p = new Le.Anime({
+            if (this.attrs.timings.outro) {
+              var N = new n.default.Group();
+              N.addIncident(new dn.Anime({
+                animatedAttrs: {
+                  height: "0%"
+                },
+                initialValues: {
+                  height: "70%"
+                }
+              }, {
+                selector: ".graph-background",
+                duration: Math.trunc(.2 * this.outroDur),
+                easing: "easeInOutQuart"
+              }), Math.trunc(.8 * this.outroDur));
+              new n.default.Group();
+
+              var _ = .13 * this.outroDur,
+                  L = [];
+
+              for (var G in this.words) {
+                L.push({
+                  incidentClass: dn.Anime,
+                  attrs: {
+                    animatedAttrs: {
+                      top: "-50px",
+                      opacity: 0
+                    },
+                    initialValues: {
+                      top: "0px",
+                      opacity: 1
+                    }
+                  },
+                  props: {
+                    selector: "#word-".concat(G),
+                    duration: Math.trunc(_ / this.words.length),
+                    easing: "easeInOutQuart"
+                  },
+                  position: Math.trunc(_ / this.words.length * (this.words.length - 1 - G))
+                });
+              }
+
+              var B = new n.default.Combo({
+                incidents: L
+              }, {
+                selector: ".title-wrapper"
+              });
+              N.addIncident(B, Math.trunc(.76 * this.outroDur));
+              var F = new n.default.Group(),
+                  X = .55 * this.outroDur;
+              F.addIncident(new dn.Anime({
+                animatedAttrs: {
+                  width: "0%"
+                },
+                initialValues: {
+                  width: "100%"
+                }
+              }, {
+                selector: ".block-background",
+                duration: Math.trunc(.55 * X),
+                easing: "easeInOutQuart"
+              }), 0 * X);
+              var Y = .2 * this.outroDur,
+                  W = 3 * Y / (this.data.length + 2);
+
+              for (var Q in this.data) {
+                var q = W / 2,
+                    H = [];
+
+                for (var Z in this.data[Q].name) {
+                  H.push({
+                    incidentClass: dn.Anime,
+                    attrs: {
+                      animatedAttrs: {
+                        opacity: 0
+                      },
+                      initialValues: {
+                        opacity: 1
+                      }
+                    },
+                    props: {
+                      selector: "#letter-".concat(Q, "-").concat(Z),
+                      duration: Math.trunc(.015 * this.outroDur),
+                      easing: "easeInOutQuart"
+                    },
+                    position: Math.trunc(W - (W - q))
+                  }), q /= 2;
+                }
+
+                var J = new n.default.Combo({
+                  incidents: H
+                }, {
+                  selector: ".label-container"
+                });
+                F.addIncident(J, Math.trunc(Y * Q / (this.data.length + 1)));
+              }
+
+              N.addIncident(F, this.outroDur - X);
+              var $ = new n.default.Group(),
+                  U = 5 * (.3 * this.outroDur) / (this.data.length + 1),
+                  K = U / 5,
+                  tt = 3 * U / (this.steleBlockNum + 1);
+
+              for (var et in this.data) {
+                var nt = new n.default.Group({
+                  selector: "#stele-".concat(et)
+                }),
+                    it = new n.default.Combo({
+                  incidents: [{
+                    incidentClass: dn.Anime,
+                    attrs: {
+                      animatedAttrs: {
+                        opacity: 0
+                      },
+                      initialValues: {
+                        opacity: 1
+                      }
+                    },
+                    props: {
+                      duration: Math.trunc(tt)
+                    },
+                    position: 0
+                  }]
+                }, {
+                  selector: ".stele-block-".concat(et),
+                  delay: "@stagger(0, ".concat(Math.trunc(U - tt), ", 0, easeOutQuad, omni, true)")
+                });
+                nt.addIncident(it, 0), $.addIncident(nt, (this.data.length - 1 - et) * K);
+              }
+
+              N.addIncident($, .25 * this.outroDur);
+
+              for (var rt = this.outroDur / this.data.length, at = .25 * rt, ot = .8 * rt, st = new n.default.Group(), lt = new n.default.Group(), ut = 0; ut < this.dataSetsNum; ut++) {
+                for (var ct = new n.default.Group(), ht = 0; ht < this.data.length; ht++) {
+                  if (ht !== this.data.length - 1) {
+                    var dt = new pn.Draw({
+                      animatedAttrs: {
+                        cover: 0
+                      },
+                      initialValues: {
+                        cover: 1
+                      }
+                    }, {
+                      selector: "#line-".concat(ut, "-").concat(ht),
+                      duration: Math.trunc(ot),
+                      easing: "easeInOutQuad"
+                    });
+                    st.addIncident(dt, Math.trunc(rt * (this.data.length - 2 - ht) + .2 * rt));
+                  }
+
+                  var pt = new dn.Anime({
+                    animatedAttrs: {
+                      opacity: 0,
+                      r: 0
+                    },
+                    initialValues: {
+                      opacity: 1,
+                      r: this.r
+                    }
+                  }, {
+                    selector: "#point-".concat(ut, "-").concat(ht),
+                    duration: Math.trunc(at),
+                    easeing: "easeOutCubic"
+                  });
+                  lt.addIncident(pt, Math.trunc(rt * (this.data.length - 1 - ht)));
+                  var ft = this.findPointY(ht, ut) - .083 * this.linesHeight,
+                      yt = ft + .07 * this.linesHeight / 2,
+                      gt = 5 * this.data.length > 10 ? 10 : 5 * this.data.length;
+                  gt = gt < 6 ? 6 : gt;
+                  var mt = this.findPointX(ht) - gt * this.linesWidth / 100 * .5,
+                      vt = mt + this.linesWidth * (gt / 100) / 2,
+                      bt = new dn.Anime({
+                    animatedAttrs: {
+                      opacity: 0,
+                      width: "0%",
+                      "min-width": "0%",
+                      height: "0%",
+                      top: "".concat(yt, "px"),
+                      left: "".concat(vt, "px"),
+                      "font-size": 0
+                    },
+                    initialValues: {
+                      opacity: .6,
+                      width: "".concat(gt, "%"),
+                      "min-width": "".concat(gt, "%"),
+                      height: "7%",
+                      top: "".concat(ft, "px"),
+                      left: "".concat(mt, "px"),
+                      "font-size": this.fontSizeInner
+                    }
+                  }, {
+                    selector: ".label-".concat(this.data[ht].name, "-").concat(ut),
+                    duration: Math.trunc(at),
+                    easeing: "easeInOutCubic"
+                  });
+                  ct.addIncident(bt, Math.trunc(rt * (this.data.length - 1 - ht) + .2 * at));
+                }
+
+                N.addIncident(ct, 0);
+              }
+
+              N.addIncident(st, at), N.addIncident(lt, 0), this.addIncident(N, 0 + this.introDur + this.staticDur);
+            }
+
+            var wt = new dn.Anime({
               animatedAttrs: {}
             }, {
-              duration: this.attrs.timings.static ? this.attrs.timings.static : 1e3,
-              selector: ".container"
+              selector: ".container",
+              duration: this.staticDur
             });
-
-            if (this.addIncident(p, this.attrs.timings.intro), this.attrs.timings.outro) {
-              var d = new Le.Anime({
-                animatedAttrs: {
-                  opacity: 0
-                }
-              }, {
-                duration: this.attrs.timings.outro,
-                selector: ".container",
-                easing: "linear"
-              });
-              this.addIncident(d, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1e3));
-            }
+            this.addIncident(wt, this.introDur);
           }
         }, {
           key: "opacityControl",
           value: function value() {
-            this.addIncident(new Le.Anime({
+            this.addIncident(new dn.Anime({
               animatedAttrs: {
                 opacity: 1
               },
@@ -3712,157 +4828,437 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }, {
               selector: ".container",
               duration: 1
-            }), 0), this.attrs.timings.outro || this.addIncident(new Le.Anime({
+            }), 0), this.addIncident(new dn.Anime({
               animatedAttrs: {
                 opacity: 0
               }
             }, {
               selector: ".container",
               duration: 1
-            }), this.attrs.timings.intro + this.attrs.timings.static - 1);
+            }), this.introDur + this.staticDur + this.outroDur - 1);
+          }
+        }, {
+          key: "buildVars",
+          value: function value() {
+            var t = this;
+            this.data = this.attrs.data.data, this.graphScale = {
+              width: .76,
+              height: .58
+            }, this.linesWidth = We.originalDims.width * this.graphScale.width, this.linesHeight = We.originalDims.height * this.graphScale.height, this.steleWidth = .01 * this.linesWidth, this.spaceAround = (this.linesWidth - this.steleWidth * this.data.length) / (2 * this.data.length), this.r = .65, this.title = this.attrs.data.title, this.words = this.title.split(" "), this.dataSetsNum = 0, this.maxPoint = 0;
+
+            var e,
+                n = function (t, e) {
+              var _n;
+
+              if ("undefined" == typeof Symbol || null == t[Symbol.iterator]) {
+                if (Array.isArray(t) || (_n = d(t)) || e && t && "number" == typeof t.length) {
+                  _n && (t = _n);
+
+                  var i = 0,
+                      r = function r() {};
+
+                  return {
+                    s: r,
+                    n: function n() {
+                      return i >= t.length ? {
+                        done: !0
+                      } : {
+                        done: !1,
+                        value: t[i++]
+                      };
+                    },
+                    e: function e(t) {
+                      throw t;
+                    },
+                    f: r
+                  };
+                }
+
+                throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+              }
+
+              var a,
+                  o = !0,
+                  s = !1;
+              return {
+                s: function s() {
+                  _n = t[Symbol.iterator]();
+                },
+                n: function n() {
+                  var t = _n.next();
+
+                  return o = t.done, t;
+                },
+                e: function e(t) {
+                  s = !0, a = t;
+                },
+                f: function f() {
+                  try {
+                    o || null == _n.return || _n.return();
+                  } finally {
+                    if (s) throw a;
+                  }
+                }
+              };
+            }(this.data);
+
+            try {
+              for (n.s(); !(e = n.n()).done;) {
+                var i = e.value;
+                i.values.length > this.dataSetsNum && (this.dataSetsNum = i.values.length), Math.max.apply(Math, h(i.values)) > this.maxPoint && (this.maxPoint = Math.max.apply(Math, h(i.values)));
+              }
+            } catch (t) {
+              n.e(t);
+            } finally {
+              n.f();
+            }
+
+            this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint, this.hover = !!this.attrs.data.hover && this.attrs.data.hover, this.hover = 1 !== this.dataSetsNum || this.hover, this.trace = !!this.attrs.data.trace && this.attrs.data.trace, this.trace = 1 === this.dataSetsNum && this.trace, this.unit = this.attrs.data.unit ? this.attrs.data.unit : "%", this.interval = this.attrs.data.interval ? this.attrs.data.interval : 5, this.steleBlockNum = this.maxPoint / this.interval + 1, this.findPointX = function (e) {
+              return t.steleWidth / 2 + t.spaceAround + e * (2 * t.spaceAround + t.steleWidth);
+            }, this.findPointY = function (e, n) {
+              return t.linesHeight - t.data[e].values[n] * t.linesHeight / t.maxPoint;
+            }, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : bt, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : wt, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : xt, this.quaternaryC = this.attrs.palette.quaternary ? this.attrs.palette.quaternary : Ot, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : kt, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : Mt, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : Pt, this.attrs.font = this.attrs.font ? this.attrs.font : {}, this.fontFamily = this.attrs.font.fontFamily ? this.attrs.font.fontFamily : "'Staatliches', cursive", this.fontSizeLabel = this.attrs.font.size ? this.attrs.font.size : "1.7rem", this.fontSizeTitle = "200%", this.fontSizeInner = "80%", this.url = this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap", this.attrs.timings = this.attrs.timings ? this.attrs.timings : {}, this.introDur = this.attrs.timings.intro ? this.attrs.timings.intro : 0, this.outroDur = this.attrs.timings.outro ? this.attrs.timings.outro : 0, 0 === this.attrs.timings.static ? this.staticDur = 0 : this.staticDur = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
           }
         }, {
           key: "html",
           get: function get() {
-            var t = this,
-                e = this.attrs.data.map(function (e, i) {
-              var r;
-              return n.default.utils.createDOMElement("div", {
-                class: "row row-" + i
-              }, n.default.utils.createDOMElement("div", {
-                class: "bar-header"
-              }, e.name), n.default.utils.createDOMElement("div", {
-                class: "container-bar container-bar-" + i
-              }, n.default.utils.createDOMElement("div", {
-                class: "inner-bar inner-bar-" + i + " " + (e.value < t.criticalValue ? "extra-rounded-" + i : null)
-              })), n.default.utils.createDOMElement("div", {
-                class: "text text-" + i
-              }, null !== (r = t.attrs.options) && void 0 !== r && r.hidePercentage ? null : (e.value > 0 ? e.value.toFixed(2) : 0) + "%"));
-            });
+            this.buildVars();
+            var t = [];
+
+            for (var e in this.words) {
+              for (var i = [], r = 0; r < this.words[e].length; r++) {
+                i += this.words[e][r];
+              }
+
+              t.push(n.default.utils.createDOMElement("div", {
+                id: "word-" + e,
+                class: "fontColorOn letter-wrapper-title"
+              }, i)), e != this.words.length - 1 && t.push(n.default.utils.createDOMElement("div", {
+                class: "space-char letter-wrapper-title"
+              }, "-"));
+            }
+
+            var a = [];
+
+            for (var o in this.data) {
+              for (var s = [], l = 0; l < this.steleBlockNum; l++) {
+                s.push(n.default.utils.createDOMElement("div", {
+                  class: "stele-block-" + o + " stele-block"
+                }));
+              }
+
+              a.push(n.default.utils.createDOMElement("div", {
+                id: "stele-" + o,
+                class: "data-stele"
+              }, s));
+            }
+
+            for (var u = [], c = 0; c < this.dataSetsNum; c++) {
+              for (var h = [], d = 0; d < this.data.length; d++) {
+                var p = [],
+                    f = this.findPointX(d),
+                    y = this.findPointY(d, c);
+
+                if (d !== this.data.length - 1) {
+                  var g = this.findPointX(d + 1),
+                      m = this.findPointY(d + 1, c);
+                  p.push(n.default.utils.createDOMElement("path", {
+                    id: "line-".concat(c, "-").concat(d),
+                    class: "line-".concat(c),
+                    d: "M ".concat(f, " ").concat(y) + "L ".concat(g, " ").concat(m),
+                    stroke: this.tertiaryC,
+                    "stroke-width": "0.65%",
+                    "stroke-linecap": "round",
+                    fill: "none"
+                  }));
+                }
+
+                p.push(n.default.utils.createDOMElement("circle", {
+                  id: "point-".concat(c, "-").concat(d),
+                  class: "point-".concat(c, " datapoint"),
+                  cx: "".concat(f),
+                  cy: "".concat(y),
+                  r: "".concat(this.r, "%"),
+                  fill: this.accentC,
+                  stroke: this.accentC
+                })), h.push(n.default.utils.createDOMElement("g", null, p));
+              }
+
+              u.push(n.default.utils.createDOMElement("g", null, h));
+            }
+
+            var v = [];
+            v.push(n.default.utils.createDOMElement("svg", {
+              class: "lines-container",
+              viewbox: "0 0 ".concat(this.linesWidth, " ").concat(this.linesHeight)
+            }, u));
+
+            for (var b = [], w = 0; w < this.dataSetsNum; w++) {
+              for (var x = [], O = 0; O < this.data.length; O++) {
+                x.push(n.default.utils.createDOMElement("div", {
+                  class: "label-".concat(this.data[O].name, "-").concat(w, " inner-label-container"),
+                  id: "label-".concat(this.data[O].name, "-").concat(w, " inner-label-container")
+                }, n.default.utils.createDOMElement("div", {
+                  class: "inner-label"
+                }, "".concat(this.data[O].values[w], " ").concat(this.unit))));
+              }
+
+              b.push(n.default.utils.createDOMElement("div", {
+                class: "line-".concat(w, "-label-container")
+              }, x));
+            }
+
+            var k = [];
+
+            for (var M in this.data) {
+              var P = [];
+
+              for (var D in this.data[M].name.length > 4 && (this.data[M].name = this.data[M].name.slice(0, 4)), this.data[M].name) {
+                P.push(n.default.utils.createDOMElement("div", {
+                  id: "letter-" + M + "-" + D,
+                  class: "letter-container"
+                }, n.default.utils.createDOMElement("div", {
+                  class: "letter-wrapper-label fontColorOn"
+                }, this.data[M].name[D])));
+              }
+
+              k.push(n.default.utils.createDOMElement("div", {
+                class: "label-container",
+                id: "label-" + M
+              }, P));
+            }
+
             return n.default.utils.createDOMElement("div", {
               class: "container"
-            }, e);
+            }, n.default.utils.createDOMElement("div", {
+              class: "viewport"
+            }, n.default.utils.createDOMElement("div", {
+              class: "title-container"
+            }, n.default.utils.createDOMElement("div", {
+              class: "title-wrapper"
+            }, t)), n.default.utils.createDOMElement("div", {
+              class: "graph-background"
+            }), n.default.utils.createDOMElement("div", {
+              class: "dataStele-container"
+            }, a), n.default.utils.createDOMElement("div", {
+              class: "svg-container"
+            }, v), n.default.utils.createDOMElement("div", {
+              class: "graph-labels-container"
+            }, b), n.default.utils.createDOMElement("div", {
+              class: "x-labels-container"
+            }, k), n.default.utils.createDOMElement("div", {
+              class: "x-labels-back-wrapper"
+            }, n.default.utils.createDOMElement("div", {
+              class: "block-background"
+            }))));
           }
         }, {
           key: "css",
           get: function get() {
             return function (t) {
-              Ne.setup({
+              Ge.setup({
                 createGenerateId: function createGenerateId() {
                   return function (t) {
                     return t.key;
                   };
                 }
               });
-              var e = {
+
+              for (var e = {
                 container: {
+                  width: "100%",
                   height: "100%",
-                  background: t.palette.background ? t.palette.background : xt,
-                  display: "flex",
-                  color: t.palette.font ? t.palette.font : bt,
-                  "font-family": t.font.fontFamily ? t.font.fontFamily : "'Staatliches', cursive",
-                  "font-size": t.font.size ? t.font.size : "1.2rem"
+                  background: t.backgroundC,
+                  "font-family": t.fontFamily,
+                  "font-size": t.fontSizeTitle
                 },
-                row: {
+                viewport: {
+                  width: "100%",
+                  height: "100%"
+                },
+                "title-container": {
+                  background: "transparent",
+                  width: "70%",
+                  height: "10%",
+                  top: "8%",
+                  left: "8%",
+                  position: "absolute",
+                  display: "flex",
+                  "align-items": "center",
+                  "z-index": "1",
+                  "justify-content": "space-around"
+                },
+                "title-wrapper": {
+                  display: "flex",
+                  "flex-grow": "2",
+                  "flex-wrap": "nowrap",
+                  overflow: "hidden",
+                  "padding-left": "6px"
+                },
+                "letter-wrapper-title": {
+                  display: "flex",
+                  "flex-direction": "column",
+                  position: "relative",
+                  "font-size": "190%"
+                },
+                "graph-background": {
+                  left: "10%",
+                  top: "13%",
+                  width: "80%",
+                  height: "70%",
+                  position: "absolute",
+                  background: t.secondaryC
+                },
+                "svg-container": {
+                  width: "76%",
+                  height: "58%",
+                  top: "21%",
+                  left: "12%",
+                  position: "relative",
+                  "z-index": "1",
+                  overflow: "visible"
+                },
+                "lines-container": {
+                  width: "100%",
+                  height: "100%",
+                  "min-height": "100%",
+                  "min-width": "100%",
+                  overflow: "visible"
+                },
+                datapoint: {},
+                "dataStele-container": {
+                  width: "76%",
+                  height: "58%",
+                  top: "21%",
+                  left: "12%",
+                  position: "absolute",
+                  display: "flex",
+                  "align-items": "center",
+                  "justify-content": "space-around",
+                  "z-index": "0"
+                },
+                "data-stele": {
+                  height: "100%",
+                  width: "1%",
+                  display: "flex",
+                  "flex-direction": "column-reverse",
+                  "justify-content": "space-between"
+                },
+                "stele-block": {
+                  width: "100%",
+                  height: "".concat(Math.trunc(t.linesHeight * (.26 / t.steleBlockNum)), "px"),
+                  "max-height": "5px",
+                  opacity: "0.8",
+                  background: t.primaryC
+                },
+                "graph-labels-container": {
+                  width: "76%",
+                  height: "58%",
+                  top: "21%",
+                  left: "12%",
+                  position: "absolute"
+                },
+                "x-labels-back-wrapper": {
+                  width: "76%",
+                  height: "6%",
+                  top: "80%",
+                  left: "12%",
+                  position: "absolute",
+                  display: "flex",
+                  "justify-content": "flex-end"
+                },
+                "block-background": {
+                  width: "100%",
+                  height: "100%",
+                  background: t.accentC,
+                  position: "relative"
+                },
+                "x-labels-container": {
+                  background: "transparent",
+                  width: "76%",
+                  height: "6%",
+                  top: "80%",
+                  left: "12%",
+                  position: "absolute",
+                  display: "flex",
+                  "align-items": "center",
+                  "z-index": "1",
+                  "justify-content": "space-around"
+                },
+                "label-container": {
                   display: "flex",
                   "flex-direction": "row",
-                  position: "absolute",
-                  left: "20%",
-                  "align-items": "center",
-                  height: 60 / t.barCount + "%",
-                  width: "100%"
-                },
-                "container-bar": {
-                  position: "absolute",
-                  height: "100%",
-                  background: t.palette.secondary ? t.palette.secondary : vt,
-                  "border-radius": "3rem",
-                  width: "60%",
-                  "box-shadow": "2px 2px 5px gray",
-                  border: "0.2rem solid " + (t.palette.accent ? t.palette.accent : wt),
-                  "z-index": "1",
                   overflow: "hidden"
                 },
-                "inner-bar": {
-                  position: "relative",
-                  background: t.palette.primary ? t.palette.primary : mt,
-                  height: "102%",
-                  "border-radius": "3rem",
-                  bottom: "-1px",
-                  "z-index": "2px",
-                  top: "-0.5px"
+                "letter-container": {
+                  overflow: "hidden",
+                  position: "relative"
                 },
-                text: {
-                  position: "relative",
-                  "z-index": "0",
+                "letter-wrapper-label": {
+                  "font-size": "100%",
+                  display: "flex",
+                  "flex-direction": "column",
+                  position: "relative"
+                },
+                fontColorOn: {
+                  color: t.fontC
+                },
+                "space-char": {
+                  visibility: "hidden"
+                },
+                "inner-label": {
                   opacity: "1",
-                  left: "62%"
+                  display: "flex",
+                  "justify-content": "center",
+                  "align-items": "center"
                 },
-                "bar-header": {
-                  position: "absolute",
-                  left: "-21%",
-                  "text-align": "right",
-                  width: "20%"
+                "inner-label-container": {
+                  background: t.quaternaryC,
+                  "font-size": t.fontSizeInner,
+                  opacity: "0.6",
+                  width: "".concat(5 * t.data.length, "%"),
+                  "min-width": "6%",
+                  "max-width": "10%",
+                  height: "7%",
+                  position: "absolute"
                 }
-              },
-                  n = t.barSum / t.barCount;
-              return t.data.forEach(function (i, r) {
-                e["row-" + r] = {
-                  bottom: 50 + 100 * (n - r) / t.barCount - 60 / t.barCount * 2.15 + "%"
-                }, e["inner-bar-" + r] = {
-                  width: i.value.toFixed(2) + "%"
+              }, n = 0; n < t.dataSetsNum; n++) {
+                e["line-".concat(n, "-label-container")] = {
+                  width: "100%",
+                  height: "100%",
+                  position: "absolute",
+                  "z-index": "".concat(2 + n)
                 };
-              }), Ne.createStyleSheet(e).toString();
-            }({
-              barSum: this.barSum,
-              barCount: this.barCount,
-              data: this.attrs.data,
-              palette: this.attrs.palette ? this.attrs.palette : {},
-              font: this.attrs.font ? this.attrs.font : {},
-              options: this.attrs.options ? this.attrs.options : {}
-            });
+
+                for (var i = 0; i < t.data.length; i++) {
+                  var r = t.findPointY(i, n) - .083 * t.linesHeight,
+                      a = 5 * t.data.length > 10 ? 10 : 5 * t.data.length;
+                  a = a < 6 ? 6 : a;
+                  var o = t.findPointX(i) - a * t.linesWidth / 100 * .5;
+                  e["label-".concat(t.data[i].name, "-").concat(n)] = {
+                    top: "".concat(r, "px"),
+                    left: "".concat(o, "px")
+                  };
+                }
+              }
+
+              return Ge.createStyleSheet(e).toString();
+            }(this);
           }
         }, {
           key: "fonts",
           get: function get() {
-            var t;
             return [{
               type: "google-font",
-              src: null !== (t = this.attrs.font) && void 0 !== t && t.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+              src: "".concat(this.url)
             }];
-          }
-        }, {
-          key: "barSum",
-          get: function get() {
-            for (var t = 0, e = 1; e <= this.barCount; e++) {
-              t += e;
-            }
-
-            return t;
-          }
-        }, {
-          key: "barCount",
-          get: function get() {
-            return this.attrs.data.length;
-          }
-        }, {
-          key: "criticalValue",
-          get: function get() {
-            return this.barCount / 10 == 1 ? this.barCount / 10 * 10 : this.barCount / 10 > 1 ? 10 * (this.barCount / 10 - 1) : 10 * (this.barCount / 10 + 1);
           }
         }]), r;
       }(n.default.HTMLClip),
-      name: "ProgressBar",
+      name: "LineGraph",
       originalDims: {
-        width: "1200px",
-        height: "900px"
-      }
-    }, {
-      exportable: _e,
-      name: "BarChartSimple",
-      originalDims: {
-        width: "1200px",
-        height: "900px"
+        width: "".concat(We.originalDims.width, "px"),
+        height: "".concat(We.originalDims.height, "px")
       }
     }]
   };
@@ -5172,7 +6568,7 @@ return Promise$1;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "c0aa6b6fd75a936eed00"
+/******/ 		__webpack_require__.h = () => "15711d67abd14584903e"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -6121,6 +7517,6 @@ return Promise$1;
 /******/ 	// module cache are used so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module
-/******/ 	__webpack_require__(296);
+/******/ 	__webpack_require__(59);
 /******/ })()
 ;

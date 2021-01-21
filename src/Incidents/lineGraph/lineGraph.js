@@ -9,9 +9,6 @@ const Anime = MotorCortex.loadPlugin(AnimePlugin);
 const SVGD = MotorCortex.loadPlugin(SVGDDef);
 const TDCAM = MotorCortex.loadPlugin(TDCAMDef);
 
-
-
-
 /**
  * LINE GRAPH: MotorCortex Implementation
  */
@@ -117,7 +114,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         class={`label-${this.data[i].name}-${l} inner-label-container`}
                         id={`label-${this.data[i].name}-${l} inner-label-container`}>
                         <div class="inner-label">
-                            {`${this.data[i].values[l]} ${this.unit}`}
+                            {`${parseFloat(this.data[i].values[l].toFixed(2))} ${this.unit}`}
                         </div>
                     </div>
                 );
@@ -188,7 +185,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
 
     // MotorCortex Animation generation and
     buildTree() {
-        // this.opacityControl();
+        this.opacityControl();
 
          // INTRO CONTROL
          if (this.attrs.timings.intro) {
@@ -458,21 +455,55 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             introGroup.addIncident(pathAnimGroup, Math.trunc(pointDur));
             introGroup.addIncident(pointAnimGroup, 0);
 
-            // Zoom Intro Animation
-            const zoomInit = new TDCAM.ZoomTo({
-                animatedAttrs: {
-                    position: {
-                        x: 100, 
-                        y: 100, 
-                        zoom: 10
-                    },
-                },
-            }, {
-                selector: '.viewport',
-                duration: 4000,
-                easing: 'easeInOutSine'
-            });
-            introGroup.addIncident(zoomInit, 0);
+            //!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!
+            // // Zoom Intro Animation
+            // for (let l = 0; l < this.dataSetsNum; l++) {
+            //     for (let i = 0; i < this.data.length; i++) {
+            //         let xTarget = this.findPointX(0) + 
+            //             ((1-this.graphScale.width) / 2) * 
+            //             config.lineGraph.originalDims.width;     
+            //         let yTarget = this.findPointY(0, l) + 
+            //             ((1-this.graphScale.height) / 2) * 
+            //             config.lineGraph.originalDims.height;    
+            //         // console.log(xTarget, yTarget)
+
+            //         let zoomInit1 = new TDCAM.ZoomTo({
+            //             animatedAttrs: {
+            //                 position: {
+            //                     // x: xTarget, 
+            //                     // y: yTarget, 
+            //                     // x: config.lineGraph.originalDims.width * 0.5, 
+            //                     // y: config.lineGraph.originalDims.height * 0.5, 
+            //                     x: 0, 
+            //                     y: 0, 
+            //                     zoom: 1,
+            //                 },
+            //             },
+            //             initialValues: {
+            //                 position: {
+            //                     // x: xTarget, 
+            //                     // y: yTarget, 
+            //                     x: config.lineGraph.originalDims.width * 0.5, 
+            //                     y: config.lineGraph.originalDims.height * 0.5, 
+            //                     // x: 0, 
+            //                     // y: 0, 
+            //                     zoom: 1,
+            //                 },
+            //             },
+            //         }, {
+            //             selector: '.viewport',
+            //             duration: this.introDur,
+            //             easing: 'easeInOutSine',
+            //             id: "zoom_incident"
+            //         });
+            //         // introGroup.addIncident(zoomInit1, 0);
+            //     }
+            // }
+            //!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!
 
             this.addIncident(introGroup, 0);
         }
@@ -765,6 +796,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
 
 
         // Hover control
+        // console.log(document.querySelectorAll(".datapoint"))
         // console.log(this)
     }
 
