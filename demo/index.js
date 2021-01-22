@@ -17,9 +17,6 @@ const clip = new MotorCortex.HTMLClip({
             height: 768px;
             background: #D3CDCD;
         }
-        .container::hover{
-            background: "blue;
-        }
         .container>div{
             width: 50%;
             height: 50%;
@@ -34,13 +31,11 @@ const clip = new MotorCortex.HTMLClip({
 
 const lineGraph = new MCGraphs.LineGraph({
     data: lineGraphData,  
-    // MAX 16 datapoints
-
     timings: {
-        // intro: 7000,
-        // static: 1000,
-        static: 0,
-        // outro: 7000,
+        intro: 7000,
+        static: 1000,
+        // static: 0,
+        outro: 7000,
     },
 }, {
     selector: '#htmlclip',

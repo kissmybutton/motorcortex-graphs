@@ -358,7 +358,7 @@ The data array of the graph contains `datapoint` objects. These Objects contain 
 | Key | Description | Value Type |
 | --------- |:-----------| :----: |
 | name | The name (x-axis label) of the point  (up to 4 chars) | `string` |
-| value | The value (y-axis) of the point (2 significal digits) | `Array[Number]` |
+| value | The value (y-axis) of the point (2 significal digits)* | `Array[Number]` |
 
 The length of the array should be equal to the number of lines in the graph. Each Array contains the n'th point of each line.
 
@@ -374,6 +374,8 @@ The length of the array should be equal to the number of lines in the graph. Eac
     },       
 ]
 ```
+\* To avoid cluttering it is recommended to not enter more than 16 datapoints per line.
+
 
 #### Timings:
 The `timings` object is an *optional* attribute that contains three (3) parameters for setting the duration of the event. These parameters are: 

@@ -185,7 +185,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
 
     // MotorCortex Animation generation and
     buildTree() {
-        this.opacityControl();
+        // this.opacityControl();
 
          // INTRO CONTROL
          if (this.attrs.timings.intro) {
@@ -458,49 +458,49 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             //!!!!!!!!!!!!!!!!!!!!
             //!!!!!!!!!!!!!!!!!!!!
             //!!!!!!!!!!!!!!!!!!!!
-            // // Zoom Intro Animation
-            // for (let l = 0; l < this.dataSetsNum; l++) {
-            //     for (let i = 0; i < this.data.length; i++) {
-            //         let xTarget = this.findPointX(0) + 
-            //             ((1-this.graphScale.width) / 2) * 
-            //             config.lineGraph.originalDims.width;     
-            //         let yTarget = this.findPointY(0, l) + 
-            //             ((1-this.graphScale.height) / 2) * 
-            //             config.lineGraph.originalDims.height;    
-            //         // console.log(xTarget, yTarget)
+            // Zoom Intro Animation
+            for (let l = 0; l < this.dataSetsNum; l++) {
+                for (let i = 0; i < this.data.length; i++) {
+                    let xTarget = this.findPointX(0) + 
+                        ((1-this.graphScale.width) / 2) * 
+                        config.lineGraph.originalDims.width;     
+                    let yTarget = this.findPointY(0, l) + 
+                        ((1-this.graphScale.height) / 2) * 
+                        config.lineGraph.originalDims.height;    
+                    // console.log(xTarget, yTarget)
 
-            //         let zoomInit1 = new TDCAM.ZoomTo({
-            //             animatedAttrs: {
-            //                 position: {
-            //                     // x: xTarget, 
-            //                     // y: yTarget, 
-            //                     // x: config.lineGraph.originalDims.width * 0.5, 
-            //                     // y: config.lineGraph.originalDims.height * 0.5, 
-            //                     x: 0, 
-            //                     y: 0, 
-            //                     zoom: 1,
-            //                 },
-            //             },
-            //             initialValues: {
-            //                 position: {
-            //                     // x: xTarget, 
-            //                     // y: yTarget, 
-            //                     x: config.lineGraph.originalDims.width * 0.5, 
-            //                     y: config.lineGraph.originalDims.height * 0.5, 
-            //                     // x: 0, 
-            //                     // y: 0, 
-            //                     zoom: 1,
-            //                 },
-            //             },
-            //         }, {
-            //             selector: '.viewport',
-            //             duration: this.introDur,
-            //             easing: 'easeInOutSine',
-            //             id: "zoom_incident"
-            //         });
-            //         // introGroup.addIncident(zoomInit1, 0);
-            //     }
-            // }
+                    let zoomInit1 = new TDCAM.ZoomTo({
+                        animatedAttrs: {
+                            position: {
+                                // x: xTarget, 
+                                // y: yTarget, 
+                                // x: config.lineGraph.originalDims.width * 0.5, 
+                                // y: config.lineGraph.originalDims.height * 0.5, 
+                                x: 0, 
+                                y: 0, 
+                                zoom: 2,
+                            },
+                        },
+                        initialValues: {
+                            position: {
+                                // x: xTarget, 
+                                // y: yTarget, 
+                                x: config.lineGraph.originalDims.width * 0.5, 
+                                y: config.lineGraph.originalDims.height * 0.5, 
+                                // x: 0, 
+                                // y: 0, 
+                                zoom: 1,
+                            },
+                        },
+                    }, {
+                        selector: '.viewport',
+                        duration: this.introDur,
+                        easing: 'easeInOutSine',
+                        id: "zoom_incident"
+                    });
+                    introGroup.addIncident(zoomInit1, 0);
+                }
+            }
             //!!!!!!!!!!!!!!!!!!!!
             //!!!!!!!!!!!!!!!!!!!!
             //!!!!!!!!!!!!!!!!!!!!

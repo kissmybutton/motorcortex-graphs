@@ -14,6 +14,7 @@ export default function buildCSS(lineGraph) {
             "font-size": lineGraph.fontSizeTitle,
         },
         viewport: {
+            // background: "blue",
             width: "100%",
             height: "100%",
         },
@@ -193,15 +194,15 @@ export default function buildCSS(lineGraph) {
     }
     let styleSheet = jss.createStyleSheet(styles).toString();
 
-    // for (let l = 0; l < lineGraph.dataSetsNum; l++) {
-    //     for (let i = 0; i < lineGraph.data.length; i++) {
-    //         styleSheet += `
-    //             #label-${lineGraph.data[i].name}-${l}:hover {
-    //                 background-color: red;
-    //             }
-    //         `;
-    //     }
-    // }
+    for (let l = 0; l < lineGraph.dataSetsNum; l++) {
+        for (let i = 0; i < lineGraph.data.length; i++) {
+            styleSheet += `
+                .label-${lineGraph.data[i].name}-${l}:hover {
+                    background-color: #fd8fff;
+                }
+            `;
+        }
+    }
 
     return styleSheet;
 }
