@@ -14,7 +14,7 @@ export default function buildCSS(lineGraph) {
             "font-size": lineGraph.fontSizeTitle,
         },
         viewport: {
-            // background: "blue",
+            "transform-origin": "top left",
             width: "100%",
             height: "100%",
         },

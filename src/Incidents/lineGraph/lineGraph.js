@@ -449,61 +449,77 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         gLabelAnimation, 
                         Math.trunc((segmentDur * i) + (pointDur * 0.2))
                     );
+
+                    if (this.trace) {
+                        let entry = 0;
+                        let duration = 0;
+                        let xTarget = this.findPointX(i) + 
+                            ((1-this.graphScale.width) / 2) * 
+                            config.lineGraph.originalDims.width;     
+                        let yTarget = this.findPointY(i, l) + 
+                            ((1-this.graphScale.height) / 2) * 
+                            config.lineGraph.originalDims.height;    
+                        let zoomTarget = 1.4;
+                        
+                        let xInit, yInit, zoomInit;
+                        if (i === 0) {
+                            xInit = config.lineGraph.originalDims.width * 0.5;
+                            yInit = config.lineGraph.originalDims.height * 0.5; 
+                            zoomInit = 1.4;
+                            duration = pointDur - (segmentDur * 0.15);
+                            entry = 0;
+                        } else if ( i === this.data.length - 1) {
+                            xInit = this.findPointX(i-1) + 
+                                ((1-this.graphScale.width) / 2) * 
+                                config.lineGraph.originalDims.width;
+                            yInit = this.findPointY(i-1, l) + 
+                                ((1-this.graphScale.height) / 2) * 
+                                config.lineGraph.originalDims.height;
+                            zoomInit = 1.4;
+                            xTarget = config.lineGraph.originalDims.width * 0.5;
+                            yTarget = config.lineGraph.originalDims.height * 0.5; 
+                            zoomTarget = 1;
+                            entry = (segmentDur * (i-1)) + (pointDur);
+                            duration = segmentDur + pointDur - (segmentDur * 0.15);
+                        } else {
+                            xInit = this.findPointX(i-1) + 
+                                ((1-this.graphScale.width) / 2) * 
+                                config.lineGraph.originalDims.width;
+                            yInit = this.findPointY(i-1, l) + 
+                                ((1-this.graphScale.height) / 2) * 
+                                config.lineGraph.originalDims.height; 
+                            zoomInit = 1.4;
+                            duration = segmentDur;
+                            entry = segmentDur * (i - 1) + pointDur ;
+                        }
+    
+                        let zoomIncident = new TDCAM.ZoomTo({
+                            animatedAttrs: {
+                                position: {
+                                    x: xTarget, 
+                                    y: yTarget, 
+                                    zoom: zoomTarget,
+                                },
+                            },
+                            initialValues: {
+                                position: {
+                                    x: xInit, 
+                                    y: yInit, 
+                                    zoom: zoomInit, 
+                                },
+                            },
+                        }, {
+                            selector: '.viewport',
+                            duration: Math.trunc(duration),
+                            easing: 'easeInOutQuad',
+                        });
+                        introGroup.addIncident(zoomIncident, Math.trunc(entry));
+                    }
                 }
                 introGroup.addIncident(gLabelGroup, 0);
             }
             introGroup.addIncident(pathAnimGroup, Math.trunc(pointDur));
             introGroup.addIncident(pointAnimGroup, 0);
-
-            //!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!
-            // Zoom Intro Animation
-            for (let l = 0; l < this.dataSetsNum; l++) {
-                for (let i = 0; i < this.data.length; i++) {
-                    let xTarget = this.findPointX(0) + 
-                        ((1-this.graphScale.width) / 2) * 
-                        config.lineGraph.originalDims.width;     
-                    let yTarget = this.findPointY(0, l) + 
-                        ((1-this.graphScale.height) / 2) * 
-                        config.lineGraph.originalDims.height;    
-                    // console.log(xTarget, yTarget)
-
-                    let zoomInit1 = new TDCAM.ZoomTo({
-                        animatedAttrs: {
-                            position: {
-                                // x: xTarget, 
-                                // y: yTarget, 
-                                // x: config.lineGraph.originalDims.width * 0.5, 
-                                // y: config.lineGraph.originalDims.height * 0.5, 
-                                x: 0, 
-                                y: 0, 
-                                zoom: 2,
-                            },
-                        },
-                        initialValues: {
-                            position: {
-                                // x: xTarget, 
-                                // y: yTarget, 
-                                x: config.lineGraph.originalDims.width * 0.5, 
-                                y: config.lineGraph.originalDims.height * 0.5, 
-                                // x: 0, 
-                                // y: 0, 
-                                zoom: 1,
-                            },
-                        },
-                    }, {
-                        selector: '.viewport',
-                        duration: this.introDur,
-                        easing: 'easeInOutSine',
-                        id: "zoom_incident"
-                    });
-                    introGroup.addIncident(zoomInit1, 0);
-                }
-            }
-            //!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!
-            //!!!!!!!!!!!!!!!!!!!!
 
             this.addIncident(introGroup, 0);
         }
@@ -680,9 +696,10 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             outroGroup.addIncident(stelesOutro, this.outroDur * 0.25);
 
             // Graph SVG & Labels Outro Animation
-            let segmentDur = (this.outroDur / this.data.length);
+            let segmentDur = (this.outroDur / (this.data.length + 1));
             let pointDur = segmentDur * 0.25;
             let pathDur = segmentDur * 0.8;
+            let zoomOffset = this.trace ? 1 : 0;
 
             let pathAnimGroup = new MotorCortex.Group();
             let pointAnimGroup = new MotorCortex.Group();
@@ -707,7 +724,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         );
                         pathAnimGroup.addIncident(
                             pathAnimation, 
-                            Math.trunc((segmentDur * (this.data.length - 2 - i)) + (segmentDur * 0.2))
+                            Math.trunc((segmentDur * (this.data.length  + zoomOffset - i - 2)) + (segmentDur * 0.2))
                         );
                     }
     
@@ -730,7 +747,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     );
                     pointAnimGroup.addIncident(
                         pointAnimation, 
-                        Math.trunc(segmentDur * (this.data.length - 1 - i))
+                        Math.trunc(segmentDur * (this.data.length  + zoomOffset - i - 1))
                     );
 
                     // Graph Label Outro Animation
@@ -773,8 +790,84 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     );
                     gLabelGroup.addIncident(
                         gLabelAnimation, 
-                        Math.trunc(segmentDur * (this.data.length - 1 - i) + (pointDur * 0.2))
+                        Math.trunc((segmentDur * (this.data.length  + zoomOffset - i - 1)) + (pointDur * 0.2))
                     );
+
+                    if (this.trace) {
+                        let entry = 0
+                        let duration = 0;
+                        let xTarget = this.findPointX(i) + 
+                            ((1-this.graphScale.width) / 2) * 
+                            config.lineGraph.originalDims.width;     
+                        let yTarget = this.findPointY(i, l) + 
+                            ((1-this.graphScale.height) / 2) * 
+                            config.lineGraph.originalDims.height;    
+                        let zoomTarget = 1.4;
+                        
+                        let xInit, yInit, zoomInit;
+                        if (i === 0) {
+                            xInit = this.findPointX(i+1) + 
+                                ((1-this.graphScale.width) / 2) * 
+                                config.lineGraph.originalDims.width;
+                            yInit = this.findPointY(i+1, l) + 
+                                ((1-this.graphScale.height) / 2) * 
+                                config.lineGraph.originalDims.height;
+                            xTarget = config.lineGraph.originalDims.width * 0.5;
+                            yTarget = config.lineGraph.originalDims.height * 0.5;    
+                            zoomInit = 1.4;
+                            zoomTarget = 1;
+                            duration = segmentDur + pointDur - (segmentDur * 0.15);
+                            entry = (segmentDur * (this.data.length - 1)) + (pointDur);
+                        } else if ( i === this.data.length - 1) {
+                            xInit = config.lineGraph.originalDims.width * 0.5;
+                            yInit = config.lineGraph.originalDims.height * 0.5; 
+                            
+                            zoomInit = 1;
+                            xTarget = this.findPointX(i) + 
+                                ((1-this.graphScale.width) / 2) * 
+                                config.lineGraph.originalDims.width;
+                            yTarget = this.findPointY(i, l) + 
+                                ((1-this.graphScale.height) / 2) * 
+                                config.lineGraph.originalDims.height;
+                            zoomTarget = 1.4;
+                            entry = 0;
+                            duration = pointDur - (segmentDur * 0.15) + segmentDur;
+                        } else {
+                            xInit = this.findPointX(i+1) + 
+                                ((1-this.graphScale.width) / 2) * 
+                                config.lineGraph.originalDims.width;     
+                            yInit = this.findPointY((i + 1), l) + 
+                                ((1-this.graphScale.height) / 2) * 
+                                config.lineGraph.originalDims.height; 
+                            zoomInit = 1.4;
+                            duration = segmentDur;
+                            entry = segmentDur * (this.data.length - i - 1) + pointDur;
+                        }
+    
+                        let zoomIncident = new TDCAM.ZoomTo({
+                            animatedAttrs: {
+                                position: {
+                                    x: xTarget, 
+                                    y: yTarget, 
+                                    zoom: zoomTarget,
+                                },
+                            },
+                            initialValues: {
+                                position: {
+                                    x: xInit, 
+                                    y: yInit, 
+                                    zoom: zoomInit, 
+                                },
+                            },
+                        }, {
+                            selector: '.viewport',
+                            id: `zoom-${i}`,
+                            duration: Math.trunc(duration),
+                            easing: 'easeInOutQuad',
+                        });
+                        outroGroup.addIncident(zoomIncident, Math.trunc(entry));
+                    }
+
                 }
                 outroGroup.addIncident(gLabelGroup, 0);
             }
@@ -793,11 +886,6 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             }
         );
         this.addIncident(staticIncident, this.introDur);
-
-
-        // Hover control
-        // console.log(document.querySelectorAll(".datapoint"))
-        // console.log(this)
     }
 
     // Static control
@@ -869,10 +957,10 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             this.attrs.data.hover : false;
         this.hover = (this.dataSetsNum !== 1) ? 
             true : this.hover;
-        this.trace = this.attrs.data.trace ? 
-            this.attrs.data.trace : false;
-        this.trace = (this.dataSetsNum !==1) ?
-            false : this.trace;
+        this.trace = this.attrs.trace ? 
+            this.attrs.trace : false;
+        this.trace = (this.dataSetsNum === 1) ?
+            this.trace : false;
         this.unit = this.attrs.data.unit ? 
             this.attrs.data.unit : "%";
         this.interval = this.attrs.data.interval ? 

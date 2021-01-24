@@ -31,11 +31,11 @@ const clip = new MotorCortex.HTMLClip({
 
 const lineGraph = new MCGraphs.LineGraph({
     data: lineGraphData,  
+    trace: true,
     timings: {
-        intro: 7000,
+        // intro: 7000,
         static: 1000,
-        // static: 0,
-        outro: 7000,
+        // outro: 7000,
     },
 }, {
     selector: '#htmlclip',
@@ -86,4 +86,4 @@ clip.addIncident(lineGraph, 0);
 
 
 clip.play();
-const player = new Player({clip, timeFormat: "ms", pointerEvents: true});
+const player = new Player({clip, timeFormat: "ms", scaleToFit: true, pointerEvents: true});

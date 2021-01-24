@@ -279,6 +279,7 @@ const newGraph = new MCGraphs.BarChartSimple({
         url: "https://fonts.googleapis.com/css2?family=Staatliches&display=swap",
         size: "1.7rem",
     },
+    trace: true,
     grid: true,
     timings: {
         intro: 7000,
@@ -294,7 +295,6 @@ const newGraph = new MCGraphs.BarChartSimple({
 });
 
 clip.addIncident(newGraph, 0);
-
 ```
 
 ### Customization
@@ -303,6 +303,8 @@ The Bar Chart Incident can take the following attributes:
 
 * `data`
 * `timings`
+* `hover`
+* `grid`
 * `palette`
 * `font`
 
