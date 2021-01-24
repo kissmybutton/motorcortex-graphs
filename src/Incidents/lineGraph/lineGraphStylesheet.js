@@ -13,13 +13,14 @@ export default function buildCSS(lineGraph) {
             background: lineGraph.backgroundC,
             "font-family": lineGraph.fontFamily,
             "font-size": lineGraph.fontSizeTitle,
+            display: "flex",
         },
         viewport: {
             "transform-origin": "top left",
             width: "100%",
             height: "100%",
         },
-        "title-container": {
+        "title-container-lineGraph": {
             background: "transparent",
             width: "70%",
             height: "10%",
@@ -31,7 +32,7 @@ export default function buildCSS(lineGraph) {
             "z-index": "1",
             "justify-content": "space-around",
         },
-        "title-wrapper": {
+        "title-wrapper-lineGraph": {
             display: "flex",
             "flex-grow": "2",
             "flex-wrap": "nowrap",
@@ -68,8 +69,6 @@ export default function buildCSS(lineGraph) {
             "min-width": "100%",
             overflow: "visible"
         },
-        datapoint: {
-        },
         "dataStele-container": {
             width: `76%`,
             height: "58%",
@@ -102,7 +101,7 @@ export default function buildCSS(lineGraph) {
             left: "12%",
             position: "absolute",
         },
-        "x-labels-back-wrapper": {
+        "x-labels-back-wrapper-lineGraph": {
             width: `76%`,
             height: "6%",
             top: "80%",
@@ -117,7 +116,7 @@ export default function buildCSS(lineGraph) {
             background: lineGraph.accentC,
             position: "relative",
         },
-        "x-labels-container": {
+        "x-labels-container-lineGraph": {
             background: "transparent",
             width: `76%`,
             height: "6%",

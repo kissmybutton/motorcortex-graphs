@@ -153,15 +153,15 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         let lineGraphHTML = (
             <div class="container">
                 <div class="viewport">
-                    <div class="title-container">
-                        <div class="title-wrapper">{title}</div>
+                    <div class="title-container-lineGraph">
+                        <div class="title-wrapper-lineGraph">{title}</div>
                     </div>
                     <div class="graph-background"></div>
                     <div class="dataStele-container">{dataSteles}</div>
                     <div class="svg-container">{lines}</div>
                     <div class="graph-labels-container">{labelGroups}</div>
-                    <div class="x-labels-container">{xLabels}</div>
-                    <div class="x-labels-back-wrapper">
+                    <div class="x-labels-container-lineGraph">{xLabels}</div>
+                    <div class="x-labels-back-wrapper-lineGraph">
                         <div class="block-background"></div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
 
     // MotorCortex Animation generation and
     buildTree() {
-        // this.opacityControl();
+        this.opacityControl();
 
          // INTRO CONTROL
          if (this.attrs.timings.intro) {
@@ -244,7 +244,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     incidents: titleIncidents
                 },
                 {
-                    selector: ".title-wrapper",
+                    selector: ".title-wrapper-lineGraph",
                 }
             );
             introGroup.addIncident(titleCombo, Math.trunc(this.introDur * 0.14));
@@ -581,7 +581,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                     incidents: titleIncidents
                 },
                 {
-                    selector: ".title-wrapper",
+                    selector: ".title-wrapper-lineGraph",
                 }
             );
             outroGroup.addIncident(titleCombo, Math.trunc(this.outroDur * 0.76));

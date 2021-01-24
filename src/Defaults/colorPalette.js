@@ -5,5 +5,14 @@ export const colorPalette = {
     "whiteBack": "#EEEEEE",
     "font": "#100300",
     "accent": "#FFD800", 
-    "background": "transparent"
+    "background": "transparent",
+    "pieColors": [
+        'rgb(117,112,110)',
+        'rgb(255,216,0)',
+        'rgb(67,66,67)',
+        'rgb(163, 255, 200)',
+        'rgb(255,255,255)'
+    ]
 }
+
+export default colorPalette;

@@ -696,7 +696,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     duration: 1,
                 }
             ),
-            this.introDur + this.staticDur + this.outroDur 
+            this.introDur + this.staticDur + this.outroDur - 1
         );
     }
 

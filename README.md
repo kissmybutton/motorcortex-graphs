@@ -258,6 +258,102 @@ The `font` object is an optional parameter that contains three (3) values used f
 | fontFamily | description | `Righteous, cursive` | string |
 | size | The desired font size | `1.7rem` | px/rem/em |
 
+## Creating a Pie Chart Incident
+```javascript
+const pieChart = new MCGraphs.PieChart({
+    data: {
+        "title": "My Pie Chart",
+        "data": [
+            {
+                "name": "Percentage 1",
+                "value": 50,
+                "color": ""
+            },
+            {
+                "name": "Percentage 2",
+                "value": 15,
+                "color": ""
+            },
+            {
+                "name": "Percentage 3",
+                "value": 10,
+                "color": ""
+            },
+            {
+                "name": "Percentage 4",
+                "value": 5,
+                "color": "rgb(163, 255, 200)"
+            },
+            {
+                "name": "Percentage 5",
+                "value": 20,
+                "color": ""
+            }
+        ]
+    },
+    timings: {
+        intro: 2000,
+        static: 1500,
+        outro: 2000
+    },
+    font: {
+        size: '1.6rem'
+    }
+},{
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px',
+        height: '768px'
+    },
+});
+
+clip.addIncident(pieChart, 0);
+
+```
+### Customization
+The Progress Bar incident can be customized via the following parameters:
+* `data`
+* `timings`
+* `palette`
+* `font`
+
+#### Data:
+An object with two properties :
+| Name | Description | Values |
+| --- | --- | --- |
+| title? | The title displayed at the top of the screen| string
+| data | An array of objects | PieChartDataEntry |
+
+Type `PieChartDataEntry`:
+| Name | Description | Values |
+| --- | --- | --- |
+| name | The name displayed in the legend | string
+| value | The percentage value that the slice should take up | number (range 0-100)|
+|color?| The color to display on that slice of the pie|string (rgb)|
+* Note: 
+    The color attribute is optional but if your pie has more than five (5) values it is recommended you provide it because the pie will otherwise pick a random color from the built in palette. 
+#### Timings:
+The `timings` object is an optional object that contains three (3) values for setting the duration of the event. These values are:
+| Name | Description | Default | Values |
+| --- | --- | --- | --- |
+| intro |  Duration of the intro animation | 0 | ms |
+| static | Duration of the the time that the graph should stay on screen | 1000 | ms |
+| outro | Duration of the outro animation | 0 | ms |
+
+#### Palette:
+The `palette` object is an optional object used to customize the colors used in the graph. The colors that can be set are:
+| Name | Description | Default | Values |
+| --- | --- | --- | --- |
+| font | The font color | #100300 | hex or css color |
+
+#### Font:
+The `font` object is an optional object that contains three (3) values used for customizing the font. These values are:
+| Name | Description | Default | Values |
+| --- | --- | --- | --- |
+| url |A url pointing to a google font|https://fonts.googleapis.com/css2?family=Righteous&display=swap|string|
+| fontFamily | The font family to be used| Righteous, cursive | string|
+| size |The desired font size| 1.6rem | px/rem/em
+
 
 ## Creating A Line Graph Incident
 
