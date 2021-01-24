@@ -33,9 +33,9 @@ const lineGraph = new MCGraphs.LineGraph({
     data: lineGraphData,  
     trace: true,
     timings: {
-        // intro: 7000,
+        intro: 7000,
         static: 1000,
-        // outro: 7000,
+        outro: 7000,
     },
 }, {
     selector: '#htmlclip',

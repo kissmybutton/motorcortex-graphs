@@ -110,15 +110,17 @@ export default class LineGraph extends MotorCortex.HTMLClip{
             let graphLabels = [];
             for (let i = 0; i < this.data.length; i++) {
                 graphLabels.push (
-                    <div 
-                        class={`label-${this.data[i].name}-${l} inner-label-container`}
-                        id={`label-${this.data[i].name}-${l} inner-label-container`}>
-                        <div class="inner-label">
-                            {`${parseFloat(this.data[i].values[l].toFixed(2))} ${this.unit}`}
+                    <div>
+                        <div class={`hoverPoint-${l}-${this.data[i].name} hoverPoint`}></div>
+                        <div 
+                            class={`label-${l}-${this.data[i].name} inner-label-container`}
+                            id={`label-${l}-${this.data[i].name}`}>
+                            <div class="inner-label">
+                                {`${parseFloat(this.data[i].values[l].toFixed(2))} ${this.unit}`}
+                            </div>
                         </div>
                     </div>
                 );
-
             }
             labelGroups.push(
                 <div class={`line-${l}-label-container`}>
@@ -440,7 +442,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                                 "font-size": 0,
                             },
                         }, {
-                            selector: `.label-${this.data[i].name}-${l}`,
+                            selector: `.label-${l}-${this.data[i].name}`,
                             duration: Math.trunc(pointDur),
                             easeing: "easeInOutCubic",
                         }
@@ -783,7 +785,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                                 "font-size": this.fontSizeInner,
                             }, 
                         }, {
-                            selector: `.label-${this.data[i].name}-${l}`,
+                            selector: `.label-${l}-${this.data[i].name}`,
                             duration: Math.trunc(pointDur),
                             easeing: "easeInOutCubic",
                         }

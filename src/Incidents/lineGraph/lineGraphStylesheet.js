@@ -1,4 +1,5 @@
 import jss, { createGenerateId } from 'jss';
+import config from '../../incident_config'
 
 export default function buildCSS(lineGraph) {
     const createGenerateId = () => {
@@ -164,6 +165,15 @@ export default function buildCSS(lineGraph) {
             "max-width": `10%`,
             height: "7%",
             position: "absolute",
+            display: `${lineGraph.hover ? "none" : "initial"}`,
+            "z-index": "2",
+        },
+        hoverPoint: {
+            position: "absolute",
+            width: `${config.lineGraph.originalDims.width * 0.01}px`,
+            height: `${config.lineGraph.originalDims.width * 0.01}px`,
+            "border-radius": "50%",
+            "z-index": "2",
         },
     };
 
@@ -172,7 +182,6 @@ export default function buildCSS(lineGraph) {
             width: "100%",
             height: "100%",
             position: "absolute",
-            "z-index": `${2 + l}`,
         };
 
         for (let i = 0; i < lineGraph.data.length; i++) {
@@ -185,9 +194,20 @@ export default function buildCSS(lineGraph) {
             let targetLeft = lineGraph.findPointX(i) 
                 - ((fullWidth * lineGraph.linesWidth / 100) * 0.5);
 
-            styles[`label-${lineGraph.data[i].name}-${l}`] = {
+            styles[`label-${l}-${lineGraph.data[i].name}`] = {
                 top: `${targetTop}px`,
                 left: `${targetLeft}px`,
+            };
+
+            let pointLeftOffset = ((fullWidth * lineGraph.linesWidth / 100) * 0.5)
+                - config.lineGraph.originalDims.width * 0.01 / 2;
+
+            let pointTopOffset = 0.07 * lineGraph.linesHeight;
+
+
+            styles[`hoverPoint-${l}-${lineGraph.data[i].name}`] = {
+                top: `${targetTop + pointTopOffset}px`,
+                left: `${targetLeft + pointLeftOffset}px`,
             };
         }
 
@@ -197,8 +217,8 @@ export default function buildCSS(lineGraph) {
     for (let l = 0; l < lineGraph.dataSetsNum; l++) {
         for (let i = 0; i < lineGraph.data.length; i++) {
             styleSheet += `
-                .label-${lineGraph.data[i].name}-${l}:hover {
-                    background-color: #fd8fff;
+                .hoverPoint-${l}-${lineGraph.data[i].name}:hover + .label-${l}-${lineGraph.data[i].name} {
+                    display: initial;
                 }
             `;
         }

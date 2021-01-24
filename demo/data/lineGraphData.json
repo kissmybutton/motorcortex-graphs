@@ -4,7 +4,7 @@
     "interval": 4,
     "maxValue": 100,
     "unit": "%",
-    "hover": true,
+    "hover": false,
     "data": [
         {
             "name": "2016",

@@ -319,7 +319,7 @@ An object that contains the parameters with which to display the data in the gra
 | interval | The number of units between each line on the grid | `integer` |
 | maxValue | The max value for the y-axis of the graph | `integer` |
 | unit | The accompanying unit or character of the graph's labels | `string` |
-| hover? | Toggle for showing the labels only on hover * | `boolean` |
+| hover | Toggle for showing the labels only on hover * | `boolean` |
 | data | The datapoint array for the graph (example below) | `Array[datapoint]` |
 
 \* Ignores input and is set to true when data contains more than 1 line.
