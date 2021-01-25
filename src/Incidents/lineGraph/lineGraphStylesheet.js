@@ -154,6 +154,8 @@ export default function buildCSS(lineGraph) {
             display: "flex",
             "justify-content": "center",
             "align-items": "center",
+            width: "100%",
+            height: "100%",
         },
         "inner-label-container": {
             background: lineGraph.quaternaryC,
@@ -164,7 +166,7 @@ export default function buildCSS(lineGraph) {
             "max-width": `10%`,
             height: "7%",
             position: "absolute",
-            display: `${lineGraph.hover ? "none" : "initial"}`,
+            display: `${lineGraph.hover ? "none" : "block"}`,
             "z-index": "2",
         },
         hoverPoint: {
@@ -217,7 +219,7 @@ export default function buildCSS(lineGraph) {
         for (let i = 0; i < lineGraph.data.length; i++) {
             styleSheet += `
                 .hoverPoint-${l}-${lineGraph.data[i].name}:hover + .label-${l}-${lineGraph.data[i].name} {
-                    display: initial;
+                    display: block;
                 }
             `;
         }

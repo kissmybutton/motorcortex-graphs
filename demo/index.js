@@ -98,6 +98,9 @@ const progressBar = new MCGraphs.ProgressBar({
     palette: {
         background: "#D3CDCD"
     },
+    font: {
+        size: '1.6rem'
+    },
 }, {
     selector: '#htmlclip',
     containerParams: {
