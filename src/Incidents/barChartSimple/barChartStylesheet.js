@@ -142,7 +142,7 @@ export default function buildCSS(barChart) {
             overflow: "hidden",
             "justify-content": "flex-end",
         },
-        container: {
+        "container-barGraph": {
             width: "100%",
             height: "100%",
             background: barChart.backgroundC,

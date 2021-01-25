@@ -19,7 +19,7 @@ const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 export default class PieChart extends MotorCortex.HTMLClip{
 
     get html() {
-        return <div class="container">
+        return <div class="container-pieChart">
             <h1 class="title">{this.buildTitle()}</h1> 
             <div class='columns'>
             <div class="col-1">
@@ -50,6 +50,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
     }
 
     buildTree(){
+        this.opacityControl();
         
         if (this.attrs.timings?.intro) {
             const fadeInDuration = Math.round(this.attrs.timings?.intro * 0.2);
@@ -66,7 +67,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
             },
             {
                 duration: fadeInDuration,
-                selector: '.container',
+                selector: '.container-pieChart',
                 easing: 'linear'
             }
             )
@@ -133,7 +134,6 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
             this.addIncident(legendIn, titleInDuration);
         } else {
-            this.opacityControl();
         }
 
         const staticPie = new MCAnime.Anime({
@@ -141,7 +141,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
         },
         {
             duration: this.attrs.timings?.static ? this.attrs.timings?.static : 1000,
-            selector: ".container"
+            selector: ".container-pieChart"
         });
 
         this.addIncident(staticPie, this.attrs.timings?.intro ? this.attrs.timings?.intro : 0);
@@ -158,7 +158,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
                     opacity: 1
                 }
             },{
-                selector: '.container',
+                selector: '.container-pieChart',
                 duration: fadeOutDuration,
                 easing: 'linear'
             })
@@ -208,7 +208,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
                         opacity: 0,
                     }
                 }, {
-                    selector: `.container`,
+                    selector: `.container-pieChart`,
                     duration: 1,
                 }
             ),
@@ -222,11 +222,11 @@ export default class PieChart extends MotorCortex.HTMLClip{
                             opacity: 0,
                         },
                     }, {
-                        selector: `.container`,
+                        selector: `.container-pieChart`,
                         duration: 1,
                     }
                 ),
-                this.attrs.timings.intro + this.attrs.timings.static - 1
+                this.attrs.timings.intro + this.attrs.timings.static + this.attrs.timings.outro - 1
             );
         }
     }

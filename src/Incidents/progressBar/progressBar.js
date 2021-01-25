@@ -27,7 +27,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         </div>
         });
 
-        return <div class="container">{list}</div>
+        return <div class="container-progressBar">{list}</div>
     }
 
     get css(){
@@ -135,7 +135,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             this.addIncident(expand_text, slideInDuration + expandBaseDuration + expandBarDuration);
         }
 
-        const staticGraph = new MCAnime.Anime({animatedAttrs: {}},{duration: this.attrs.timings.static ? this.attrs.timings.static : 1000, selector: '.container' });
+        const staticGraph = new MCAnime.Anime({animatedAttrs: {}},{duration: this.attrs.timings.static ? this.attrs.timings.static : 1000, selector: '.container-progressBar' });
         this.addIncident(staticGraph, this.attrs.timings.intro)
                 
         if (this.attrs.timings.outro) {    
@@ -146,7 +146,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                     },
                     {
                         duration: this.attrs.timings.outro,
-                        selector: `.container`,
+                        selector: `.container-progressBar`,
                         easing: 'linear'
                     });
         
@@ -169,7 +169,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                         opacity: 0,
                     }
                 }, {
-                    selector: `.container`,
+                    selector: `.container-progressBar`,
                     duration: 1,
                 }
             ),
@@ -183,7 +183,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                             opacity: 0,
                         },
                     }, {
-                        selector: `.container`,
+                        selector: `.container-progressBar`,
                         duration: 1,
                     }
                 ),

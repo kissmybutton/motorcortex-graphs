@@ -8,7 +8,7 @@ export default function buildCSS(cssArgs) {
     jss.setup({createGenerateId});
 
     const styles = {
-        container: {
+        "container-pieChart": {
             opacity: 1,
             "background-color": "transparent",
             width: "100%",

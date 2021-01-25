@@ -7,7 +7,7 @@ export default function buildCSS(lineGraph) {
     }
     jss.setup({createGenerateId});
     const styles = {
-        container: {
+        "container-lineGraph": {
             width: "100%",
             height: "100%",
             background: lineGraph.backgroundC,
@@ -174,7 +174,7 @@ export default function buildCSS(lineGraph) {
             width: `${config.lineGraph.originalDims.width * 0.01}px`,
             height: `${config.lineGraph.originalDims.width * 0.01}px`,
             "border-radius": "50%",
-            "z-index": "2",
+            "z-index": "9999",
         },
     };
 

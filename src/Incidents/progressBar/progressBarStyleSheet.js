@@ -9,7 +9,7 @@ export default function buildCSS(cssArgs) {
     jss.setup({createGenerateId});
 
     const styles = {
-        container: {
+        "container-progressBar": {
             height: "100%",
             background: cssArgs.palette.background ? cssArgs.palette.background : DefaultStyle.colorPalette.background,
             display: "flex",

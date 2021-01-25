@@ -311,7 +311,7 @@ clip.addIncident(pieChart, 0);
 
 ```
 ### Customization
-The Progress Bar incident can be customized via the following parameters:
+The Pie Chart incident can be customized via the following parameters:
 * `data`
 * `timings`
 * `palette`
@@ -395,7 +395,7 @@ clip.addIncident(newGraph, 0);
 
 ### Customization
 
-The Bar Chart Incident can take the following attributes:
+The Line Graph Incident can take the following attributes:
 
 * `data`
 * `timings`
@@ -509,6 +509,7 @@ The `font` object is an optional parameter that contains three (3) values used f
 ### Exposed Incidents
 * `BarChartSimple`
 * `LineGraph`
+* `PieChart`
 * `ProgressBar`
 ### Demo
 https://kissmybutton.github.io/motorcortex-graphs/demo

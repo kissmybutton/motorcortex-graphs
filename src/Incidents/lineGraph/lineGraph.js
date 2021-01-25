@@ -151,7 +151,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
        
         // MAIN HTML TREE
         let lineGraphHTML = (
-            <div class="container">
+            <div class="container-lineGraph">
                 <div class="viewport">
                     <div class="title-container-lineGraph">
                         <div class="title-wrapper-lineGraph">{title}</div>
@@ -794,82 +794,6 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         gLabelAnimation, 
                         Math.trunc((segmentDur * (this.data.length  + zoomOffset - i - 1)) + (pointDur * 0.2))
                     );
-
-                    if (this.trace) {
-                        let entry = 0
-                        let duration = 0;
-                        let xTarget = this.findPointX(i) + 
-                            ((1-this.graphScale.width) / 2) * 
-                            config.lineGraph.originalDims.width;     
-                        let yTarget = this.findPointY(i, l) + 
-                            ((1-this.graphScale.height) / 2) * 
-                            config.lineGraph.originalDims.height;    
-                        let zoomTarget = 1.4;
-                        
-                        let xInit, yInit, zoomInit;
-                        if (i === 0) {
-                            xInit = this.findPointX(i+1) + 
-                                ((1-this.graphScale.width) / 2) * 
-                                config.lineGraph.originalDims.width;
-                            yInit = this.findPointY(i+1, l) + 
-                                ((1-this.graphScale.height) / 2) * 
-                                config.lineGraph.originalDims.height;
-                            xTarget = config.lineGraph.originalDims.width * 0.5;
-                            yTarget = config.lineGraph.originalDims.height * 0.5;    
-                            zoomInit = 1.4;
-                            zoomTarget = 1;
-                            duration = segmentDur + pointDur - (segmentDur * 0.15);
-                            entry = (segmentDur * (this.data.length - 1)) + (pointDur);
-                        } else if ( i === this.data.length - 1) {
-                            xInit = config.lineGraph.originalDims.width * 0.5;
-                            yInit = config.lineGraph.originalDims.height * 0.5; 
-                            
-                            zoomInit = 1;
-                            xTarget = this.findPointX(i) + 
-                                ((1-this.graphScale.width) / 2) * 
-                                config.lineGraph.originalDims.width;
-                            yTarget = this.findPointY(i, l) + 
-                                ((1-this.graphScale.height) / 2) * 
-                                config.lineGraph.originalDims.height;
-                            zoomTarget = 1.4;
-                            entry = 0;
-                            duration = pointDur - (segmentDur * 0.15) + segmentDur;
-                        } else {
-                            xInit = this.findPointX(i+1) + 
-                                ((1-this.graphScale.width) / 2) * 
-                                config.lineGraph.originalDims.width;     
-                            yInit = this.findPointY((i + 1), l) + 
-                                ((1-this.graphScale.height) / 2) * 
-                                config.lineGraph.originalDims.height; 
-                            zoomInit = 1.4;
-                            duration = segmentDur;
-                            entry = segmentDur * (this.data.length - i - 1) + pointDur;
-                        }
-    
-                        let zoomIncident = new TDCAM.ZoomTo({
-                            animatedAttrs: {
-                                position: {
-                                    x: xTarget, 
-                                    y: yTarget, 
-                                    zoom: zoomTarget,
-                                },
-                            },
-                            initialValues: {
-                                position: {
-                                    x: xInit, 
-                                    y: yInit, 
-                                    zoom: zoomInit, 
-                                },
-                            },
-                        }, {
-                            selector: '.viewport',
-                            id: `zoom-${i}`,
-                            duration: Math.trunc(duration),
-                            easing: 'easeInOutQuad',
-                        });
-                        outroGroup.addIncident(zoomIncident, Math.trunc(entry));
-                    }
-
                 }
                 outroGroup.addIncident(gLabelGroup, 0);
             }
@@ -883,7 +807,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
         const staticIncident = new Anime.Anime(
             { animatedAttrs: {} },
             {
-                selector: ".container",
+                selector: ".container-lineGraph",
                 duration: this.staticDur,
             }
         );
@@ -904,7 +828,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         opacity: 0,
                     }
                 }, {
-                    selector: `.container`,
+                    selector: `.container-lineGraph`,
                     duration: 1,
                 }
             ),
@@ -917,7 +841,7 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                         opacity: 0,
                     },
                 }, {
-                    selector: `.container`,
+                    selector: `.container-lineGraph`,
                     duration: 1,
                 }
             ),

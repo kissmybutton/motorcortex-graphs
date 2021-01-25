@@ -10,6 +10,7 @@ const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 const clip = new MotorCortex.HTMLClip({
     html: `<div class="container">
         <div id="htmlclip"></div>
+        <div id="html-hoverclip"></div>
     </div>`,
     css: `
         .container{
@@ -20,6 +21,13 @@ const clip = new MotorCortex.HTMLClip({
         .container>div{
             width: 50%;
             height: 50%;
+            position: absolute;
+        }
+        #htmlclip {
+            z-index: 0;
+        }   
+        #html-hoverclip {
+            z-index: 1;
         }
     `,
     host: document.getElementById('clip'),
@@ -60,7 +68,7 @@ const lineGraph = new MCGraphs.LineGraph({
         size: '1.7rem'
     }
 }, {
-    selector: '#htmlclip',
+    selector: '#html-hoverclip',
     containerParams: {
         width: '1024px',
         height: '768px'
@@ -73,7 +81,7 @@ const pieChart = new MCGraphs.PieChart({
     timings: {
         intro: 2000,
         static: 1500,
-        outro: 2000
+        outro: 2000,
     },
     font: {
         size: '1.6rem'

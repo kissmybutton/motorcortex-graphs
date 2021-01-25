@@ -85,7 +85,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
 
         // MAIN HTML TREE
         let barGraphHTML = (
-            <div class="container">
+            <div class="container-barGraph">
                 <div class="title-container">
                     <div class="title-wrapper">{title}</div>
                     <div class="subtitle-position-end">
@@ -173,7 +173,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     ]
                 },
                 {
-                    selector: ".container",
+                    selector: ".container-barGraph",
                 }
             );
             introGroup.addIncident(axisCombo, this.introDur * 0);
@@ -434,7 +434,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     ]
                 },
                 {
-                    selector: ".container",
+                    selector: ".container-barGraph",
                 }
             );
             outroGroup.addIncident(axisCombooutro, Math.trunc(this.outroDur * 0.5));
@@ -658,7 +658,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
         const staticIncident = new Anime.Anime(
             { animatedAttrs: {} },
             {
-                selector: ".container",
+                selector: ".container-barGraph",
                 duration: this.staticDur,
             }
         );
@@ -674,12 +674,16 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                 {
                     animatedAttrs: {
                         opacity: 1,
+                        display: "flex"
+
                     },
                     initialValues: {
                         opacity: 0,
+                        display: "none"
+
                     }
                 }, {
-                    selector: `.container`,
+                    selector: `.container-barGraph`,
                     duration: 1,
                 }
             ),
@@ -692,7 +696,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                         opacity: 0,
                     },
                 }, {
-                    selector: `.container`,
+                    selector: `.container-barGraph`,
                     duration: 1,
                 }
             ),
