@@ -1,7 +1,8 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
-import * as DefaultStyle from '../../Defaults/colorPalette';
+import * as DefaultStyle from '../../shared/colorPalette';
 import buildCSS from './pieChartStylesheet';
+import { fadeOutOpacityControl } from '../../shared/opacityControl';
 
 const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 
@@ -50,7 +51,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
     }
 
     buildTree(){
-        this.opacityControl();
+        fadeOutOpacityControl(this, `.container-pieChart`);
         
         if (this.attrs.timings?.intro) {
             const fadeInDuration = Math.round(this.attrs.timings?.intro * 0.2);
@@ -184,51 +185,14 @@ export default class PieChart extends MotorCortex.HTMLClip{
     }
 
     generateColor(index) {
-        if (index > DefaultStyle.colorPalette.pieColors.length - 1) {
-            return DefaultStyle.colorPalette.pieColors[Math.floor(Math.random() * Math.floor(DefaultStyle.colorPalette.pieColors.length))];
+        if (index > DefaultStyle.colorPalette.dataColors.length - 1) {
+            return DefaultStyle.colorPalette.dataColors[Math.floor(Math.random() * Math.floor(DefaultStyle.colorPalette.dataColors.length))];
         }
-        return DefaultStyle.colorPalette.pieColors[index];
+        return DefaultStyle.colorPalette.dataColors[index];
     }
 
     get radiusValues() {
         return this.attrs.data.data.map((elem, index) =>  this.calculateRadius(elem, index));
-    }
-
-    // Static control
-    // Making the contents of this animation invisible before timestamp:0 
-    // and after timestamp: {totalDuration}
-    opacityControl() {
-        this.addIncident(
-            new MCAnime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 1,
-                    },
-                    initialValues: {
-                        opacity: 0,
-                    }
-                }, {
-                    selector: `.container-pieChart`,
-                    duration: 1,
-                }
-            ),
-            0    
-        );
-        if (!this.attrs.timings.outro) {
-            this.addIncident(
-                new MCAnime.Anime(
-                    {
-                        animatedAttrs: {
-                            opacity: 0,
-                        },
-                    }, {
-                        selector: `.container-pieChart`,
-                        duration: 1,
-                    }
-                ),
-                this.attrs.timings.intro + this.attrs.timings.static + this.attrs.timings.outro - 1
-            );
-        }
     }
 
     buildTitle() {
@@ -239,7 +203,12 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
     buildLegend() {
         return this.attrs.data.data.map((elem, index) => {
-            return <div class="legend-row" ><div class={'indicator-'+index}></div><div class="legend-text">{elem.name}</div></div>
+            let legendRow = 
+                <div class="legend-row" >
+                    <div class={'indicator-'+index}></div>
+                    <div class="legend-text">{elem.name}</div>
+                </div>
+            return legendRow;
         })
     }
 }

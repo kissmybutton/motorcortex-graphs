@@ -1,6 +1,7 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
 import buildCSS from './progressBarStyleSheet'; 
+import { fadeOutOpacityControl } from '../../shared/opacityControl';
 
 const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 
@@ -51,7 +52,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
 
     buildTree(){
         const avg = this.barSum / this.barCount;
-        this.opacityControl();
+        fadeOutOpacityControl(this, `.container-progressBar`);
 
         if (this.attrs.timings?.intro) {
             const slideInDuration = Math.floor(this.attrs.timings.intro * 0.33);
@@ -153,43 +154,6 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             this.addIncident(collapse_all, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1000));
         }
         
-    }
-    
-    // Static control
-    // Making the contents of this animation invisible before timestamp:0 
-    // and after timestamp: {totalDuration}
-    opacityControl() {
-        this.addIncident(
-            new MCAnime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 1,
-                    },
-                    initialValues: {
-                        opacity: 0,
-                    }
-                }, {
-                    selector: `.container-progressBar`,
-                    duration: 1,
-                }
-            ),
-            0    
-        );
-        if (!this.attrs.timings.outro) {
-            this.addIncident(
-                new MCAnime.Anime(
-                    {
-                        animatedAttrs: {
-                            opacity: 0,
-                        },
-                    }, {
-                        selector: `.container-progressBar`,
-                        duration: 1,
-                    }
-                ),
-                this.attrs.timings.intro + this.attrs.timings.static - 1
-            );
-        }
     }
 
     get barSum() {

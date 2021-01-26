@@ -6,13 +6,17 @@ export const colorPalette = {
     "font": "#100300",
     "accent": "#FFD800", 
     "background": "transparent",
-    "pieColors": [
+    "dataColors": [
         'rgb(117,112,110)',
         'rgb(255,216,0)',
-        'rgb(67,66,67)',
+        'rgb(87,86,87)',
         'rgb(163, 255, 200)',
-        'rgb(255,255,255)'
+        'rgb(255,255,255)',
+        'rgb(206, 36, 132)',
+        'rgb(68, 214, 37)',
+        'rgb(228, 31, 31)',
+        'rgb(68, 36, 157)',
+        'rgb(45, 109, 121)',
     ]
 }
 
-export default colorPalette;

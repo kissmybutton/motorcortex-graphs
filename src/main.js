@@ -1,8 +1,8 @@
-import BarChartSimple from './Incidents/barChartSimple/barChartSimple';
-import ProgressBar from './Incidents/progressBar/progressBar';
-import LineGraph from './Incidents/lineGraph/lineGraph';
+import BarChartSimple from './Incidents/barChartSimple/BarChartSimple';
+import ProgressBar from './Incidents/progressBar/ProgressBar';
+import LineGraph from './Incidents/lineGraph/LineGraph';
+import PieChart from './Incidents/pieChart/PieChart';
 import config from './incident_config'
-import PieChart from './Incidents/pieChart/pieChart';
 
 export default {
   npm_name: "motorcortex-graphs", // !! make sure the name of your plugin is identical to the name of your package.json !!

@@ -1,34 +1,40 @@
 { 
     "title": "EXAMPLE LINE GRAPH", 
     "showGrid": true,
-    "interval": 4,
     "maxValue": 100,
+    "interval": 4,
     "unit": "%",
     "hover": false,
+    "dataSets": [
+        {
+            "title": "",
+            "color": ""
+        }
+    ],
     "data": [
         {
             "name": "2016",
-            "values": [56]
+            "values": [56, 45, 12]
         },
         {
             "name": "2017",
-            "values": [43]
+            "values": [43, 24, 67]
         },
         {
             "name": "2018",
-            "values": [61]
+            "values": [61, 11, 98]
         },
         {
             "name": "2019",
-            "values": [10]
+            "values": [10 , 35, 69]
         },
         {
             "name": "2020",
-            "values": [3]
+            "values": [3, 81, 78]
         },
         {
             "name": "2021",
-            "values": [74]
+            "values": [74, 92, 59]
         }
     ]
 }   

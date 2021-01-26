@@ -1,5 +1,5 @@
 import jss, { createGenerateId } from 'jss';
-import * as DefaultStyle from '../../Defaults/colorPalette';
+import * as DefaultStyle from '../../shared/colorPalette';
 
 export default function buildCSS(cssArgs) {
     const createGenerateId = () => {
@@ -98,8 +98,8 @@ export default function buildCSS(cssArgs) {
 }
 
 function generateColor(index) {
-    if (index > DefaultStyle.colorPalette.pieColors.length - 1) {
-        return DefaultStyle.colorPalette.pieColors[Math.floor(Math.random() * Math.floor(DefaultStyle.colorPalette.pieColors.length))];
+    if (index > DefaultStyle.colorPalette.dataColors.length - 1) {
+        return DefaultStyle.colorPalette.dataColors[Math.floor(Math.random() * Math.floor(DefaultStyle.colorPalette.dataColors.length))];
     }
-    return DefaultStyle.colorPalette.pieColors[index];
+    return DefaultStyle.colorPalette.dataColors[index];
 }

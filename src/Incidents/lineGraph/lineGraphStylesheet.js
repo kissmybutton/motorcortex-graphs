@@ -6,6 +6,8 @@ export default function buildCSS(lineGraph) {
         return rule => rule.key
     }
     jss.setup({createGenerateId});
+
+    
     const styles = {
         "container-lineGraph": {
             width: "100%",
@@ -15,14 +17,16 @@ export default function buildCSS(lineGraph) {
             "font-size": lineGraph.fontSizeTitle,
             display: "flex",
         },
-        viewport: {
+        "viewport-lineGraph": {
+            position: "absolute",
+            top: `${lineGraph.legend ? "2%" : "0%"}`,
             "transform-origin": "top left",
             width: "100%",
             height: "100%",
         },
         "title-container-lineGraph": {
             background: "transparent",
-            width: "70%",
+            width: "60%",
             height: "10%",
             top: "8%",
             left: "8%",
@@ -44,6 +48,43 @@ export default function buildCSS(lineGraph) {
             "flex-direction": "column",
             position: "relative",
             "font-size": "190%",
+        },
+        "legend-wrapper": {
+            position: "absolute",
+            width: `${(lineGraph.dataSetsNum === 1) ? 12 : 24}%`,
+            height: `${lineGraph.legendHeight}%`,
+            top: `${11 - (3 * (lineGraph.legendHeightFactor + (lineGraph.legendHeightFactor % 1 ? 1 : 0) - 1))}%`,
+            left: `${68 + ((lineGraph.dataSetsNum === 1) ? 12 : 0)}%`,
+            background: lineGraph.primaryC,
+            background: "rgb(132, 130, 128)",
+            "font-size": lineGraph.fontSizeInner,
+            display: "flex",
+            "flex-wrap": "wrap",
+            "z-index": "1",
+        }, 
+        "line-wrapper": {
+            width: `${(lineGraph.dataSetsNum === 1) ? 100 : 50}%`,
+            height: `${1/(lineGraph.legendHeightFactor + (lineGraph.legendHeightFactor % 1 ? 1 : 0)) * 100}%`,
+            display: "flex",
+            overflow: "hidden",
+        },
+        "color-wrapper": {
+            display: "flex",
+            "align-items": "center",
+            "justify-content": "center",
+            width: "25%",
+            height: "100%",
+        },
+        "line-color": {
+            width: '60%',
+            height: '60%',
+        },
+        "line-title": {
+            display: "flex",
+            "align-items": "center",
+            "justify-content": "flex-start",
+            width: '75%',
+            height: '100%',
         },
         "graph-background": {
             left: "10%",
@@ -158,7 +199,6 @@ export default function buildCSS(lineGraph) {
             height: "100%",
         },
         "inner-label-container": {
-            background: lineGraph.quaternaryC,
             "font-size": lineGraph.fontSizeInner,
             opacity: "0.6",
             width: `${10 / 2 * lineGraph.data.length}%`,
@@ -179,10 +219,18 @@ export default function buildCSS(lineGraph) {
     };
 
     for (let l = 0; l < lineGraph.dataSetsNum; l++) {
+        let dynamicColor = (lineGraph.dataSetsNum > 1) ?
+            lineGraph.colorPalette.dataColors[l+2] : 
+            lineGraph.quaternaryC;
+
         styles[`line-${l}-label-container`] = {
             width: "100%",
             height: "100%",
             position: "absolute",
+        };
+
+        styles[`color-${l}`] = {
+            background: dynamicColor,
         };
 
         for (let i = 0; i < lineGraph.data.length; i++) {
@@ -196,6 +244,7 @@ export default function buildCSS(lineGraph) {
                 - ((fullWidth * lineGraph.linesWidth / 100) * 0.5);
 
             styles[`label-${l}-${lineGraph.data[i].name}`] = {
+                background: dynamicColor,
                 top: `${targetTop}px`,
                 left: `${targetLeft}px`,
             };

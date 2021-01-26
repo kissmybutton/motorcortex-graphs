@@ -1,9 +1,9 @@
+import { colorPalette } from '../../shared/colorPalette';
+import { opacityControl } from '../../shared/opacityControl';
+import buildCSS  from './barChartStylesheet'; 
 import MotorCortex from '@kissmybutton/motorcortex';
 import AnimePlugin from '@kissmybutton/motorcortex-anime';
 const Anime = MotorCortex.loadPlugin(AnimePlugin);
-import { colorPalette } from '../../Defaults/colorPalette';
-import buildCSS  from './barChartStylesheet'; 
-
 
 
 /**
@@ -85,7 +85,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
 
         // MAIN HTML TREE
         let barGraphHTML = (
-            <div class="container-barGraph">
+            <div class="container-barChart">
                 <div class="title-container">
                     <div class="title-wrapper">{title}</div>
                     <div class="subtitle-position-end">
@@ -126,7 +126,8 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
 
     // MotorCortex Animation generation and
     buildTree() {
-        this.opacityControl();
+        opacityControl(this, `.container-barChart`);
+
         
         // INTRO CONTROL
         if (this.attrs.timings.intro) {
@@ -173,7 +174,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     ]
                 },
                 {
-                    selector: ".container-barGraph",
+                    selector: ".container-barChart",
                 }
             );
             introGroup.addIncident(axisCombo, this.introDur * 0);
@@ -434,7 +435,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     ]
                 },
                 {
-                    selector: ".container-barGraph",
+                    selector: ".container-barChart",
                 }
             );
             outroGroup.addIncident(axisCombooutro, Math.trunc(this.outroDur * 0.5));
@@ -658,50 +659,11 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
         const staticIncident = new Anime.Anime(
             { animatedAttrs: {} },
             {
-                selector: ".container-barGraph",
+                selector: ".container-barChart",
                 duration: this.staticDur,
             }
         );
         this.addIncident(staticIncident, this.introDur);
-    }
-
-    // Static control
-    // Making the contents of this animation invisible before timestamp:0 
-    // and after timestamp: {totalDuration}
-    opacityControl() {
-        this.addIncident(
-            new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 1,
-                        display: "flex"
-
-                    },
-                    initialValues: {
-                        opacity: 0,
-                        display: "none"
-
-                    }
-                }, {
-                    selector: `.container-barGraph`,
-                    duration: 1,
-                }
-            ),
-            0    
-        );
-        this.addIncident(
-            new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 0,
-                    },
-                }, {
-                    selector: `.container-barGraph`,
-                    duration: 1,
-                }
-            ),
-            this.introDur + this.staticDur + this.outroDur - 1
-        );
     }
 
     buildVars() {

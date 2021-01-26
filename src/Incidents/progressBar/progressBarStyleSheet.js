@@ -1,5 +1,5 @@
 import jss, { createGenerateId } from 'jss';
-import * as DefaultStyle from '../../Defaults/colorPalette';
+import * as DefaultStyle from '../../shared/colorPalette';
 
 
 export default function buildCSS(cssArgs) {

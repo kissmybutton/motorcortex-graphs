@@ -375,7 +375,10 @@ const newGraph = new MCGraphs.BarChartSimple({
         url: "https://fonts.googleapis.com/css2?family=Staatliches&display=swap",
         size: "1.7rem",
     },
-    trace: true,
+    trace: { 
+        toggle: true,
+        scale: 1.45,
+    },
     grid: true,
     timings: {
         intro: 7000,
@@ -401,8 +404,10 @@ The Line Graph Incident can take the following attributes:
 * `timings`
 * `hover`
 * `grid`
+* `trace`
 * `palette`
 * `font`
+
 
 #### Data:
 
@@ -473,6 +478,14 @@ The length of the array should be equal to the number of lines in the graph. Eac
 ]
 ```
 \* To avoid cluttering it is recommended to not enter more than 16 datapoints per line.
+
+#### Trace
+The trace configuration object controls the zoom effect of the introduction. The scale option is not required for the zoom effect to play.
+
+| Key | Description | Value Type |
+| --------- |:-----------| :----: |
+| toggle | Toggles the zoom effect on or off | `boolean` |
+| scale | The scale of the zoom effect | `number` |
 
 
 #### Timings:
