@@ -1,7 +1,7 @@
-import BarChartSimple from './Incidents/barChartSimple/BarChartSimple';
-import ProgressBar from './Incidents/progressBar/ProgressBar';
-import LineGraph from './Incidents/lineGraph/LineGraph';
-import PieChart from './Incidents/pieChart/PieChart';
+import BarChartSimple from './Incidents/barChartSimple/barChartSimple';
+import ProgressBar from './Incidents/progressBar/progressBar';
+import LineGraph from './Incidents/lineGraph/lineGraph';
+import PieChart from './Incidents/pieChart/pieChart';
 import config from './incident_config'
 
 export default {
