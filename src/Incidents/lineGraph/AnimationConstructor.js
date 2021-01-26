@@ -143,6 +143,8 @@ export default class AnimationConstructor {
     buildIntroLegend() {
         let colorsDur = this.instance.introDur * 0.25;
         let colorDur = colorsDur / this.instance.dataSetsNum;
+        let delay = this.instance.dataSetsNum === 1 ?
+            null : `@stagger(0, ${colorsDur - colorDur})`;
         let legendIncidents = [
             {
                 incidentClass: Anime.Anime,
@@ -173,7 +175,7 @@ export default class AnimationConstructor {
                 props: {
                     selector: ".color-wrapper",
                     duration: Math.trunc(this.instance.introDur * 0.1),
-                    delay: `@stagger(0, ${colorsDur - colorDur})`,
+                    delay: delay,
                     easing: "easeInOutQuad",
                 },
                 position: Math.trunc(this.instance.introDur * 0.15),
@@ -191,7 +193,7 @@ export default class AnimationConstructor {
                 props: {
                     selector: ".line-title",
                     duration: Math.trunc(this.instance.introDur * 0.1),
-                    delay: `@stagger(0, ${colorsDur - colorDur})`,
+                    delay: delay,
                     easing: "easeInOutQuad",
                 },
                 position: Math.trunc(this.instance.introDur * 0.15),
@@ -213,6 +215,8 @@ export default class AnimationConstructor {
     buildOutroLegend() {
         let colorsDur = this.instance.outroDur * 0.25;
         let colorDur = colorsDur / this.instance.dataSetsNum;
+        let delay = this.instance.dataSetsNum === 1 ?
+            null : `@stagger(0, ${colorsDur - colorDur}, 0, linear, linear, true)`;
         let legendIncidents = [
             {
                 incidentClass: Anime.Anime,
@@ -243,7 +247,7 @@ export default class AnimationConstructor {
                 props: {
                     selector: ".color-wrapper",
                     duration: Math.trunc(this.instance.introDur * 0.1),
-                    delay: `@stagger(0, ${colorsDur - colorDur}, 0, linear, linear, true)`,
+                    delay: delay,
                     easing: "easeInOutQuad",
                 },
                 position: Math.trunc(colorsDur - this.instance.introDur * 0.15),
@@ -261,7 +265,7 @@ export default class AnimationConstructor {
                 props: {
                     selector: ".line-title",
                     duration: Math.trunc(this.instance.introDur * 0.1),
-                    delay: `@stagger(0, ${colorsDur - colorDur}, 0, linear, linear, true)`,
+                    delay: delay,
                     easing: "easeInOutQuad",
                 },
                 position: Math.trunc(colorsDur - this.instance.introDur * 0.15),

@@ -4,7 +4,8 @@ import MotorCortexGraph from "../dist/bundle.umd";
 import * as barChartData from './data/barChartData.json';
 import * as progressBarData from './data/progressBarData.json';
 import * as lineGraphData from './data/lineGraphData.json';
-import * as lineGraphDataMult from './data/lineGraphDataMult.json';
+import * as pieChartData from './data/pieChartData.json';
+
 
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
@@ -55,11 +56,10 @@ const barChart = new MCGraphs.BarChartSimple({
         height: '768px'
     }
 });
-// clip.addIncident(barChart, 0);
+clip.addIncident(barChart, 0);
 
 const lineGraph = new MCGraphs.LineGraph({
-    // data: lineGraphData, 
-    data: lineGraphDataMult,  
+    data: lineGraphData, 
     trace: { 
         toggle: false,
         toggle: true,
@@ -68,8 +68,7 @@ const lineGraph = new MCGraphs.LineGraph({
     legend: true,
     timings: {
         intro: 7000,
-        // static: 1000,
-        static: 0,
+        static: 1000,
         outro: 7000,
     },
     font: {
@@ -82,11 +81,10 @@ const lineGraph = new MCGraphs.LineGraph({
         height: '768px'
     }
 });
-clip.addIncident(lineGraph, 0);
-// clip.addIncident(lineGraph, 5500);
+clip.addIncident(lineGraph, 5500);
 
 const pieChart = new MCGraphs.PieChart({
-    data: require('./data/pieChartData.json'),
+    data: pieChartData,
     timings: {
         intro: 2000,
         static: 1500,
@@ -102,8 +100,7 @@ const pieChart = new MCGraphs.PieChart({
         height: '768px'
     },
 });
-// clip.addIncident(pieChart, 20500);
-
+clip.addIncident(pieChart, 20500);
 
 const progressBar = new MCGraphs.ProgressBar({
     data: require('./data/progressBarData.json'),
@@ -125,7 +122,7 @@ const progressBar = new MCGraphs.ProgressBar({
         height: '768px'
     },
 });
-// clip.addIncident(progressBar, 26000);
+clip.addIncident(progressBar, 26000);
 
 clip.play();
-const player = new Player({clip, timeFormat: "ms", scaleToFit: true, pointerEvents: true});
+const player = new Player({clip, scaleToFit: true, pointerEvents: true});
