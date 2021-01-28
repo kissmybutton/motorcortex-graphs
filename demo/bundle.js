@@ -1,11 +1,11 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 313:
+/***/ 425:
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("[{\"name\":\"Percentage 1\",\"value\":5},{\"name\":\"Percentage 2\",\"value\":34},{\"name\":\"Percentage 3\",\"value\":12.298374},{\"name\":\"Percentage 4\",\"value\":100},{\"name\":\"Percentage 5\",\"value\":45}]");
+module.exports = JSON.parse("{\"title\":\"My Pie Chart\",\"data\":[{\"name\":\"Percentage 1\",\"value\":50},{\"name\":\"Percentage 2\",\"value\":15},{\"name\":\"Percentage 3\",\"value\":10},{\"name\":\"Percentage 4\",\"value\":5},{\"name\":\"Percentage 5\",\"value\":20}]}");
 
 /***/ }),
 
@@ -33,7 +33,7 @@ var n=a.default,r=!1,o=gC,s="locals",u=["delimiter","scope","context","debug","c
 
 /***/ }),
 
-/***/ 296:
+/***/ 576:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -50,9 +50,11 @@ var bundle_umd_default = /*#__PURE__*/__webpack_require__.n(bundle_umd);
 ;// CONCATENATED MODULE: ./data/barChartData.json
 const barChartData_namespaceObject = JSON.parse("{\"title\":\"Test Graph\",\"subtitle\":\"Subtitle 2021\",\"showGrid\":true,\"maxValue\":1800,\"data\":[{\"name\":\"JAN\",\"value\":100},{\"name\":\"FEB\",\"value\":200},{\"name\":\"MAR\",\"value\":300},{\"name\":\"APR\",\"value\":400},{\"name\":\"MAY\",\"value\":500},{\"name\":\"JUN\",\"value\":600},{\"name\":\"JUL\",\"value\":700},{\"name\":\"AUG\",\"value\":800},{\"name\":\"SEP\",\"value\":900},{\"name\":\"OCT\",\"value\":1000},{\"name\":\"NOV\",\"value\":1100},{\"name\":\"DEC\",\"value\":1200}]}");
 var data_barChartData_namespaceObject = /*#__PURE__*/__webpack_require__.t(barChartData_namespaceObject, 2);
-// EXTERNAL MODULE: ./data/progressBarData.json
-var progressBarData = __webpack_require__(313);
+;// CONCATENATED MODULE: ./data/progressBarData.json
+const progressBarData_namespaceObject = JSON.parse("[{\"name\":\"Percentage 1\",\"value\":5},{\"name\":\"Percentage 2\",\"value\":34},{\"name\":\"Percentage 3\",\"value\":12.298374},{\"name\":\"Percentage 4\",\"value\":100},{\"name\":\"Percentage 5\",\"value\":45}]");
+var data_progressBarData_namespaceObject = /*#__PURE__*/__webpack_require__.t(progressBarData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./index.js
+
 
 
 
@@ -61,40 +63,38 @@ var progressBarData = __webpack_require__(313);
 var MCGraphs = motorcortex_umd_default().loadPlugin((bundle_umd_default()));
 var clip = new (motorcortex_umd_default()).HTMLClip({
   html: "<div class=\"container\">\n        <div id=\"htmlclip\"></div>\n    </div>",
-  css: "\n        .container{\n            width: 1024px;\n            height: 768px;\n            background: #D3CDCD;\n        }\n        .container>div{\n            width: 50%;\n            height: 50%;\n        }\n    ",
+  css: "\n        .container{\n            width: 1224px;\n            height: 768px;\n            background: #D3CDCD;\n        }\n        .container::hover{\n            background: \"blue;\n        }\n        .container>div{\n            width: 50%;\n            height: 50%;\n        }\n    ",
   host: document.getElementById('clip'),
   containerParams: {
-    width: '1024px',
-    height: '768px'
-  }
-});
-var barChart = new MCGraphs.BarChartSimple({
-  data: data_barChartData_namespaceObject,
-  timings: {
-    intro: 2000,
-    static: 1500,
-    outro: 2000
-  },
-  palette: {
-    background: "#D3CDCD"
-  }
-}, {
-  selector: '#htmlclip',
-  containerParams: {
-    width: '1024px',
+    width: '1224px',
     height: '768px'
   }
 });
 clip.addIncident(barChart, 0);
 var progressBar = new MCGraphs.ProgressBar({
-  data: __webpack_require__(313),
+  data: data_progressBarData_namespaceObject,
+  timings: {
+    intro: 7000,
+    // static: 1000,
+    static: 0 // outro: 7000,
+
+  },
+  palette: {// background: "#D3CDCD"
+  }
+}, {
+  selector: '#htmlclip',
+  containerParams: {
+    width: '1224px',
+    height: '768px'
+  }
+});
+clip.addIncident(progressBar, 5500);
+var pieChart = new MCGraphs.PieChart({
+  data: __webpack_require__(425),
   timings: {
     intro: 2000,
-    static: 1500,
-    outro: 2000
-  },
-  palette: {
-    background: "#D3CDCD"
+    static: 4000,
+    outro: 1000
   }
 }, {
   selector: '#htmlclip',
@@ -103,7 +103,7 @@ var progressBar = new MCGraphs.ProgressBar({
     height: '768px'
   }
 });
-clip.addIncident(progressBar, 5500);
+clip.addIncident(pieChart, 11000);
 clip.play();
 var player = new (motorcortex_player_umd_default())({
   clip: clip,
@@ -146,11 +146,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function o(t, e, n) {
+  function a(t, e, n) {
     return e && r(t.prototype, e), n && r(t, n), t;
   }
 
-  function s(t, e) {
+  function a(t, e) {
     if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
     t.prototype = Object.create(e && e.prototype, {
       constructor: {
@@ -161,8 +161,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }), e && l(t, e);
   }
 
-  function a(t) {
-    return (a = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+  function s(t) {
+    return (s = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
       return t.__proto__ || Object.getPrototypeOf(t);
     })(t);
   }
@@ -195,10 +195,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return function () {
       var n,
-          i = a(t);
+          i = s(t);
 
       if (e) {
-        var r = a(this).constructor;
+        var r = s(this).constructor;
         n = Reflect.construct(i, arguments, r);
       } else n = i.apply(this, arguments);
 
@@ -206,11 +206,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     };
   }
 
-  function p(t, e) {
+  function d(t, e) {
     if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
   }
 
-  function d(t, e) {
+  function p(t, e) {
     for (var n = 0; n < e.length; n++) {
       var i = e[n];
       i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
@@ -218,10 +218,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function h(t, e, n) {
-    return e && d(t.prototype, e), n && d(t, n), t;
+    return e && p(t.prototype, e), n && p(t, n), t;
   }
 
-  function f(t, e, n) {
+  function m(t, e, n) {
     return e in t ? Object.defineProperty(t, e, {
       value: n,
       enumerable: !0,
@@ -230,7 +230,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }) : t[e] = n, t;
   }
 
-  function y(t, e) {
+  function v(t, e) {
     var n = Object.keys(t);
 
     if (Object.getOwnPropertySymbols) {
@@ -243,7 +243,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function g(t, e) {
+  function b(t, e) {
     if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
     t.prototype = Object.create(e && e.prototype, {
       constructor: {
@@ -251,22 +251,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         writable: !0,
         configurable: !0
       }
-    }), e && v(t, e);
+    }), e && x(t, e);
   }
 
-  function m(t) {
-    return (m = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+  function w(t) {
+    return (w = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
       return t.__proto__ || Object.getPrototypeOf(t);
     })(t);
   }
 
-  function v(t, e) {
-    return (v = Object.setPrototypeOf || function (t, e) {
+  function x(t, e) {
+    return (x = Object.setPrototypeOf || function (t, e) {
       return t.__proto__ = e, t;
     })(t, e);
   }
 
-  function b() {
+  function O() {
     if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
     if (Reflect.construct.sham) return !1;
     if ("function" == typeof Proxy) return !0;
@@ -278,54 +278,54 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function w(t, e) {
+  function k(t, e) {
     return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
       if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
       return t;
     }(t) : e;
   }
 
-  function x(t) {
+  function M(t) {
     return function () {
       var e,
-          n = m(t);
+          n = w(t);
 
-      if (b()) {
-        var i = m(this).constructor;
+      if (O()) {
+        var i = w(this).constructor;
         e = Reflect.construct(n, arguments, i);
       } else e = n.apply(this, arguments);
 
-      return w(this, e);
+      return k(this, e);
     };
   }
 
-  var k = {},
-      O = {
+  var P = {},
+      D = {
     duration: 1e3,
     round: 0
   },
-      C = ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skew", "skewX", "skewY", "perspective"],
-      S = {
+      S = ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skew", "skewX", "skewY", "perspective"],
+      C = {
     CSS: {}
   };
 
-  function P(t, e, n) {
+  function I(t, e, n) {
     return Math.min(Math.max(t, e), n);
   }
 
-  function R(t, e) {
+  function A(t, e) {
     return t.indexOf(e) > -1;
   }
 
-  var D = {
+  var E = {
     arr: function arr(t) {
       return Array.isArray(t);
     },
     obj: function obj(t) {
-      return R(Object.prototype.toString.call(t), "Object");
+      return A(Object.prototype.toString.call(t), "Object");
     },
     pth: function pth(t) {
-      return D.obj(t) && t.hasOwnProperty("totalLength");
+      return E.obj(t) && t.hasOwnProperty("totalLength");
     },
     svg: function svg(t) {
       return t instanceof SVGElement;
@@ -334,7 +334,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return t instanceof HTMLInputElement;
     },
     dom: function dom(t) {
-      return t.nodeType || D.svg(t);
+      return t.nodeType || E.svg(t);
     },
     str: function str(t) {
       return "string" == typeof t;
@@ -355,13 +355,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return /^hsl/.test(t);
     },
     col: function col(t) {
-      return D.hex(t) || D.rgb(t) || D.hsl(t);
+      return E.hex(t) || E.rgb(t) || E.hsl(t);
     },
     key: function key(t) {
-      return !k.hasOwnProperty(t) && !O.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
+      return !P.hasOwnProperty(t) && !D.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
     }
   },
-      I = {
+      R = {
     linear: function linear() {
       return function (t) {
         return t;
@@ -372,21 +372,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function M(t, e) {
     for (var n = t.length, i = arguments.length >= 2 ? arguments[1] : void 0, r = [], o = 0; o < n; o++) {
       if (o in t) {
-        var s = t[o];
-        e.call(i, s, o, t) && r.push(s);
+        var a = t[o];
+        e.call(i, a, o, t) && r.push(a);
       }
     }
 
     return r;
   }
 
-  function E(t) {
+  function A(t) {
     return t.reduce(function (t, e) {
-      return t.concat(D.arr(e) ? E(e) : e);
+      return t.concat(D.arr(e) ? A(e) : e);
     }, []);
   }
 
-  function A(t) {
+  function E(t) {
     return D.arr(t) ? t : (D.str(t) && (t = function (t) {
       try {
         return document.querySelectorAll(t);
@@ -396,13 +396,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }(t) || t), t instanceof NodeList || t instanceof HTMLCollection ? [].slice.call(t) : [t]);
   }
 
-  function j(t, e) {
+  function z(t, e) {
     return t.some(function (t) {
       return t === e;
     });
   }
 
-  function V(t) {
+  function N(t) {
     var e = {};
 
     for (var n in t) {
@@ -412,8 +412,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return e;
   }
 
-  function T(t, e) {
-    var n = V(t);
+  function _(t, e) {
+    var n = N(t);
 
     for (var i in t) {
       n[i] = e.hasOwnProperty(i) ? e[i] : t[i];
@@ -422,87 +422,87 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function N(t, e) {
-    var n = V(t);
+  function L(t, e) {
+    var n = N(t);
 
     for (var i in e) {
-      n[i] = D.und(t[i]) ? e[i] : t[i];
+      n[i] = E.und(t[i]) ? e[i] : t[i];
     }
 
     return n;
   }
 
-  function B(t) {
-    return D.rgb(t) ? (n = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(e = t)) ? "rgba(" + n[1] + ",1)" : e : D.hex(t) ? function (t) {
+  function G(t) {
+    return E.rgb(t) ? (n = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(e = t)) ? "rgba(" + n[1] + ",1)" : e : E.hex(t) ? function (t) {
       var e = t.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (t, e, n, i) {
         return e + e + n + n + i + i;
       }),
           n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);
       return "rgba(" + parseInt(n[1], 16) + "," + parseInt(n[2], 16) + "," + parseInt(n[3], 16) + ",1)";
-    }(t) : D.hsl(t) ? function (t) {
+    }(t) : E.hsl(t) ? function (t) {
       var e,
           n,
           i,
           r = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(t) || /hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*([\d.]+)\)/g.exec(t),
           o = parseInt(r[1], 10) / 360,
-          s = parseInt(r[2], 10) / 100,
-          a = parseInt(r[3], 10) / 100,
+          a = parseInt(r[2], 10) / 100,
+          s = parseInt(r[3], 10) / 100,
           l = r[4] || 1;
 
       function u(t, e, n) {
         return n < 0 && (n += 1), n > 1 && (n -= 1), n < 1 / 6 ? t + 6 * (e - t) * n : n < .5 ? e : n < 2 / 3 ? t + (e - t) * (2 / 3 - n) * 6 : t;
       }
 
-      if (0 == s) e = n = i = a;else {
-        var c = a < .5 ? a * (1 + s) : a + s - a * s,
-            p = 2 * a - c;
-        e = u(p, c, o + 1 / 3), n = u(p, c, o), i = u(p, c, o - 1 / 3);
+      if (0 == a) e = n = i = s;else {
+        var c = s < .5 ? s * (1 + a) : s + a - s * a,
+            d = 2 * s - c;
+        e = u(d, c, o + 1 / 3), n = u(d, c, o), i = u(d, c, o - 1 / 3);
       }
       return "rgba(" + 255 * e + "," + 255 * n + "," + 255 * i + "," + l + ")";
     }(t) : void 0;
     var e, n;
   }
 
-  function _(t) {
+  function G(t) {
     var e = /[+-]?\d*\.?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(%|px|pt|em|rem|in|cm|mm|ex|ch|pc|vw|vh|vmin|vmax|deg|rad|turn)?$/.exec(t);
     if (e) return e[1];
   }
 
-  function L(t, e) {
+  function _(t, e) {
     return D.fnc(t) ? t(e.target, e.id, e.total) : t;
   }
 
-  function G(t, e) {
+  function L(t, e) {
     return t.getAttribute(e);
   }
 
   function z(t, e, n) {
-    if (j([n, "deg", "rad", "turn"], _(e))) return e;
+    if (j([n, "deg", "rad", "turn"], G(e))) return e;
     var i = S.CSS[e + n];
     if (!D.und(i)) return i;
     var r = document.createElement(t.tagName),
         o = t.parentNode && t.parentNode !== document ? t.parentNode : document.body;
     o.appendChild(r), r.style.position = "absolute", r.style.width = 100 + n;
-    var s = 100 / r.offsetWidth;
+    var a = 100 / r.offsetWidth;
     o.removeChild(r);
-    var a = s * parseFloat(e);
-    return S.CSS[e + n] = a, a;
+    var s = a * parseFloat(e);
+    return S.CSS[e + n] = s, s;
   }
 
-  function F(t, e, n) {
+  function W(t, e, n) {
     if (e in t.style) {
       var i = e.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
           r = t.style[e] || getComputedStyle(t).getPropertyValue(i) || "0";
-      return n ? z(t, r, n) : r;
+      return n ? Y(t, r, n) : r;
     }
   }
 
   function q(t, e) {
-    return D.dom(t) && !D.inp(t) && (G(t, e) || D.svg(t) && t[e]) ? "attribute" : D.dom(t) && j(C, e) ? "transform" : D.dom(t) && "transform" !== e && F(t, e) ? "css" : null != t[e] ? "object" : void 0;
+    return D.dom(t) && !D.inp(t) && (L(t, e) || D.svg(t) && t[e]) ? "attribute" : D.dom(t) && j(C, e) ? "transform" : D.dom(t) && "transform" !== e && F(t, e) ? "css" : null != t[e] ? "object" : void 0;
   }
 
-  function Y(t) {
-    if (D.dom(t)) {
+  function q(t) {
+    if (E.dom(t)) {
       for (var e, n = t.style.transform || "", i = /(\w+)\(([^)]*)\)/g, r = new Map(); e = i.exec(n);) {
         r.set(e[1], e[2]);
       }
@@ -511,72 +511,70 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function X(t, e, n, i) {
-    var r = R(e, "scale") ? 1 : 0 + function (t) {
-      return R(t, "translate") || "perspective" === t ? "px" : R(t, "rotate") || R(t, "skew") ? "deg" : void 0;
+  function H(t, e, n, i) {
+    var r = A(e, "scale") ? 1 : 0 + function (t) {
+      return A(t, "translate") || "perspective" === t ? "px" : A(t, "rotate") || A(t, "skew") ? "deg" : void 0;
     }(e),
-        o = Y(t).get(e) || r;
-    return n && (n.transforms.list.set(e, o), n.transforms.last = e), i ? z(t, o, i) : o;
+        a = q(t).get(e) || r;
+    return n && (n.transforms.list.set(e, a), n.transforms.last = e), i ? Y(t, a, i) : a;
   }
 
-  function Q(t, e, n, i) {
-    switch (q(t, e)) {
+  function Z(t, e, n, i) {
+    switch (Q(t, e)) {
       case "transform":
-        return X(t, e, i, n);
+        return H(t, e, i, n);
 
       case "css":
-        return F(t, e, n);
+        return W(t, e, n);
 
       case "attribute":
-        return G(t, e);
+        return L(t, e);
 
       default:
         return t[e] || 0;
     }
   }
 
-  function W(t, e) {
+  function J(t, e) {
     var n = /^(\*=|\+=|-=)/.exec(t);
     if (!n) return t;
-    var i = _(t) || 0,
+    var i = G(t) || 0,
         r = parseFloat(e),
-        o = parseFloat(t.replace(n[0], ""));
+        a = parseFloat(t.replace(n[0], ""));
 
     switch (n[0][0]) {
       case "+":
-        return r + o + i;
+        return r + a + i;
 
       case "-":
-        return r - o + i;
+        return r - a + i;
 
       case "*":
-        return r * o + i;
+        return r * a + i;
     }
   }
 
-  function J(t, e) {
-    if (D.col(t)) return B(t);
+  function $(t, e) {
+    if (E.col(t)) return G(t);
     if (/\s/g.test(t)) return t;
-
-    var n = _(t),
+    var n = G(t),
         i = n ? t.substr(0, t.length - n.length) : t;
-
     return e ? i + e : i;
   }
 
-  function $(t, e) {
+  function Z(t, e) {
     var n = /[+-]?\d*\.?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g,
-        i = J(D.pth(t) ? t.totalLength : t, e) + "";
+        i = $(E.pth(t) ? t.totalLength : t, e) + "";
     return {
       original: i,
       numbers: i.match(n) ? i.match(n).map(Number) : [0],
-      strings: D.str(t) || e ? i.split(n) : []
+      strings: E.str(t) || e ? i.split(n) : []
     };
   }
 
-  function Z(t) {
+  function $(t) {
     var e = function (t) {
-      return M(t ? E(D.arr(t) ? t.map(A) : A(t)) : [], function (t, e, n) {
+      return M(t ? A(D.arr(t) ? t.map(E) : E(t)) : [], function (t, e, n) {
         return n.indexOf(t) === e;
       });
     }(t);
@@ -587,60 +585,61 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         id: n,
         total: e.length,
         transforms: {
-          list: Y(t)
+          list: q(t)
         }
       };
     });
   }
 
-  function H(t, e) {
-    var n = V(e);
+  function tt(t, e) {
+    var n = N(e);
 
-    if (D.arr(t)) {
+    if (E.arr(t)) {
       var i = t.length;
-      2 === i && !D.obj(t[0]) ? t = {
+      2 === i && !E.obj(t[0]) ? t = {
         value: t
-      } : D.fnc(e.duration) || (n.duration = e.duration / i);
+      } : E.fnc(e.duration) || (n.duration = e.duration / i);
     }
 
-    return (D.arr(t) ? t : [t]).map(function (t, e) {
-      return D.obj(t) && !D.pth(t) ? t : {
+    return (E.arr(t) ? t : [t]).map(function (t, e) {
+      return E.obj(t) && !E.pth(t) ? t : {
         value: t
       };
     }).map(function (t) {
-      return N(t, n);
+      return L(t, n);
     });
   }
 
-  function U(t, e) {
+  function et(t, e) {
     var n;
     return t.tweens.map(function (i) {
       var r = function (t, e) {
         var n = {};
 
         for (var i in t) {
-          var r = L(t[i], e);
+          var r = _(t[i], e);
+
           D.arr(r) && 1 === (r = r.map(function (t) {
-            return L(t, e);
+            return _(t, e);
           })).length && (r = r[0]), n[i] = r;
         }
 
         return n.duration = parseFloat(n.duration), n;
       }(i, e),
           o = r.value,
-          s = D.arr(o) ? o[1] : o,
-          a = _(s),
-          l = Q(e.target, t.name, a, e),
+          a = D.arr(o) ? o[1] : o,
+          s = G(a),
+          l = Q(e.target, t.name, s, e),
           u = n ? n.to.original : l,
           c = D.arr(o) ? o[0] : u,
-          p = _(c) || _(l),
-          d = a || p;
+          d = G(c) || G(l),
+          p = s || d;
 
-      return D.und(s) && (s = u), r.from = $(c, d), r.to = $(W(s, c), d), r.start = n ? n.end : 0, r.end = r.start + r.duration, r.isPath = !1, r.isColor = D.col(r.from.original), r.isColor && (r.round = 1), n = r, r;
+      return D.und(a) && (a = u), r.from = Z(c, p), r.to = Z(W(a, c), p), r.start = n ? n.end : 0, r.end = r.start + r.duration, r.isPath = !1, r.isColor = D.col(r.from.original), r.isColor && (r.round = 1), n = r, r;
     });
   }
 
-  var K = {
+  var nt = {
     css: function css(t, e, n) {
       return t.style[e] = n;
     },
@@ -652,37 +651,37 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     },
     transform: function transform(t, e, n, i, r) {
       if (i.list.set(e, n), e === i.last || r) {
-        var o = "";
+        var a = "";
         i.list.forEach(function (t, e) {
-          o += e + "(" + t + ") ";
-        }), t.style.transform = o;
+          a += e + "(" + t + ") ";
+        }), t.style.transform = a;
       }
     }
   };
 
   function tt(t, e) {
-    Z(t).forEach(function (t) {
+    $(t).forEach(function (t) {
       for (var n in e) {
-        var i = L(e[n], t),
+        var i = _(e[n], t),
             r = t.target,
-            o = _(i),
-            s = Q(r, n, o, t),
-            a = W(J(i, o || _(s)), s),
+            o = G(i),
+            a = Q(r, n, o, t),
+            s = W(J(i, o || G(a)), a),
             l = q(r, n);
 
-        K[l](r, n, a, t.transforms, !0);
+        K[l](r, n, s, t.transforms, !0);
       }
     });
   }
 
   function et(t, e) {
-    return M(E(t.map(function (t) {
+    return M(A(t.map(function (t) {
       return e.map(function (e) {
         return function (t, e) {
-          var n = q(t.target, e.name);
+          var n = Q(t.target, e.name);
 
           if (n) {
-            var i = U(e, t),
+            var i = et(e, t),
                 r = i[i.length - 1];
             return {
               type: n,
@@ -695,48 +694,48 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }(t, e);
       });
     })), function (t) {
-      return !D.und(t);
+      return !E.und(t);
     });
   }
 
-  var nt = 0;
+  var at = 0;
 
-  function it(t) {
-    var e = T(k, t),
-        n = T(O, t),
+  function ot(t) {
+    var e = _(P, t),
+        n = _(D, t),
         i = function (t, e) {
       var n = [];
 
       for (var i in e) {
-        D.key(i) && n.push({
+        E.key(i) && n.push({
           name: i,
-          tweens: H(e[i], t)
+          tweens: tt(e[i], t)
         });
       }
 
       return n;
     }(n, t),
-        r = Z(t.targets),
+        r = $(t.targets),
         o = et(r, i),
-        s = function (t, e) {
+        a = function (t, e) {
       var n = t.length,
           i = {};
       return i.duration = n ? Math.max.apply(Math, t.map(function (t) {
         return t.duration;
       })) : e.duration, i;
     }(o, n),
-        a = nt;
+        s = nt;
 
     return nt++, N(e, {
-      id: a,
+      id: s,
       children: [],
       animatables: r,
       animations: o,
-      duration: s.duration
+      duration: a.duration
     });
   }
 
-  function rt(t) {
+  function st(t) {
     void 0 === t && (t = {});
     var e,
         n = 0,
@@ -749,158 +748,158 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return t.finished = e, e;
     }
 
-    var o = it(t);
-    r(o);
+    var a = ot(t);
+    r(a);
 
-    function s(t, e) {
+    function a(t, e) {
       e && e.seek(t);
     }
 
-    function a(t) {
-      var a = o.duration,
+    function s(t) {
+      var s = o.duration,
           l = t;
-      o.progress = P(l / a * 100, 0, 100), o.reversePlayback = l < o.currentTime, e && function (t) {
+      o.progress = P(l / s * 100, 0, 100), o.reversePlayback = l < o.currentTime, e && function (t) {
         if (o.reversePlayback) for (var i = n; i--;) {
-          s(t, e[i]);
+          a(t, e[i]);
         } else for (var r = 0; r < n; r++) {
-          s(t, e[r]);
+          a(t, e[r]);
         }
-      }(l), !o.began && o.currentTime > 0 && (o.began = !0), function (t) {
-        for (var e = 0, n = o.animations, i = n.length; e < i;) {
+      }(l), !a.began && a.currentTime > 0 && (a.began = !0), function (t) {
+        for (var e = 0, n = a.animations, i = n.length; e < i;) {
           var r = n[e],
-              s = r.animatable,
-              a = r.tweens,
-              l = a.length - 1,
-              u = a[l];
-          l && (u = M(a, function (e) {
+              a = r.animatable,
+              s = r.tweens,
+              l = s.length - 1,
+              u = s[l];
+          l && (u = M(s, function (e) {
             return t < e.end;
           })[0] || u);
 
-          for (var c = P(t - u.start, 0, u.duration) / u.duration, p = u.to.strings, d = u.round, h = [], f = u.to.numbers.length, y = void 0, g = 0; g < f; g++) {
+          for (var c = P(t - u.start, 0, u.duration) / u.duration, d = u.to.strings, p = u.round, h = [], f = u.to.numbers.length, y = void 0, g = 0; g < f; g++) {
             var m = void 0,
                 v = u.to.numbers[g],
                 b = u.from.numbers[g] || 0;
-            m = b + c * (v - b), d && (u.isColor && g > 2 || (m = Math.round(m * d) / d)), h.push(m);
+            m = b + c * (v - b), p && (u.isColor && g > 2 || (m = Math.round(m * p) / p)), h.push(m);
           }
 
-          var w = p.length;
+          var w = d.length;
 
           if (w) {
-            y = p[0];
+            y = d[0];
 
             for (var x = 0; x < w; x++) {
-              p[x];
-              var k = p[x + 1],
+              d[x];
+              var k = d[x + 1],
                   O = h[x];
               isNaN(O) || (y += k ? O + k : O + " ");
             }
-          } else y = h[0];
+          } else y = p[0];
 
-          K[r.type](s.target, r.property, y, s.transforms), r.currentValue = y, e++;
+          K[r.type](a.target, r.property, y, a.transforms), r.currentValue = y, e++;
         }
-      }(l), o.currentTime = P(l, 0, a), t >= a && (o.paused = !0, o.completed || (o.completed = !0, !o.passThrough && "Promise" in window && (i(), r(o))));
+      }(l), o.currentTime = P(l, 0, s), t >= s && (o.paused = !0, o.completed || (o.completed = !0, !o.passThrough && "Promise" in window && (i(), r(o))));
     }
 
-    return o.reset = function () {
-      o.passThrough = !1, o.currentTime = 0, o.progress = 0, o.paused = !0, o.began = !1, o.completed = !1, o.reversePlayback = !1, e = o.children;
+    return a.reset = function () {
+      a.passThrough = !1, a.currentTime = 0, a.progress = 0, a.paused = !0, a.began = !1, a.completed = !1, a.reversePlayback = !1, e = a.children;
 
       for (var t = n = e.length; t--;) {
-        o.children[t].reset();
+        a.children[t].reset();
       }
     }, o.set = function (t, e) {
       return tt(t, e), o;
     }, o.seek = function (t) {
-      a(t);
+      s(t);
     }, o.reset(), o;
   }
 
-  function ot(t, e) {
+  function lt(t, e) {
     return Math.sqrt(Math.pow(e.x - t.x, 2) + Math.pow(e.y - t.y, 2));
   }
 
-  function st(t) {
+  function at(t) {
     for (var e, n = t.points, i = 0, r = 0; r < n.numberOfItems; r++) {
-      var o = n.getItem(r);
-      r > 0 && (i += ot(e, o)), e = o;
+      var a = n.getItem(r);
+      r > 0 && (i += lt(e, a)), e = a;
     }
 
     return i;
   }
 
-  function at(t) {
+  function st(t) {
     if (t.getTotalLength) return t.getTotalLength();
 
     switch (t.tagName.toLowerCase()) {
       case "circle":
         return function (t) {
-          return 2 * Math.PI * G(t, "r");
+          return 2 * Math.PI * L(t, "r");
         }(t);
 
       case "rect":
         return function (t) {
-          return 2 * G(t, "width") + 2 * G(t, "height");
+          return 2 * L(t, "width") + 2 * L(t, "height");
         }(t);
 
       case "line":
         return function (t) {
           return ot({
-            x: G(t, "x1"),
-            y: G(t, "y1")
+            x: L(t, "x1"),
+            y: L(t, "y1")
           }, {
-            x: G(t, "x2"),
-            y: G(t, "y2")
+            x: L(t, "x2"),
+            y: L(t, "y2")
           });
         }(t);
 
       case "polyline":
-        return st(t);
+        return at(t);
 
       case "polygon":
         return function (t) {
           var e = t.points;
-          return st(t) + ot(e.getItem(e.numberOfItems - 1), e.getItem(0));
+          return at(t) + ot(e.getItem(e.numberOfItems - 1), e.getItem(0));
         }(t);
     }
   }
 
-  function lt(t, e) {
+  function ht(t, e) {
     var n = e || {},
         i = n.el || function (t) {
-      for (var e = t.parentNode; D.svg(e) && D.svg(e.parentNode);) {
+      for (var e = t.parentNode; E.svg(e) && E.svg(e.parentNode);) {
         e = e.parentNode;
       }
 
       return e;
     }(t),
         r = i.getBoundingClientRect(),
-        o = G(i, "viewBox"),
-        s = r.width,
-        a = r.height,
-        l = n.viewBox || (o ? o.split(" ") : [0, 0, s, a]);
+        o = L(i, "viewBox"),
+        a = r.width,
+        s = r.height,
+        l = n.viewBox || (o ? o.split(" ") : [0, 0, a, s]);
 
     return {
       el: i,
       viewBox: l,
       x: l[0] / 1,
       y: l[1] / 1,
-      w: s,
-      h: a,
+      w: a,
+      h: s,
       vW: l[2],
       vH: l[3]
     };
   }
 
-  rt.version = "3.1.0", rt.get = Q, rt.set = tt, rt.convertPx = z, rt.penner = I, rt.path = function (t) {
+  st.version = "3.1.0", st.get = Z, st.set = it, st.convertPx = Y, st.penner = R, st.path = function (t) {
     return {
       el: t,
       svg: lt(t),
-      totalLength: at(t),
+      totalLength: st(t),
       deltaCorrections: {
         x: 4,
         y: 5
       }
     };
-  }, rt.getPathProgress = function (t, e, n) {
+  }, st.getPathProgress = function (t, e, n) {
     function i(n) {
       void 0 === n && (n = 0);
       var i = e * t.totalLength,
@@ -910,48 +909,48 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     var r = lt(t.el, t.svg),
         o = i(),
-        s = i(-1),
-        a = i(1),
+        a = i(-1),
+        s = i(1),
         l = n ? 1 : r.w / r.vW,
         u = n ? 1 : r.h / r.vH;
     return {
       x: (o.x - r.x) * l,
       y: (o.y - r.y) * u,
-      angle: 180 * Math.atan2(a.y - s.y, a.x - s.x) / Math.PI
+      angle: 180 * Math.atan2(s.y - a.y, s.x - a.x) / Math.PI
     };
   };
-  var ut = rt,
-      ct = {
+  var dt = st,
+      pt = {
     transform: ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skewX", "skewY", "perspective"]
   };
-  var pt = ["cm", "mm", "in", "px", "pt", "pc", "em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax", "%"],
-      dt = ["deg", "rad", "grad", "turn"],
+  var dt = ["cm", "mm", "in", "px", "pt", "pc", "em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax", "%"],
+      pt = ["deg", "rad", "grad", "turn"],
       ht = "measurement",
       ft = "color",
       yt = {
     npm_name: "@kissmybutton/motorcortex-anime",
     incidents: [{
       exportable: function (t) {
-        g(n, t);
-        var e = x(n);
+        b(n, t);
+        var e = M(n);
 
         function n() {
-          return p(this, n), e.apply(this, arguments);
+          return d(this, n), e.apply(this, arguments);
         }
 
-        return h(n, [{
+        return g(n, [{
           key: "onGetContext",
           value: function value() {
             var t = {};
-            if (Object.prototype.hasOwnProperty.call(ct, this.attributeKey)) for (var e = ct[this.attributeKey], n = 0; n < e.length; n++) {
+            if (Object.prototype.hasOwnProperty.call(pt, this.attributeKey)) for (var e = pt[this.attributeKey], n = 0; n < e.length; n++) {
               Object.prototype.hasOwnProperty.call(this.targetValue, e[n]) && (t[e[n]] = [this.getInitialValue()[e[n]], this.targetValue[e[n]]]);
             } else t[this.attributeKey] = [this.getInitialValue(), this.targetValue];
-            this.target = ut(function (t) {
+            this.target = dt(function (t) {
               for (var e = 1; e < arguments.length; e++) {
                 var n = null != arguments[e] ? arguments[e] : {};
-                e % 2 ? y(Object(n), !0).forEach(function (e) {
-                  f(t, e, n[e]);
-                }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : y(Object(n)).forEach(function (e) {
+                e % 2 ? v(Object(n), !0).forEach(function (e) {
+                  m(t, e, n[e]);
+                }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : v(Object(n)).forEach(function (e) {
                   Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e));
                 });
               }
@@ -968,35 +967,35 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           key: "getScratchValue",
           value: function value() {
             if ("transform" === this.attributeKey) {
-              for (var t = {}, e = ct[this.attributeKey], n = function (t, e) {
+              for (var t = {}, e = pt[this.attributeKey], n = function (t, e) {
                 var n = t.getComputedStyle(e).transform;
                 if ("" === n || "none" === n) return {};
                 var i,
                     r,
                     o,
-                    s,
                     a,
+                    s,
                     l,
                     u,
                     c,
-                    p = n.split("(")[1].split(")")[0].split(",");
-                return i = p, r = Math.atan2(i[1], i[0]), o = Math.pow(i[0], 2) + Math.pow(i[1], 2), s = Math.pow(i[2], 2) + Math.pow(i[3], 2), a = Math.sqrt(o), l = (i[0] * i[3] - i[2] * i[1]) / a, u = Math.atan2(i[0] * i[2] + i[1] * i[3], o), c = Math.atan2(i[1] * i[3] + i[0] * i[2], s), {
+                    d = n.split("(")[1].split(")")[0].split(",");
+                return i = d, r = Math.atan2(i[1], i[0]), o = Math.pow(i[0], 2) + Math.pow(i[1], 2), a = Math.pow(i[2], 2) + Math.pow(i[3], 2), s = Math.sqrt(o), l = (i[0] * i[3] - i[2] * i[1]) / s, u = Math.atan2(i[0] * i[2] + i[1] * i[3], o), c = Math.atan2(i[1] * i[3] + i[0] * i[2], a), {
                   rotate: r / (Math.PI / 180) + "deg",
-                  scaleX: a,
+                  scaleX: s,
                   scaleY: l,
                   skewX: (1 === o ? u / (Math.PI / 180) : 0) + "deg",
-                  skewY: (1 === s ? c / (Math.PI / 180) : 0) + "deg",
+                  skewY: (1 === a ? c / (Math.PI / 180) : 0) + "deg",
                   translateX: i[4] + "px",
                   translateY: i[5] + "px"
                 };
               }(this.context.window, this.element), i = 0; i < e.length; i++) {
-                Object.prototype.hasOwnProperty.call(n, e[i]) ? t[e[i]] = n[e[i]] : t[e[i]] = ut.get(this.element, e[i]);
+                Object.prototype.hasOwnProperty.call(n, e[i]) ? t[e[i]] = n[e[i]] : t[e[i]] = dt.get(this.element, e[i]);
               }
 
               return t;
             }
 
-            return ut.get(this.element, this.attributeKey);
+            return dt.get(this.element, this.attributeKey);
           }
         }, {
           key: "onProgress",
@@ -1012,11 +1011,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           props: {
             background: {
               optional: !0,
-              type: ft
+              type: mt
             },
             backgroundColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             backgroundPosition: {
               optional: !0,
@@ -1036,53 +1035,53 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderBottomColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderBottomLeftRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderBottomRightRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderBottomWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderEndEndRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderEndStartRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderImageOutset: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             borderImageSlice: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             borderImageWidth: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             borderLeft: {
@@ -1091,17 +1090,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderLeftColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderLeftWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderRight: {
               optional: !0,
@@ -1109,22 +1108,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderRightColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderRightWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderStartEndRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderStartStartRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderTop: {
               optional: !0,
@@ -1132,32 +1131,32 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             borderTopColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             borderTopLeftRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderTopRightRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderTopWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             borderWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             bottom: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             boxShadow: {
               optional: !0,
@@ -1165,11 +1164,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             caretColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             color: {
               optional: !0,
-              type: ft
+              type: mt
             },
             columnCount: {
               optional: !0,
@@ -1180,7 +1179,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             columnGap: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             columnRule: {
               optional: !0,
@@ -1188,12 +1187,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             columnRuleColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             columnRuleWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             columns: {
               optional: !0,
@@ -1204,7 +1203,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             columnWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             flex: {
               optional: !0,
@@ -1215,7 +1214,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             flexBasis: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             flexGrow: {
               optional: !0,
@@ -1236,17 +1235,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             fontSize: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             fontSizeAdjust: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             fontStretch: {
               optional: !0,
-              type: ht,
+              type: gt,
               units: ["%"]
             },
             fontWeight: {
@@ -1256,84 +1255,84 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             gap: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             gridColumnGap: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             gridGap: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             gridRowGap: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             gridTemplateColumns: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             gridTemplateRows: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             height: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             inset: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             insetBlock: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             insetBlockEnd: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             insetBlockStart: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             insetInline: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             insetInlineEnd: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             insetInlineStart: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             left: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             letterSpacing: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             lineClamp: {
               optional: !0,
@@ -1344,7 +1343,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             lineHeight: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             margin: {
@@ -1354,27 +1353,27 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             marginBottom: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             marginLeft: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             marginRight: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             marginTop: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             maskBorder: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             maskPosition: {
@@ -1388,13 +1387,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             maxHeight: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             maxWidth: {
               optional: !0,
               type: ht,
-              units: pt,
+              units: dt,
               min: 0
             },
             objectPosition: {
@@ -1404,7 +1403,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             offset: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             offsetAnchor: {
               optional: !0,
@@ -1413,7 +1412,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             offsetDistance: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             offsetPath: {
               optional: !0,
@@ -1426,7 +1425,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             offsetRotate: {
               optional: !0,
               type: ht,
-              units: dt
+              units: pt
             },
             opacity: {
               optional: !0,
@@ -1445,72 +1444,72 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             outlineColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             outlineOffset: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             outlineRadius: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             outlineRadiusBottomleft: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             outlineRadiusBottomright: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             outlineRadiusTopleft: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             outlineRadiusTopright: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             outlineWidth: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             padding: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             paddingBottom: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             paddingLeft: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             paddingRight: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             paddingTop: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             perspective: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             perspectiveOrigin: {
               optional: !0,
@@ -1519,17 +1518,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             right: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             rotate: {
               optional: !0,
               type: ht,
-              units: dt
+              units: pt
             },
             rowGap: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scale: {
               optional: !0,
@@ -1538,117 +1537,117 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             scrollbarColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             scrollMargin: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginBlock: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginBlockEnd: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginBlockStart: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginBottom: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginInline: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginInlineEnd: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginInlineStart: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginLeft: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginRight: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollMarginTop: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPadding: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingBlock: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingBlockEnd: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingBlockStart: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingBottom: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingInline: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingInlineEnd: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingInlineStart: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingLeft: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingRight: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollPaddingTop: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             scrollSnapCoordinate: {
               optional: !0,
@@ -1657,7 +1656,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             scrollSnapDestination: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             shapeImageThreshold: {
               optional: !0,
@@ -1666,7 +1665,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             shapeMargin: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             shapeOutside: {
               optional: !0,
@@ -1682,12 +1681,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             textDecorationColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textDecorationThickness: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             textEmphasis: {
               optional: !0,
@@ -1695,16 +1694,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             textEmphasisColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textFillColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textIndent: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             textShadow: {
               optional: !0,
@@ -1716,17 +1715,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             textStrokeColor: {
               optional: !0,
-              type: ft
+              type: mt
             },
             textUnderlineOffset: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             top: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             transform: {
               optional: !0,
@@ -1734,37 +1733,37 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               props: {
                 translateX: {
                   type: ht,
-                  units: pt,
+                  units: dt,
                   optional: !0
                 },
                 translateY: {
                   type: ht,
-                  units: pt,
+                  units: dt,
                   optional: !0
                 },
                 translateZ: {
                   type: ht,
-                  units: pt,
+                  units: dt,
                   optional: !0
                 },
                 rotate: {
                   type: ht,
-                  units: dt,
+                  units: pt,
                   optional: !0
                 },
                 rotateX: {
                   type: ht,
-                  units: dt,
+                  units: pt,
                   optional: !0
                 },
                 rotateY: {
                   type: ht,
-                  units: dt,
+                  units: pt,
                   optional: !0
                 },
                 rotateZ: {
                   type: ht,
-                  units: dt,
+                  units: pt,
                   optional: !0
                 },
                 scale: {
@@ -1789,17 +1788,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 },
                 skewX: {
                   type: ht,
-                  units: dt,
+                  units: pt,
                   optional: !0
                 },
                 skewY: {
                   type: ht,
-                  units: dt,
+                  units: pt,
                   optional: !0
                 },
                 perspective: {
                   type: ht,
-                  units: pt,
+                  units: dt,
                   optional: !0
                 }
               }
@@ -1819,12 +1818,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             width: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             wordSpacing: {
               optional: !0,
               type: ht,
-              units: pt
+              units: dt
             },
             zIndex: {
               optional: !0,
@@ -1833,7 +1832,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             zoom: {
               optional: !0,
-              type: ht,
+              type: gt,
               units: ["%"],
               min: 0
             }
@@ -1849,18 +1848,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           },
           width: {
             type: ht,
-            units: pt
+            units: dt
           },
           wordSpacing: {
             type: ht,
-            units: pt
+            units: dt
           },
           zIndex: {
             type: "number",
             integer: !0
           },
           zoom: {
-            type: ht,
+            type: gt,
             units: ["%"],
             min: 0
           }
@@ -1868,23 +1867,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }, {
       exportable: function (t) {
-        g(n, t);
-        var e = x(n);
+        b(n, t);
+        var e = M(n);
 
         function n() {
-          return p(this, n), e.apply(this, arguments);
+          return d(this, n), e.apply(this, arguments);
         }
 
-        return h(n, [{
+        return g(n, [{
           key: "onGetContext",
           value: function value() {
             var t = this.context.getElements(this.targetValue.pathElement)[0];
-            this.path = ut.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
+            this.path = dt.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
           }
         }, {
           key: "onProgress",
           value: function value(t) {
-            var e = ut.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
+            var e = dt.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
                 n = "\n            translateX(".concat(e.x, "px) \n            translateY(").concat(e.y, "px) \n            rotate(").concat(e.angle, "deg)\n        ");
             this.element.style.transform = n;
           }
@@ -1907,17 +1906,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }
       }
     }],
-    compositeAttributes: ct
+    compositeAttributes: pt
   },
-      gt = "#75706E",
-      mt = "#B2B1AE",
-      vt = "#434243",
-      bt = "#100300",
-      wt = "#FFD800",
-      xt = "transparent";
+      gt = {
+    gray: "#75706E",
+    lightGray: "#B2B1AE",
+    darkGray: "#434243",
+    font: "#100300",
+    accent: "#FFD800",
+    background: "transparent",
+    pieColors: ["pink", "lightblue", "orange", "red", "blue"]
+  };
 
-  function kt() {
-    return (kt = Object.assign || function (t) {
+  function mt() {
+    return (mt = Object.assign || function (t) {
       for (var e = 1; e < arguments.length; e++) {
         var n = arguments[e];
 
@@ -1930,16 +1932,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }).apply(this, arguments);
   }
 
-  var Ot = "function" == typeof Symbol && "symbol" == _typeof(Symbol.iterator) ? function (t) {
+  var vt = "function" == typeof Symbol && "symbol" == _typeof(Symbol.iterator) ? function (t) {
     return _typeof(t);
   } : function (t) {
     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : _typeof(t);
   },
-      Ct = "object" === ("undefined" == typeof window ? "undefined" : Ot(window)) && "object" === ("undefined" == typeof document ? "undefined" : Ot(document)) && 9 === document.nodeType,
-      St = "production" === "production";
+      bt = "object" === ("undefined" == typeof window ? "undefined" : vt(window)) && "object" === ("undefined" == typeof document ? "undefined" : vt(document)) && 9 === document.nodeType,
+      wt = "production" === "production";
 
-  function Pt(t, e) {
-    if (!St) {
+  function xt(t, e) {
+    if (!wt) {
       if (t) return;
       var n = "Warning: " + e;
       "undefined" != typeof console && console.warn(n);
@@ -1950,66 +1952,66 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function Rt(t, e) {
+  function kt(t, e) {
     for (var n = 0; n < e.length; n++) {
       var i = e[n];
       i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
     }
   }
 
-  function Dt(t, e, n) {
-    return e && Rt(t.prototype, e), n && Rt(t, n), t;
+  function Ot(t, e, n) {
+    return e && kt(t.prototype, e), n && kt(t, n), t;
   }
 
-  function It(t, e) {
+  function Ct(t, e) {
     t.prototype = Object.create(e.prototype), t.prototype.constructor = t, t.__proto__ = e;
   }
 
-  function Mt(t) {
+  function St(t) {
     if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     return t;
   }
 
-  var Et = {}.constructor;
+  var Pt = {}.constructor;
 
-  function At(t) {
+  function Rt(t) {
     if (null == t || "object" != _typeof(t)) return t;
-    if (Array.isArray(t)) return t.map(At);
-    if (t.constructor !== Et) return t;
+    if (Array.isArray(t)) return t.map(Rt);
+    if (t.constructor !== Pt) return t;
     var e = {};
 
     for (var n in t) {
-      e[n] = At(t[n]);
+      e[n] = Rt(t[n]);
     }
 
     return e;
   }
 
-  function jt(t, e, n) {
+  function Dt(t, e, n) {
     void 0 === t && (t = "unnamed");
     var i = n.jss,
-        r = At(e),
+        r = Rt(e),
         o = i.plugins.onCreateRule(t, r, n);
-    return o || ("@" === t[0] && "production" !== "production" && Pt(!1, "[JSS] Unknown rule " + t), null);
+    return o || ("@" === t[0] && "production" !== "production" && xt(!1, "[JSS] Unknown rule " + t), null);
   }
 
-  var Vt = function Vt(t, e) {
+  var It = function It(t, e) {
     for (var n = "", i = 0; i < t.length && "!important" !== t[i]; i++) {
       n && (n += e), n += t[i];
     }
 
     return n;
   },
-      Tt = function Tt(t, e) {
+      Mt = function Mt(t, e) {
     if (void 0 === e && (e = !1), !Array.isArray(t)) return t;
     var n = "";
     if (Array.isArray(t[0])) for (var i = 0; i < t.length && "!important" !== t[i]; i++) {
-      n && (n += ", "), n += Vt(t[i], " ");
-    } else n = Vt(t, ", ");
+      n && (n += ", "), n += It(t[i], " ");
+    } else n = It(t, ", ");
     return e || "!important" !== t[t.length - 1] || (n += " !important"), n;
   };
 
-  function Nt(t, e) {
+  function At(t, e) {
     for (var n = "", i = 0; i < e; i++) {
       n += "  ";
     }
@@ -2017,39 +2019,39 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n + t;
   }
 
-  function Bt(t, e, n) {
+  function Et(t, e, n) {
     void 0 === n && (n = {});
     var i = "";
     if (!e) return i;
     var r = n.indent,
         o = void 0 === r ? 0 : r,
-        s = e.fallbacks;
-    if (t && o++, s) if (Array.isArray(s)) for (var a = 0; a < s.length; a++) {
-      var l = s[a];
+        a = e.fallbacks;
+    if (t && o++, a) if (Array.isArray(a)) for (var s = 0; s < a.length; s++) {
+      var l = a[s];
 
       for (var u in l) {
         var c = l[u];
-        null != c && (i && (i += "\n"), i += "" + Nt(u + ": " + Tt(c) + ";", o));
+        null != c && (i && (i += "\n"), i += "" + At(u + ": " + Mt(c) + ";", o));
       }
-    } else for (var p in s) {
-      var d = s[p];
-      null != d && (i && (i += "\n"), i += "" + Nt(p + ": " + Tt(d) + ";", o));
+    } else for (var d in a) {
+      var p = a[d];
+      null != p && (i && (i += "\n"), i += "" + At(d + ": " + Mt(p) + ";", o));
     }
 
     for (var h in e) {
       var f = e[h];
-      null != f && "fallbacks" !== h && (i && (i += "\n"), i += "" + Nt(h + ": " + Tt(f) + ";", o));
+      null != f && "fallbacks" !== h && (i && (i += "\n"), i += "" + At(h + ": " + Mt(f) + ";", o));
     }
 
-    return (i || n.allowEmpty) && t ? (i && (i = "\n" + i + "\n"), Nt(t + " {" + i, --o) + Nt("}", o)) : i;
+    return (i || n.allowEmpty) && t ? (i && (i = "\n" + i + "\n"), At(t + " {" + i, --o) + At("}", o)) : i;
   }
 
-  var _t = /([[\].#*$><+~=|^:(),"'`\s])/g,
-      Lt = "undefined" != typeof CSS && CSS.escape,
-      Gt = function Gt(t) {
-    return Lt ? Lt(t) : t.replace(_t, "\\$1");
+  var jt = /([[\].#*$><+~=|^:(),"'`\s])/g,
+      Vt = "undefined" != typeof CSS && CSS.escape,
+      Tt = function Tt(t) {
+    return Vt ? Vt(t) : t.replace(jt, "\\$1");
   },
-      zt = function () {
+      Nt = function () {
     function t(t, e, n) {
       this.type = "style", this.key = void 0, this.isProcessed = !1, this.style = void 0, this.renderer = void 0, this.renderable = void 0, this.options = void 0;
       var i = n.sheet,
@@ -2064,26 +2066,26 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var r = e;
       n && !1 === n.process || (r = this.options.jss.plugins.onChangeValue(e, t, this));
       var o = null == r || !1 === r,
-          s = (t in this.style);
-      if (o && !s && !i) return this;
-      var a = o && s;
-      if (a ? delete this.style[t] : this.style[t] = r, this.renderable && this.renderer) return a ? this.renderer.removeProperty(this.renderable, t) : this.renderer.setProperty(this.renderable, t, r), this;
+          a = (t in this.style);
+      if (o && !a && !i) return this;
+      var s = o && a;
+      if (s ? delete this.style[t] : this.style[t] = r, this.renderable && this.renderer) return s ? this.renderer.removeProperty(this.renderable, t) : this.renderer.setProperty(this.renderable, t, r), this;
       var l = this.options.sheet;
-      return l && l.attached && "production" !== "production" && Pt(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
+      return l && l.attached && "production" !== "production" && xt(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
     }, t;
   }(),
-      Ft = function (t) {
+      Bt = function (t) {
     function e(e, n, i) {
       var r;
       (r = t.call(this, e, n, i) || this).selectorText = void 0, r.id = void 0, r.renderable = void 0;
       var o = i.selector,
-          s = i.scoped,
-          a = i.sheet,
+          a = i.scoped,
+          s = i.sheet,
           l = i.generateId;
-      return o ? r.selectorText = o : !1 !== s && (r.id = l(Mt(Mt(r)), a), r.selectorText = "." + Gt(r.id)), r;
+      return o ? r.selectorText = o : !1 !== a && (r.id = l(St(St(r)), s), r.selectorText = "." + Tt(r.id)), r;
     }
 
-    It(e, t);
+    Ct(e, t);
     var n = e.prototype;
     return n.applyTo = function (t) {
       var e = this.renderer;
@@ -2102,17 +2104,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
       for (var e in this.style) {
         var n = this.style[e];
-        "object" != _typeof(n) ? t[e] = n : Array.isArray(n) && (t[e] = Tt(n));
+        "object" != _typeof(n) ? t[e] = n : Array.isArray(n) && (t[e] = Mt(n));
       }
 
       return t;
     }, n.toString = function (t) {
       var e = this.options.sheet,
-          n = !!e && e.options.link ? kt({}, t, {
+          n = !!e && e.options.link ? mt({}, t, {
         allowEmpty: !0
       }) : t;
-      return Bt(this.selectorText, this.style, n);
-    }, Dt(e, [{
+      return Et(this.selectorText, this.style, n);
+    }, Ot(e, [{
       key: "selector",
       set: function set(t) {
         if (t !== this.selectorText) {
@@ -2126,23 +2128,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this.selectorText;
       }
     }]), e;
-  }(zt),
-      qt = {
+  }(Nt),
+      Gt = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return "@" === t[0] || n.parent && "keyframes" === n.parent.type ? null : new Ft(t, e, n);
+      return "@" === t[0] || n.parent && "keyframes" === n.parent.type ? null : new Bt(t, e, n);
     }
   },
-      Yt = {
+      _t = {
     indent: 1,
     children: !0
   },
-      Xt = /@([\w-]+)/,
-      Qt = function () {
+      Lt = /@([\w-]+)/,
+      zt = function () {
     function t(t, e, n) {
       this.type = "conditional", this.at = void 0, this.key = void 0, this.query = void 0, this.rules = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t;
-      var i = t.match(Xt);
+      var i = t.match(Lt);
 
-      for (var r in this.at = i ? i[1] : "unknown", this.query = n.name || "@" + this.at, this.options = n, this.rules = new ye(kt({}, n, {
+      for (var r in this.at = i ? i[1] : "unknown", this.query = n.name || "@" + this.at, this.options = n, this.rules = new ce(mt({}, n, {
         parent: this
       })), e) {
         this.rules.add(r, e[r]);
@@ -2160,35 +2162,35 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var i = this.rules.add(t, e, n);
       return i ? (this.options.jss.plugins.onProcessRule(i), i) : null;
     }, e.toString = function (t) {
-      if (void 0 === t && (t = Yt), null == t.indent && (t.indent = Yt.indent), null == t.children && (t.children = Yt.children), !1 === t.children) return this.query + " {}";
+      if (void 0 === t && (t = _t), null == t.indent && (t.indent = _t.indent), null == t.children && (t.children = _t.children), !1 === t.children) return this.query + " {}";
       var e = this.rules.toString(t);
       return e ? this.query + " {\n" + e + "\n}" : "";
     }, t;
   }(),
-      Wt = /@media|@supports\s+/,
-      Jt = {
+      Ft = /@media|@supports\s+/,
+      qt = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return Wt.test(t) ? new Qt(t, e, n) : null;
+      return Ft.test(t) ? new zt(t, e, n) : null;
     }
   },
-      $t = {
+      Yt = {
     indent: 1,
     children: !0
   },
-      Zt = /@keyframes\s+([\w-]+)/,
-      Ht = function () {
+      Xt = /@keyframes\s+([\w-]+)/,
+      Qt = function () {
     function t(t, e, n) {
       this.type = "keyframes", this.at = "@keyframes", this.key = void 0, this.name = void 0, this.id = void 0, this.rules = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0;
-      var i = t.match(Zt);
+      var i = t.match(Xt);
       i && i[1] ? this.name = i[1] : (this.name = "noname",  false && 0), this.key = this.type + "-" + this.name, this.options = n;
       var r = n.scoped,
           o = n.sheet,
-          s = n.generateId;
+          a = n.generateId;
 
-      for (var a in this.id = !1 === r ? this.name : Gt(s(this, o)), this.rules = new ye(kt({}, n, {
+      for (var s in this.id = !1 === r ? this.name : Tt(a(this, o)), this.rules = new ce(mt({}, n, {
         parent: this
       })), e) {
-        this.rules.add(a, e[a], kt({}, n, {
+        this.rules.add(s, e[s], mt({}, n, {
           parent: this
         }));
       }
@@ -2197,29 +2199,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
 
     return t.prototype.toString = function (t) {
-      if (void 0 === t && (t = $t), null == t.indent && (t.indent = $t.indent), null == t.children && (t.children = $t.children), !1 === t.children) return this.at + " " + this.id + " {}";
+      if (void 0 === t && (t = Yt), null == t.indent && (t.indent = Yt.indent), null == t.children && (t.children = Yt.children), !1 === t.children) return this.at + " " + this.id + " {}";
       var e = this.rules.toString(t);
       return e && (e = "\n" + e + "\n"), this.at + " " + this.id + " {" + e + "}";
     }, t;
   }(),
-      Ut = /@keyframes\s+/,
-      Kt = /\$([\w-]+)/g,
-      te = function te(t, e) {
-    return "string" == typeof t ? t.replace(Kt, function (t, n) {
+      Wt = /@keyframes\s+/,
+      Jt = /\$([\w-]+)/g,
+      Zt = function Zt(t, e) {
+    return "string" == typeof t ? t.replace(Jt, function (t, n) {
       return n in e ? e[n] : ( false && 0, t);
     }) : t;
   },
-      ee = function ee(t, e, n) {
+      $t = function $t(t, e, n) {
     var i = t[e],
-        r = te(i, n);
+        r = Zt(i, n);
     r !== i && (t[e] = r);
   },
-      ne = {
+      Ht = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return "string" == typeof t && Ut.test(t) ? new Ht(t, e, n) : null;
+      return "string" == typeof t && Wt.test(t) ? new Qt(t, e, n) : null;
     },
     onProcessStyle: function onProcessStyle(t, e, n) {
-      return "style" === e.type && n ? ("animation-name" in t && ee(t, "animation-name", n.keyframes), "animation" in t && ee(t, "animation", n.keyframes), t) : t;
+      return "style" === e.type && n ? ("animation-name" in t && $t(t, "animation-name", n.keyframes), "animation" in t && $t(t, "animation", n.keyframes), t) : t;
     },
     onChangeValue: function onChangeValue(t, e, n) {
       var i = n.options.sheet;
@@ -2228,14 +2230,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       switch (e) {
         case "animation":
         case "animation-name":
-          return te(t, i.keyframes);
+          return Zt(t, i.keyframes);
 
         default:
           return t;
       }
     }
   },
-      ie = function (t) {
+      Ut = function (t) {
     function e() {
       for (var e, n = arguments.length, i = new Array(n), r = 0; r < n; r++) {
         i[r] = arguments[r];
@@ -2244,20 +2246,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return (e = t.call.apply(t, [this].concat(i)) || this).renderable = void 0, e;
     }
 
-    return It(e, t), e.prototype.toString = function (t) {
+    return Ct(e, t), e.prototype.toString = function (t) {
       var e = this.options.sheet,
-          n = !!e && e.options.link ? kt({}, t, {
+          n = !!e && e.options.link ? mt({}, t, {
         allowEmpty: !0
       }) : t;
-      return Bt(this.key, this.style, n);
+      return Et(this.key, this.style, n);
     }, e;
-  }(zt),
-      re = {
+  }(Nt),
+      Kt = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return n.parent && "keyframes" === n.parent.type ? new ie(t, e, n) : null;
+      return n.parent && "keyframes" === n.parent.type ? new Ut(t, e, n) : null;
     }
   },
-      oe = function () {
+      te = function () {
     function t(t, e, n) {
       this.type = "font-face", this.at = "@font-face", this.key = void 0, this.style = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t, this.style = e, this.options = n;
     }
@@ -2265,36 +2267,36 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return t.prototype.toString = function (t) {
       if (Array.isArray(this.style)) {
         for (var e = "", n = 0; n < this.style.length; n++) {
-          e += Bt(this.at, this.style[n]), this.style[n + 1] && (e += "\n");
+          e += Et(this.at, this.style[n]), this.style[n + 1] && (e += "\n");
         }
 
         return e;
       }
 
-      return Bt(this.at, this.style, t);
+      return Et(this.at, this.style, t);
     }, t;
   }(),
-      se = /@font-face/,
-      ae = {
+      ee = /@font-face/,
+      ne = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return se.test(t) ? new oe(t, e, n) : null;
+      return ee.test(t) ? new te(t, e, n) : null;
     }
   },
-      le = function () {
+      ie = function () {
     function t(t, e, n) {
       this.type = "viewport", this.at = "@viewport", this.key = void 0, this.style = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t, this.style = e, this.options = n;
     }
 
     return t.prototype.toString = function (t) {
-      return Bt(this.key, this.style, t);
+      return Et(this.key, this.style, t);
     }, t;
   }(),
-      ue = {
+      re = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return "@viewport" === t || "@-ms-viewport" === t ? new le(t, e, n) : null;
+      return "@viewport" === t || "@-ms-viewport" === t ? new ie(t, e, n) : null;
     }
   },
-      ce = function () {
+      oe = function () {
     function t(t, e, n) {
       this.type = "simple", this.key = void 0, this.value = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t, this.value = e, this.options = n;
     }
@@ -2311,24 +2313,24 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return this.key + " " + this.value + ";";
     }, t;
   }(),
-      pe = {
+      ae = {
     "@charset": !0,
     "@import": !0,
     "@namespace": !0
   },
-      de = [qt, Jt, ne, re, ae, ue, {
+      se = [Gt, qt, Ht, Kt, ne, re, {
     onCreateRule: function onCreateRule(t, e, n) {
-      return t in pe ? new ce(t, e, n) : null;
+      return t in ae ? new oe(t, e, n) : null;
     }
   }],
-      he = {
+      le = {
     process: !0
   },
-      fe = {
+      ue = {
     force: !0,
     process: !0
   },
-      ye = function () {
+      ce = function () {
     function t(t) {
       this.map = {}, this.raw = {}, this.index = [], this.counter = 0, this.options = void 0, this.classes = void 0, this.keyframes = void 0, this.options = t, this.classes = t.classes, this.keyframes = t.keyframes;
     }
@@ -2338,29 +2340,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var i = this.options,
           r = i.parent,
           o = i.sheet,
-          s = i.jss,
-          a = i.Renderer,
+          a = i.jss,
+          s = i.Renderer,
           l = i.generateId,
           u = i.scoped,
-          c = kt({
+          c = mt({
         classes: this.classes,
         parent: r,
         sheet: o,
-        jss: s,
-        Renderer: a,
+        jss: a,
+        Renderer: s,
         generateId: l,
         scoped: u,
         name: t,
         keyframes: this.keyframes,
         selector: void 0
       }, n),
-          p = t;
-      t in this.raw && (p = t + "-d" + this.counter++), this.raw[p] = e, p in this.classes && (c.selector = "." + Gt(this.classes[p]));
-      var d = jt(p, e, c);
-      if (!d) return null;
-      this.register(d);
+          d = t;
+      t in this.raw && (d = t + "-d" + this.counter++), this.raw[d] = e, d in this.classes && (c.selector = "." + Tt(this.classes[d]));
+      var p = Dt(d, e, c);
+      if (!p) return null;
+      this.register(p);
       var h = void 0 === c.index ? this.index.length : c.index;
-      return this.index.splice(h, 0, d), d;
+      return this.index.splice(h, 0, p), p;
     }, e.get = function (t) {
       return this.map[t];
     }, e.remove = function (t) {
@@ -2371,53 +2373,53 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var t = this.options.jss.plugins;
       this.index.slice(0).forEach(t.onProcessRule, t);
     }, e.register = function (t) {
-      this.map[t.key] = t, t instanceof Ft ? (this.map[t.selector] = t, t.id && (this.classes[t.key] = t.id)) : t instanceof Ht && this.keyframes && (this.keyframes[t.name] = t.id);
+      this.map[t.key] = t, t instanceof Bt ? (this.map[t.selector] = t, t.id && (this.classes[t.key] = t.id)) : t instanceof Qt && this.keyframes && (this.keyframes[t.name] = t.id);
     }, e.unregister = function (t) {
-      delete this.map[t.key], t instanceof Ft ? (delete this.map[t.selector], delete this.classes[t.key]) : t instanceof Ht && delete this.keyframes[t.name];
+      delete this.map[t.key], t instanceof Bt ? (delete this.map[t.selector], delete this.classes[t.key]) : t instanceof Qt && delete this.keyframes[t.name];
     }, e.update = function () {
       var t, e, n;
       if ("string" == typeof (arguments.length <= 0 ? void 0 : arguments[0]) ? (t = arguments.length <= 0 ? void 0 : arguments[0], e = arguments.length <= 1 ? void 0 : arguments[1], n = arguments.length <= 2 ? void 0 : arguments[2]) : (e = arguments.length <= 0 ? void 0 : arguments[0], n = arguments.length <= 1 ? void 0 : arguments[1], t = null), t) this.updateOne(this.map[t], e, n);else for (var i = 0; i < this.index.length; i++) {
         this.updateOne(this.index[i], e, n);
       }
     }, e.updateOne = function (e, n, i) {
-      void 0 === i && (i = he);
+      void 0 === i && (i = le);
       var r = this.options,
           o = r.jss.plugins,
-          s = r.sheet;
+          a = r.sheet;
       if (e.rules instanceof t) e.rules.update(n, i);else {
-        var a = e,
-            l = a.style;
+        var s = e,
+            l = s.style;
 
-        if (o.onUpdate(n, e, s, i), i.process && l && l !== a.style) {
-          for (var u in o.onProcessStyle(a.style, a, s), a.style) {
-            var c = a.style[u];
-            c !== l[u] && a.prop(u, c, fe);
+        if (o.onUpdate(n, e, a, i), i.process && l && l !== s.style) {
+          for (var u in o.onProcessStyle(s.style, s, a), s.style) {
+            var c = s.style[u];
+            c !== l[u] && s.prop(u, c, ue);
           }
 
-          for (var p in l) {
-            var d = a.style[p],
-                h = l[p];
-            null == d && d !== h && a.prop(p, null, fe);
+          for (var d in l) {
+            var p = s.style[d],
+                h = l[d];
+            null == p && p !== h && s.prop(d, null, ue);
           }
         }
       }
     }, e.toString = function (t) {
       for (var e = "", n = this.options.sheet, i = !!n && n.options.link, r = 0; r < this.index.length; r++) {
-        var o = this.index[r].toString(t);
-        (o || i) && (e && (e += "\n"), e += o);
+        var a = this.index[r].toString(t);
+        (a || i) && (e && (e += "\n"), e += a);
       }
 
       return e;
     }, t;
   }(),
-      ge = function () {
+      de = function () {
     function t(t, e) {
-      for (var n in this.options = void 0, this.deployed = void 0, this.attached = void 0, this.rules = void 0, this.renderer = void 0, this.classes = void 0, this.keyframes = void 0, this.queue = void 0, this.attached = !1, this.deployed = !1, this.classes = {}, this.keyframes = {}, this.options = kt({}, e, {
+      for (var n in this.options = void 0, this.deployed = void 0, this.attached = void 0, this.rules = void 0, this.renderer = void 0, this.classes = void 0, this.keyframes = void 0, this.queue = void 0, this.attached = !1, this.deployed = !1, this.classes = {}, this.keyframes = {}, this.options = mt({}, e, {
         sheet: this,
         parent: this,
         classes: this.classes,
         keyframes: this.keyframes
-      }), e.Renderer && (this.renderer = new e.Renderer(this)), this.rules = new ye(this.options), t) {
+      }), e.Renderer && (this.renderer = new e.Renderer(this)), this.rules = new ce(this.options), t) {
         this.rules.add(n, t[n]);
       }
 
@@ -2463,7 +2465,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return this.rules.toString(t);
     }, t;
   }(),
-      me = function () {
+      pe = function () {
     function t() {
       this.plugins = {
         internal: [],
@@ -2526,7 +2528,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }));
     }, t;
   }(),
-      ve = new (function () {
+      he = new (function () {
     function t() {
       this.registry = [];
     }
@@ -2549,59 +2551,59 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var n,
             i,
             r = {},
-            o = Object.keys(t);
+            a = Object.keys(t);
 
-        for (i = 0; i < o.length; i++) {
-          n = o[i], e.indexOf(n) >= 0 || (r[n] = t[n]);
+        for (i = 0; i < a.length; i++) {
+          n = a[i], e.indexOf(n) >= 0 || (r[n] = t[n]);
         }
 
         return r;
       }(e, ["attached"]), r = "", o = 0; o < this.registry.length; o++) {
-        var s = this.registry[o];
-        null != n && s.attached !== n || (r && (r += "\n"), r += s.toString(i));
+        var a = this.registry[o];
+        null != n && a.attached !== n || (r && (r += "\n"), r += a.toString(i));
       }
 
       return r;
-    }, Dt(t, [{
+    }, Ot(t, [{
       key: "index",
       get: function get() {
         return 0 === this.registry.length ? 0 : this.registry[this.registry.length - 1].options.index;
       }
     }]), t;
   }())(),
-      be = "undefined" != typeof window && window.Math == Math ? window : "undefined" != typeof self && self.Math == Math ? self : Function("return this")(),
-      we = "2f1acc6c3a606b082e5eef5e54414ffb";
+      fe = "undefined" != typeof window && window.Math == Math ? window : "undefined" != typeof self && self.Math == Math ? self : Function("return this")(),
+      ye = "2f1acc6c3a606b082e5eef5e54414ffb";
 
-  null == be[we] && (be[we] = 0);
+  null == fe[ye] && (fe[ye] = 0);
 
-  var xe = be[we]++,
-      ke = function ke(t) {
+  var ge = fe[ye]++,
+      me = function me(t) {
     void 0 === t && (t = {});
     var e = 0;
     return function (n, i) {
-      (e += 1) > 1e10 && "production" !== "production" && Pt(!1, "[JSS] You might have a memory leak. Rule counter is at " + e + ".");
+      (e += 1) > 1e10 && "production" !== "production" && xt(!1, "[JSS] You might have a memory leak. Rule counter is at " + e + ".");
       var r = "",
           o = "";
-      return i && (i.options.classNamePrefix && (o = i.options.classNamePrefix), null != i.options.jss.id && (r = String(i.options.jss.id))), t.minify ? "" + (o || "c") + xe + r + e : o + n.key + "-" + xe + (r ? "-" + r : "") + "-" + e;
+      return i && (i.options.classNamePrefix && (o = i.options.classNamePrefix), null != i.options.jss.id && (r = String(i.options.jss.id))), t.minify ? "" + (o || "c") + ge + r + e : o + n.key + "-" + ge + (r ? "-" + r : "") + "-" + e;
     };
   },
-      Oe = function Oe(t) {
+      ve = function ve(t) {
     var e;
     return function () {
       return e || (e = t()), e;
     };
   },
-      Ce = function Ce(t, e) {
+      be = function be(t, e) {
     try {
       return t.attributeStyleMap ? t.attributeStyleMap.get(e) : t.style.getPropertyValue(e);
     } catch (t) {
       return "";
     }
   },
-      Se = function Se(t, e, n) {
+      we = function we(t, e, n) {
     try {
       var i = n;
-      if (Array.isArray(n) && (i = Tt(n, !0), "!important" === n[n.length - 1])) return t.style.setProperty(e, i, "important"), !0;
+      if (Array.isArray(n) && (i = Mt(n, !0), "!important" === n[n.length - 1])) return t.style.setProperty(e, i, "important"), !0;
       t.attributeStyleMap ? t.attributeStyleMap.set(e, i) : t.style.setProperty(e, i);
     } catch (t) {
       return !1;
@@ -2609,22 +2611,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return !0;
   },
-      Pe = function Pe(t, e) {
+      xe = function xe(t, e) {
     try {
       t.attributeStyleMap ? t.attributeStyleMap.delete(e) : t.style.removeProperty(e);
     } catch (t) {
        false && 0;
     }
   },
-      Re = function Re(t, e) {
+      ke = function ke(t, e) {
     return t.selectorText = e, t.selectorText === e;
   },
-      De = Oe(function () {
+      Oe = ve(function () {
     return document.querySelector("head");
   });
 
-  function Ie(t) {
-    var e = ve.registry;
+  function Ce(t) {
+    var e = he.registry;
 
     if (e.length > 0) {
       var n = function (t, e) {
@@ -2657,7 +2659,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     if (i && "string" == typeof i) {
       var r = function (t) {
-        for (var e = De(), n = 0; n < e.childNodes.length; n++) {
+        for (var e = Oe(), n = 0; n < e.childNodes.length; n++) {
           var i = e.childNodes[n];
           if (8 === i.nodeType && i.nodeValue.trim() === t) return i;
         }
@@ -2675,12 +2677,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return !1;
   }
 
-  var Me,
-      Ee = Oe(function () {
+  var Se,
+      Pe = ve(function () {
     var t = document.querySelector('meta[property="csp-nonce"]');
     return t ? t.getAttribute("content") : null;
   }),
-      Ae = function Ae(t, e, n) {
+      Re = function Re(t, e, n) {
     try {
       if ("insertRule" in t) t.insertRule(e, n);else if ("appendRule" in t) {
         t.appendRule(e);
@@ -2691,21 +2693,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return t.cssRules[n];
   },
-      je = function je(t, e) {
+      De = function De(t, e) {
     var n = t.cssRules.length;
     return void 0 === e || e > n ? n : e;
   },
-      Ve = function () {
+      Ie = function () {
     function t(t) {
-      this.getPropertyValue = Ce, this.setProperty = Se, this.removeProperty = Pe, this.setSelector = Re, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && ve.add(t), this.sheet = t;
+      this.getPropertyValue = be, this.setProperty = we, this.removeProperty = xe, this.setSelector = ke, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && he.add(t), this.sheet = t;
       var e,
           n = this.sheet ? this.sheet.options : {},
           i = n.media,
           r = n.meta,
           o = n.element;
       this.element = o || ((e = document.createElement("style")).textContent = "\n", e), this.element.setAttribute("data-jss", ""), i && this.element.setAttribute("media", i), r && this.element.setAttribute("data-meta", r);
-      var s = Ee();
-      s && this.element.setAttribute("nonce", s);
+      var a = Pe();
+      a && this.element.setAttribute("nonce", a);
     }
 
     var e = t.prototype;
@@ -2713,12 +2715,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       if (!this.element.parentNode && this.sheet) {
         !function (t, e) {
           var n = e.insertionPoint,
-              i = Ie(e);
+              i = Ce(e);
           if (!1 !== i && i.parent) i.parent.insertBefore(t, i.node);else if (n && "number" == typeof n.nodeType) {
             var r = n,
                 o = r.parentNode;
             o ? o.insertBefore(t, r.nextSibling) :  false && 0;
-          } else De().appendChild(t);
+          } else Oe().appendChild(t);
         }(this.element, this.sheet.options);
         var t = Boolean(this.sheet && this.sheet.deployed);
         this.hasInsertedRules && t && (this.hasInsertedRules = !1, this.deploy());
@@ -2741,23 +2743,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             r = n;
 
         if ("conditional" === t.type || "keyframes" === t.type) {
-          var o = je(n, e);
-          if (!1 === (r = Ae(n, i.toString({
+          var o = De(n, e);
+          if (!1 === (r = Re(n, i.toString({
             children: !1
-          }), o))) return !1;
-          this.refCssRule(t, o, r);
+          }), a))) return !1;
+          this.refCssRule(t, a, r);
         }
 
         return this.insertRules(i.rules, r), r;
       }
 
-      var s = t.toString();
-      if (!s) return !1;
-      var a = je(n, e),
-          l = Ae(n, s, a);
-      return !1 !== l && (this.hasInsertedRules = !0, this.refCssRule(t, a, l), l);
+      var a = t.toString();
+      if (!a) return !1;
+      var s = De(n, e),
+          l = Re(n, a, s);
+      return !1 !== l && (this.hasInsertedRules = !0, this.refCssRule(t, s, l), l);
     }, e.refCssRule = function (t, e, n) {
-      t.renderable = n, t.options.parent instanceof ge && (this.cssRules[e] = n);
+      t.renderable = n, t.options.parent instanceof de && (this.cssRules[e] = n);
     }, e.deleteRule = function (t) {
       var e = this.element.sheet,
           n = this.indexOf(t);
@@ -2771,22 +2773,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return this.element.sheet.cssRules;
     }, t;
   }(),
-      Te = 0,
-      Ne = new (function () {
+      Me = 0,
+      Ae = new (function () {
     function t(t) {
-      this.id = Te++, this.version = "10.5.0", this.plugins = new me(), this.options = {
+      this.id = Me++, this.version = "10.5.0", this.plugins = new pe(), this.options = {
         id: {
           minify: !1
         },
-        createGenerateId: ke,
-        Renderer: Ct ? Ve : null,
+        createGenerateId: me,
+        Renderer: bt ? Ie : null,
         plugins: []
-      }, this.generateId = ke({
+      }, this.generateId = me({
         minify: !1
       });
 
-      for (var e = 0; e < de.length; e++) {
-        this.plugins.use(de[e], {
+      for (var e = 0; e < se.length; e++) {
+        this.plugins.use(se[e], {
           queue: "internal"
         });
       }
@@ -2796,12 +2798,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     var e = t.prototype;
     return e.setup = function (t) {
-      return void 0 === t && (t = {}), t.createGenerateId && (this.options.createGenerateId = t.createGenerateId), t.id && (this.options.id = kt({}, this.options.id, t.id)), (t.createGenerateId || t.id) && (this.generateId = this.options.createGenerateId(this.options.id)), null != t.insertionPoint && (this.options.insertionPoint = t.insertionPoint), "Renderer" in t && (this.options.Renderer = t.Renderer), t.plugins && this.use.apply(this, t.plugins), this;
+      return void 0 === t && (t = {}), t.createGenerateId && (this.options.createGenerateId = t.createGenerateId), t.id && (this.options.id = mt({}, this.options.id, t.id)), (t.createGenerateId || t.id) && (this.generateId = this.options.createGenerateId(this.options.id)), null != t.insertionPoint && (this.options.insertionPoint = t.insertionPoint), "Renderer" in t && (this.options.Renderer = t.Renderer), t.plugins && this.use.apply(this, t.plugins), this;
     }, e.createStyleSheet = function (t, e) {
       void 0 === e && (e = {});
       var n = e.index;
-      "number" != typeof n && (n = 0 === ve.index ? 0 : ve.index + 1);
-      var i = new ge(t, kt({}, e, {
+      "number" != typeof n && (n = 0 === he.index ? 0 : he.index + 1);
+      var i = new de(t, mt({}, e, {
         jss: this,
         generateId: e.generateId || this.generateId,
         insertionPoint: this.options.insertionPoint,
@@ -2810,16 +2812,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }));
       return this.plugins.onProcessSheet(i), i;
     }, e.removeStyleSheet = function (t) {
-      return t.detach(), ve.remove(t), this;
+      return t.detach(), he.remove(t), this;
     }, e.createRule = function (t, e, n) {
       if (void 0 === e && (e = {}), void 0 === n && (n = {}), "object" == _typeof(t)) return this.createRule(void 0, t, e);
-      var i = kt({}, n, {
+      var i = mt({}, n, {
         name: t,
         jss: this,
         Renderer: this.options.Renderer
       });
       i.generateId || (i.generateId = this.generateId), i.classes || (i.classes = {}), i.keyframes || (i.keyframes = {});
-      var r = jt(t, e, i);
+      var r = Dt(t, e, i);
       return r && this.plugins.onProcessRule(r), r;
     }, e.use = function () {
       for (var t = this, e = arguments.length, n = new Array(e), i = 0; i < e; i++) {
@@ -2830,18 +2832,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         t.plugins.use(e);
       }), this;
     }, t;
-  }())(Me);
+  }())(Se);
 
-  var Be = n.default.loadPlugin(yt),
-      _e = function (t) {
-    s(r, t);
+  var Ee = n.default.loadPlugin(yt),
+      je = function (t) {
+    a(r, t);
     var e = c(r);
 
     function r() {
       return i(this, r), e.apply(this, arguments);
     }
 
-    return o(r, [{
+    return a(r, [{
       key: "buildTree",
       value: function value() {
         if (this.opacityControl(), this.attrs.timings.intro) {
@@ -2849,7 +2851,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               e = new n.default.Group(),
               i = new n.default.Combo({
             incidents: [{
-              incidentClass: Be.Anime,
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   height: "70%"
@@ -2860,12 +2862,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".y-axis",
-                duration: .2 * this.introDur,
+                duration: Math.trunc(.2 * this.introDur),
                 easing: "easeInQuad"
               },
-              position: 0 * this.introDur
+              position: Math.trunc(0 * this.introDur)
             }, {
-              incidentClass: Be.Anime,
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   width: "74%"
@@ -2876,16 +2878,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".x-axis",
-                duration: .3 * this.introDur,
+                duration: Math.trunc(.3 * this.introDur),
                 easing: "easeOutQuad"
               },
-              position: .2 * this.introDur
+              position: Math.trunc(.2 * this.introDur)
             }]
           }, {
             selector: ".container"
           });
           e.addIncident(i, 0 * this.introDur);
-          var r = new Be.Anime({
+          var r = new Ee.Anime({
             animatedAttrs: {
               width: "100%"
             },
@@ -2894,12 +2896,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".gridLine",
-            duration: .5 * this.introDur,
+            duration: Math.trunc(.5 * this.introDur),
             easing: "easeOutQuad"
           });
           e.addIncident(r, .2 * this.introDur);
           var o = new n.default.Group();
-          o.addIncident(new Be.Anime({
+          o.addIncident(new Ee.Anime({
             animatedAttrs: {
               width: "100%"
             },
@@ -2908,15 +2910,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".title-background",
-            duration: .25 * this.introDur,
+            duration: Math.trunc(.25 * this.introDur),
             easing: "easeInOutQuad"
           }), 0);
-          var s = 2 * (.7 * this.introDur) / (this.title.length + 1),
-              a = [];
+          var a = 2 * (.7 * this.introDur) / (this.title.length + 1),
+              s = [];
 
           for (var l in this.title) {
-            a.push({
-              incidentClass: Be.Anime,
+            s.push({
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   left: "0px",
@@ -2929,25 +2931,25 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(l),
-                duration: s,
+                duration: a,
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(s * l / 2)
+              position: Math.trunc(a * l / 2)
             });
           }
 
           var u = new n.default.Combo({
-            incidents: a
+            incidents: s
           }, {
             selector: ".title-wrapper"
           });
-          o.addIncident(u, .25 * this.introDur);
+          a.addIncident(u, Math.trunc(.25 * this.introDur));
           var c = 2 * (.8 * this.introDur) / (this.subtitle.length + 1),
-              p = [];
+              d = [];
 
-          for (var d in this.subtitle) {
-            p.push({
-              incidentClass: Be.Anime,
+          for (var p in this.subtitle) {
+            d.push({
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   left: "0px",
@@ -2959,22 +2961,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                selector: "#letter-".concat(d),
+                selector: "#letter-".concat(p),
                 duration: c,
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(c * d / 2)
+              position: Math.trunc(c * p / 2)
             });
           }
 
           var h = new n.default.Combo({
-            incidents: p
+            incidents: d
           }, {
             selector: ".subtitle-wrapper"
           });
-          o.addIncident(h, .1 * this.introDur), e.addIncident(o, .05 * this.introDur);
+          a.addIncident(p, Math.trunc(.1 * this.introDur)), e.addIncident(a, Math.trunc(.05 * this.introDur));
           var f = new n.default.Group();
-          f.addIncident(new Be.Anime({
+          f.addIncident(new Ee.Anime({
             animatedAttrs: {
               width: "70%"
             },
@@ -2983,7 +2985,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".x-labels-back-wrapper",
-            duration: .25 * this.introDur,
+            duration: Math.trunc(.25 * this.introDur),
             easing: "easeInOutCubic"
           }), 0);
           var y = 2 * t / (this.data.length + 1);
@@ -2994,7 +2996,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
             for (var b in this.data[g].name) {
               v.push({
-                incidentClass: Be.Anime,
+                incidentClass: Ee.Anime,
                 attrs: {
                   animatedAttrs: {
                     top: "0px",
@@ -3019,13 +3021,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }, {
               selector: ".label-container"
             });
-            f.addIncident(w, t / (this.data.length + 1) * g);
+            f.addIncident(w, Math.trunc(t / (this.data.length + 1) * g));
           }
 
-          e.addIncident(f, .05 * this.introDur);
+          e.addIncident(f, Math.trunc(.05 * this.introDur));
           var x = new n.default.Combo({
             incidents: [{
-              incidentClass: Be.Anime,
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   height: "100%"
@@ -3035,24 +3037,24 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                duration: .3 * this.introDur,
+                duration: Math.trunc(.3 * this.introDur),
                 easing: "easeInOutQuad"
               },
               position: 0
             }]
           }, {
             selector: ".bar-fill",
-            delay: "@stagger(0, ".concat(.4 * this.introDur, ")")
+            delay: "@stagger(0, ".concat(Math.trunc(.4 * this.introDur), ")")
           });
-          e.addIncident(x, .3 * this.introDur), this.addIncident(e, 0 * this.introDur);
+          e.addIncident(x, Math.trunc(.3 * this.introDur)), this.addIncident(e, 0 * this.introDur);
         }
 
         if (this.attrs.timings.outro) {
-          var k = .75 * this.outroDur,
-              O = new n.default.Group(),
-              C = new n.default.Combo({
+          var O = .75 * this.outroDur,
+              k = new n.default.Group(),
+              M = new n.default.Combo({
             incidents: [{
-              incidentClass: Be.Anime,
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   width: "0%"
@@ -3063,12 +3065,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".x-axis",
-                duration: .2 * this.outroDur,
+                duration: Math.trunc(.2 * this.outroDur),
                 easing: "easeInQuad"
               },
               position: 0 * this.outroDur
             }, {
-              incidentClass: Be.Anime,
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   height: "0%"
@@ -3079,16 +3081,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: ".y-axis",
-                duration: .3 * this.outroDur,
+                duration: Math.trunc(.3 * this.outroDur),
                 easing: "easeOutQuad"
               },
-              position: .2 * this.outroDur
+              position: Math.trunc(.2 * this.outroDur)
             }]
           }, {
             selector: ".container"
           });
           O.addIncident(C, .5 * this.outroDur);
-          var S = new Be.Anime({
+          var S = new Ee.Anime({
             animatedAttrs: {
               width: "0%"
             },
@@ -3098,11 +3100,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, {
             selector: ".gridlines",
             easing: "easeInOutQuad",
-            duration: .5 * this.outroDur
+            duration: Math.trunc(.5 * this.outroDur)
           });
           O.addIncident(S, .2 * this.outroDur);
           var P = new n.default.Group();
-          P.addIncident(new Be.Anime({
+          P.addIncident(new Ee.Anime({
             animatedAttrs: {
               width: "0%"
             },
@@ -3111,15 +3113,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".title-back-wrapper",
-            duration: .45 * this.outroDur,
+            duration: Math.trunc(.45 * this.outroDur),
             easing: "easeInOutQuad"
-          }), .4 * this.outroDur);
-          var R = 2 * (.8 * this.outroDur) / (this.title.length + 1),
-              D = [];
+          }), Math.trunc(.4 * this.outroDur));
+          var S = 2 * (.8 * this.outroDur) / (this.title.length + 1),
+              C = [];
 
           for (var I in this.title) {
             D.push({
-              incidentClass: Be.Anime,
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   left: "20px",
@@ -3132,25 +3134,25 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(I),
-                duration: R,
+                duration: Math.trunc(S),
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(R * (this.title.length - I - 1) / 2)
+              position: Math.trunc(S * (this.title.length - I - 1) / 2)
             });
           }
 
-          var M = new n.default.Combo({
-            incidents: D
+          var A = new n.default.Combo({
+            incidents: C
           }, {
             selector: ".title-wrapper"
           });
           P.addIncident(M, .1 * this.outroDur);
-          var E = 2 * (.4 * this.outroDur) / (this.subtitle.length + 1),
-              A = [];
+          var A = 2 * (.4 * this.outroDur) / (this.subtitle.length + 1),
+              E = [];
 
           for (var j in this.subtitle) {
-            A.push({
-              incidentClass: Be.Anime,
+            E.push({
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   left: "20px",
@@ -3163,21 +3165,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(j),
-                duration: E,
+                duration: A,
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(E * (this.subtitle.length - j - 1) / 2)
+              position: Math.trunc(A * (this.subtitle.length - j - 1) / 2)
             });
           }
 
           var V = new n.default.Combo({
-            incidents: A
+            incidents: E
           }, {
             selector: ".subtitle-wrapper"
           });
-          P.addIncident(V, 0 * this.outroDur), O.addIncident(P, .05 * this.outroDur);
+          D.addIncident(V, Math.trunc(0 * this.outroDur)), k.addIncident(D, Math.trunc(.05 * this.outroDur));
           var T = new n.default.Group();
-          T.addIncident(new Be.Anime({
+          T.addIncident(new Ee.Anime({
             animatedAttrs: {
               width: "0%"
             },
@@ -3186,18 +3188,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".x-labels-background",
-            duration: .45 * this.outroDur,
+            duration: Math.trunc(.45 * this.outroDur),
             easing: "easeInOutCubic"
           }), .4 * this.outroDur);
-          var N = 2 * k / (this.data.length + 1);
+          var z = 2 * O / (this.data.length + 1);
 
           for (var B in this.data) {
-            var _ = 2 * N / (this.data[B].name.length + 1),
-                L = [];
+            var G = 2 * N / (this.data[B].name.length + 1),
+                _ = [];
 
-            for (var G in this.data[B].name) {
-              L.push({
-                incidentClass: Be.Anime,
+            for (var L in this.data[B].name) {
+              _.push({
+                incidentClass: Ee.Anime,
                 attrs: {
                   animatedAttrs: {
                     opacity: 0,
@@ -3209,29 +3211,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                   }
                 },
                 props: {
-                  selector: "#letter-".concat(B, "-").concat(G),
-                  duration: Math.trunc(_),
+                  selector: "#letter-".concat(B, "-").concat(L),
+                  duration: Math.trunc(G),
                   easing: "easeInQuart"
                 },
-                position: Math.trunc(_ * G / 2)
+                position: Math.trunc(G * L / 2)
               });
             }
 
             var z = new n.default.Combo({
-              incidents: L
+              incidents: _
             }, {
               selector: ".label-container"
             });
-            T.addIncident(z, k / (this.data.length + 1) * B);
+            T.addIncident(B, Math.trunc(O / (this.data.length + 1) * N));
           }
 
-          O.addIncident(T, .05 * this.outroDur);
+          k.addIncident(T, Math.trunc(.05 * this.outroDur));
           this.outroDur, this.data.length;
           var F = [];
 
-          for (var q in this.data) {
+          for (var X in this.data) {
             F.push({
-              incidentClass: Be.Anime,
+              incidentClass: Ee.Anime,
               attrs: {
                 animatedAttrs: {
                   height: "0%"
@@ -3241,11 +3243,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                duration: .3 * this.outroDur,
+                duration: Math.trunc(.3 * this.outroDur),
                 easing: "easeInOutCubic",
-                selector: "#".concat(this.data[q].name, "-bar-fill")
+                selector: "#".concat(this.data[X].name, "-bar-fill")
               },
-              position: Math.trunc(E * (this.data.length - q - 1) / 2)
+              position: Math.trunc(A * (this.data.length - q - 1) / 2)
             });
           }
 
@@ -3254,21 +3256,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, {
             selector: ".graph"
           });
-          O.addIncident(Y, 0 * this.outroDur), this.addIncident(O, 0 + this.introDur + this.staticDur);
+          k.addIncident(Y, 0 * this.outroDur), this.addIncident(k, 0 + this.introDur + this.staticDur);
         }
 
-        var X = new Be.Anime({
+        var X = new Ee.Anime({
           animatedAttrs: {}
         }, {
           selector: ".container",
           duration: this.staticDur
         });
-        this.addIncident(X, this.introDur);
+        this.addIncident(W, this.introDur);
       }
     }, {
       key: "opacityControl",
       value: function value() {
-        this.addIncident(new Be.Anime({
+        this.addIncident(new Ee.Anime({
           animatedAttrs: {
             opacity: 1
           },
@@ -3278,7 +3280,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }, {
           selector: ".container",
           duration: 1
-        }), 0), this.addIncident(new Be.Anime({
+        }), 0), this.addIncident(new Ee.Anime({
           animatedAttrs: {
             opacity: 0
           }
@@ -3290,7 +3292,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "buildVars",
       value: function value() {
-        this.data = this.attrs.data.data, this.title = this.attrs.data.title, this.subtitle = this.attrs.data.subtitle, this.maxPoint = 0, this.gridLinesNum = this.attrs.data.showGrid ? 11 : 0, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : gt, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : mt, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : vt, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : bt, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : wt, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : xt, this.attrs.font = this.attrs.font ? this.attrs.font : {}, this.fontFamily = this.attrs.font.fontFamily ? this.attrs.font.fontFamily : "'Staatliches', cursive", this.fontSize = this.attrs.font.size ? this.attrs.font.size : "1.7rem", this.url = this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap", this.attrs.timings = this.attrs.timings ? this.attrs.timings : {}, this.introDur = this.attrs.timings.intro ? this.attrs.timings.intro : 0, this.outroDur = this.attrs.timings.outro ? this.attrs.timings.outro : 0, 0 === this.attrs.timings.static ? this.staticDur = 0 : this.staticDur = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
+        this.data = this.attrs.data.data, this.title = this.attrs.data.title, this.subtitle = this.attrs.data.subtitle, this.maxPoint = 0, this.gridLinesNum = this.attrs.data.showGrid ? 11 : 0, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : gt.gray, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : gt.lightGray, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : gt.darkGray, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : gt.font, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : gt.accent, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : gt.background, this.attrs.font = this.attrs.font ? this.attrs.font : {}, this.fontFamily = this.attrs.font.fontFamily ? this.attrs.font.fontFamily : "'Staatliches', cursive", this.fontSize = this.attrs.font.size ? this.attrs.font.size : "1.7rem", this.url = this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap", this.attrs.timings = this.attrs.timings ? this.attrs.timings : {}, this.introDur = this.attrs.timings.intro ? this.attrs.timings.intro : 0, this.outroDur = this.attrs.timings.outro ? this.attrs.timings.outro : 0, 0 === this.attrs.timings.static ? this.staticDur = 0 : this.staticDur = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
       }
     }, {
       key: "html",
@@ -3311,18 +3313,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, r));
         }
 
-        var o = [];
+        var a = [];
 
-        for (var s in this.subtitle) {
-          var a = [];
-          " " === this.subtitle[s] ? a.push(n.default.utils.createDOMElement("div", {
+        for (var a in this.subtitle) {
+          var s = [];
+          " " === this.subtitle[a] ? s.push(n.default.utils.createDOMElement("div", {
             class: "space-char letter-wrapper"
-          }, "-")) : a.push(n.default.utils.createDOMElement("div", {
+          }, "-")) : s.push(n.default.utils.createDOMElement("div", {
             class: "fontColorOn letter-wrapper"
-          }, this.subtitle[s])), o.push(n.default.utils.createDOMElement("div", {
-            id: "letter-" + s,
+          }, this.subtitle[a])), o.push(n.default.utils.createDOMElement("div", {
+            id: "letter-" + a,
             class: "letter-container"
-          }, a));
+          }, s));
         }
 
         for (var l = [], u = 0; u < this.gridLinesNum; u++) {
@@ -3334,22 +3336,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         var c = [];
 
-        for (var p in this.data) {
-          var d = [];
+        for (var d in this.data) {
+          var p = [];
 
-          for (var h in this.data[p].name.length > 3 && (this.data[p].name = this.data[p].name.slice(0, 3)), this.data[p].name) {
-            d.push(n.default.utils.createDOMElement("div", {
-              id: "letter-" + p + "-" + h,
+          for (var h in this.data[d].name.length > 3 && (this.data[d].name = this.data[d].name.slice(0, 3)), this.data[d].name) {
+            p.push(n.default.utils.createDOMElement("div", {
+              id: "letter-" + d + "-" + h,
               class: "letter-container"
             }, n.default.utils.createDOMElement("div", {
               class: "letter-wrapper fontColorOn"
-            }, this.data[p].name[h])));
+            }, this.data[d].name[h])));
           }
 
           c.push(n.default.utils.createDOMElement("div", {
             class: "label-container",
-            id: "label-" + p
-          }, d));
+            id: "label-" + d
+          }, p));
         }
 
         var f = this.data.map(function (e) {
@@ -3370,7 +3372,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           class: "subtitle-position-end"
         }, n.default.utils.createDOMElement("div", {
           class: "subtitle-wrapper"
-        }, o))), n.default.utils.createDOMElement("div", {
+        }, a))), n.default.utils.createDOMElement("div", {
           class: "title-back-wrapper"
         }, n.default.utils.createDOMElement("div", {
           class: "title-background block-background"
@@ -3396,7 +3398,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       key: "css",
       get: function get() {
         return function (t) {
-          Ne.setup({
+          Ae.setup({
             createGenerateId: function createGenerateId() {
               return function (t) {
                 return t.key;
@@ -3445,7 +3447,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             "bar-container": {
               "align-self": "flex-end",
-              width: 100 / t.data.length + "%",
+              width: "".concat(100 / t.data.length, "%"),
               margin: "0% ".concat(10 / t.data.length + 1, "%"),
               height: "100%",
               display: "flex"
@@ -3566,16 +3568,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           };
           return t.data.map(function (n) {
-            e[n.name + "-bar"] = {
+            e["".concat(n.name, "-bar")] = {
               "align-self": "flex-end",
-              width: 100 / t.data.length + "%",
+              width: "".concat(100 / t.data.length, "%"),
               margin: "0% ".concat(10 / t.data.length + 1, "%"),
               height: "100%",
               display: "flex"
-            }, e[n.name + "-bar"].height = n.value.toFixed(2) / t.maxPoint * 100 + "%", e[n.name + "-bar-fill"] = {
+            }, e["".concat(n.name, "-bar")].height = "".concat(n.value.toFixed(2) / t.maxPoint * 100, "%"), e["".concat(n.name, "-bar-fill")] = {
               height: "100%"
             };
-          }), Ne.createStyleSheet(e).toString();
+          }), Ae.createStyleSheet(e).toString();
         }({
           data: this.data,
           maxPoint: this.maxPoint,
@@ -3600,227 +3602,358 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), r;
   }(n.default.HTMLClip);
 
-  var Le = n.default.loadPlugin(yt);
+  var Ve = n.default.loadPlugin(yt),
+      Te = function (t) {
+    a(r, t);
+    var e = c(r);
+
+    function r() {
+      return i(this, r), e.apply(this, arguments);
+    }
+
+    return o(r, [{
+      key: "buildTree",
+      value: function value() {
+        var t,
+            e = this.barSum / this.barCount;
+
+        if (this.opacityControl(), null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
+          for (var n = Math.floor(.33 * this.attrs.timings.intro), i = Math.floor(.25 * this.attrs.timings.intro), r = Math.floor(.33 * this.attrs.timings.intro), o = Math.floor(.09 * this.attrs.timings.intro), a = 0; a < this.barCount; a++) {
+            var s = new Ve.Anime({
+              animatedAttrs: {
+                bottom: "".concat(50 + 100 * (e - a) / this.barCount - 60 / this.barCount * 2.15, "%")
+              },
+              initialValues: {
+                bottom: "-".concat(65 / this.barCount, "%")
+              }
+            }, {
+              duration: n,
+              selector: ".row-".concat(a),
+              easing: "linear"
+            }),
+                l = new Ve.Anime({
+              animatedAttrs: {
+                width: "60%"
+              },
+              initialValues: {
+                width: "0.2%"
+              }
+            }, {
+              duration: i,
+              delay: Math.round(200 / this.attrs.timings.intro) * a,
+              selector: ".container-bar-".concat(a),
+              easing: "linear"
+            }),
+                u = new Ve.Anime({
+              animatedAttrs: {
+                width: "".concat(this.attrs.data[a].value.toFixed(2), "%")
+              },
+              initialValues: {
+                width: "0px"
+              }
+            }, {
+              duration: r,
+              delay: Math.round(200 / this.attrs.timings.intro) * a,
+              selector: ".inner-bar-".concat(a),
+              easing: "linear"
+            });
+            this.addIncident(s, 0), this.addIncident(l, n), this.addIncident(u, n + i);
+          }
+
+          var c = new Ve.Anime({
+            animatedAttrs: {
+              left: "62%",
+              opacity: 1
+            },
+            initialValues: {
+              left: "58%",
+              opacity: 0
+            }
+          }, {
+            duration: o,
+            delay: Math.round(200 / this.attrs.timings.intro) * this.barCount,
+            selector: ".text",
+            easing: "linear"
+          });
+          this.addIncident(c, n + i + r);
+        }
+
+        var d = new Ve.Anime({
+          animatedAttrs: {}
+        }, {
+          duration: this.attrs.timings.static ? this.attrs.timings.static : 1e3,
+          selector: ".container"
+        });
+
+        if (this.addIncident(d, this.attrs.timings.intro), this.attrs.timings.outro) {
+          var p = new Ve.Anime({
+            animatedAttrs: {
+              opacity: 0
+            }
+          }, {
+            duration: this.attrs.timings.outro,
+            selector: ".container",
+            easing: "linear"
+          });
+          this.addIncident(p, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1e3));
+        }
+      }
+    }, {
+      key: "opacityControl",
+      value: function value() {
+        this.addIncident(new Ve.Anime({
+          animatedAttrs: {
+            opacity: 1
+          },
+          initialValues: {
+            opacity: 0
+          }
+        }, {
+          selector: ".container",
+          duration: 1
+        }), 0), this.attrs.timings.outro || this.addIncident(new Ve.Anime({
+          animatedAttrs: {
+            opacity: 0
+          }
+        }, {
+          selector: ".container",
+          duration: 1
+        }), this.attrs.timings.intro + this.attrs.timings.static - 1);
+      }
+    }, {
+      key: "html",
+      get: function get() {
+        var t = this,
+            e = this.attrs.data.map(function (e, i) {
+          var r;
+          return n.default.utils.createDOMElement("div", {
+            class: "row row-" + i
+          }, n.default.utils.createDOMElement("div", {
+            class: "bar-header"
+          }, e.name), n.default.utils.createDOMElement("div", {
+            class: "container-bar container-bar-" + i
+          }, n.default.utils.createDOMElement("div", {
+            class: "inner-bar inner-bar-" + i + " " + (e.value < t.criticalValue ? "extra-rounded-" + i : null)
+          })), n.default.utils.createDOMElement("div", {
+            class: "text text-" + i
+          }, null !== (r = t.attrs.options) && void 0 !== r && r.hidePercentage ? null : (e.value > 0 ? e.value.toFixed(2) : 0) + "%"));
+        });
+        return n.default.utils.createDOMElement("div", {
+          class: "container"
+        }, e);
+      }
+    }, {
+      key: "css",
+      get: function get() {
+        return function (t) {
+          Ae.setup({
+            createGenerateId: function createGenerateId() {
+              return function (t) {
+                return t.key;
+              };
+            }
+          });
+          var e = {
+            container: {
+              height: "100%",
+              background: t.palette.background ? t.palette.background : gt.background,
+              display: "flex",
+              color: t.palette.font ? t.palette.font : gt.font,
+              "font-family": t.font.fontFamily ? t.font.fontFamily : "'Staatliches', cursive",
+              "font-size": t.font.size ? t.font.size : "1.2rem"
+            },
+            row: {
+              display: "flex",
+              "flex-direction": "row",
+              position: "absolute",
+              left: "20%",
+              "align-items": "center",
+              height: "".concat(60 / t.barCount, "%"),
+              width: "100%"
+            },
+            "container-bar": {
+              position: "absolute",
+              height: "100%",
+              background: t.palette.secondary ? t.palette.secondary : gt.darkGray,
+              "border-radius": "4rem",
+              width: "60%",
+              "box-shadow": "2px 2px 5px gray",
+              border: "0.2rem solid ".concat(t.palette.accent ? t.palette.accent : gt.accent),
+              "z-index": "1",
+              overflow: "hidden"
+            },
+            "inner-bar": {
+              position: "relative",
+              background: t.palette.primary ? t.palette.primary : gt.lightGray,
+              height: "102%",
+              "border-radius": "4rem",
+              bottom: "-1px",
+              "z-index": "2px",
+              top: "-0.5px"
+            },
+            text: {
+              position: "relative",
+              "z-index": "0",
+              opacity: "1",
+              left: "62%"
+            },
+            "bar-header": {
+              position: "absolute",
+              left: "-21%",
+              "text-align": "right",
+              width: "20%"
+            }
+          },
+              n = t.barSum / t.barCount;
+          return t.data.forEach(function (i, r) {
+            e["row-".concat(r)] = {
+              bottom: "".concat(50 + 100 * (n - r) / t.barCount - 60 / t.barCount * 2.15, "%")
+            }, e["inner-bar-".concat(r)] = {
+              width: "".concat(i.value.toFixed(2), "%")
+            };
+          }), Ae.createStyleSheet(e).toString();
+        }({
+          barSum: this.barSum,
+          barCount: this.barCount,
+          data: this.attrs.data,
+          palette: this.attrs.palette ? this.attrs.palette : {},
+          font: this.attrs.font ? this.attrs.font : {},
+          options: this.attrs.options ? this.attrs.options : {}
+        });
+      }
+    }, {
+      key: "fonts",
+      get: function get() {
+        var t;
+        return [{
+          type: "google-font",
+          src: null !== (t = this.attrs.font) && void 0 !== t && t.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+        }];
+      }
+    }, {
+      key: "barSum",
+      get: function get() {
+        for (var t = 0, e = 1; e <= this.barCount; e++) {
+          t += e;
+        }
+
+        return t;
+      }
+    }, {
+      key: "barCount",
+      get: function get() {
+        return this.attrs.data.length;
+      }
+    }, {
+      key: "criticalValue",
+      get: function get() {
+        return this.barCount / 10 == 1 ? this.barCount / 10 * 10 : this.barCount / 10 > 1 ? 10 * (this.barCount / 10 - 1) : 10 * (this.barCount / 10 + 1);
+      }
+    }]), r;
+  }(n.default.HTMLClip),
+      Ne = n.default.loadPlugin(yt);
+
   return {
     npm_name: "motorcortex-graphs",
     incidents: [{
+      exportable: Te,
+      name: "ProgressBar",
+      originalDims: {
+        width: "1200px",
+        height: "900px"
+      }
+    }, {
+      exportable: je,
+      name: "BarChartSimple",
+      originalDims: {
+        width: "1200px",
+        height: "900px"
+      }
+    }, {
       exportable: function (t) {
-        s(r, t);
+        a(r, t);
         var e = c(r);
 
-        function r() {
-          return i(this, r), e.apply(this, arguments);
-        }
+    function r() {
+      return i(this, r), e.apply(this, arguments);
+    }
 
         return o(r, [{
           key: "buildTree",
           value: function value() {
-            var t,
-                e = this.barSum / this.barCount;
+            var t, e, n, i, r;
 
-            if (this.opacityControl(), null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
-              for (var n = Math.floor(.33 * this.attrs.timings.intro), i = Math.floor(.25 * this.attrs.timings.intro), r = Math.floor(.33 * this.attrs.timings.intro), o = Math.floor(.09 * this.attrs.timings.intro), s = 0; s < this.barCount; s++) {
-                var a = new Le.Anime({
-                  animatedAttrs: {
-                    bottom: "".concat(50 + 100 * (e - s) / this.barCount - 60 / this.barCount * 2.15, "%")
-                  },
-                  initialValues: {
-                    bottom: "-".concat(65 / this.barCount, "%")
-                  }
-                }, {
-                  duration: n,
-                  selector: ".row-".concat(s),
-                  easing: "linear"
-                }),
-                    l = new Le.Anime({
-                  animatedAttrs: {
-                    width: "60%"
-                  },
-                  initialValues: {
-                    width: "0.2%"
-                  }
-                }, {
-                  duration: i,
-                  delay: Math.round(200 / this.attrs.timings.intro) * s,
-                  selector: ".container-bar-".concat(s),
-                  easing: "linear"
-                }),
-                    u = new Le.Anime({
-                  animatedAttrs: {
-                    width: "".concat(this.attrs.data[s].value.toFixed(2), "%")
-                  },
-                  initialValues: {
-                    width: "0px"
-                  }
-                }, {
-                  duration: r,
-                  delay: Math.round(200 / this.attrs.timings.intro) * s,
-                  selector: ".inner-bar-".concat(s),
-                  easing: "linear"
-                });
-                this.addIncident(a, 0), this.addIncident(l, n), this.addIncident(u, n + i);
-              }
-
-              var c = new Le.Anime({
+            if (null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
+              var o,
+                  a,
+                  s = Math.round(.2 * (null === (o = this.attrs.timings) || void 0 === o ? void 0 : o.intro)),
+                  l = Math.round(.8 * (null === (a = this.attrs.timings) || void 0 === a ? void 0 : a.intro)),
+                  u = new Ne.Anime({
                 animatedAttrs: {
-                  left: "62%",
                   opacity: 1
                 },
                 initialValues: {
-                  left: "58%",
                   opacity: 0
                 }
               }, {
-                duration: o,
-                delay: Math.round(200 / this.attrs.timings.intro) * this.barCount,
-                selector: ".text",
-                easing: "linear"
-              });
-              this.addIncident(c, n + i + r);
-            }
-
-            var p = new Le.Anime({
-              animatedAttrs: {}
-            }, {
-              duration: this.attrs.timings.static ? this.attrs.timings.static : 1e3,
-              selector: ".container"
-            });
-
-            if (this.addIncident(p, this.attrs.timings.intro), this.attrs.timings.outro) {
-              var d = new Le.Anime({
-                animatedAttrs: {
-                  opacity: 0
-                }
-              }, {
-                duration: this.attrs.timings.outro,
+                duration: s,
                 selector: ".container",
                 easing: "linear"
               });
-              this.addIncident(d, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1e3));
+              this.addIncident(u, 0);
+              var c = new Ne.Anime({
+                animatedAttrs: {
+                  "background-image": "conic-gradient(".concat(this.createRadiusString(), ")")
+                },
+                initialValues: {
+                  "background-image": "conic-gradient(black 0deg)"
+                }
+              }, {
+                duration: l,
+                selector: ".piechart",
+                easing: "easeOutCubic"
+              });
+              this.addIncident(c, s);
             }
+
+            var d = new Ne.Anime({
+              animatedAttrs: {}
+            }, {
+              duration: null !== (e = this.attrs.timings) && void 0 !== e && e.static ? null === (n = this.attrs.timings) || void 0 === n ? void 0 : n.static : 1e3,
+              selector: ".container"
+            });
+            this.addIncident(d, null !== (i = this.attrs.timings) && void 0 !== i && i.intro ? null === (r = this.attrs.timings) || void 0 === r ? void 0 : r.intro : 0);
           }
         }, {
-          key: "opacityControl",
+          key: "createRadiusString",
           value: function value() {
-            this.addIncident(new Le.Anime({
-              animatedAttrs: {
-                opacity: 1
-              },
-              initialValues: {
-                opacity: 0
-              }
-            }, {
-              selector: ".container",
-              duration: 1
-            }), 0), this.attrs.timings.outro || this.addIncident(new Le.Anime({
-              animatedAttrs: {
-                opacity: 0
-              }
-            }, {
-              selector: ".container",
-              duration: 1
-            }), this.attrs.timings.intro + this.attrs.timings.static - 1);
+            var t = this,
+                e = "";
+            return this.radiusValues.forEach(function (n, i) {
+              e += "".concat(gt.pieColors[i], " 0 ").concat(n, "deg ").concat(t.attrs.data.data.length - 1 === i ? "" : ", ");
+            }), e;
+          }
+        }, {
+          key: "calculateRadius",
+          value: function value(t, e) {
+            return 0 === e ? t.value / 100 * 360 : this.calculateRadius(this.attrs.data.data[e - 1], e - 1) + t.value / 100 * 360;
           }
         }, {
           key: "html",
           get: function get() {
-            var t = this,
-                e = this.attrs.data.map(function (e, i) {
-              var r;
-              return n.default.utils.createDOMElement("div", {
-                class: "row row-" + i
-              }, n.default.utils.createDOMElement("div", {
-                class: "bar-header"
-              }, e.name), n.default.utils.createDOMElement("div", {
-                class: "container-bar container-bar-" + i
-              }, n.default.utils.createDOMElement("div", {
-                class: "inner-bar inner-bar-" + i + " " + (e.value < t.criticalValue ? "extra-rounded-" + i : null)
-              })), n.default.utils.createDOMElement("div", {
-                class: "text text-" + i
-              }, null !== (r = t.attrs.options) && void 0 !== r && r.hidePercentage ? null : (e.value > 0 ? e.value.toFixed(2) : 0) + "%"));
-            });
             return n.default.utils.createDOMElement("div", {
               class: "container"
-            }, e);
+            }, n.default.utils.createDOMElement("h1", {
+              class: "title"
+            }, this.attrs.data.title), n.default.utils.createDOMElement("div", {
+              class: "piechart"
+            }));
           }
         }, {
           key: "css",
           get: function get() {
-            return function (t) {
-              Ne.setup({
-                createGenerateId: function createGenerateId() {
-                  return function (t) {
-                    return t.key;
-                  };
-                }
-              });
-              var e = {
-                container: {
-                  height: "100%",
-                  background: t.palette.background ? t.palette.background : xt,
-                  display: "flex",
-                  color: t.palette.font ? t.palette.font : bt,
-                  "font-family": t.font.fontFamily ? t.font.fontFamily : "'Staatliches', cursive",
-                  "font-size": t.font.size ? t.font.size : "1.2rem"
-                },
-                row: {
-                  display: "flex",
-                  "flex-direction": "row",
-                  position: "absolute",
-                  left: "20%",
-                  "align-items": "center",
-                  height: 60 / t.barCount + "%",
-                  width: "100%"
-                },
-                "container-bar": {
-                  position: "absolute",
-                  height: "100%",
-                  background: t.palette.secondary ? t.palette.secondary : vt,
-                  "border-radius": "3rem",
-                  width: "60%",
-                  "box-shadow": "2px 2px 5px gray",
-                  border: "0.2rem solid " + (t.palette.accent ? t.palette.accent : wt),
-                  "z-index": "1",
-                  overflow: "hidden"
-                },
-                "inner-bar": {
-                  position: "relative",
-                  background: t.palette.primary ? t.palette.primary : mt,
-                  height: "102%",
-                  "border-radius": "3rem",
-                  bottom: "-1px",
-                  "z-index": "2px",
-                  top: "-0.5px"
-                },
-                text: {
-                  position: "relative",
-                  "z-index": "0",
-                  opacity: "1",
-                  left: "62%"
-                },
-                "bar-header": {
-                  position: "absolute",
-                  left: "-21%",
-                  "text-align": "right",
-                  width: "20%"
-                }
-              },
-                  n = t.barSum / t.barCount;
-              return t.data.forEach(function (i, r) {
-                e["row-" + r] = {
-                  bottom: 50 + 100 * (n - r) / t.barCount - 60 / t.barCount * 2.15 + "%"
-                }, e["inner-bar-" + r] = {
-                  width: i.value.toFixed(2) + "%"
-                };
-              }), Ne.createStyleSheet(e).toString();
-            }({
-              barSum: this.barSum,
-              barCount: this.barCount,
-              data: this.attrs.data,
-              palette: this.attrs.palette ? this.attrs.palette : {},
-              font: this.attrs.font ? this.attrs.font : {},
-              options: this.attrs.options ? this.attrs.options : {}
-            });
+            var t, e, n;
+            return "\n        .container{\n            background-color: transparent;\n            width: 100%;\n            height: 100%;\n            display:flex;\n            justify-content: center; \n            align-items: center; \n            flex:direction: column;\n            font-family: ".concat(null !== (t = this.attrs.font) && void 0 !== t && t.fontFamily ? this.attrs.font.fontFamily : "Staatliches, cursive", ";\n            font-size: ").concat(null !== (e = this.attrs.font) && void 0 !== e && e.size ? null === (n = this.attrs) || void 0 === n ? void 0 : n.font.size : "1.6rem", ";\n        }\n        .title{\n            color: white;\n            align-self: flex-start;\n            top: -1rem;\n            position: relative;\n        }\n        .piechart { \n            display: block; \n            position: absolute; \n            width: calc(80% * 0.75); \n            height: 80%; \n            border-radius: 50%; \n            background-image: conic-gradient(").concat(this.createRadiusString(), "); \n        } \n        ");
           }
         }, {
           key: "fonts",
@@ -3832,34 +3965,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }];
           }
         }, {
-          key: "barSum",
+          key: "radiusValues",
           get: function get() {
-            for (var t = 0, e = 1; e <= this.barCount; e++) {
-              t += e;
-            }
-
-            return t;
-          }
-        }, {
-          key: "barCount",
-          get: function get() {
-            return this.attrs.data.length;
-          }
-        }, {
-          key: "criticalValue",
-          get: function get() {
-            return this.barCount / 10 == 1 ? this.barCount / 10 * 10 : this.barCount / 10 > 1 ? 10 * (this.barCount / 10 - 1) : 10 * (this.barCount / 10 + 1);
+            var t = this;
+            return this.attrs.data.data.map(function (e, n) {
+              return t.calculateRadius(e, n);
+            });
           }
         }]), r;
       }(n.default.HTMLClip),
-      name: "ProgressBar",
-      originalDims: {
-        width: "1200px",
-        height: "900px"
-      }
-    }, {
-      exportable: _e,
-      name: "BarChartSimple",
+      name: "PieChart",
       originalDims: {
         width: "1200px",
         height: "900px"
@@ -5172,7 +5287,7 @@ return Promise$1;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "c0aa6b6fd75a936eed00"
+/******/ 		__webpack_require__.h = () => "11f531307ba685e201b2"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -6121,6 +6236,6 @@ return Promise$1;
 /******/ 	// module cache are used so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module
-/******/ 	__webpack_require__(296);
+/******/ 	__webpack_require__(576);
 /******/ })()
 ;

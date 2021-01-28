@@ -1,5 +1,5 @@
 import jss, { createGenerateId } from 'jss';
-import * as DefaultStyle from '../../Defaults/colorPalette';
+import * as DefaultStyle from '../../shared/colorPalette';
 
 
 export default function buildCSS(cssArgs) {
@@ -9,13 +9,12 @@ export default function buildCSS(cssArgs) {
     jss.setup({createGenerateId});
 
     const styles = {
-        container: {
+        "container-progressBar": {
             height: "100%",
             background: cssArgs.palette.background ? cssArgs.palette.background : DefaultStyle.colorPalette.background,
             display: "flex",
             color: cssArgs.palette.font ? cssArgs.palette.font : DefaultStyle.colorPalette.font,
             "font-family": cssArgs.font.fontFamily? cssArgs.font.fontFamily : "'Staatliches', cursive",
-            "font-size": cssArgs.font.size ? cssArgs.font.size : '1.2rem',
         },
         row: {
             display: "flex",
@@ -51,12 +50,14 @@ export default function buildCSS(cssArgs) {
             "z-index": "0",
             opacity: "1",
             left: "62%",
+            "font-size": cssArgs.font.size ? cssArgs.font.size : '1.2rem',
         },
         "bar-header": {
             position: "absolute",
             left: "-21%",
             "text-align": "right",
             width: "20%",
+            "font-size": cssArgs.font.size ? cssArgs.font.size : '1.2rem',
         },
     };
 

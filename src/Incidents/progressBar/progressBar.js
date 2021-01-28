@@ -1,6 +1,7 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import MCAnimeDefinition from "@kissmybutton/motorcortex-anime";
 import buildCSS from './progressBarStyleSheet'; 
+import { fadeOutOpacityControl } from '../../shared/opacityControl';
 
 const MCAnime = MotorCortex.loadPlugin(MCAnimeDefinition);
 
@@ -27,7 +28,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
         </div>
         });
 
-        return <div class="container">{list}</div>
+        return <div class="container-progressBar">{list}</div>
     }
 
     get css(){
@@ -51,7 +52,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
 
     buildTree(){
         const avg = this.barSum / this.barCount;
-        this.opacityControl();
+        fadeOutOpacityControl(this, `.container-progressBar`);
 
         if (this.attrs.timings?.intro) {
             const slideInDuration = Math.floor(this.attrs.timings.intro * 0.33);
@@ -135,7 +136,7 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
             this.addIncident(expand_text, slideInDuration + expandBaseDuration + expandBarDuration);
         }
 
-        const staticGraph = new MCAnime.Anime({animatedAttrs: {}},{duration: this.attrs.timings.static ? this.attrs.timings.static : 1000, selector: '.container' });
+        const staticGraph = new MCAnime.Anime({animatedAttrs: {}},{duration: this.attrs.timings.static ? this.attrs.timings.static : 1000, selector: '.container-progressBar' });
         this.addIncident(staticGraph, this.attrs.timings.intro)
                 
         if (this.attrs.timings.outro) {    
@@ -146,50 +147,13 @@ export default class ProgressBar extends MotorCortex.HTMLClip{
                     },
                     {
                         duration: this.attrs.timings.outro,
-                        selector: `.container`,
+                        selector: `.container-progressBar`,
                         easing: 'linear'
                     });
         
             this.addIncident(collapse_all, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1000));
         }
         
-    }
-    
-    // Static control
-    // Making the contents of this animation invisible before timestamp:0 
-    // and after timestamp: {totalDuration}
-    opacityControl() {
-        this.addIncident(
-            new MCAnime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 1,
-                    },
-                    initialValues: {
-                        opacity: 0,
-                    }
-                }, {
-                    selector: `.container`,
-                    duration: 1,
-                }
-            ),
-            0    
-        );
-        if (!this.attrs.timings.outro) {
-            this.addIncident(
-                new MCAnime.Anime(
-                    {
-                        animatedAttrs: {
-                            opacity: 0,
-                        },
-                    }, {
-                        selector: `.container`,
-                        duration: 1,
-                    }
-                ),
-                this.attrs.timings.intro + this.attrs.timings.static - 1
-            );
-        }
     }
 
     get barSum() {

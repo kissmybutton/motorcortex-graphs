@@ -1,9 +1,9 @@
+import { colorPalette } from '../../shared/colorPalette';
+import { opacityControl } from '../../shared/opacityControl';
+import buildCSS  from './barChartStylesheet'; 
 import MotorCortex from '@kissmybutton/motorcortex';
 import AnimePlugin from '@kissmybutton/motorcortex-anime';
 const Anime = MotorCortex.loadPlugin(AnimePlugin);
-import { colorPalette } from '../../Defaults/colorPalette';
-import buildCSS  from './barChartStylesheet'; 
-
 
 
 /**
@@ -53,8 +53,8 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
         for (let i in this.data) {
             let label = [];
 
-            if (this.data[i].name.length > 3) {
-                this.data[i].name = this.data[i].name.slice(0, 3);
+            if (this.data[i].name.length > 4) {
+                this.data[i].name = this.data[i].name.slice(0, 4);
             }
             for (let z in this.data[i].name) {
                 let cssClasses = 
@@ -70,22 +70,22 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             );
         }
 
-//  Bars html generation with data parameter as reference
-let bars = this.data.map( (datum) => {
-    this.maxPoint = (this.maxPoint < datum.value) ? 
-        datum.value : this.maxPoint;
+        //  Bars html generation with data parameter as reference
+        let bars = this.data.map( (datum) => {
+            this.maxPoint = (this.maxPoint < datum.value) ? 
+                datum.value : this.maxPoint;
 
-    return (
-        <div class={datum.name + "-bar"}>
-            <div class="bar-fill" id={datum.name + "-bar-fill"}></div>
-        </div>
-    );
-});
-this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint;
+            return (
+                <div class={datum.name + "-bar"}>
+                    <div class="bar-fill" id={datum.name + "-bar-fill"}></div>
+                </div>
+            );
+        });
+        this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint;
 
         // MAIN HTML TREE
         let barGraphHTML = (
-            <div class="container">
+            <div class="container-barChart">
                 <div class="title-container">
                     <div class="title-wrapper">{title}</div>
                     <div class="subtitle-position-end">
@@ -113,18 +113,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
 
     // Build CSS rules for incident
     get css() {
-        return buildCSS({
-            data: this.data,
-            maxPoint: this.maxPoint,
-            primaryC: this.primaryC,
-            secondaryC: this.secondaryC,
-            tertiaryC: this.tertiaryC,
-            accentC: this.accentC,
-            backgroundC: this.backgroundC,
-            fontC: this.fontC,
-            fontFamily: this.fontFamily,
-            fontSize: this.fontSize
-        });
+        return buildCSS(this);
     } 
 
     // Font API call (only google fonts API supported)
@@ -137,7 +126,8 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
 
     // MotorCortex Animation generation and
     buildTree() {
-        this.opacityControl();
+        opacityControl(this, `.container-barChart`);
+
         
         // INTRO CONTROL
         if (this.attrs.timings.intro) {
@@ -160,10 +150,10 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                             },
                             props: {
                                 selector: '.y-axis',
-                                duration:  this.introDur * 0.2,
+                                duration:  Math.trunc(this.introDur * 0.2),
                                 easing: 'easeInQuad'
                             },
-                            position: this.introDur * 0
+                            position: Math.trunc(this.introDur * 0)
                         }, {
                             incidentClass: Anime.Anime,
                             attrs: {
@@ -176,15 +166,15 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                             },
                             props: {
                                 selector: '.x-axis',
-                                duration: this.introDur * 0.3,
+                                duration: Math.trunc(this.introDur * 0.3),
                                 easing: 'easeOutQuad'
                             },
-                            position: this.introDur * 0.2
+                            position: Math.trunc(this.introDur * 0.2)
                         },
                     ]
                 },
                 {
-                    selector: ".container",
+                    selector: ".container-barChart",
                 }
             );
             introGroup.addIncident(axisCombo, this.introDur * 0);
@@ -201,11 +191,11 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                 },
                 {
                     selector: ".gridLine",
-                    duration: this.introDur * 0.5,
+                    duration: Math.trunc(this.introDur * 0.5),
                     easing: "easeOutQuad"
                 }
             );
-            introGroup.addIncident(gridLinesAnim, this.introDur * 0.2);
+            introGroup.addIncident(gridLinesAnim, Math.trunc(this.introDur * 0.2));
 
             // Title Bar Intro Control
             const titlesAnim = new MotorCortex.Group();
@@ -222,7 +212,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     {
                         selector: ".title-background",
-                        duration: this.introDur * 0.25,
+                        duration: Math.trunc(this.introDur * 0.25),
                         easing: "easeInOutQuad",
                     }
                 ),
@@ -248,7 +238,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     props: {
                         selector: `#letter-${i}`,
-                        duration: titleLetterDur,
+                        duration: Math.trunc(titleLetterDur),
                         easing: "easeOutQuart",
                     },
                     position: Math.trunc(titleLetterDur * i / 2)
@@ -263,7 +253,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     selector: ".title-wrapper",
                 }
             );
-            titlesAnim.addIncident(titleCombo, this.introDur * 0.25);
+            titlesAnim.addIncident(titleCombo, Math.trunc(this.introDur * 0.25));
 
             // Subtitle Intro: letter animation control
             let subtitleDur = this.introDur * 0.8;
@@ -284,7 +274,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     props: {
                         selector: `#letter-${i}`,
-                        duration: subLetterDur,
+                        duration: Math.trunc(subLetterDur),
                         easing: "easeOutQuart",
                     },
                     position: Math.trunc(subLetterDur * i / 2)
@@ -299,8 +289,8 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     selector: ".subtitle-wrapper",
                 }
             );
-            titlesAnim.addIncident(subtitleCombo, this.introDur * 0.1);
-            introGroup.addIncident(titlesAnim, this.introDur * 0.05);
+            titlesAnim.addIncident(subtitleCombo, Math.trunc(this.introDur * 0.1));
+            introGroup.addIncident(titlesAnim, Math.trunc(this.introDur * 0.05));
 
             // Labels (xAxis) Intro Control
             const xLabelsAnim = new MotorCortex.Group();
@@ -316,7 +306,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     {
                         selector: ".x-labels-back-wrapper",
-                        duration: this.introDur * 0.25,
+                        duration: Math.trunc(this.introDur * 0.25),
                         easing: "easeInOutCubic",
                     }
                 ),
@@ -362,10 +352,10 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                 );
                 xLabelsAnim.addIncident(
                     datumCombo, 
-                    (textAnimDur / (this.data.length + 1)) * i
+                    Math.trunc((textAnimDur / (this.data.length + 1)) * i)
                 );
             }
-            introGroup.addIncident(xLabelsAnim, this.introDur * 0.05)
+            introGroup.addIncident(xLabelsAnim, Math.trunc(this.introDur * 0.05))
 
             // Bar Intro Control
             const barAnimation = new MotorCortex.Combo(
@@ -382,7 +372,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                                 },
                             },
                             props: {
-                                duration: this.introDur * 0.3,
+                                duration: Math.trunc(this.introDur * 0.3),
                                 easing: "easeInOutQuad"
 
                             },
@@ -392,13 +382,12 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                 },
                 {
                     selector: ".bar-fill",
-                    delay: `@stagger(0, ${this.introDur * 0.4})`
+                    delay: `@stagger(0, ${Math.trunc(this.introDur * 0.4)})`
                 }
             );
-            introGroup.addIncident(barAnimation, this.introDur * 0.3);
+            introGroup.addIncident(barAnimation, Math.trunc(this.introDur * 0.3));
     
             this.addIncident(introGroup, this.introDur * 0);
-
         }
 
         // OUTRO CONTROL
@@ -422,7 +411,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                             },
                             props: {
                                 selector: '.x-axis',
-                                duration:  this.outroDur * 0.2,
+                                duration:  Math.trunc(this.outroDur * 0.2),
                                 easing: 'easeInQuad'
                             },
                             position: this.outroDur * 0
@@ -438,18 +427,18 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                             },
                             props: {
                                 selector: '.y-axis',
-                                duration:  this.outroDur * 0.3,
+                                duration:  Math.trunc(this.outroDur * 0.3),
                                 easing: 'easeOutQuad'
                             },
-                            position: this.outroDur * 0.2
+                            position: Math.trunc(this.outroDur * 0.2)
                         }
                     ]
                 },
                 {
-                    selector: ".container",
+                    selector: ".container-barChart",
                 }
             );
-            outroGroup.addIncident(axisCombooutro, this.outroDur * 0.5);
+            outroGroup.addIncident(axisCombooutro, Math.trunc(this.outroDur * 0.5));
 
             // GridLines Outro Control
             const gridLinesoutro = new Anime.Anime(
@@ -464,10 +453,10 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                 {
                     selector: ".gridlines",
                     easing: 'easeInOutQuad',
-                    duration: this.outroDur * 0.5,
+                    duration: Math.trunc(this.outroDur * 0.5),
                 }
             );
-            outroGroup.addIncident(gridLinesoutro, this.outroDur * 0.2);
+            outroGroup.addIncident(gridLinesoutro, Math.trunc(this.outroDur * 0.2));
             
             // Title Bar Outro Control
             const titlesoutro = new MotorCortex.Group();
@@ -483,11 +472,11 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     {
                         selector: ".title-back-wrapper",
-                        duration: this.outroDur * 0.45,
+                        duration: Math.trunc(this.outroDur * 0.45),
                         easing: "easeInOutQuad",
                     }
                 ),
-                this.outroDur * 0.4
+                Math.trunc(this.outroDur * 0.4)
             );
             
             // Main Title Outro: letter animation control
@@ -509,7 +498,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     props: {
                         selector: `#letter-${i}`,
-                        duration: letterDur,
+                        duration: Math.trunc(letterDur),
                         easing: "easeOutQuart",
                     },
                     position: Math.trunc(letterDur * (this.title.length-i-1) / 2)
@@ -523,7 +512,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     selector: ".title-wrapper",
                 }
             );
-            titlesoutro.addIncident(titleCombo, this.outroDur * 0.1);
+            titlesoutro.addIncident(titleCombo, Math.trunc(this.outroDur * 0.1));
 
             // Subtitle Outro: letter animation control
             let subtitleDur = this.outroDur * 0.4;
@@ -545,7 +534,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     props: {
                         selector: `#letter-${i}`,
-                        duration: subLetterDur,
+                        duration: Math.trunc(subLetterDur),
                         easing: "easeOutQuart",
                     },
                     position: Math.trunc(subLetterDur * (this.subtitle.length-i-1) / 2)
@@ -560,8 +549,8 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     selector: ".subtitle-wrapper",
                 }
             );
-            titlesoutro.addIncident(subtitleCombo, this.outroDur * 0);            
-            outroGroup.addIncident(titlesoutro, this.outroDur * 0.05);
+            titlesoutro.addIncident(subtitleCombo, Math.trunc(this.outroDur * 0));            
+            outroGroup.addIncident(titlesoutro, Math.trunc(this.outroDur * 0.05));
 
             // Labels (xAxis) Outro Control
             const xLabelsoutro = new MotorCortex.Group();
@@ -577,7 +566,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                     },
                     {
                         selector: ".x-labels-background",
-                        duration: this.outroDur * 0.45,
+                        duration: Math.trunc(this.outroDur * 0.45),
                         easing: "easeInOutCubic"
                     }
                 ),
@@ -623,10 +612,10 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                 );
                 xLabelsoutro.addIncident(
                     datumCombo, 
-                    (textAnimDur / (this.data.length + 1)) * i
+                    Math.trunc((textAnimDur / (this.data.length + 1)) * i)
                 );
             }
-            outroGroup.addIncident(xLabelsoutro, this.outroDur * 0.05);
+            outroGroup.addIncident(xLabelsoutro, Math.trunc(this.outroDur * 0.05));
 
             // Bar outro Control
             let baroutroDur = this.outroDur * 0.7;
@@ -645,7 +634,7 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
                             },
                         },
                         props: {
-                            duration: this.outroDur * 0.3,
+                            duration: Math.trunc(this.outroDur * 0.3),
                             easing: "easeInOutCubic",
                             selector: `#${this.data[i].name}-bar-fill`,
                         },
@@ -670,46 +659,11 @@ this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPo
         const staticIncident = new Anime.Anime(
             { animatedAttrs: {} },
             {
-                selector: ".container",
+                selector: ".container-barChart",
                 duration: this.staticDur,
             }
         );
         this.addIncident(staticIncident, this.introDur);
-    }
-
-    // Static control
-    // Making the contents of this animation invisible before timestamp:0 
-    // and after timestamp: {totalDuration}
-    opacityControl() {
-        this.addIncident(
-            new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 1,
-                    },
-                    initialValues: {
-                        opacity: 0,
-                    }
-                }, {
-                    selector: `.container`,
-                    duration: 1,
-                }
-            ),
-            0    
-        );
-        this.addIncident(
-            new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        opacity: 0,
-                    },
-                }, {
-                    selector: `.container`,
-                    duration: 1,
-                }
-            ),
-            this.introDur + this.staticDur + this.outroDur 
-        );
     }
 
     buildVars() {
