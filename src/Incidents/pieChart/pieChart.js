@@ -149,9 +149,9 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
 
         if (this.attrs.timings?.outro) {
-            const fadeOutDuration = Math.round(this.attrs.timings?.outro);
+            const outroDuration = Math.round(this.attrs.timings?.outro);
 
-            const pieOut = new MCAnime.Anime({
+            const titleOut = new MCAnime.Anime({
                 animatedAttrs: {
                     'top': '-10%'
                 },
@@ -159,13 +159,13 @@ export default class PieChart extends MotorCortex.HTMLClip{
                     'top': '0%'
                 }
             },{
-                    duration: fadeOutDuration,
+                    duration: outroDuration,
                     selector: '.title',
                     easing: 'linear'
                 }
             );
 
-            this.addIncident(pieOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
+            this.addIncident(titleOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
 
             const legendOut = new MCAnime.Anime({
                 animatedAttrs: {
@@ -173,7 +173,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
                     'min-width': '0%',
                 },
             },{
-                    duration: fadeOutDuration,
+                    duration: outroDuration,
                     selector: '.legend',
                     easing: 'linear'
                 }
@@ -181,7 +181,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
             this.addIncident(legendOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
 
-            const titleOut = new MCAnime.Anime({
+            const pieOut = new MCAnime.Anime({
                 animatedAttrs: {
                     'width': '0%',
                     'height': '0%'
@@ -191,13 +191,13 @@ export default class PieChart extends MotorCortex.HTMLClip{
                     'height': '95%'
                 }
             },{
-                    duration: fadeOutDuration,
+                    duration: outroDuration,
                     selector: '.piechart',
                     easing: 'linear'
                 }
             );
 
-            this.addIncident(titleOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
+            this.addIncident(pieOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
     
             const fadeOut = new MCAnime.Anime({
                 animatedAttrs: {
@@ -208,7 +208,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
                 }
             },{
                 selector: '.container-pieChart',
-                duration: fadeOutDuration,
+                duration: outroDuration,
                 easing: 'linear'
             })
 
