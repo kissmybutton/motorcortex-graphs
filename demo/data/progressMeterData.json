@@ -1,0 +1,7 @@
+{
+	"title": "Progress Meter",
+	"value": 1,
+	"unit": "%",
+	"showIndicator": true,
+	"innerImage": "battery"
+}

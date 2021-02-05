@@ -404,6 +404,7 @@ The Line Graph Incident can take the following attributes:
 * `timings`
 * `hover`
 * `grid`
+* `legend`
 * `trace`
 * `palette`
 * `font`
