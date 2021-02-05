@@ -127,10 +127,10 @@ const clip = new MotorCortex.HTMLClip({
 const progressMeter = new MCGraphs.ProgressMeter({
     data: progressMeterData,
     timings: {
-        intro: 3000,
-        static: 1000,
-        outro: 3000,
-        // static: 0,
+        // intro: 3000,
+        // static: 1000,
+        // outro: 3000,
+        static: 0,
     },
     palette: {
         background: "#D3CDCD"

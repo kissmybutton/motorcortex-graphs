@@ -1,7 +1,10 @@
 {
 	"title": "Progress Meter",
-	"value": 82,
+	"value": 60,
 	"unit": "%",
-	"showIndicator": true,
-	"innerImage": "backup"
+	"innerImage": "backup",
+	"innerFill": {
+		"revert": false,
+		"rotate": false
+	}
 }

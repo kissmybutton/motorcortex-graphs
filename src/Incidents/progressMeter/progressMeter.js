@@ -22,13 +22,28 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
         if (this.innerSVG) {
             let initialSVG = svgPresets[this.innerSVG];
 
+            let gradientControl = {
+                x1: this.innerFill.rotate ? 
+                    (this.innerFill.revert ? 1 : 0) : 0,
+                x2: this.innerFill.rotate ? 
+                    (this.innerFill.revert ? 0 : 1) : 0,
+                y1: this.innerFill.rotate ? 
+                    0 : (this.innerFill.revert ? 0 : 1),
+                y2: this.innerFill.rotate ? 
+                    0 : (this.innerFill.revert ? 1 : 0),
+            }; 
+
             let classPos = initialSVG.indexOf('<svg ') + 5;
             let customPathClass = `class="svg-preset ${this.innerSVG}" fill="url(#gradientFilter)"`;
             let svgPath = [initialSVG.slice(0, classPos), customPathClass, initialSVG.slice(classPos)].join('');
             
             let gradientPos = svgPath.indexOf('>') + 1;
             let gradient = (
-                <linearGradient class="gradient-filter" id="gradientFilter" x1="0.5" y1="1" x2="0.5" y2="0">
+                <linearGradient 
+                    class="gradient-filter" id="gradientFilter"
+                    x1={gradientControl.x1} x2={gradientControl.x2}
+                    y1={gradientControl.y1} y2={gradientControl.y2}
+                    >
                     <stop offset="0%" stop-opacity="1" stop-color={this.accentC}/>
                     <stop offset={`${this.data.value}%`} stop-opacity="1" class="gradient-stop" stop-color={this.accentC}/>
                     <stop offset={`${this.data.value}%`} stop-opacity="0.3" class="gradient-stop" stop-color={this.accentC}/>
@@ -47,8 +62,6 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
                 </div>
             );
         }
-
-        
 
         // Bulding SVG for meter circle
         let svgViewBox = (
@@ -210,41 +223,43 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
             // );
             // introGroup.addIncident(indicatorCounter, 0);
             
-            // Gradient Background Fill-Up Intro Animation
-            let gradientBackFillBottom = new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        offset: `100%`,
+            if (this.innerSVG) {
+                // Gradient Background Fill-Up Intro Animation
+                let gradientBackFillBottom = new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            offset: `100%`,
+                        },
+                        initialValues: {
+                            offset: `${0}%`,
+                        },
                     },
-                    initialValues: {
-                        offset: `${0}%`,
-                    },
-                },
-                {
-                    selector: ".gradient-back-bottom",
-                    easing: "easeInOutCubic",
-                    duration: Math.trunc(trackAnimsDur),
-                }
-            );
-            introGroup.addIncident(gradientBackFillBottom, 0);
+                    {
+                        selector: ".gradient-back-bottom",
+                        easing: "easeInOutCubic",
+                        duration: Math.trunc(trackAnimsDur),
+                    }
+                );
+                introGroup.addIncident(gradientBackFillBottom, 0);
 
-            // Gradient Background Fill-Up Intro Animation
-            let gradientFill = new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        offset: `${this.data.value}%`,
+                // Gradient Background Fill-Up Intro Animation
+                let gradientFill = new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            offset: `${this.data.value}%`,
+                        },
+                        initialValues: {
+                            offset: `0%`,
+                        },
                     },
-                    initialValues: {
-                        offset: `0%`,
-                    },
-                },
-                {
-                    selector: ".gradient-stop",
-                    easing: "easeInOutCubic",
-                    duration: Math.trunc(pathAnimsDur),
-                }
-            );
-            introGroup.addIncident(gradientFill, Math.trunc(this.introDur * 0.3));
+                    {
+                        selector: ".gradient-stop",
+                        easing: "easeInOutCubic",
+                        duration: Math.trunc(pathAnimsDur),
+                    }
+                );
+                introGroup.addIncident(gradientFill, Math.trunc(this.introDur * 0.3));
+            }
 
             this.addIncident(introGroup, 0);
         }
@@ -345,41 +360,43 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
             // );
             // introGroup.addIncident(indicatorCounter, 0);
 
-            // Gradient Background Empty-Out Intro Animation
-            let gradientBackFillBottom = new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        offset: `${0}%`,
+            if (this.innerSVG) {
+                // Gradient Background Empty-Out Intro Animation4
+                let gradientBackFillBottom = new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            offset: `${0}%`,
+                        },
+                        initialValues: {
+                            offset: `100%`,
+                        },
                     },
-                    initialValues: {
-                        offset: `100%`,
-                    },
-                },
-                {
-                    selector: ".gradient-back-bottom",
-                    easing: "easeInOutCubic",
-                    duration: Math.trunc(trackAnimsDur),
-                }
-            );
-            outroGroup.addIncident(gradientBackFillBottom, Math.trunc(this.outroDur* 0.3));
+                    {
+                        selector: ".gradient-back-bottom",
+                        easing: "easeInOutCubic",
+                        duration: Math.trunc(trackAnimsDur),
+                    }
+                );
+                outroGroup.addIncident(gradientBackFillBottom, Math.trunc(this.outroDur* 0.3));
 
-            // Gradient Background Fill-Up Intro Animation
-            let gradientFill = new Anime.Anime(
-                {
-                    animatedAttrs: {
-                        offset: `0%`,
+                // Gradient Background Fill-Up Intro Animation
+                let gradientFill = new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            offset: `0%`,
+                        },
+                        initialValues: {
+                            offset: `${this.data.value}%`,
+                        },
                     },
-                    initialValues: {
-                        offset: `${this.data.value}%`,
-                    },
-                },
-                {
-                    selector: ".gradient-stop",
-                    easing: "easeInOutCubic",
-                    duration: Math.trunc(pathAnimsDur),
-                }
-            );
-            outroGroup.addIncident(gradientFill, 0);
+                    {
+                        selector: ".gradient-stop",
+                        easing: "easeInOutCubic",
+                        duration: Math.trunc(pathAnimsDur),
+                    }
+                );
+                outroGroup.addIncident(gradientFill, 0);
+            }
 
             this.addIncident(outroGroup, 0 + this.introDur + this.staticDur);
         }
@@ -398,6 +415,12 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
     buildVars() {
         this.data = this.attrs.data;
         this.innerSVG = this.data.innerImage ? this.data.innerImage : null;
+        this.innerFill = this.data.innerFill ? 
+            this.data.innerFill :
+            {
+                "revert": false,
+		        "rotate": false,
+            };
         this.originalDims = config.progressMeter.originalDims;
         this.boxSize = (this.originalDims.width < this.originalDims.height) ? 
             this.originalDims.width * 0.65 :
