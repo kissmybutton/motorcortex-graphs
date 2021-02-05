@@ -388,7 +388,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }(t) : e;
   }
 
-  function S(t) {
+  function C(t) {
     return function () {
       var e,
           n = k(t);
@@ -402,7 +402,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     };
   }
 
-  var C = {},
+  var S = {},
       P = {
     duration: 1e3,
     round: 0
@@ -461,7 +461,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return j.hex(t) || j.rgb(t) || j.hsl(t);
     },
     key: function key(t) {
-      return !C.hasOwnProperty(t) && !P.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
+      return !S.hasOwnProperty(t) && !P.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
     }
   },
       V = {
@@ -802,7 +802,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   var st = 0;
 
   function lt(t) {
-    var e = _(C, t),
+    var e = _(S, t),
         n = _(P, t),
         i = function (t, e) {
       var n = [];
@@ -1033,7 +1033,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     incidents: [{
       exportable: function (t) {
         x(n, t);
-        var e = S(n);
+        var e = C(n);
 
         function n() {
           return m(this, n), e.apply(this, arguments);
@@ -1968,7 +1968,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       exportable: function (t) {
         x(n, t);
-        var e = S(n);
+        var e = C(n);
 
         function n() {
           return m(this, n), e.apply(this, arguments);
@@ -2071,11 +2071,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   } : function (t) {
     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : _typeof(t);
   },
-      St = "object" === ("undefined" == typeof window ? "undefined" : Dt(window)) && "object" === ("undefined" == typeof document ? "undefined" : Dt(document)) && 9 === document.nodeType,
-      Ct = "production" === "production";
+      Ct = "object" === ("undefined" == typeof window ? "undefined" : Dt(window)) && "object" === ("undefined" == typeof document ? "undefined" : Dt(document)) && 9 === document.nodeType,
+      St = "production" === "production";
 
   function Pt(t, e) {
-    if (!Ct) {
+    if (!St) {
       if (t) return;
       var n = "Warning: " + e;
       "undefined" != typeof console && console.warn(n);
@@ -2727,14 +2727,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return e || (e = t()), e;
     };
   },
-      Se = function Se(t, e) {
+      Ce = function Ce(t, e) {
     try {
       return t.attributeStyleMap ? t.attributeStyleMap.get(e) : t.style.getPropertyValue(e);
     } catch (t) {
       return "";
     }
   },
-      Ce = function Ce(t, e, n) {
+      Se = function Se(t, e, n) {
     try {
       var i = n;
       if (Array.isArray(n) && (i = zt(n, !0), "!important" === n[n.length - 1])) return t.style.setProperty(e, i, "important"), !0;
@@ -2833,7 +2833,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   },
       Te = function () {
     function t(t) {
-      this.getPropertyValue = Se, this.setProperty = Ce, this.removeProperty = Pe, this.setSelector = Ie, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && we.add(t), this.sheet = t;
+      this.getPropertyValue = Ce, this.setProperty = Se, this.removeProperty = Pe, this.setSelector = Ie, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && we.add(t), this.sheet = t;
       var e,
           n = this.sheet ? this.sheet.options : {},
           i = n.media,
@@ -2915,7 +2915,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           minify: !1
         },
         createGenerateId: Oe,
-        Renderer: St ? Te : null,
+        Renderer: Ct ? Te : null,
         plugins: []
       }, this.generateId = Oe({
         minify: !1
@@ -3237,8 +3237,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.5 * this.outroDur)
           });
           M.addIncident(D, Math.trunc(.2 * this.outroDur));
-          var S = new n.default.Group();
-          S.addIncident(new Le.Anime({
+          var C = new n.default.Group();
+          C.addIncident(new Le.Anime({
             animatedAttrs: {
               width: "0%"
             },
@@ -3250,7 +3250,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.45 * this.outroDur),
             easing: "easeInOutQuad"
           }), Math.trunc(.4 * this.outroDur));
-          var C = 2 * (.8 * this.outroDur) / (this.title.length + 1),
+          var S = 2 * (.8 * this.outroDur) / (this.title.length + 1),
               P = [];
 
           for (var I in this.title) {
@@ -3268,10 +3268,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(I),
-                duration: Math.trunc(C),
+                duration: Math.trunc(S),
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(C * (this.title.length - I - 1) / 2)
+              position: Math.trunc(S * (this.title.length - I - 1) / 2)
             });
           }
 
@@ -3280,7 +3280,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, {
             selector: ".title-wrapper"
           });
-          S.addIncident(A, Math.trunc(.1 * this.outroDur));
+          C.addIncident(A, Math.trunc(.1 * this.outroDur));
           var E = 2 * (.4 * this.outroDur) / (this.subtitle.length + 1),
               R = [];
 
@@ -3311,7 +3311,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, {
             selector: ".subtitle-wrapper"
           });
-          S.addIncident(V, Math.trunc(0 * this.outroDur)), M.addIncident(S, Math.trunc(.05 * this.outroDur));
+          C.addIncident(V, Math.trunc(0 * this.outroDur)), M.addIncident(C, Math.trunc(.05 * this.outroDur));
           var G = new n.default.Group();
           G.addIncident(new Le.Anime({
             animatedAttrs: {
@@ -4942,13 +4942,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                   M = v[4],
                   O = v[5],
                   D = v[6],
-                  S = v[7],
-                  C = new pn.ZoomTo({
+                  C = v[7],
+                  S = new pn.ZoomTo({
                 animatedAttrs: {
                   position: {
                     x: O,
                     y: D,
-                    zoom: S
+                    zoom: C
                   }
                 },
                 initialValues: {
@@ -4963,7 +4963,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 duration: Math.trunc(w),
                 easing: "easeInOutQuad"
               });
-              t.addIncident(C, Math.trunc(b));
+              t.addIncident(S, Math.trunc(b));
             }
           }
         }
@@ -5292,23 +5292,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, O));
         }
 
-        var S = [];
+        var C = [];
 
-        for (var C in this.data) {
+        for (var S in this.data) {
           var P = [];
 
-          for (var I in this.data[C].name.length > 4 && (this.data[C].name = this.data[C].name.slice(0, 4)), this.data[C].name) {
+          for (var I in this.data[S].name.length > 4 && (this.data[S].name = this.data[S].name.slice(0, 4)), this.data[S].name) {
             P.push(n.default.utils.createDOMElement("div", {
-              id: "letter-" + C + "-" + I,
+              id: "letter-" + S + "-" + I,
               class: "letter-container"
             }, n.default.utils.createDOMElement("div", {
               class: "letter-wrapper-label fontColorOn"
-            }, this.data[C].name[I])));
+            }, this.data[S].name[I])));
           }
 
-          S.push(n.default.utils.createDOMElement("div", {
+          C.push(n.default.utils.createDOMElement("div", {
             class: "label-container",
-            id: "label-" + C
+            id: "label-" + S
           }, P));
         }
 
@@ -5330,7 +5330,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           class: "graph-labels-container"
         }, k), n.default.utils.createDOMElement("div", {
           class: "x-labels-container-lineGraph"
-        }, S), n.default.utils.createDOMElement("div", {
+        }, C), n.default.utils.createDOMElement("div", {
           class: "x-labels-back-wrapper-lineGraph"
         }, n.default.utils.createDOMElement("div", {
           class: "block-background"
@@ -5706,8 +5706,56 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               b,
               w,
               x,
-              k = Math.round(null === (v = this.attrs.timings) || void 0 === v ? void 0 : v.outro),
-              M = new yn.Anime({
+              k,
+              M,
+              O,
+              D,
+              C,
+              S,
+              P,
+              I,
+              A,
+              E = Math.round(null === (v = this.attrs.timings) || void 0 === v ? void 0 : v.outro),
+              R = new yn.Anime({
+            animatedAttrs: {
+              top: "-10%"
+            },
+            initialValues: {
+              top: "0%"
+            }
+          }, {
+            duration: E,
+            selector: ".title",
+            easing: "easeInOutCirc"
+          });
+          this.addIncident(R, (null !== (b = this.attrs.timings) && void 0 !== b && b.intro ? null === (w = this.attrs.timings) || void 0 === w ? void 0 : w.intro : 0) + (null === (x = this.attrs.timings) || void 0 === x ? void 0 : x.static));
+          var j = new yn.Anime({
+            animatedAttrs: {
+              width: "0%",
+              "min-width": "0%"
+            }
+          }, {
+            duration: E,
+            selector: ".legend",
+            easing: "easeInOutCirc"
+          });
+          this.addIncident(j, (null !== (k = this.attrs.timings) && void 0 !== k && k.intro ? null === (M = this.attrs.timings) || void 0 === M ? void 0 : M.intro : 0) + (null === (O = this.attrs.timings) || void 0 === O ? void 0 : O.static));
+          var V = new yn.Anime({
+            animatedAttrs: {
+              width: "0%",
+              height: "0%"
+            },
+            initialValues: {
+              width: "95%",
+              height: "95%"
+            }
+          }, {
+            duration: E,
+            selector: ".piechart",
+            easing: "easeInOutCirc"
+          });
+          this.addIncident(V, (null !== (D = this.attrs.timings) && void 0 !== D && D.intro ? null === (C = this.attrs.timings) || void 0 === C ? void 0 : C.intro : 0) + (null === (S = this.attrs.timings) || void 0 === S ? void 0 : S.static));
+          var G = new yn.Anime({
             animatedAttrs: {
               opacity: 0
             },
@@ -5716,10 +5764,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             selector: ".container-pieChart",
-            duration: k,
+            duration: E,
             easing: "linear"
           });
-          this.addIncident(M, (null !== (b = this.attrs.timings) && void 0 !== b && b.intro ? null === (w = this.attrs.timings) || void 0 === w ? void 0 : w.intro : 0) + (null === (x = this.attrs.timings) || void 0 === x ? void 0 : x.static));
+          this.addIncident(G, (null !== (P = this.attrs.timings) && void 0 !== P && P.intro ? null === (I = this.attrs.timings) || void 0 === I ? void 0 : I.intro : 0) + (null === (A = this.attrs.timings) || void 0 === A ? void 0 : A.static));
         }
       }
     }, {
@@ -5815,7 +5863,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               display: "flex",
               "justify-content": "center",
               "align-items": "center",
-              "flex:direction": "row"
+              "flex:direction": "row",
+              overflow: "hidden"
             },
             columns: {
               width: "100%",
@@ -5826,7 +5875,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               width: "65%",
               height: "100%",
               display: "flex",
-              "justify-content": "center"
+              "justify-content": "center",
+              "align-items": "center"
             },
             "col-2": {
               width: "35%",
@@ -7244,7 +7294,7 @@ return Promise$1;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "1d5d0f60f8081c569b64"
+/******/ 		__webpack_require__.h = () => "c5abc56d4907706a8517"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
