@@ -127,10 +127,10 @@ const clip = new MotorCortex.HTMLClip({
 const progressMeter = new MCGraphs.ProgressMeter({
     data: progressMeterData,
     timings: {
-        // intro: 3000,
-        // static: 1000,
-        // outro: 3000,
-        static: 0,
+        intro: 3000,
+        static: 1000,
+        outro: 3000,
+        // static: 0,
     },
     palette: {
         background: "#D3CDCD"
@@ -149,4 +149,4 @@ clip.addIncident(progressMeter, 0);
 // clip.addIncident(progressMeter, 31500);
 
 clip.play();
-const player = new Player({clip, scaleToFit: true, pointerEvents: true});
+const player = new Player({clip, timeFormat: 'ms', scaleToFit: true, pointerEvents: true});

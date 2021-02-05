@@ -37,13 +37,13 @@ export default function buildCSS(progressMeter) {
         "meter-track": {
             stroke: progressMeter.accentC,
             opacity: 0.3,
-            "stroke-dasharray": (progressMeter.introDur > 0) ? 0 : 10000,
+            "stroke-dasharray": progressMeter.pathLength,
             "stroke-dashoffset": 0,
         },
         "meter-path": {
             stroke: progressMeter.accentC,
-            "stroke-dasharray": (progressMeter.introDur > 0) ? 0 : 10000,
-            "stroke-dashoffset": 10000 - (10000 * progressMeter.data.value / 100),
+            "stroke-dasharray": progressMeter.pathLength,
+            "stroke-dashoffset": progressMeter.pathLength - (progressMeter.pathLength * progressMeter.data.value / 100),
         },
         "indicator-general": {
             width: `${progressMeter.boxSize}px`,
@@ -55,9 +55,16 @@ export default function buildCSS(progressMeter) {
         "indicator-label": {
             "align-items": "center",
         },
+        "indicator-value": {
+        },
         "indicator-center": {
             position: "absolute",
             "font-size": "180%",
+        },
+        "indicator-inner": {
+            display: "flex",
+            "justify-content": "center",
+            "align-items": "center",
         },
         "inner-svg-container": {
             width: `100%`,
@@ -65,16 +72,6 @@ export default function buildCSS(progressMeter) {
             position: "absolute",
             top: 0,
             left: 0,
-        },
-        "track-container": {
-            width: `100%`,
-            height: `100%`,
-            position: "absolute",
-            top: 0,
-            left: 0,    
-            display: "flex",
-            "justify-content": "center",
-            "align-items": "center",
         },
         "path-container": {
             width: `100%`,
@@ -89,18 +86,23 @@ export default function buildCSS(progressMeter) {
         "svg-preset": {
             width: `${progressMeter.boxSize * 0.5}px`,
             height: `${progressMeter.boxSize * 0.5}px`,
-            fill: progressMeter.accentC,
         },
-        "svg-preset-track": {
-            opacity: 0.3,
+        "gradient-filter": {
+
         },
-        "svg-preset-path": {
-           
+        "gradient-stop": {
+            offset: `${progressMeter.data.value}%`,
         },
-        
     };
 
-    const styleSheet = jss.createStyleSheet(styles).toString();
+    let styleSheet = jss.createStyleSheet(styles).toString();
+
+    // styleSheet += `
+    //     .indicator-value::after {
+    //         content: counter(indicator-counter);
+    //         counter-increment: indicator-counter ${progressMeter.data.value};
+    //     }
+    // `;
 
     return styleSheet;
 }
