@@ -161,7 +161,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
             },{
                     duration: outroDuration,
                     selector: '.title',
-                    easing: 'linear'
+                    easing: 'easeInOutCirc'
                 }
             );
 
@@ -175,7 +175,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
             },{
                     duration: outroDuration,
                     selector: '.legend',
-                    easing: 'linear'
+                    easing: 'easeInOutCirc'
                 }
             );
 
@@ -193,7 +193,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
             },{
                     duration: outroDuration,
                     selector: '.piechart',
-                    easing: 'linear'
+                    easing: 'easeInOutCirc'
                 }
             );
 
