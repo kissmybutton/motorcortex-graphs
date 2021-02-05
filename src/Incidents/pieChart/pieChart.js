@@ -149,7 +149,55 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
 
         if (this.attrs.timings?.outro) {
-            const fadeOutDuration = Math.round(this.attrs.timings?.outro);
+            const outroDuration = Math.round(this.attrs.timings?.outro);
+
+            const titleOut = new MCAnime.Anime({
+                animatedAttrs: {
+                    'top': '-10%'
+                },
+                initialValues: {
+                    'top': '0%'
+                }
+            },{
+                    duration: outroDuration,
+                    selector: '.title',
+                    easing: 'easeInOutCirc'
+                }
+            );
+
+            this.addIncident(titleOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
+
+            const legendOut = new MCAnime.Anime({
+                animatedAttrs: {
+                    'width': '0%',
+                    'min-width': '0%',
+                },
+            },{
+                    duration: outroDuration,
+                    selector: '.legend',
+                    easing: 'easeInOutCirc'
+                }
+            );
+
+            this.addIncident(legendOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
+
+            const pieOut = new MCAnime.Anime({
+                animatedAttrs: {
+                    'width': '0%',
+                    'height': '0%'
+                },
+                initialValues: {
+                    'width': '95%',
+                    'height': '95%'
+                }
+            },{
+                    duration: outroDuration,
+                    selector: '.piechart',
+                    easing: 'easeInOutCirc'
+                }
+            );
+
+            this.addIncident(pieOut, (this.attrs.timings?.intro ? this.attrs.timings?.intro : 0) + this.attrs.timings?.static);
     
             const fadeOut = new MCAnime.Anime({
                 animatedAttrs: {
@@ -160,7 +208,7 @@ export default class PieChart extends MotorCortex.HTMLClip{
                 }
             },{
                 selector: '.container-pieChart',
-                duration: fadeOutDuration,
+                duration: outroDuration,
                 easing: 'linear'
             })
 

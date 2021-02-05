@@ -27,6 +27,7 @@ export default function buildCSS(cssArgs) {
             "justify-content": "center", 
             "align-items": "center",
             "flex:direction": "row",
+            overflow: 'hidden'
         },
         columns: {
             width: '100%',
@@ -38,6 +39,7 @@ export default function buildCSS(cssArgs) {
             height: '100%',
             display: 'flex',
             "justify-content": "center", 
+            'align-items': 'center', 
         },
         'col-2': {
             width: '35%',
