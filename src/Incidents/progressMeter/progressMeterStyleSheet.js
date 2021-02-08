@@ -16,6 +16,7 @@ export default function buildCSS(progressMeter) {
             "flex-direction": "column",
             "font-family": progressMeter.fontFamily,
             "font-size": progressMeter.fontSize,
+            "background-color": progressMeter.backgroundC,
         },
         "svg-container": {
             width: `${progressMeter.boxSize}px`,
@@ -96,13 +97,6 @@ export default function buildCSS(progressMeter) {
     };
 
     let styleSheet = jss.createStyleSheet(styles).toString();
-
-    // styleSheet += `
-    //     .indicator-value::after {
-    //         content: counter(indicator-counter);
-    //         counter-increment: indicator-counter ${progressMeter.data.value};
-    //     }
-    // `;
 
     return styleSheet;
 }

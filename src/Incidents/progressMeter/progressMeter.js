@@ -20,7 +20,9 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
         // Building Inner SVG
         let innerImage = null;
         if (this.innerSVG) {
-            let initialSVG = svgPresets[this.innerSVG];
+            let initialSVG = svgPresets[this.innerSVG] ? 
+                svgPresets[this.innerSVG] :
+                this.innerSVG;
 
             let gradientControl = {
                 x1: this.innerFill.rotate ? 
@@ -34,7 +36,7 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
             }; 
 
             let classPos = initialSVG.indexOf('<svg ') + 5;
-            let customPathClass = `class="svg-preset ${this.innerSVG}" fill="url(#gradientFilter)"`;
+            let customPathClass = `class="svg-preset" fill="url(#gradientFilter)"`;
             let svgPath = [initialSVG.slice(0, classPos), customPathClass, initialSVG.slice(classPos)].join('');
             
             let gradientPos = svgPath.indexOf('>') + 1;
@@ -259,6 +261,23 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
                     }
                 );
                 introGroup.addIncident(gradientFill, Math.trunc(this.introDur * 0.3));
+            
+                let svgOpacity = new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            opacity: 1,
+                        },
+                        initialValues: {
+                            opacity: 0,
+                        },
+                    },
+                    {
+                        selector: ".inner-svg-container",
+                        easing: "easeInCubic",
+                        duration: Math.trunc(this.introDur * 0.05),
+                    }
+                );
+                introGroup.addIncident(svgOpacity, Math.trunc(this.introDur * 0.1))
             }
 
             this.addIncident(introGroup, 0);
@@ -377,7 +396,7 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
                         duration: Math.trunc(trackAnimsDur),
                     }
                 );
-                outroGroup.addIncident(gradientBackFillBottom, Math.trunc(this.outroDur* 0.3));
+                outroGroup.addIncident(gradientBackFillBottom, Math.trunc(this.outroDur * 0.3));
 
                 // Gradient Background Fill-Up Intro Animation
                 let gradientFill = new Anime.Anime(
@@ -396,6 +415,23 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
                     }
                 );
                 outroGroup.addIncident(gradientFill, 0);
+
+                let svgOpacity = new Anime.Anime(
+                    {
+                        animatedAttrs: {
+                            opacity: 0,
+                        },
+                        initialValues: {
+                            opacity: 1,
+                        },
+                    },
+                    {
+                        selector: ".inner-svg-container",
+                        easing: "easeOutCubic",
+                        duration: Math.trunc(this.outroDur * 0.1),
+                    }
+                );
+                outroGroup.addIncident(svgOpacity, Math.trunc(this.outroDur * 0.75))
             }
 
             this.addIncident(outroGroup, 0 + this.introDur + this.staticDur);
@@ -414,7 +450,7 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
 
     buildVars() {
         this.data = this.attrs.data;
-        this.innerSVG = this.data.innerImage ? this.data.innerImage : null;
+        this.innerSVG = this.attrs.innerImage ? this.attrs.innerImage : null;
         this.innerFill = this.data.innerFill ? 
             this.data.innerFill :
             {
@@ -429,12 +465,6 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
 
         this.attrs.palette = this.attrs.palette ? 
             this.attrs.palette : {};
-        this.primaryC = this.attrs.palette.primary ? 
-            this.attrs.palette.primary : colorPalette.gray;
-        this.secondaryC = this.attrs.palette.secondary ? 
-            this.attrs.palette.secondary : colorPalette.lightGray;
-        this.tertiaryC = this.attrs.palette.tertiary ? 
-            this.attrs.palette.tertiary : colorPalette.darkGray;
         this.fontC = this.attrs.palette.font ? 
             this.attrs.palette.font : colorPalette.font;
         this.accentC = this.attrs.palette.accent ? 
