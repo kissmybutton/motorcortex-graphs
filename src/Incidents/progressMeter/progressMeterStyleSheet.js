@@ -51,7 +51,7 @@ export default function buildCSS(progressMeter) {
             display: "flex",
             "justify-content": "center",
             "align-items": "center",
-            color: progressMeter.fontC
+            color: progressMeter.fontC,
         },
         "indicator-label": {
             "align-items": "center",
@@ -60,7 +60,7 @@ export default function buildCSS(progressMeter) {
         },
         "indicator-center": {
             position: "absolute",
-            "font-size": "180%",
+            "font-size": "165%",
         },
         "indicator-inner": {
             display: "flex",

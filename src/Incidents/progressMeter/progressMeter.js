@@ -1,6 +1,8 @@
 import MotorCortex from '@kissmybutton/motorcortex';
 import AnimePlugin from '@kissmybutton/motorcortex-anime';
 const Anime = MotorCortex.loadPlugin(AnimePlugin);
+import CounterPlugin from '@kissmybutton/motorcortex-counter';
+const Counter = MotorCortex.loadPlugin(CounterPlugin);
 
 import { colorPalette } from '../../shared/colorPalette';
 import { opacityControl } from '../../shared/opacityControl';
@@ -126,8 +128,7 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
 
     // MotorCortex Animation generation and
     buildTree() {
-        // opacityControl(this, `.container-progressMeter`);
-
+        opacityControl(this, `.container-progressMeter`);
         
         // INTRO CONTROL
         if (this.attrs.timings.intro) {
@@ -208,22 +209,38 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
             );
             introGroup.addIncident(circlePathFadeIn, Math.trunc(this.introDur * 0.3));
 
-            // // Indicator Counter Intro Animation
-            // let indicatorCounter = new Anime.Anime(
-            //     {
-            //         animatedAttrs: {
-            //             innerHTML: Math.round(this.data.value),
-            //         },
-            //         initialValues: {
-            //             innerHTML: 0,
-            //         },
-            //     },
-            //     {
-            //         selector: ".indicator-value",
-            //         duration: Math.trunc(pathAnimsDur),
-            //     }
-            // );
-            // introGroup.addIncident(indicatorCounter, 0);
+            // Indicator Fade In Animation
+            let indicatorFade = new Anime.Anime(
+                {
+                    animatedAttrs: {
+                        opacity: 1,
+                    },
+                    initialValues: {
+                        opacity: 0,
+                    },
+                },
+                {
+                    selector: ".indicator-general",
+                    easing: "easeInQuart",
+                    duration: Math.trunc(this.introDur * 0.3),
+                }
+            );
+            introGroup.addIncident(indicatorFade, 0);
+
+            // Indicator Counter Intro Animation
+            let indicatorCounter = new Counter.Counter(
+                {
+                    animatedAttrs: {
+                        count: Math.round(this.data.value),
+                    },
+                },
+                {
+                    selector: ".indicator-value",
+                    easing: "easeInOutCubic",
+                    duration: Math.trunc(pathAnimsDur),
+                }
+            );
+            introGroup.addIncident(indicatorCounter, Math.trunc(this.introDur * 0.3));
             
             if (this.innerSVG) {
                 // Gradient Background Fill-Up Intro Animation
@@ -278,10 +295,9 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
                     }
                 );
                 introGroup.addIncident(svgOpacity, Math.trunc(this.introDur * 0.1))
-            }
-
+            } 
             this.addIncident(introGroup, 0);
-        }
+        } 
 
         // OUTRO CONTROL
         if (this.attrs.timings.outro) {
@@ -362,22 +378,38 @@ export default class ProgressMeter extends MotorCortex.HTMLClip{
             );
             outroGroup.addIncident(circlePathFadeIn, Math.trunc(this.outroDur * 0.7 - trackAnimsDur * 0.1));
 
-            // Indicator Counter Intro Animation
-            // let indicatorCounter = new Anime.Anime(
-            //     {
-            //         animatedAttrs: {
-            //             innerHTML: Math.round(this.data.value),
-            //         },
-            //         initialValues: {
-            //             innerHTML: 0,
-            //         },
-            //     },
-            //     {
-            //         selector: ".indicator-value",
-            //         duration: Math.trunc(circleMeterDur),
-            //     }
-            // );
-            // introGroup.addIncident(indicatorCounter, 0);
+            // Indicator Fade Out Animation
+            let indicatorFade = new Anime.Anime(
+                {
+                    animatedAttrs: {
+                        opacity: 0,
+                    },
+                    initialValues: {
+                        opacity: 1,
+                    },
+                },
+                {
+                    selector: ".indicator-general",
+                    easing: "easeInQuart",
+                    duration: Math.trunc(this.outroDur * 0.3),
+                }
+            );
+            outroGroup.addIncident(indicatorFade, Math.trunc(this.outroDur * 0.55));
+            
+            // Indicator Counter Outtro Animation
+            let indicatorCounter = new Counter.Counter(
+                {
+                    animatedAttrs: {
+                        count: 0,
+                    },
+                },
+                {
+                    selector: ".indicator-value",
+                    easing: "easeInOutCubic",
+                    duration: Math.trunc(pathAnimsDur),
+                }
+            );
+            outroGroup.addIncident(indicatorCounter, 0);
 
             if (this.innerSVG) {
                 // Gradient Background Empty-Out Intro Animation4
