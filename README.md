@@ -137,6 +137,82 @@ The `options` object is an optional object what contains miscellaneous graph con
 | --- | --- | --- | --- |
 | hidePercentage | Toggles the percentages next to the bars | false | boolean|
 
+
+
+## Creating A Progress Meter Incident
+
+To create a progress meter, the necessary attribute parameter is the data object. The remaining parameters implement customization of the meter and are all optional.
+
+```javascript
+const progressMeter = new MCGraphs.ProgressMeter({
+    data: progressMeterData,
+	innerImage: `battery`,
+    timings: {
+        intro: 3000,
+        static: 1000,
+        outro: 3000,
+    },
+    palette: {
+        background: "#D3CDCD"
+        font: "#100300",
+        accent: "#FFD800",
+    },
+    font: {
+        size: '8rem'
+    },
+}, {
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px',
+        height: '768px'
+    },
+});
+
+clip.addIncident(progressMeter, 0);
+```
+
+### Customization
+
+The Progress Meter Incident can take the following attributes:
+
+* `data`
+* `innerImage`
+* `timings`
+* `palette`
+* `font`
+
+#### Data:
+
+An object that contains the parameters with which to display the meter. The "value" parameter is required, but all the rest are optional.
+
+| Name | Description | Type |
+| --------- |:-----------| :----:|
+| value | The final progress value of the graph (0-100) | `number` |
+| unit | The unit (if any) to display the value with (defaults to "%") | `string` |
+| innerFill | InnerSVG animation parametrization | `object` |  
+
+Example data:
+```json
+{
+	"value": 60,
+	"unit": "%",
+	"innerFill": {
+		"revert": false,
+		"rotate": false
+	}
+}
+```
+
+#### InnerImage
+The InnerImage parameter is not required. If it is not present, the number value will be placed in the middle of the progress meter. Otherwise it will be placed below, and the middle of the progress meter will be filled with a processed version of the provided SVG. The SVG's animation can be configured by the "innerFill" data parameter in the data attribute of the incident.
+
+There are 5 preset SVG's that you may use. Those are "battery", "backup", "synch", "folder", and "checkMark". You may enter these values in the innerSVG parameter.
+
+If you wish to use your own SVG as the template for the animated innerSVG, you may convert it to a string and enter it as the value of the "innerImage" parameter. 
+
+Ideal SVG's for this type of animation can be found in the [Material Design Icon Library](https://material.io/resources/icons/?style=baseline). 
+
+
 ## Creating A Bar Chart Incident
 
 To create a bar chart, the necessary attribute parameter is the data object. The remaining parameters implement customization of the graph and are all optional.
@@ -171,7 +247,6 @@ const newGraph = new MCGraphs.BarChartSimple({
 });
 
 clip.addIncident(newGraph, 0);
-
 ```
 
 ### Customization
@@ -404,6 +479,7 @@ The Line Graph Incident can take the following attributes:
 * `timings`
 * `hover`
 * `grid`
+* `legend`
 * `trace`
 * `palette`
 * `font`

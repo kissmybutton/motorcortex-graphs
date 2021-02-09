@@ -17,7 +17,7 @@ export function opacityControl(clip, selector) {
                     opacity: 0,
                 }
             }, {
-                selector: `.container-barGraph`,
+                selector: selector,
                 duration: 1,
             }
         ),
