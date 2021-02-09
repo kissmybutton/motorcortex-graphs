@@ -2,10 +2,9 @@ import MotorCortex from '@kissmybutton/motorcortex';
 import Player from "@kissmybutton/motorcortex-player";
 import MotorCortexGraph from "../dist/bundle.umd";
 import * as barChartData from './data/barChartData.json';
-import * as progressBarData from './data/progressBarData.json';
 import * as lineGraphData from './data/lineGraphData.json';
 import * as pieChartData from './data/pieChartData.json';
-
+import * as progressMeterData from './data/progressMeterData.json';
 
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
@@ -124,5 +123,28 @@ const progressBar = new MCGraphs.ProgressBar({
 });
 clip.addIncident(progressBar, 26000);
 
+const progressMeter = new MCGraphs.ProgressMeter({
+    data: progressMeterData,
+	innerImage: 'battery',
+    timings: {
+        intro: 3000,
+        static: 1000,
+        outro: 3000,
+    },
+    palette: {
+        background: "#D3CDCD"
+    },
+    font: {
+        size: '8rem'
+    },
+}, {
+    selector: '#htmlclip',
+    containerParams: {
+        width: '1024px',
+        height: '768px'
+    },
+});
+clip.addIncident(progressMeter, 31500);
+
 clip.play();
-const player = new Player({clip, scaleToFit: true, pointerEvents: true});
+const player = new Player({clip, timeFormat: 'ms', scaleToFit: true, pointerEvents: true});
