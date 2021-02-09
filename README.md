@@ -173,7 +173,7 @@ clip.addIncident(progressMeter, 0);
 
 ### Customization
 
-The Bar Chart Incident can take the following attributes:
+The Progress Meter Incident can take the following attributes:
 
 * `data`
 * `innerImage`
