@@ -60,10 +60,6 @@ var data_pieChartData_namespaceObject = /*#__PURE__*/__webpack_require__.t(pieCh
 const progressMeterData_namespaceObject = JSON.parse("{\"value\":60,\"unit\":\"%\",\"innerFill\":{\"revert\":false,\"rotate\":false}}");
 var data_progressMeterData_namespaceObject = /*#__PURE__*/__webpack_require__.t(progressMeterData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./index.js
-var _trace;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -98,12 +94,12 @@ var barChart = new MCGraphs.BarChartSimple({
     height: '768px'
   }
 });
-clip.addIncident(barChart, 0);
 var lineGraph = new MCGraphs.LineGraph({
   data: data_lineGraphData_namespaceObject,
-  trace: (_trace = {
-    toggle: false
-  }, _defineProperty(_trace, "toggle", true), _defineProperty(_trace, "scale", 1.45), _trace),
+  trace: {
+    toggle: false,
+    scale: 1.45
+  },
   legend: true,
   timings: {
     intro: 7000,
@@ -120,7 +116,6 @@ var lineGraph = new MCGraphs.LineGraph({
     height: '768px'
   }
 });
-clip.addIncident(lineGraph, 5500);
 var pieChart = new MCGraphs.PieChart({
   data: data_pieChartData_namespaceObject,
   timings: {
@@ -138,7 +133,6 @@ var pieChart = new MCGraphs.PieChart({
     height: '768px'
   }
 });
-clip.addIncident(pieChart, 20500);
 var progressBar = new MCGraphs.ProgressBar({
   data: __webpack_require__(313),
   timings: {
@@ -159,7 +153,6 @@ var progressBar = new MCGraphs.ProgressBar({
     height: '768px'
   }
 });
-clip.addIncident(progressBar, 26000);
 var progressMeter = new MCGraphs.ProgressMeter({
   data: data_progressMeterData_namespaceObject,
   innerImage: 'battery',
@@ -181,6 +174,10 @@ var progressMeter = new MCGraphs.ProgressMeter({
     height: '768px'
   }
 });
+clip.addIncident(barChart, 0);
+clip.addIncident(lineGraph, 5500);
+clip.addIncident(pieChart, 20500);
+clip.addIncident(progressBar, 26000);
 clip.addIncident(progressMeter, 31500);
 clip.play();
 var player = new (motorcortex_player_umd_default())({
@@ -229,7 +226,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return e && r(t.prototype, e), n && r(t, n), t;
   }
 
-  function s(t, e, n) {
+  function o(t, e, n) {
     return e in t ? Object.defineProperty(t, e, {
       value: n,
       enumerable: !0,
@@ -238,7 +235,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }) : t[e] = n, t;
   }
 
-  function o(t, e) {
+  function s(t, e) {
     if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
     t.prototype = Object.create(e && e.prototype, {
       constructor: {
@@ -440,19 +437,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return Math.min(Math.max(t, e), n);
   }
 
-  function R(t, e) {
+  function V(t, e) {
     return t.indexOf(e) > -1;
   }
 
-  var V = {
+  var R = {
     arr: function arr(t) {
       return Array.isArray(t);
     },
     obj: function obj(t) {
-      return R(Object.prototype.toString.call(t), "Object");
+      return V(Object.prototype.toString.call(t), "Object");
     },
     pth: function pth(t) {
-      return V.obj(t) && t.hasOwnProperty("totalLength");
+      return R.obj(t) && t.hasOwnProperty("totalLength");
     },
     svg: function svg(t) {
       return t instanceof SVGElement;
@@ -461,7 +458,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return t instanceof HTMLInputElement;
     },
     dom: function dom(t) {
-      return t.nodeType || V.svg(t);
+      return t.nodeType || R.svg(t);
     },
     str: function str(t) {
       return "string" == typeof t;
@@ -482,7 +479,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return /^hsl/.test(t);
     },
     col: function col(t) {
-      return V.hex(t) || V.rgb(t) || V.hsl(t);
+      return R.hex(t) || R.rgb(t) || R.hsl(t);
     },
     key: function key(t) {
       return !S.hasOwnProperty(t) && !P.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
@@ -499,8 +496,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function z(t, e) {
     for (var n = t.length, i = arguments.length >= 2 ? arguments[1] : void 0, r = [], a = 0; a < n; a++) {
       if (a in t) {
-        var s = t[a];
-        e.call(i, s, a, t) && r.push(s);
+        var o = t[a];
+        e.call(i, o, a, t) && r.push(o);
       }
     }
 
@@ -509,12 +506,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   function G(t) {
     return t.reduce(function (t, e) {
-      return t.concat(V.arr(e) ? G(e) : e);
+      return t.concat(R.arr(e) ? G(e) : e);
     }, []);
   }
 
   function T(t) {
-    return V.arr(t) ? t : (V.str(t) && (t = function (t) {
+    return R.arr(t) ? t : (R.str(t) && (t = function (t) {
       try {
         return document.querySelectorAll(t);
       } catch (t) {
@@ -539,7 +536,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return e;
   }
 
-  function _(t, e) {
+  function F(t, e) {
     var n = N(t);
 
     for (var i in t) {
@@ -549,40 +546,40 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function F(t, e) {
+  function _(t, e) {
     var n = N(t);
 
     for (var i in e) {
-      n[i] = V.und(t[i]) ? e[i] : t[i];
+      n[i] = R.und(t[i]) ? e[i] : t[i];
     }
 
     return n;
   }
 
   function B(t) {
-    return V.rgb(t) ? (n = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(e = t)) ? "rgba(" + n[1] + ",1)" : e : V.hex(t) ? function (t) {
+    return R.rgb(t) ? (n = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(e = t)) ? "rgba(" + n[1] + ",1)" : e : R.hex(t) ? function (t) {
       var e = t.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (t, e, n, i) {
         return e + e + n + n + i + i;
       }),
           n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);
       return "rgba(" + parseInt(n[1], 16) + "," + parseInt(n[2], 16) + "," + parseInt(n[3], 16) + ",1)";
-    }(t) : V.hsl(t) ? function (t) {
+    }(t) : R.hsl(t) ? function (t) {
       var e,
           n,
           i,
           r = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(t) || /hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*([\d.]+)\)/g.exec(t),
           a = parseInt(r[1], 10) / 360,
-          s = parseInt(r[2], 10) / 100,
-          o = parseInt(r[3], 10) / 100,
+          o = parseInt(r[2], 10) / 100,
+          s = parseInt(r[3], 10) / 100,
           l = r[4] || 1;
 
       function u(t, e, n) {
         return n < 0 && (n += 1), n > 1 && (n -= 1), n < 1 / 6 ? t + 6 * (e - t) * n : n < .5 ? e : n < 2 / 3 ? t + (e - t) * (2 / 3 - n) * 6 : t;
       }
 
-      if (0 == s) e = n = i = o;else {
-        var c = o < .5 ? o * (1 + s) : o + s - o * s,
-            h = 2 * o - c;
+      if (0 == o) e = n = i = s;else {
+        var c = s < .5 ? s * (1 + o) : s + o - s * o,
+            h = 2 * s - c;
         e = u(h, c, a + 1 / 3), n = u(h, c, a), i = u(h, c, a - 1 / 3);
       }
       return "rgba(" + 255 * e + "," + 255 * n + "," + 255 * i + "," + l + ")";
@@ -596,7 +593,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function Q(t, e) {
-    return V.fnc(t) ? t(e.target, e.id, e.total) : t;
+    return R.fnc(t) ? t(e.target, e.id, e.total) : t;
   }
 
   function X(t, e) {
@@ -606,14 +603,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function Y(t, e, n) {
     if (L([n, "deg", "rad", "turn"], H(e))) return e;
     var i = A.CSS[e + n];
-    if (!V.und(i)) return i;
+    if (!R.und(i)) return i;
     var r = document.createElement(t.tagName),
         a = t.parentNode && t.parentNode !== document ? t.parentNode : document.body;
     a.appendChild(r), r.style.position = "absolute", r.style.width = 100 + n;
-    var s = 100 / r.offsetWidth;
+    var o = 100 / r.offsetWidth;
     a.removeChild(r);
-    var o = s * parseFloat(e);
-    return A.CSS[e + n] = o, o;
+    var s = o * parseFloat(e);
+    return A.CSS[e + n] = s, s;
   }
 
   function W(t, e, n) {
@@ -625,11 +622,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function q(t, e) {
-    return V.dom(t) && !V.inp(t) && (X(t, e) || V.svg(t) && t[e]) ? "attribute" : V.dom(t) && L(I, e) ? "transform" : V.dom(t) && "transform" !== e && W(t, e) ? "css" : null != t[e] ? "object" : void 0;
+    return R.dom(t) && !R.inp(t) && (X(t, e) || R.svg(t) && t[e]) ? "attribute" : R.dom(t) && L(I, e) ? "transform" : R.dom(t) && "transform" !== e && W(t, e) ? "css" : null != t[e] ? "object" : void 0;
   }
 
   function Z(t) {
-    if (V.dom(t)) {
+    if (R.dom(t)) {
       for (var e, n = t.style.transform || "", i = /(\w+)\(([^)]*)\)/g, r = new Map(); e = i.exec(n);) {
         r.set(e[1], e[2]);
       }
@@ -639,8 +636,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function J(t, e, n, i) {
-    var r = R(e, "scale") ? 1 : 0 + function (t) {
-      return R(t, "translate") || "perspective" === t ? "px" : R(t, "rotate") || R(t, "skew") ? "deg" : void 0;
+    var r = V(e, "scale") ? 1 : 0 + function (t) {
+      return V(t, "translate") || "perspective" === t ? "px" : V(t, "rotate") || V(t, "skew") ? "deg" : void 0;
     }(e),
         a = Z(t).get(e) || r;
     return n && (n.transforms.list.set(e, a), n.transforms.last = e), i ? Y(t, a, i) : a;
@@ -682,7 +679,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function K(t, e) {
-    if (V.col(t)) return B(t);
+    if (R.col(t)) return B(t);
     if (/\s/g.test(t)) return t;
     var n = H(t),
         i = n ? t.substr(0, t.length - n.length) : t;
@@ -691,17 +688,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   function tt(t, e) {
     var n = /[+-]?\d*\.?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g,
-        i = K(V.pth(t) ? t.totalLength : t, e) + "";
+        i = K(R.pth(t) ? t.totalLength : t, e) + "";
     return {
       original: i,
       numbers: i.match(n) ? i.match(n).map(Number) : [0],
-      strings: V.str(t) || e ? i.split(n) : []
+      strings: R.str(t) || e ? i.split(n) : []
     };
   }
 
   function et(t) {
     var e = function (t) {
-      return z(t ? G(V.arr(t) ? t.map(T) : T(t)) : [], function (t, e, n) {
+      return z(t ? G(R.arr(t) ? t.map(T) : T(t)) : [], function (t, e, n) {
         return n.indexOf(t) === e;
       });
     }(t);
@@ -721,19 +718,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function nt(t, e) {
     var n = N(e);
 
-    if (V.arr(t)) {
+    if (R.arr(t)) {
       var i = t.length;
-      2 === i && !V.obj(t[0]) ? t = {
+      2 === i && !R.obj(t[0]) ? t = {
         value: t
-      } : V.fnc(e.duration) || (n.duration = e.duration / i);
+      } : R.fnc(e.duration) || (n.duration = e.duration / i);
     }
 
-    return (V.arr(t) ? t : [t]).map(function (t, e) {
-      return V.obj(t) && !V.pth(t) ? t : {
+    return (R.arr(t) ? t : [t]).map(function (t, e) {
+      return R.obj(t) && !R.pth(t) ? t : {
         value: t
       };
     }).map(function (t) {
-      return F(t, n);
+      return _(t, n);
     });
   }
 
@@ -745,7 +742,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         for (var i in t) {
           var r = Q(t[i], e);
-          V.arr(r) && 1 === (r = r.map(function (t) {
+          R.arr(r) && 1 === (r = r.map(function (t) {
             return Q(t, e);
           })).length && (r = r[0]), n[i] = r;
         }
@@ -753,15 +750,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return n.duration = parseFloat(n.duration), n;
       }(i, e),
           a = r.value,
-          s = V.arr(a) ? a[1] : a,
-          o = H(s),
-          l = $(e.target, t.name, o, e),
+          o = R.arr(a) ? a[1] : a,
+          s = H(o),
+          l = $(e.target, t.name, s, e),
           u = n ? n.to.original : l,
-          c = V.arr(a) ? a[0] : u,
+          c = R.arr(a) ? a[0] : u,
           h = H(c) || H(l),
-          d = o || h;
+          d = s || h;
 
-      return V.und(s) && (s = u), r.from = tt(c, d), r.to = tt(U(s, c), d), r.start = n ? n.end : 0, r.end = r.start + r.duration, r.isPath = !1, r.isColor = V.col(r.from.original), r.isColor && (r.round = 1), n = r, r;
+      return R.und(o) && (o = u), r.from = tt(c, d), r.to = tt(U(o, c), d), r.start = n ? n.end : 0, r.end = r.start + r.duration, r.isPath = !1, r.isColor = R.col(r.from.original), r.isColor && (r.round = 1), n = r, r;
     });
   }
 
@@ -791,15 +788,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var i = Q(e[n], t),
             r = t.target,
             a = H(i),
-            s = $(r, n, a, t),
-            o = U(K(i, a || H(s)), s),
+            o = $(r, n, a, t),
+            s = U(K(i, a || H(o)), o),
             l = q(r, n);
-        rt[l](r, n, o, t.transforms, !0);
+        rt[l](r, n, s, t.transforms, !0);
       }
     });
   }
 
-  function st(t, e) {
+  function ot(t, e) {
     return z(G(t.map(function (t) {
       return e.map(function (e) {
         return function (t, e) {
@@ -819,20 +816,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }(t, e);
       });
     })), function (t) {
-      return !V.und(t);
+      return !R.und(t);
     });
   }
 
-  var ot = 0;
+  var st = 0;
 
   function lt(t) {
-    var e = _(S, t),
-        n = _(P, t),
+    var e = F(S, t),
+        n = F(P, t),
         i = function (t, e) {
       var n = [];
 
       for (var i in e) {
-        V.key(i) && n.push({
+        R.key(i) && n.push({
           name: i,
           tweens: nt(e[i], t)
         });
@@ -841,22 +838,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return n;
     }(n, t),
         r = et(t.targets),
-        a = st(r, i),
-        s = function (t, e) {
+        a = ot(r, i),
+        o = function (t, e) {
       var n = t.length,
           i = {};
       return i.duration = n ? Math.max.apply(Math, t.map(function (t) {
         return t.duration;
       })) : e.duration, i;
     }(a, n),
-        o = ot;
+        s = st;
 
-    return ot++, F(e, {
-      id: o,
+    return st++, _(e, {
+      id: s,
       children: [],
       animatables: r,
       animations: a,
-      duration: s.duration
+      duration: o.duration
     });
   }
 
@@ -876,27 +873,27 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var a = lt(t);
     r(a);
 
-    function s(t, e) {
+    function o(t, e) {
       e && e.seek(t);
     }
 
-    function o(t) {
-      var o = a.duration,
+    function s(t) {
+      var s = a.duration,
           l = t;
-      a.progress = E(l / o * 100, 0, 100), a.reversePlayback = l < a.currentTime, e && function (t) {
+      a.progress = E(l / s * 100, 0, 100), a.reversePlayback = l < a.currentTime, e && function (t) {
         if (a.reversePlayback) for (var i = n; i--;) {
-          s(t, e[i]);
+          o(t, e[i]);
         } else for (var r = 0; r < n; r++) {
-          s(t, e[r]);
+          o(t, e[r]);
         }
       }(l), !a.began && a.currentTime > 0 && (a.began = !0), function (t) {
         for (var e = 0, n = a.animations, i = n.length; e < i;) {
           var r = n[e],
-              s = r.animatable,
-              o = r.tweens,
-              l = o.length - 1,
-              u = o[l];
-          l && (u = z(o, function (e) {
+              o = r.animatable,
+              s = r.tweens,
+              l = s.length - 1,
+              u = s[l];
+          l && (u = z(s, function (e) {
             return t < e.end;
           })[0] || u);
 
@@ -920,9 +917,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           } else g = p[0];
 
-          rt[r.type](s.target, r.property, g, s.transforms), r.currentValue = g, e++;
+          rt[r.type](o.target, r.property, g, o.transforms), r.currentValue = g, e++;
         }
-      }(l), a.currentTime = E(l, 0, o), t >= o && (a.paused = !0, a.completed || (a.completed = !0, !a.passThrough && "Promise" in window && (i(), r(a))));
+      }(l), a.currentTime = E(l, 0, s), t >= s && (a.paused = !0, a.completed || (a.completed = !0, !a.passThrough && "Promise" in window && (i(), r(a))));
     }
 
     return a.reset = function () {
@@ -934,7 +931,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, a.set = function (t, e) {
       return at(t, e), a;
     }, a.seek = function (t) {
-      o(t);
+      s(t);
     }, a.reset(), a;
   }
 
@@ -990,7 +987,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function pt(t, e) {
     var n = e || {},
         i = n.el || function (t) {
-      for (var e = t.parentNode; V.svg(e) && V.svg(e.parentNode);) {
+      for (var e = t.parentNode; R.svg(e) && R.svg(e.parentNode);) {
         e = e.parentNode;
       }
 
@@ -998,17 +995,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }(t),
         r = i.getBoundingClientRect(),
         a = X(i, "viewBox"),
-        s = r.width,
-        o = r.height,
-        l = n.viewBox || (a ? a.split(" ") : [0, 0, s, o]);
+        o = r.width,
+        s = r.height,
+        l = n.viewBox || (a ? a.split(" ") : [0, 0, o, s]);
 
     return {
       el: i,
       viewBox: l,
       x: l[0] / 1,
       y: l[1] / 1,
-      w: s,
-      h: o,
+      w: o,
+      h: s,
       vW: l[2],
       vH: l[3]
     };
@@ -1034,14 +1031,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     var r = pt(t.el, t.svg),
         a = i(),
-        s = i(-1),
-        o = i(1),
+        o = i(-1),
+        s = i(1),
         l = n ? 1 : r.w / r.vW,
         u = n ? 1 : r.h / r.vH;
     return {
       x: (a.x - r.x) * l,
       y: (a.y - r.y) * u,
-      angle: 180 * Math.atan2(o.y - s.y, o.x - s.x) / Math.PI
+      angle: 180 * Math.atan2(s.y - o.y, s.x - o.x) / Math.PI
     };
   };
   var ft = ut,
@@ -1100,14 +1097,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                       i = Math.pow(t[2], 2) + Math.pow(t[3], 2),
                       r = Math.sqrt(n),
                       a = (t[0] * t[3] - t[2] * t[1]) / r,
-                      s = Math.atan2(t[0] * t[2] + t[1] * t[3], n),
-                      o = Math.atan2(t[1] * t[3] + t[0] * t[2], i);
+                      o = Math.atan2(t[0] * t[2] + t[1] * t[3], n),
+                      s = Math.atan2(t[1] * t[3] + t[0] * t[2], i);
                   return {
                     rotate: e / (Math.PI / 180) + "deg",
                     scaleX: r,
                     scaleY: a,
-                    skewX: (1 === n ? s / (Math.PI / 180) : 0) + "deg",
-                    skewY: (1 === i ? o / (Math.PI / 180) : 0) + "deg",
+                    skewX: (1 === n ? o / (Math.PI / 180) : 0) + "deg",
+                    skewY: (1 === i ? s / (Math.PI / 180) : 0) + "deg",
                     translateX: t[4] + "px",
                     translateY: t[5] + "px"
                   };
@@ -2125,17 +2122,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     t.prototype = Object.create(e.prototype), t.prototype.constructor = t, t.__proto__ = e;
   }
 
-  function Rt(t) {
+  function Vt(t) {
     if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     return t;
   }
 
-  var Vt = {}.constructor;
+  var Rt = {}.constructor;
 
   function jt(t) {
     if (null == t || "object" != _typeof(t)) return t;
     if (Array.isArray(t)) return t.map(jt);
-    if (t.constructor !== Vt) return t;
+    if (t.constructor !== Rt) return t;
     var e = {};
 
     for (var n in t) {
@@ -2183,16 +2180,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     if (!e) return i;
     var r = n.indent,
         a = void 0 === r ? 0 : r,
-        s = e.fallbacks;
-    if (t && a++, s) if (Array.isArray(s)) for (var o = 0; o < s.length; o++) {
-      var l = s[o];
+        o = e.fallbacks;
+    if (t && a++, o) if (Array.isArray(o)) for (var s = 0; s < o.length; s++) {
+      var l = o[s];
 
       for (var u in l) {
         var c = l[u];
         null != c && (i && (i += "\n"), i += "" + Lt(u + ": " + Tt(c) + ";", a));
       }
-    } else for (var h in s) {
-      var d = s[h];
+    } else for (var h in o) {
+      var d = o[h];
       null != d && (i && (i += "\n"), i += "" + Lt(h + ": " + Tt(d) + ";", a));
     }
 
@@ -2204,10 +2201,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return (i || n.allowEmpty) && t ? (i && (i = "\n" + i + "\n"), Lt(t + " {" + i, --a) + Lt("}", a)) : i;
   }
 
-  var _t = /([[\].#*$><+~=|^:(),"'`\s])/g,
-      Ft = "undefined" != typeof CSS && CSS.escape,
+  var Ft = /([[\].#*$><+~=|^:(),"'`\s])/g,
+      _t = "undefined" != typeof CSS && CSS.escape,
       Bt = function Bt(t) {
-    return Ft ? Ft(t) : t.replace(_t, "\\$1");
+    return _t ? _t(t) : t.replace(Ft, "\\$1");
   },
       Ht = function () {
     function t(t, e, n) {
@@ -2224,10 +2221,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var r = e;
       n && !1 === n.process || (r = this.options.jss.plugins.onChangeValue(e, t, this));
       var a = null == r || !1 === r,
-          s = (t in this.style);
-      if (a && !s && !i) return this;
-      var o = a && s;
-      if (o ? delete this.style[t] : this.style[t] = r, this.renderable && this.renderer) return o ? this.renderer.removeProperty(this.renderable, t) : this.renderer.setProperty(this.renderable, t, r), this;
+          o = (t in this.style);
+      if (a && !o && !i) return this;
+      var s = a && o;
+      if (s ? delete this.style[t] : this.style[t] = r, this.renderable && this.renderer) return s ? this.renderer.removeProperty(this.renderable, t) : this.renderer.setProperty(this.renderable, t, r), this;
       var l = this.options.sheet;
       return l && l.attached && "production" !== "production" && Pt(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
     }, t;
@@ -2237,10 +2234,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var r;
       (r = t.call(this, e, n, i) || this).selectorText = void 0, r.id = void 0, r.renderable = void 0;
       var a = i.selector,
-          s = i.scoped,
-          o = i.sheet,
+          o = i.scoped,
+          s = i.sheet,
           l = i.generateId;
-      return a ? r.selectorText = a : !1 !== s && (r.id = l(Rt(Rt(r)), o), r.selectorText = "." + Bt(r.id)), r;
+      return a ? r.selectorText = a : !1 !== o && (r.id = l(Vt(Vt(r)), s), r.selectorText = "." + Bt(r.id)), r;
     }
 
     Et(e, t);
@@ -2343,12 +2340,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       i && i[1] ? this.name = i[1] : (this.name = "noname",  false && 0), this.key = this.type + "-" + this.name, this.options = n;
       var r = n.scoped,
           a = n.sheet,
-          s = n.generateId;
+          o = n.generateId;
 
-      for (var o in this.id = !1 === r ? this.name : Bt(s(this, a)), this.rules = new ye(Ot({}, n, {
+      for (var s in this.id = !1 === r ? this.name : Bt(o(this, a)), this.rules = new ye(Ot({}, n, {
         parent: this
       })), e) {
-        this.rules.add(o, e[o], Ot({}, n, {
+        this.rules.add(s, e[s], Ot({}, n, {
           parent: this
         }));
       }
@@ -2412,12 +2409,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return Nt(this.key, this.style, n);
     }, e;
   }(Ht),
-      se = {
+      oe = {
     onCreateRule: function onCreateRule(t, e, n) {
       return n.parent && "keyframes" === n.parent.type ? new ae(t, e, n) : null;
     }
   },
-      oe = function () {
+      se = function () {
     function t(t, e, n) {
       this.type = "font-face", this.at = "@font-face", this.key = void 0, this.style = void 0, this.options = void 0, this.isProcessed = !1, this.renderable = void 0, this.key = t, this.style = e, this.options = n;
     }
@@ -2437,7 +2434,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       le = /@font-face/,
       ue = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return le.test(t) ? new oe(t, e, n) : null;
+      return le.test(t) ? new se(t, e, n) : null;
     }
   },
       ce = function () {
@@ -2476,7 +2473,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     "@import": !0,
     "@namespace": !0
   },
-      fe = [Xt, Jt, re, se, ue, he, {
+      fe = [Xt, Jt, re, oe, ue, he, {
     onCreateRule: function onCreateRule(t, e, n) {
       return t in pe ? new de(t, e, n) : null;
     }
@@ -2498,16 +2495,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var i = this.options,
           r = i.parent,
           a = i.sheet,
-          s = i.jss,
-          o = i.Renderer,
+          o = i.jss,
+          s = i.Renderer,
           l = i.generateId,
           u = i.scoped,
           c = Ot({
         classes: this.classes,
         parent: r,
         sheet: a,
-        jss: s,
-        Renderer: o,
+        jss: o,
+        Renderer: s,
         generateId: l,
         scoped: u,
         name: t,
@@ -2543,21 +2540,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       void 0 === i && (i = ge);
       var r = this.options,
           a = r.jss.plugins,
-          s = r.sheet;
+          o = r.sheet;
       if (e.rules instanceof t) e.rules.update(n, i);else {
-        var o = e,
-            l = o.style;
+        var s = e,
+            l = s.style;
 
-        if (a.onUpdate(n, e, s, i), i.process && l && l !== o.style) {
-          for (var u in a.onProcessStyle(o.style, o, s), o.style) {
-            var c = o.style[u];
-            c !== l[u] && o.prop(u, c, me);
+        if (a.onUpdate(n, e, o, i), i.process && l && l !== s.style) {
+          for (var u in a.onProcessStyle(s.style, s, o), s.style) {
+            var c = s.style[u];
+            c !== l[u] && s.prop(u, c, me);
           }
 
           for (var h in l) {
-            var d = o.style[h],
+            var d = s.style[h],
                 p = l[h];
-            null == d && d !== p && o.prop(h, null, me);
+            null == d && d !== p && s.prop(h, null, me);
           }
         }
       }
@@ -2717,8 +2714,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         return r;
       }(e, ["attached"]), r = "", a = 0; a < this.registry.length; a++) {
-        var s = this.registry[a];
-        null != n && s.attached !== n || (r && (r += "\n"), r += s.toString(i));
+        var o = this.registry[a];
+        null != n && o.attached !== n || (r && (r += "\n"), r += o.toString(i));
       }
 
       return r;
@@ -2835,8 +2832,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return !1;
   }
 
-  var Re,
-      Ve = De(function () {
+  var Ve,
+      Re = De(function () {
     var t = document.querySelector('meta[property="csp-nonce"]');
     return t ? t.getAttribute("content") : null;
   }),
@@ -2864,8 +2861,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           r = n.meta,
           a = n.element;
       this.element = a || ((e = document.createElement("style")).textContent = "\n", e), this.element.setAttribute("data-jss", ""), i && this.element.setAttribute("media", i), r && this.element.setAttribute("data-meta", r);
-      var s = Ve();
-      s && this.element.setAttribute("nonce", s);
+      var o = Re();
+      o && this.element.setAttribute("nonce", o);
     }
 
     var e = t.prototype;
@@ -2911,11 +2908,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this.insertRules(i.rules, r), r;
       }
 
-      var s = t.toString();
-      if (!s) return !1;
-      var o = ze(n, e),
-          l = je(n, s, o);
-      return !1 !== l && (this.hasInsertedRules = !0, this.refCssRule(t, o, l), l);
+      var o = t.toString();
+      if (!o) return !1;
+      var s = ze(n, e),
+          l = je(n, o, s);
+      return !1 !== l && (this.hasInsertedRules = !0, this.refCssRule(t, s, l), l);
     }, e.refCssRule = function (t, e, n) {
       t.renderable = n, t.options.parent instanceof ve && (this.cssRules[e] = n);
     }, e.deleteRule = function (t) {
@@ -2990,11 +2987,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         t.plugins.use(e);
       }), this;
     }, t;
-  }())(Re);
+  }())(Ve);
 
   var Ne = n.default.loadPlugin(wt),
-      _e = function (t) {
-    o(r, t);
+      Fe = function (t) {
+    s(r, t);
     var e = h(r);
 
     function r() {
@@ -3071,11 +3068,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.25 * this.introDur),
             easing: "easeInOutQuad"
           }), 0);
-          var s = 2 * (.7 * this.introDur) / (this.title.length + 1),
-              o = [];
+          var o = 2 * (.7 * this.introDur) / (this.title.length + 1),
+              s = [];
 
           for (var l in this.title) {
-            o.push({
+            s.push({
               incidentClass: Ne.Anime,
               attrs: {
                 animatedAttrs: {
@@ -3089,15 +3086,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               },
               props: {
                 selector: "#letter-".concat(l),
-                duration: Math.trunc(s),
+                duration: Math.trunc(o),
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(s * l / 2)
+              position: Math.trunc(o * l / 2)
             });
           }
 
           var u = new n.default.Combo({
-            incidents: o
+            incidents: s
           }, {
             selector: ".title-wrapper"
           });
@@ -3306,10 +3303,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           });
           C.addIncident(A, Math.trunc(.1 * this.outroDur));
           var E = 2 * (.4 * this.outroDur) / (this.subtitle.length + 1),
-              R = [];
+              V = [];
 
-          for (var V in this.subtitle) {
-            R.push({
+          for (var R in this.subtitle) {
+            V.push({
               incidentClass: Ne.Anime,
               attrs: {
                 animatedAttrs: {
@@ -3322,16 +3319,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                selector: "#letter-".concat(V),
+                selector: "#letter-".concat(R),
                 duration: Math.trunc(E),
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(E * (this.subtitle.length - V - 1) / 2)
+              position: Math.trunc(E * (this.subtitle.length - R - 1) / 2)
             });
           }
 
           var j = new n.default.Combo({
-            incidents: R
+            incidents: V
           }, {
             selector: ".subtitle-wrapper"
           });
@@ -3355,7 +3352,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             var L = 2 * G / (this.data[T].name.length + 1),
                 N = [];
 
-            for (var _ in this.data[T].name) {
+            for (var F in this.data[T].name) {
               N.push({
                 incidentClass: Ne.Anime,
                 attrs: {
@@ -3369,20 +3366,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                   }
                 },
                 props: {
-                  selector: "#letter-".concat(T, "-").concat(_),
+                  selector: "#letter-".concat(T, "-").concat(F),
                   duration: Math.trunc(L),
                   easing: "easeInQuart"
                 },
-                position: Math.trunc(L * _ / 2)
+                position: Math.trunc(L * F / 2)
               });
             }
 
-            var F = new n.default.Combo({
+            var _ = new n.default.Combo({
               incidents: N
             }, {
               selector: ".label-container"
             });
-            z.addIncident(F, Math.trunc(M / (this.data.length + 1) * T));
+
+            z.addIncident(_, Math.trunc(M / (this.data.length + 1) * T));
           }
 
           k.addIncident(z, Math.trunc(.05 * this.outroDur));
@@ -3451,16 +3449,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         var a = [];
 
-        for (var s in this.subtitle) {
-          var o = [];
-          " " === this.subtitle[s] ? o.push(n.default.utils.createDOMElement("div", {
+        for (var o in this.subtitle) {
+          var s = [];
+          " " === this.subtitle[o] ? s.push(n.default.utils.createDOMElement("div", {
             class: "space-char letter-wrapper"
-          }, "-")) : o.push(n.default.utils.createDOMElement("div", {
+          }, "-")) : s.push(n.default.utils.createDOMElement("div", {
             class: "fontColorOn letter-wrapper"
-          }, this.subtitle[s])), a.push(n.default.utils.createDOMElement("div", {
-            id: "letter-" + s,
+          }, this.subtitle[o])), a.push(n.default.utils.createDOMElement("div", {
+            id: "letter-" + o,
             class: "letter-container"
-          }, o));
+          }, s));
         }
 
         for (var l = [], u = 0; u < this.gridLinesNum; u++) {
@@ -3727,9 +3725,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), r;
   }(n.default.HTMLClip);
 
-  var Fe = n.default.loadPlugin(wt),
+  var _e = n.default.loadPlugin(wt),
       Be = function (t) {
-    o(r, t);
+    s(r, t);
     var e = h(r);
 
     function r() {
@@ -3743,20 +3741,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             e = this.barSum / this.barCount;
 
         if (kt(this, ".container-progressBar"), null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
-          for (var n = Math.floor(.33 * this.attrs.timings.intro), i = Math.floor(.25 * this.attrs.timings.intro), r = Math.floor(.33 * this.attrs.timings.intro), a = Math.floor(.09 * this.attrs.timings.intro), s = 0; s < this.barCount; s++) {
-            var o = new Fe.Anime({
+          for (var n = Math.floor(.33 * this.attrs.timings.intro), i = Math.floor(.25 * this.attrs.timings.intro), r = Math.floor(.33 * this.attrs.timings.intro), a = Math.floor(.09 * this.attrs.timings.intro), o = 0; o < this.barCount; o++) {
+            var s = new _e.Anime({
               animatedAttrs: {
-                bottom: "".concat(50 + 100 * (e - s) / this.barCount - 60 / this.barCount * 2.15, "%")
+                bottom: "".concat(50 + 100 * (e - o) / this.barCount - 60 / this.barCount * 2.15, "%")
               },
               initialValues: {
                 bottom: "-".concat(65 / this.barCount, "%")
               }
             }, {
               duration: n,
-              selector: ".row-".concat(s),
+              selector: ".row-".concat(o),
               easing: "linear"
             }),
-                l = new Fe.Anime({
+                l = new _e.Anime({
               animatedAttrs: {
                 width: "60%"
               },
@@ -3765,27 +3763,27 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               }
             }, {
               duration: i,
-              delay: Math.round(200 / this.attrs.timings.intro) * s,
-              selector: ".container-bar-".concat(s),
+              delay: Math.round(200 / this.attrs.timings.intro) * o,
+              selector: ".container-bar-".concat(o),
               easing: "linear"
             }),
-                u = new Fe.Anime({
+                u = new _e.Anime({
               animatedAttrs: {
-                width: "".concat(this.attrs.data[s].value.toFixed(2), "%")
+                width: "".concat(this.attrs.data[o].value.toFixed(2), "%")
               },
               initialValues: {
                 width: "0px"
               }
             }, {
               duration: r,
-              delay: Math.round(200 / this.attrs.timings.intro) * s,
-              selector: ".inner-bar-".concat(s),
+              delay: Math.round(200 / this.attrs.timings.intro) * o,
+              selector: ".inner-bar-".concat(o),
               easing: "linear"
             });
-            this.addIncident(o, 0), this.addIncident(l, n), this.addIncident(u, n + i);
+            this.addIncident(s, 0), this.addIncident(l, n), this.addIncident(u, n + i);
           }
 
-          var c = new Fe.Anime({
+          var c = new _e.Anime({
             animatedAttrs: {
               left: "62%",
               opacity: 1
@@ -3803,7 +3801,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           this.addIncident(c, n + i + r);
         }
 
-        var h = new Fe.Anime({
+        var h = new _e.Anime({
           animatedAttrs: {}
         }, {
           duration: this.attrs.timings.static ? this.attrs.timings.static : 1e3,
@@ -3811,7 +3809,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         });
 
         if (this.addIncident(h, this.attrs.timings.intro), this.attrs.timings.outro) {
-          var d = new Fe.Anime({
+          var d = new _e.Anime({
             animatedAttrs: {
               opacity: 0
             }
@@ -4097,7 +4095,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       Ke = n.default.loadPlugin(wt),
       tn = n.default.loadPlugin(Je),
       en = function (t) {
-    o(r, t);
+    s(r, t);
     var e = h(r);
 
     function r() {
@@ -4137,7 +4135,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".meter-path"
           });
           t.addIncident(a, Math.trunc(.3 * this.introDur));
-          var s = new Ke.Anime({
+          var o = new Ke.Anime({
             animatedAttrs: {
               "stroke-width": .05 * this.boxSize
             },
@@ -4149,8 +4147,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInQuart",
             duration: Math.trunc(.04 * i)
           });
-          t.addIncident(s, 0);
-          var o = new Ke.Anime({
+          t.addIncident(o, 0);
+          var s = new Ke.Anime({
             animatedAttrs: {
               "stroke-width": .05 * this.boxSize
             },
@@ -4162,7 +4160,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInQuart",
             duration: Math.trunc(.04 * i)
           });
-          t.addIncident(o, Math.trunc(.3 * this.introDur));
+          t.addIncident(s, Math.trunc(.3 * this.introDur));
           var l = new Ke.Anime({
             animatedAttrs: {
               opacity: 1
@@ -4387,8 +4385,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           },
               r = e.indexOf("<svg ") + 5,
               a = [e.slice(0, r), 'class="svg-preset" fill="url(#gradientFilter)"', e.slice(r)].join(""),
-              s = a.indexOf(">") + 1,
-              o = n.default.utils.createDOMElement("linearGradient", {
+              o = a.indexOf(">") + 1,
+              s = n.default.utils.createDOMElement("linearGradient", {
             class: "gradient-filter",
             id: "gradientFilter",
             x1: i.x1,
@@ -4425,7 +4423,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             class: "gradient-back-top",
             "stop-color": this.accentC
           })).toString();
-          a = [a.slice(0, s), o, a.slice(s)].join(""), t = n.default.utils.createDOMElement("div", {
+          a = [a.slice(0, o), s, a.slice(o)].join(""), t = n.default.utils.createDOMElement("div", {
             class: "inner-svg-container"
           }, n.default.utils.createDOMElement("div", {
             class: "path-container"
@@ -4587,14 +4585,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     })(t, e);
   }
 
-  function sn(t, e) {
+  function on(t, e) {
     return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
       if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
       return t;
     }(t) : e;
   }
 
-  var on = {
+  var sn = {
     npm_name: "@kissmybutton/motorcortex-svgdraw",
     incidents: [{
       exportable: function (t) {
@@ -4632,7 +4630,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               n = Reflect.construct(i, arguments, r);
             } else n = i.apply(this, arguments);
 
-            return sn(this, n);
+            return on(this, n);
           };
         }(r);
 
@@ -4799,8 +4797,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               i,
               r,
               a,
-              s,
               o,
+              s,
               l,
               u = window.getComputedStyle(t).transform;
           return "" === u || "none" === u ? {
@@ -4811,11 +4809,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             skewY: "0deg",
             translateX: "0px",
             translateY: "0px"
-          } : (e = u.split("(")[1].split(")")[0].split(","), n = Math.atan2(e[1], e[0]), i = Math.pow(e[0], 2) + Math.pow(e[1], 2), r = Math.pow(e[2], 2) + Math.pow(e[3], 2), a = Math.sqrt(i), s = (e[0] * e[3] - e[2] * e[1]) / a, o = Math.atan2(e[0] * e[2] + e[1] * e[3], i), l = Math.atan2(e[1] * e[3] + e[0] * e[2], r), {
+          } : (e = u.split("(")[1].split(")")[0].split(","), n = Math.atan2(e[1], e[0]), i = Math.pow(e[0], 2) + Math.pow(e[1], 2), r = Math.pow(e[2], 2) + Math.pow(e[3], 2), a = Math.sqrt(i), o = (e[0] * e[3] - e[2] * e[1]) / a, s = Math.atan2(e[0] * e[2] + e[1] * e[3], i), l = Math.atan2(e[1] * e[3] + e[0] * e[2], r), {
             rotate: n / (Math.PI / 180) + "deg",
             scaleX: a,
-            scaleY: s,
-            skewX: (1 === i ? o / (Math.PI / 180) : 0) + "deg",
+            scaleY: o,
+            skewX: (1 === i ? s / (Math.PI / 180) : 0) + "deg",
             skewY: (1 === r ? l / (Math.PI / 180) : 0) + "deg",
             translateX: e[4] + "px",
             translateY: e[5] + "px"
@@ -4865,13 +4863,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             i = Math.atan(Math.abs(n.y - e.y) / Math.abs(n.x - e.x)),
             r = Math.sqrt(Math.pow(n.y - e.y, 2) + Math.pow(n.x - e.x, 2)),
             a = 1,
-            s = 1;
+            o = 1;
 
-        return n.x < e.x && (a = -1), n.y < e.y && (s = -1), function (t) {
-          var o = t * r;
+        return n.x < e.x && (a = -1), n.y < e.y && (o = -1), function (t) {
+          var s = t * r;
           return {
-            translateX: a * o * Math.cos(i) + e.x,
-            translateY: s * o * Math.sin(i) + e.y,
+            translateX: a * s * Math.cos(i) + e.x,
+            translateY: o * s * Math.sin(i) + e.y,
             scale: (n.scale - e.scale) * t + e.scale
           };
         };
@@ -4905,13 +4903,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }));
         var r = t.transitionDuration / (t.transitionDuration + t.alongPathDuration),
             a = t.alongPathDuration / (t.transitionDuration + t.alongPathDuration),
-            s = (t.endTo - t.startFrom) * t.pathLength;
-        return function (o) {
-          if (t.transitionDuration > 0 && o < r) return i(o / r);
+            o = (t.endTo - t.startFrom) * t.pathLength;
+        return function (s) {
+          if (t.transitionDuration > 0 && s < r) return i(s / r);
 
-          var l = (o - r) / a,
+          var l = (s - r) / a,
               u = (t.zoom - e.zoom) * l + e.zoom,
-              c = l * s + t.startFrom * t.pathLength,
+              c = l * o + t.startFrom * t.pathLength,
               h = t.path.getPointAtLength(c),
               d = n._xyzoomToTranslate({
             x: h.x,
@@ -5072,7 +5070,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   },
       Mn = n.default.loadPlugin(wt),
-      kn = n.default.loadPlugin(on),
+      kn = n.default.loadPlugin(sn),
       On = n.default.loadPlugin(xn),
       Dn = function () {
     function t(e) {
@@ -5336,10 +5334,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         for (var r in this.instance.data) {
           var a = i / 2,
-              s = [];
+              o = [];
 
-          for (var o in this.instance.data[r].name) {
-            s.push({
+          for (var s in this.instance.data[r].name) {
+            o.push({
               incidentClass: Mn.Anime,
               attrs: {
                 animatedAttrs: {
@@ -5350,7 +5348,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                selector: "#letter-".concat(r, "-").concat(o),
+                selector: "#letter-".concat(r, "-").concat(s),
                 duration: Math.trunc(.015 * this.instance.introDur),
                 easing: "easeInOutQuart"
               },
@@ -5359,7 +5357,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }
 
           var l = new n.default.Combo({
-            incidents: s
+            incidents: o
           }, {
             selector: ".label-container"
           });
@@ -5389,11 +5387,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             r = 3 * i / (this.instance.data.length + 2);
 
         for (var a in this.instance.data) {
-          var s = r / 2,
-              o = [];
+          var o = r / 2,
+              s = [];
 
           for (var l in this.instance.data[a].name) {
-            o.push({
+            s.push({
               incidentClass: Mn.Anime,
               attrs: {
                 animatedAttrs: {
@@ -5408,12 +5406,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 duration: Math.trunc(.015 * this.instance.outroDur),
                 easing: "easeInOutQuart"
               },
-              position: Math.trunc(r - (r - s))
-            }), s /= 2;
+              position: Math.trunc(r - (r - o))
+            }), o /= 2;
           }
 
           var u = new n.default.Combo({
-            incidents: o
+            incidents: s
           }, {
             selector: ".label-container"
           });
@@ -5431,10 +5429,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             r = 3 * e / (this.instance.steleBlockNum + 1);
 
         for (var a in this.instance.data) {
-          var s = new n.default.Group({
+          var o = new n.default.Group({
             selector: "#stele-".concat(a)
           }),
-              o = new n.default.Combo({
+              s = new n.default.Combo({
             incidents: [{
               incidentClass: Mn.Anime,
               attrs: {
@@ -5454,7 +5452,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".stele-block-".concat(a),
             delay: "@stagger(0, ".concat(Math.trunc(e - r), ", 0, easeOutQuad)")
           });
-          s.addIncident(o, 0), t.addIncident(s, Math.trunc(a * i));
+          o.addIncident(s, 0), t.addIncident(o, Math.trunc(a * i));
         }
 
         return t;
@@ -5468,10 +5466,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             r = 3 * e / (this.instance.steleBlockNum + 1);
 
         for (var a in this.instance.data) {
-          var s = new n.default.Group({
+          var o = new n.default.Group({
             selector: "#stele-".concat(a)
           }),
-              o = new n.default.Combo({
+              s = new n.default.Combo({
             incidents: [{
               incidentClass: Mn.Anime,
               attrs: {
@@ -5491,7 +5489,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".stele-block-".concat(a),
             delay: "@stagger(0, ".concat(Math.trunc(e - r), ", 0, easeOutQuad, omni, true)")
           });
-          s.addIncident(o, 0), t.addIncident(s, (this.instance.data.length - 1 - a) * i);
+          o.addIncident(s, 0), t.addIncident(o, (this.instance.data.length - 1 - a) * i);
         }
 
         return t;
@@ -5499,7 +5497,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "buildIntroGraph",
       value: function value(t) {
-        for (var e = this.instance.introDur / this.instance.data.length, i = .35 * e, r = .8 * e, a = new n.default.Group(), s = new n.default.Group(), o = 0; o < this.instance.dataSetsNum; o++) {
+        for (var e = this.instance.introDur / this.instance.data.length, i = .35 * e, r = .8 * e, a = new n.default.Group(), o = new n.default.Group(), s = 0; s < this.instance.dataSetsNum; s++) {
           for (var l = 0; l < this.instance.data.length; l++) {
             if (l !== this.instance.data.length - 1) {
               var u = new kn.Draw({
@@ -5510,7 +5508,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                   cover: 0
                 }
               }, {
-                selector: "#line-".concat(o, "-").concat(l),
+                selector: "#line-".concat(s, "-").concat(l),
                 duration: Math.trunc(r),
                 easing: "easeInOutQuad"
               });
@@ -5527,12 +5525,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 r: 0
               }
             }, {
-              selector: "#point-".concat(o, "-").concat(l),
+              selector: "#point-".concat(s, "-").concat(l),
               duration: Math.trunc(i),
               easing: "easeInQuart"
             });
-            s.addIncident(c, Math.trunc(e * l));
-            var h = this.instance.findPointY(l, o) - .083 * this.instance.linesHeight,
+            o.addIncident(c, Math.trunc(e * l));
+            var h = this.instance.findPointY(l, s) - .083 * this.instance.linesHeight,
                 p = h + .07 * this.instance.linesHeight / 2,
                 f = 5 * this.instance.data.length > 10 ? 10 : 5 * this.instance.data.length;
             f = f < 6 ? 6 : f;
@@ -5558,7 +5556,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 "font-size": 0
               }
             }, {
-              selector: ".label-".concat(o, "-").concat(this.instance.data[l].name),
+              selector: ".label-".concat(s, "-").concat(this.instance.data[l].name),
               duration: Math.trunc(i),
               easeing: "easeInOutCubic"
             });
@@ -5598,7 +5596,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }
         }
 
-        return [t, a, s];
+        return [t, a, o];
       }
     }, {
       key: "buildSvgIntroParams",
@@ -5606,17 +5604,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var i,
             r,
             a,
-            s = 0,
             o = 0,
+            s = 0,
             l = this.instance.findPointX(t) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width,
             u = this.instance.findPointY(t, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height,
             c = this.instance.traceScale;
-        return 0 === t ? (i = .5 * $e.lineGraph.originalDims.width, r = .5 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, o = e - .15 * n, s = 0) : t === this.instance.data.length - 1 ? (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, l = .5 * $e.lineGraph.originalDims.width, u = .5 * $e.lineGraph.originalDims.height, c = 1, s = n * (t - 1) + e, o = n + e - .15 * n) : (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, o = n, s = n * (t - 1) + e), [s, o, i, r, a, l, u, c];
+        return 0 === t ? (i = .5 * $e.lineGraph.originalDims.width, r = .5 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, s = e - .15 * n, o = 0) : t === this.instance.data.length - 1 ? (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, l = .5 * $e.lineGraph.originalDims.width, u = .5 * $e.lineGraph.originalDims.height, c = 1, o = n * (t - 1) + e, s = n + e - .15 * n) : (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, s = n, o = n * (t - 1) + e), [o, s, i, r, a, l, u, c];
       }
     }, {
       key: "buildOutroGraph",
       value: function value(t) {
-        for (var e = this.instance.outroDur / (this.instance.data.length + 1), i = .25 * e, r = .8 * e, a = this.instance.trace ? 1 : 0, s = new n.default.Group(), o = new n.default.Group(), l = 0; l < this.instance.dataSetsNum; l++) {
+        for (var e = this.instance.outroDur / (this.instance.data.length + 1), i = .25 * e, r = .8 * e, a = this.instance.trace ? 1 : 0, o = new n.default.Group(), s = new n.default.Group(), l = 0; l < this.instance.dataSetsNum; l++) {
           for (var u = new n.default.Group(), c = 0; c < this.instance.data.length; c++) {
             if (c !== this.instance.data.length - 1) {
               var h = new kn.Draw({
@@ -5631,7 +5629,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 duration: Math.trunc(r),
                 easing: "easeInOutQuad"
               });
-              s.addIncident(h, Math.trunc(e * (this.instance.data.length + a - c - 2) + .2 * e));
+              o.addIncident(h, Math.trunc(e * (this.instance.data.length + a - c - 2) + .2 * e));
             }
 
             var d = new Mn.Anime({
@@ -5648,7 +5646,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               duration: Math.trunc(i),
               easeing: "easeOutCubic"
             });
-            o.addIncident(d, Math.trunc(e * (this.instance.data.length + a - c - 1)));
+            s.addIncident(d, Math.trunc(e * (this.instance.data.length + a - c - 1)));
             var p = this.instance.findPointY(c, l) - .083 * this.instance.linesHeight,
                 f = p + .07 * this.instance.linesHeight / 2,
                 g = 5 * this.instance.data.length > 10 ? 10 : 5 * this.instance.data.length;
@@ -5685,12 +5683,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           t.addIncident(u, 0);
         }
 
-        return [t, s, o];
+        return [t, o, s];
       }
     }]), t;
   }(),
       Cn = function (t) {
-    o(r, t);
+    s(r, t);
     var e = h(r);
 
     function r() {
@@ -5707,19 +5705,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               i = d(this.animConstructor.buildIntroGraph(t)),
               r = i[0],
               a = i[1],
-              s = i[2];
-          (t = r).addIncident(a, Math.trunc(e)), t.addIncident(s, 0), this.addIncident(t, 0);
+              o = i[2];
+          (t = r).addIncident(a, Math.trunc(e)), t.addIncident(o, 0), this.addIncident(t, 0);
         }
 
         if (this.attrs.timings.outro) {
-          var o = new n.default.Group();
-          o.addIncident(this.animConstructor.buildBackgroundOutro(), Math.trunc(.8 * this.outroDur)), o.addIncident(this.animConstructor.buildTitleOutroCombo(), Math.trunc(.76 * this.outroDur)), o.addIncident(this.animConstructor.buildOutroLegend(), Math.trunc(.1 * this.outroDur)), o.addIncident(this.animConstructor.buildOutroLabels(), this.outroDur - .55 * this.outroDur), o.addIncident(this.animConstructor.buildOutroStele(), .25 * this.outroDur);
+          var s = new n.default.Group();
+          s.addIncident(this.animConstructor.buildBackgroundOutro(), Math.trunc(.8 * this.outroDur)), s.addIncident(this.animConstructor.buildTitleOutroCombo(), Math.trunc(.76 * this.outroDur)), s.addIncident(this.animConstructor.buildOutroLegend(), Math.trunc(.1 * this.outroDur)), s.addIncident(this.animConstructor.buildOutroLabels(), this.outroDur - .55 * this.outroDur), s.addIncident(this.animConstructor.buildOutroStele(), .25 * this.outroDur);
           var l = .25 * (this.outroDur / (this.data.length + 1)),
-              u = d(this.animConstructor.buildOutroGraph(o)),
+              u = d(this.animConstructor.buildOutroGraph(s)),
               c = u[0],
               h = u[1],
               p = u[2];
-          (o = c).addIncident(h, Math.trunc(l)), o.addIncident(p, 0), this.addIncident(o, 0 + this.introDur + this.staticDur);
+          (s = c).addIncident(h, Math.trunc(l)), s.addIncident(p, 0), this.addIncident(s, 0 + this.introDur + this.staticDur);
         }
 
         this.addIncident(this.animConstructor.buildStaticControl(), this.introDur);
@@ -5767,8 +5765,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }
 
           var a,
-              s = !0,
-              o = !1;
+              o = !0,
+              s = !1;
           return {
             s: function s() {
               _n = t[Symbol.iterator]();
@@ -5776,16 +5774,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             n: function n() {
               var t = _n.next();
 
-              return s = t.done, t;
+              return o = t.done, t;
             },
             e: function e(t) {
-              o = !0, a = t;
+              s = !0, a = t;
             },
             f: function f() {
               try {
-                s || null == _n.return || _n.return();
+                o || null == _n.return || _n.return();
               } finally {
-                if (o) throw a;
+                if (s) throw a;
               }
             }
           };
@@ -5833,21 +5831,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var a = [];
 
         if (this.legend) {
-          for (var s = [], o = 0; o < this.dataSetsNum; o++) {
-            s.push(n.default.utils.createDOMElement("div", {
+          for (var o = [], s = 0; s < this.dataSetsNum; s++) {
+            o.push(n.default.utils.createDOMElement("div", {
               class: "line-wrapper"
             }, n.default.utils.createDOMElement("div", {
               class: "color-wrapper"
             }, n.default.utils.createDOMElement("div", {
-              class: "line-color color-" + o
+              class: "line-color color-" + s
             })), n.default.utils.createDOMElement("div", {
               class: "line-title"
-            }, this.dataSets[o].title)));
+            }, this.dataSets[s].title)));
           }
 
           a.push(n.default.utils.createDOMElement("div", {
             class: "legend-wrapper"
-          }, s));
+          }, o));
         }
 
         var l = [];
@@ -6027,7 +6025,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               top: "".concat(11 - 3 * (t.legendHeightFactor + (t.legendHeightFactor % 1 ? 1 : 0) - 1), "%"),
               left: "".concat(68 + (1 === t.dataSetsNum ? 12 : 0), "%"),
               background: t.primaryC
-            }, s(e, "background", "rgb(132, 130, 128)"), s(e, "font-size", t.fontSizeInner), s(e, "display", "flex"), s(e, "flex-wrap", "wrap"), s(e, "z-index", "1"), e),
+            }, o(e, "background", "rgb(132, 130, 128)"), o(e, "font-size", t.fontSizeInner), o(e, "display", "flex"), o(e, "flex-wrap", "wrap"), o(e, "z-index", "1"), e),
             "line-wrapper": {
               width: "".concat(1 === t.dataSetsNum ? 100 : 50, "%"),
               height: "".concat(1 / (t.legendHeightFactor + (t.legendHeightFactor % 1 ? 1 : 0)) * 100, "%"),
@@ -6193,19 +6191,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             };
 
             for (var a = 0; a < t.data.length; a++) {
-              var o = t.findPointY(a, i) - .083 * t.linesHeight,
+              var s = t.findPointY(a, i) - .083 * t.linesHeight,
                   l = 5 * t.data.length > 10 ? 10 : 5 * t.data.length;
               l = l < 6 ? 6 : l;
               var u = t.findPointX(a) - l * t.linesWidth / 100 * .5;
               n["label-".concat(i, "-").concat(t.data[a].name)] = {
                 background: r,
-                top: "".concat(o, "px"),
+                top: "".concat(s, "px"),
                 left: "".concat(u, "px")
               };
               var c = l * t.linesWidth / 100 * .5 - .01 * $e.lineGraph.originalDims.width / 2,
                   h = .07 * t.linesHeight;
               n["hoverPoint-".concat(i, "-").concat(t.data[a].name)] = {
-                top: "".concat(o + h, "px"),
+                top: "".concat(s + h, "px"),
                 left: "".concat(u + c, "px")
               };
             }
@@ -6237,7 +6235,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   var Pn = n.default.loadPlugin(wt),
       In = function (t) {
-    o(r, t);
+    s(r, t);
     var e = h(r);
 
     function r() {
@@ -6253,13 +6251,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             i,
             r,
             a,
-            s = this;
+            o = this;
 
         if (kt(this, ".container-pieChart"), null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
-          var o,
+          var s,
               l,
               u,
-              c = Math.round(.2 * (null === (o = this.attrs.timings) || void 0 === o ? void 0 : o.intro)),
+              c = Math.round(.2 * (null === (s = this.attrs.timings) || void 0 === s ? void 0 : s.intro)),
               h = Math.round(.8 * (null === (l = this.attrs.timings) || void 0 === l ? void 0 : l.intro)),
               p = Math.round(.4 * (null === (u = this.attrs.timings) || void 0 === u ? void 0 : u.intro)),
               f = new Pn.Anime({
@@ -6286,11 +6284,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 position: "relative"
               }
             }, {
-              duration: Math.round(p / s.attrs.data.title.length),
+              duration: Math.round(p / o.attrs.data.title.length),
               selector: ".char-".concat(e),
               easing: "easeOutCubic"
             });
-            s.addIncident(n, Math.round(p / s.attrs.data.title.length) * e);
+            o.addIncident(n, Math.round(p / o.attrs.data.title.length) * e);
           });
           var g = new Pn.Anime({
             animatedAttrs: {
@@ -6346,7 +6344,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               I,
               A,
               E = Math.round(null === (v = this.attrs.timings) || void 0 === v ? void 0 : v.outro),
-              R = new Pn.Anime({
+              V = new Pn.Anime({
             animatedAttrs: {
               top: "-10%"
             },
@@ -6358,8 +6356,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".title",
             easing: "easeInOutCirc"
           });
-          this.addIncident(R, (null !== (b = this.attrs.timings) && void 0 !== b && b.intro ? null === (w = this.attrs.timings) || void 0 === w ? void 0 : w.intro : 0) + (null === (x = this.attrs.timings) || void 0 === x ? void 0 : x.static));
-          var V = new Pn.Anime({
+          this.addIncident(V, (null !== (b = this.attrs.timings) && void 0 !== b && b.intro ? null === (w = this.attrs.timings) || void 0 === w ? void 0 : w.intro : 0) + (null === (x = this.attrs.timings) || void 0 === x ? void 0 : x.static));
+          var R = new Pn.Anime({
             animatedAttrs: {
               width: "0%",
               "min-width": "0%"
@@ -6369,7 +6367,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".legend",
             easing: "easeInOutCirc"
           });
-          this.addIncident(V, (null !== (M = this.attrs.timings) && void 0 !== M && M.intro ? null === (k = this.attrs.timings) || void 0 === k ? void 0 : k.intro : 0) + (null === (O = this.attrs.timings) || void 0 === O ? void 0 : O.static));
+          this.addIncident(R, (null !== (M = this.attrs.timings) && void 0 !== M && M.intro ? null === (k = this.attrs.timings) || void 0 === k ? void 0 : k.intro : 0) + (null === (O = this.attrs.timings) || void 0 === O ? void 0 : O.static));
           var j = new Pn.Anime({
             animatedAttrs: {
               width: "0%",
@@ -6584,20 +6582,500 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         });
       }
     }]), r;
-  }(n.default.HTMLClip);
+  }(n.default.HTMLClip),
+      An = {
+    ProgressBar: {
+      data: {
+        type: "array"
+      },
+      timings: {
+        type: "object",
+        props: {
+          intro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          static: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          outro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          }
+        }
+      },
+      pallete: {
+        type: "object",
+        optional: !0,
+        props: {
+          primary: {
+            type: "color",
+            optional: !0
+          },
+          secondary: {
+            type: "color",
+            optional: !0
+          },
+          font: {
+            type: "color",
+            optional: !0
+          },
+          accent: {
+            type: "color",
+            optional: !0
+          },
+          background: {
+            type: "color",
+            optional: !0
+          }
+        }
+      },
+      font: {
+        type: "object",
+        optional: !0,
+        props: {
+          url: {
+            type: "string",
+            optional: !0
+          },
+          fontFamily: {
+            type: "string",
+            optional: !0
+          },
+          size: {
+            type: "measurement",
+            optional: !0,
+            min: 0,
+            units: ["px", "%", "em", "rem"]
+          }
+        }
+      },
+      options: {
+        type: "object",
+        optional: !0,
+        props: {
+          hidePercentage: {
+            type: "boolean",
+            optional: !0
+          }
+        }
+      }
+    },
+    BarChartSimple: {
+      data: {
+        type: "object",
+        props: {
+          title: {
+            type: "string",
+            optional: !0
+          },
+          subtitle: {
+            type: "string",
+            optional: !0
+          },
+          showGrid: {
+            type: "boolean",
+            optional: !0
+          },
+          maxValue: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          data: {
+            type: "array"
+          }
+        }
+      },
+      timings: {
+        type: "object",
+        props: {
+          intro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          static: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          outro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          }
+        }
+      },
+      pallete: {
+        type: "object",
+        optional: !0,
+        props: {
+          primary: {
+            type: "color",
+            optional: !0
+          },
+          secondary: {
+            type: "color",
+            optional: !0
+          },
+          tertiary: {
+            type: "color",
+            optional: !0
+          },
+          font: {
+            type: "color",
+            optional: !0
+          },
+          accent: {
+            type: "color",
+            optional: !0
+          },
+          background: {
+            type: "color",
+            optional: !0
+          }
+        }
+      },
+      font: {
+        type: "object",
+        optional: !0,
+        props: {
+          url: {
+            type: "string",
+            optional: !0
+          },
+          fontFamily: {
+            type: "string",
+            optional: !0
+          },
+          size: {
+            type: "measurement",
+            optional: !0,
+            min: 0,
+            units: ["px", "%", "em", "rem"]
+          }
+        }
+      }
+    },
+    LineGraph: {
+      data: {
+        type: "object",
+        props: {
+          title: {
+            type: "string",
+            optional: !0
+          },
+          showGrid: {
+            type: "boolean",
+            optional: !0
+          },
+          interval: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          maxValue: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          unit: {
+            type: "string",
+            optional: !0
+          },
+          hover: {
+            type: "boolean",
+            optional: !0
+          },
+          data: {
+            type: "array"
+          }
+        }
+      },
+      timings: {
+        type: "object",
+        props: {
+          intro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          static: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          outro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          }
+        }
+      },
+      pallete: {
+        type: "object",
+        optional: !0,
+        props: {
+          primary: {
+            type: "color",
+            optional: !0
+          },
+          secondary: {
+            type: "color",
+            optional: !0
+          },
+          tertiary: {
+            type: "color",
+            optional: !0
+          },
+          quaternary: {
+            type: "color",
+            optional: !0
+          },
+          font: {
+            type: "color",
+            optional: !0
+          },
+          accent: {
+            type: "color",
+            optional: !0
+          },
+          background: {
+            type: "color",
+            optional: !0
+          }
+        }
+      },
+      font: {
+        type: "object",
+        optional: !0,
+        props: {
+          url: {
+            type: "string",
+            optional: !0
+          },
+          fontFamily: {
+            type: "string",
+            optional: !0
+          },
+          size: {
+            type: "measurement",
+            optional: !0,
+            min: 0,
+            units: ["px", "%", "em", "rem"]
+          }
+        }
+      },
+      hover: {
+        type: "boolean",
+        optional: !0
+      },
+      grid: {
+        type: "boolean",
+        optional: !0
+      },
+      legend: {
+        type: "boolean",
+        optional: !0
+      },
+      trace: {
+        type: "object",
+        optional: !0,
+        props: {
+          toggle: {
+            type: "boolean",
+            optional: !0
+          },
+          scale: {
+            type: "number",
+            optional: !0
+          }
+        }
+      }
+    },
+    PieChart: {
+      data: {
+        type: "object",
+        props: {
+          title: {
+            type: "string",
+            optional: !0
+          },
+          data: {
+            type: "array"
+          }
+        }
+      },
+      timings: {
+        type: "object",
+        props: {
+          intro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          static: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          outro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          }
+        }
+      },
+      pallete: {
+        type: "object",
+        optional: !0,
+        props: {
+          font: {
+            type: "color",
+            optional: !0
+          },
+          background: {
+            type: "color",
+            optional: !0
+          }
+        }
+      },
+      font: {
+        type: "object",
+        optional: !0,
+        props: {
+          url: {
+            type: "string",
+            optional: !0
+          },
+          fontFamily: {
+            type: "string",
+            optional: !0
+          },
+          size: {
+            type: "measurement",
+            optional: !0,
+            min: 0,
+            units: ["px", "%", "em", "rem"]
+          }
+        }
+      }
+    },
+    ProgressMeter: {
+      data: {
+        type: "object",
+        props: {
+          value: {
+            type: "number",
+            min: 0,
+            max: 100,
+            integer: !0,
+            optional: !0
+          },
+          unit: {
+            type: "string",
+            optional: !0
+          },
+          innerFill: {
+            type: "object",
+            optional: !0,
+            props: {
+              revert: {
+                type: "boolean",
+                optional: !0
+              },
+              rotate: {
+                type: "boolean",
+                optional: !0
+              }
+            }
+          }
+        }
+      },
+      innerImage: {
+        type: "string",
+        optional: !0
+      },
+      timings: {
+        type: "object",
+        props: {
+          intro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          static: {
+            type: "number",
+            min: 0,
+            optional: !0
+          },
+          outro: {
+            type: "number",
+            min: 0,
+            optional: !0
+          }
+        }
+      },
+      pallete: {
+        type: "object",
+        optional: !0,
+        props: {
+          font: {
+            type: "color",
+            optional: !0
+          },
+          accent: {
+            type: "color",
+            optional: !0
+          },
+          background: {
+            type: "color",
+            optional: !0
+          }
+        }
+      },
+      font: {
+        type: "object",
+        optional: !0,
+        props: {
+          url: {
+            type: "string",
+            optional: !0
+          },
+          fontFamily: {
+            type: "string",
+            optional: !0
+          },
+          size: {
+            type: "measurement",
+            optional: !0,
+            min: 0,
+            units: ["px", "%", "em", "rem"]
+          }
+        }
+      }
+    }
+  };
 
   return {
-    npm_name: "motorcortex-graphs",
+    npm_name: "@kissmybutton/motorcortex-graph",
     incidents: [{
       exportable: Be,
       name: "ProgressBar",
+      attributesValidationRules: An.ProgressBar,
       originalDims: {
         width: "1200px",
         height: "900px"
       }
     }, {
-      exportable: _e,
+      exportable: Fe,
       name: "BarChartSimple",
+      attributesValidationRules: An.BarChartSimple,
       originalDims: {
         width: "1200px",
         height: "900px"
@@ -6605,6 +7083,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       exportable: Cn,
       name: "LineGraph",
+      attributesValidationRules: An.LineGraph,
       originalDims: {
         width: "".concat($e.lineGraph.originalDims.width, "px"),
         height: "".concat($e.lineGraph.originalDims.height, "px")
@@ -6612,6 +7091,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       exportable: In,
       name: "PieChart",
+      attributesValidationRules: An.PieChart,
       originalDims: {
         width: "1200px",
         height: "900px"
@@ -6619,6 +7099,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       exportable: en,
       name: "ProgressMeter",
+      attributesValidationRules: An.ProgressMeter,
       originalDims: {
         width: "".concat($e.progressMeter.originalDims.width, "px"),
         height: "".concat($e.progressMeter.originalDims.height, "px")
@@ -7813,7 +8294,7 @@ return Promise$1;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"version\":\"1.4.0\",\"description\":\"A plugin for creating graphs for MotorCortex\",\"main\":\"dist/bundle.cjs.js\",\"module\":\"dist/bundle.esm.js\",\"browser\":\"dist/bundle.umd.js\",\"author\":\"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/kissmybutton/motorcortex-graphs\"},\"license\":\"MIT\",\"engines\":{\"node\":\">=10\"},\"scripts\":{\"concurrently\":\"concurrently -c \\\"cyan.bold,magenta.bold\\\" --names \\\"JS,Styles\\\"\",\"lint:styles\":\"stylelint  --allow-empty-input \\\"src/**.css\\\" \\\"src/**/*.scss\\\" --config .stylelintrc.json\",\"lint:js\":\"eslint -c .eslintrc src/**/*.js\",\"lint\":\"npm run concurrently \\\"npm:lint:js\\\" \\\"npm:lint:styles\\\"\",\"lint:fix\":\"npm run concurrently  \\\"npm:lint:js -- --fix\\\" \\\"npm:lint:styles -- --fix\\\"\",\"build\":\"npm run build:lib && npm run build:demo\",\"build:lib\":\"rollup -c\",\"start\":\"npm run build:lib && concurrently -c \\\"cyan.bold,magenta.bold\\\" \\\"npm:build:lib -- -w\\\"  \\\"npm:start:demo\\\" \",\"start:demo\":\"webpack serve --mode=development --config ./demo/webpack.config.js\",\"build:demo\":\"webpack --mode=production --config ./demo/webpack.config.js\",\"test\":\"HERE GOES YOUR TEST TASK\",\"test:prod\":\"npm run lint\"},\"keywords\":[\"motorcortex\",\"animation\"],\"config\":{\"commitizen\":{\"path\":\"cz-conventional-changelog\"}},\"dependencies\":{\"@kissmybutton/motorcortex-2dcam\":\"0.0.6\",\"@kissmybutton/motorcortex-anime\":\"^2.1.4\",\"@kissmybutton/motorcortex-counter\":\"^1.0.1\",\"@kissmybutton/motorcortex-svgdraw\":\"0.0.2\",\"jss\":\"^10.5.0\"},\"peerDependencies\":{\"@kissmybutton/motorcortex\":\"6.1.2\"},\"devDependencies\":{\"@babel/cli\":\"7.12.10\",\"@babel/core\":\"7.12.10\",\"@babel/plugin-syntax-jsx\":\"7.12.1\",\"@babel/plugin-transform-react-jsx\":\"7.12.12\",\"@babel/preset-env\":\"7.12.11\",\"@kissmybutton/motorcortex\":\"6.1.4\",\"@kissmybutton/motorcortex-player\":\"1.7.3\",\"babel-eslint\":\"10.1.0\",\"babel-loader\":\"8.2.2\",\"concurrently\":\"5.3.0\",\"css-loader\":\"5.0.1\",\"es6-promise\":\"4.2.8\",\"eslint\":\"7.16.0\",\"eslint-config-prettier\":\"7.1.0\",\"eslint-config-standard\":\"16.0.2\",\"eslint-plugin-babel\":\"5.3.1\",\"eslint-plugin-import\":\"2.22.1\",\"eslint-plugin-node\":\"11.1.0\",\"eslint-plugin-prettier\":\"3.3.0\",\"eslint-plugin-promise\":\"4.2.1\",\"eslint-plugin-standard\":\"4.1.0\",\"exports-loader\":\"1.1.1\",\"imports-loader\":\"1.2.0\",\"npx\":\"10.2.2\",\"prettier\":\"2.2.1\",\"rimraf\":\"3.0.2\",\"rollup\":\"2.35.1\",\"rollup-plugin-terser\":\"^7.0.2\",\"@rollup/plugin-babel\":\"5.2.2\",\"@rollup/plugin-node-resolve\":\"11.0.1\",\"@rollup/plugin-commonjs\":\"17.0.0\",\"shelljs\":\"0.8.4\",\"stylelint\":\"13.8.0\",\"stylelint-config-prettier\":\"8.0.2\",\"stylelint-config-recommended\":\"3.0.0\",\"stylelint-config-recommended-scss\":\"4.2.0\",\"stylelint-config-sass-guidelines\":\"7.1.0\",\"stylelint-config-standard\":\"20.0.0\",\"stylelint-scss\":\"3.18.0\",\"webpack\":\"5.11.0\",\"webpack-cli\":\"4.3.0\",\"webpack-dev-server\":\"3.11.0\",\"whatwg-fetch\":\"3.5.0\"}}");
+module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"version\":\"1.4.0\",\"description\":\"A plugin for creating graphs for MotorCortex\",\"main\":\"dist/bundle.cjs.js\",\"module\":\"dist/bundle.esm.js\",\"browser\":\"dist/bundle.umd.js\",\"author\":\"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/kissmybutton/motorcortex-graphs\"},\"license\":\"MIT\",\"engines\":{\"node\":\">=10\"},\"scripts\":{\"concurrently\":\"concurrently -c \\\"cyan.bold,magenta.bold\\\" --names \\\"JS,Styles\\\"\",\"lint:styles\":\"stylelint  --allow-empty-input \\\"src/**.css\\\" \\\"src/**/*.scss\\\" --config .stylelintrc.json\",\"lint:js\":\"eslint -c .eslintrc src/**/*.js\",\"lint\":\"npm run concurrently \\\"npm:lint:js\\\" \\\"npm:lint:styles\\\"\",\"lint:fix\":\"npm run concurrently  \\\"npm:lint:js -- --fix\\\" \\\"npm:lint:styles -- --fix\\\"\",\"build\":\"npm run build:lib && npm run build:demo\",\"build:lib\":\"rollup -c\",\"start\":\"npm run build:lib && concurrently -c \\\"cyan.bold,magenta.bold\\\" \\\"npm:build:lib -- -w\\\"  \\\"npm:start:demo\\\" \",\"start:demo\":\"webpack serve --mode=development --config ./demo/webpack.config.js\",\"build:demo\":\"webpack --mode=production --config ./demo/webpack.config.js\",\"test\":\"HERE GOES YOUR TEST TASK\",\"test:prod\":\"npm run lint\"},\"keywords\":[\"motorcortex\",\"animation\"],\"config\":{\"commitizen\":{\"path\":\"cz-conventional-changelog\"}},\"dependencies\":{\"@kissmybutton/motorcortex-2dcam\":\"0.0.6\",\"@kissmybutton/motorcortex-anime\":\"^2.1.11\",\"@kissmybutton/motorcortex-counter\":\"^1.0.1\",\"@kissmybutton/motorcortex-svgdraw\":\"0.0.2\",\"jss\":\"^10.5.1\"},\"peerDependencies\":{\"@kissmybutton/motorcortex\":\"6.1.2\"},\"devDependencies\":{\"@babel/cli\":\"7.12.10\",\"@babel/core\":\"7.12.10\",\"@babel/plugin-syntax-jsx\":\"7.12.1\",\"@babel/plugin-transform-react-jsx\":\"7.12.12\",\"@babel/preset-env\":\"7.12.11\",\"@kissmybutton/motorcortex\":\"6.1.4\",\"@kissmybutton/motorcortex-player\":\"1.7.3\",\"@rollup/plugin-babel\":\"5.2.2\",\"@rollup/plugin-commonjs\":\"17.0.0\",\"@rollup/plugin-node-resolve\":\"11.0.1\",\"babel-eslint\":\"10.1.0\",\"babel-loader\":\"8.2.2\",\"concurrently\":\"5.3.0\",\"css-loader\":\"5.0.1\",\"es6-promise\":\"4.2.8\",\"eslint\":\"7.16.0\",\"eslint-config-prettier\":\"7.1.0\",\"eslint-config-standard\":\"16.0.2\",\"eslint-plugin-babel\":\"5.3.1\",\"eslint-plugin-import\":\"2.22.1\",\"eslint-plugin-node\":\"11.1.0\",\"eslint-plugin-prettier\":\"3.3.0\",\"eslint-plugin-promise\":\"4.2.1\",\"eslint-plugin-standard\":\"4.1.0\",\"exports-loader\":\"1.1.1\",\"imports-loader\":\"1.2.0\",\"npx\":\"^10.2.2\",\"prettier\":\"2.2.1\",\"rimraf\":\"3.0.2\",\"rollup\":\"2.35.1\",\"rollup-plugin-terser\":\"^7.0.2\",\"shelljs\":\"0.8.4\",\"stylelint\":\"13.8.0\",\"stylelint-config-prettier\":\"8.0.2\",\"stylelint-config-recommended\":\"3.0.0\",\"stylelint-config-recommended-scss\":\"4.2.0\",\"stylelint-config-sass-guidelines\":\"7.1.0\",\"stylelint-config-standard\":\"20.0.0\",\"stylelint-scss\":\"3.18.0\",\"webpack\":\"5.11.0\",\"webpack-cli\":\"4.3.0\",\"webpack-dev-server\":\"3.11.0\",\"whatwg-fetch\":\"3.5.0\"}}");
 
 /***/ }),
 
@@ -7939,7 +8420,7 @@ module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"ve
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "e73b7866042360643033"
+/******/ 		__webpack_require__.h = () => "813f850bfbfc8bec2ae8"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
