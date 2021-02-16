@@ -55,13 +55,11 @@ const barChart = new MCGraphs.BarChartSimple({
         height: '768px'
     }
 });
-clip.addIncident(barChart, 0);
 
 const lineGraph = new MCGraphs.LineGraph({
     data: lineGraphData, 
     trace: { 
         toggle: false,
-        toggle: true,
         scale: 1.45,
     },
     legend: true,
@@ -80,7 +78,6 @@ const lineGraph = new MCGraphs.LineGraph({
         height: '768px'
     }
 });
-clip.addIncident(lineGraph, 5500);
 
 const pieChart = new MCGraphs.PieChart({
     data: pieChartData,
@@ -99,7 +96,6 @@ const pieChart = new MCGraphs.PieChart({
         height: '768px'
     },
 });
-clip.addIncident(pieChart, 20500);
 
 const progressBar = new MCGraphs.ProgressBar({
     data: require('./data/progressBarData.json'),
@@ -121,7 +117,6 @@ const progressBar = new MCGraphs.ProgressBar({
         height: '768px'
     },
 });
-clip.addIncident(progressBar, 26000);
 
 const progressMeter = new MCGraphs.ProgressMeter({
     data: progressMeterData,
@@ -144,6 +139,11 @@ const progressMeter = new MCGraphs.ProgressMeter({
         height: '768px'
     },
 });
+
+clip.addIncident(barChart, 0);
+clip.addIncident(lineGraph, 5500);
+clip.addIncident(pieChart, 20500);
+clip.addIncident(progressBar, 26000);
 clip.addIncident(progressMeter, 31500);
 
 clip.play();
