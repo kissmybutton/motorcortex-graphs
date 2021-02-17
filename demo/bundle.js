@@ -137,8 +137,9 @@ var progressBar = new MCGraphs.ProgressBar({
   data: __webpack_require__(313),
   timings: {
     intro: 2000,
-    static: 1500,
-    outro: 2000
+    static: 1500 // static: 0,
+    // outro: 2000,
+
   },
   palette: {
     background: "#D3CDCD"
@@ -173,12 +174,13 @@ var progressMeter = new MCGraphs.ProgressMeter({
     width: '1024px',
     height: '768px'
   }
-});
-clip.addIncident(barChart, 0);
-clip.addIncident(lineGraph, 5500);
-clip.addIncident(pieChart, 20500);
-clip.addIncident(progressBar, 26000);
-clip.addIncident(progressMeter, 31500);
+}); // clip.addIncident(barChart, 0);
+// clip.addIncident(lineGraph, 5500);
+// clip.addIncident(pieChart, 20500);
+// clip.addIncident(progressBar, 26000);
+
+clip.addIncident(progressBar, 0); // clip.addIncident(progressMeter, 31500);
+
 clip.play();
 var player = new (motorcortex_player_umd_default())({
   clip: clip,
@@ -587,12 +589,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var e, n;
   }
 
-  function H(t) {
+  function Q(t) {
     var e = /[+-]?\d*\.?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(%|px|pt|em|rem|in|cm|mm|ex|ch|pc|vw|vh|vmin|vmax|deg|rad|turn)?$/.exec(t);
     if (e) return e[1];
   }
 
-  function Q(t, e) {
+  function H(t, e) {
     return R.fnc(t) ? t(e.target, e.id, e.total) : t;
   }
 
@@ -601,7 +603,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function Y(t, e, n) {
-    if (L([n, "deg", "rad", "turn"], H(e))) return e;
+    if (L([n, "deg", "rad", "turn"], Q(e))) return e;
     var i = A.CSS[e + n];
     if (!R.und(i)) return i;
     var r = document.createElement(t.tagName),
@@ -662,7 +664,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function U(t, e) {
     var n = /^(\*=|\+=|-=)/.exec(t);
     if (!n) return t;
-    var i = H(t) || 0,
+    var i = Q(t) || 0,
         r = parseFloat(e),
         a = parseFloat(t.replace(n[0], ""));
 
@@ -681,7 +683,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function K(t, e) {
     if (R.col(t)) return B(t);
     if (/\s/g.test(t)) return t;
-    var n = H(t),
+    var n = Q(t),
         i = n ? t.substr(0, t.length - n.length) : t;
     return e ? i + e : i;
   }
@@ -741,9 +743,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var n = {};
 
         for (var i in t) {
-          var r = Q(t[i], e);
+          var r = H(t[i], e);
           R.arr(r) && 1 === (r = r.map(function (t) {
-            return Q(t, e);
+            return H(t, e);
           })).length && (r = r[0]), n[i] = r;
         }
 
@@ -751,11 +753,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }(i, e),
           a = r.value,
           o = R.arr(a) ? a[1] : a,
-          s = H(o),
+          s = Q(o),
           l = $(e.target, t.name, s, e),
           u = n ? n.to.original : l,
           c = R.arr(a) ? a[0] : u,
-          h = H(c) || H(l),
+          h = Q(c) || Q(l),
           d = s || h;
 
       return R.und(o) && (o = u), r.from = tt(c, d), r.to = tt(U(o, c), d), r.start = n ? n.end : 0, r.end = r.start + r.duration, r.isPath = !1, r.isColor = R.col(r.from.original), r.isColor && (r.round = 1), n = r, r;
@@ -785,11 +787,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   function at(t, e) {
     et(t).forEach(function (t) {
       for (var n in e) {
-        var i = Q(e[n], t),
+        var i = H(e[n], t),
             r = t.target,
-            a = H(i),
+            a = Q(i),
             o = $(r, n, a, t),
-            s = U(K(i, a || H(o)), o),
+            s = U(K(i, a || Q(o)), o),
             l = q(r, n);
         rt[l](r, n, s, t.transforms, !0);
       }
@@ -2206,7 +2208,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       Bt = function Bt(t) {
     return _t ? _t(t) : t.replace(Ft, "\\$1");
   },
-      Ht = function () {
+      Qt = function () {
     function t(t, e, n) {
       this.type = "style", this.key = void 0, this.isProcessed = !1, this.style = void 0, this.renderer = void 0, this.renderable = void 0, this.options = void 0;
       var i = n.sheet,
@@ -2229,7 +2231,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return l && l.attached && "production" !== "production" && Pt(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
     }, t;
   }(),
-      Qt = function (t) {
+      Ht = function (t) {
     function e(e, n, i) {
       var r;
       (r = t.call(this, e, n, i) || this).selectorText = void 0, r.id = void 0, r.renderable = void 0;
@@ -2283,10 +2285,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this.selectorText;
       }
     }]), e;
-  }(Ht),
+  }(Qt),
       Xt = {
     onCreateRule: function onCreateRule(t, e, n) {
-      return "@" === t[0] || n.parent && "keyframes" === n.parent.type ? null : new Qt(t, e, n);
+      return "@" === t[0] || n.parent && "keyframes" === n.parent.type ? null : new Ht(t, e, n);
     }
   },
       Yt = {
@@ -2408,7 +2410,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }) : t;
       return Nt(this.key, this.style, n);
     }, e;
-  }(Ht),
+  }(Qt),
       oe = {
     onCreateRule: function onCreateRule(t, e, n) {
       return n.parent && "keyframes" === n.parent.type ? new ae(t, e, n) : null;
@@ -2528,9 +2530,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var t = this.options.jss.plugins;
       this.index.slice(0).forEach(t.onProcessRule, t);
     }, e.register = function (t) {
-      this.map[t.key] = t, t instanceof Qt ? (this.map[t.selector] = t, t.id && (this.classes[t.key] = t.id)) : t instanceof Kt && this.keyframes && (this.keyframes[t.name] = t.id);
+      this.map[t.key] = t, t instanceof Ht ? (this.map[t.selector] = t, t.id && (this.classes[t.key] = t.id)) : t instanceof Kt && this.keyframes && (this.keyframes[t.name] = t.id);
     }, e.unregister = function (t) {
-      delete this.map[t.key], t instanceof Qt ? (delete this.map[t.selector], delete this.classes[t.key]) : t instanceof Kt && delete this.keyframes[t.name];
+      delete this.map[t.key], t instanceof Ht ? (delete this.map[t.selector], delete this.classes[t.key]) : t instanceof Kt && delete this.keyframes[t.name];
     }, e.update = function () {
       var t, e, n;
       if ("string" == typeof (arguments.length <= 0 ? void 0 : arguments[0]) ? (t = arguments.length <= 0 ? void 0 : arguments[0], e = arguments.length <= 1 ? void 0 : arguments[1], n = arguments.length <= 2 ? void 0 : arguments[2]) : (e = arguments.length <= 0 ? void 0 : arguments[0], n = arguments.length <= 1 ? void 0 : arguments[1], t = null), t) this.updateOne(this.map[t], e, n);else for (var i = 0; i < this.index.length; i++) {
@@ -3387,7 +3389,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           this.outroDur, this.data.length;
           var B = [];
 
-          for (var H in this.data) {
+          for (var Q in this.data) {
             B.push({
               incidentClass: Ne.Anime,
               attrs: {
@@ -3401,18 +3403,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               props: {
                 duration: Math.trunc(.3 * this.outroDur),
                 easing: "easeInOutCubic",
-                selector: "#".concat(this.data[H].name, "-bar-fill")
+                selector: "#".concat(this.data[Q].name, "-bar-fill")
               },
-              position: Math.trunc(E * (this.data.length - H - 1) / 2)
+              position: Math.trunc(E * (this.data.length - Q - 1) / 2)
             });
           }
 
-          var Q = new n.default.Combo({
+          var H = new n.default.Combo({
             incidents: B
           }, {
             selector: ".graph"
           });
-          k.addIncident(Q, 0 * this.outroDur), this.addIncident(k, 0 + this.introDur + this.staticDur);
+          k.addIncident(H, 0 * this.outroDur), this.addIncident(k, 0 + this.introDur + this.staticDur);
         }
 
         var X = new Ne.Anime({
@@ -3725,8 +3727,126 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), r;
   }(n.default.HTMLClip);
 
-  var _e = n.default.loadPlugin(wt),
-      Be = function (t) {
+  function _e(t, e) {
+    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+  }
+
+  function Be(t) {
+    return (Be = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+      return t.__proto__ || Object.getPrototypeOf(t);
+    })(t);
+  }
+
+  function Qe(t, e) {
+    return (Qe = Object.setPrototypeOf || function (t, e) {
+      return t.__proto__ = e, t;
+    })(t, e);
+  }
+
+  function He(t, e) {
+    return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
+      if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      return t;
+    }(t) : e;
+  }
+
+  function Xe(t) {
+    var e = function () {
+      if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+      if (Reflect.construct.sham) return !1;
+      if ("function" == typeof Proxy) return !0;
+
+      try {
+        return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+      } catch (t) {
+        return !1;
+      }
+    }();
+
+    return function () {
+      var n,
+          i = Be(t);
+
+      if (e) {
+        var r = Be(this).constructor;
+        n = Reflect.construct(i, arguments, r);
+      } else n = i.apply(this, arguments);
+
+      return He(this, n);
+    };
+  }
+
+  var Ye = function (t) {
+    !function (t, e) {
+      if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+      t.prototype = Object.create(e && e.prototype, {
+        constructor: {
+          value: t,
+          writable: !0,
+          configurable: !0
+        }
+      }), e && Qe(t, e);
+    }(r, n.default.Effect);
+    var e,
+        i = Xe(r);
+
+    function r() {
+      return _e(this, r), i.apply(this, arguments);
+    }
+
+    return (e = [{
+      key: "getScratchValue",
+      value: function value() {
+        return 0;
+      }
+    }, {
+      key: "onGetContext",
+      value: function value() {
+        this.element.innerHTML = this.initialValue;
+      }
+    }, {
+      key: "onProgress",
+      value: function value(t, e) {
+        var n = this.initialValue + (this.targetValue - this.initialValue) * t;
+        n = this.attrs.decimals ? n.toFixed(this.attrs.decimals) : Math.trunc(n), this.element.innerHTML = n;
+      }
+    }]) && function (t, e) {
+      for (var n = 0; n < e.length; n++) {
+        var i = e[n];
+        i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
+      }
+    }(r.prototype, e), r;
+  }(),
+      We = __webpack_require__(500),
+      qe = {
+    npm_name: We.name,
+    version: We.version,
+    incidents: [{
+      exportable: Ye,
+      name: "Counter",
+      attributesValidationRules: {
+        animatedAttrs: {
+          type: "object",
+          props: {
+            count: {
+              type: "number"
+            }
+          }
+        },
+        decimals: {
+          type: "number",
+          optional: !0,
+          min: 0,
+          max: 20,
+          integer: !0
+        }
+      }
+    }]
+  };
+
+  var Ze = n.default.loadPlugin(qe),
+      Je = n.default.loadPlugin(wt),
+      $e = function (t) {
     s(r, t);
     var e = h(r);
 
@@ -3737,24 +3857,27 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return a(r, [{
       key: "buildTree",
       value: function value() {
-        var t,
-            e = this.barSum / this.barCount;
+        var t;
+        0 === this.attrs.timings.static ? this.static = 0 : this.static = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
+        var e = this.barSum / this.barCount;
 
         if (kt(this, ".container-progressBar"), null !== (t = this.attrs.timings) && void 0 !== t && t.intro) {
           for (var n = Math.floor(.33 * this.attrs.timings.intro), i = Math.floor(.25 * this.attrs.timings.intro), r = Math.floor(.33 * this.attrs.timings.intro), a = Math.floor(.09 * this.attrs.timings.intro), o = 0; o < this.barCount; o++) {
-            var s = new _e.Anime({
+            var s = new Je.Anime({
               animatedAttrs: {
-                bottom: "".concat(50 + 100 * (e - o) / this.barCount - 60 / this.barCount * 2.15, "%")
+                bottom: "".concat(50 + 100 * (e - o) / this.barCount - 60 / this.barCount * 2.15, "%"),
+                opacity: 1
               },
               initialValues: {
-                bottom: "-".concat(65 / this.barCount, "%")
+                bottom: "-".concat(65 / this.barCount, "%"),
+                opacity: 0
               }
             }, {
               duration: n,
               selector: ".row-".concat(o),
-              easing: "linear"
+              easing: "easeInOutQuad"
             }),
-                l = new _e.Anime({
+                l = new Je.Anime({
               animatedAttrs: {
                 width: "60%"
               },
@@ -3763,11 +3886,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               }
             }, {
               duration: i,
-              delay: Math.round(200 / this.attrs.timings.intro) * o,
+              delay: Math.trunc(200 / this.attrs.timings.intro) * o,
               selector: ".container-bar-".concat(o),
-              easing: "linear"
+              easing: "easeInOutQuad"
             }),
-                u = new _e.Anime({
+                u = new Je.Anime({
               animatedAttrs: {
                 width: "".concat(this.attrs.data[o].value.toFixed(2), "%")
               },
@@ -3776,14 +3899,27 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               }
             }, {
               duration: r,
-              delay: Math.round(200 / this.attrs.timings.intro) * o,
+              delay: Math.trunc(200 / this.attrs.timings.intro) * o,
               selector: ".inner-bar-".concat(o),
-              easing: "linear"
+              easing: "easeInQuad"
+            }),
+                c = new Ze.Counter({
+              animatedAttrs: {
+                count: this.attrs.data[o].value
+              },
+              initialValues: {
+                count: 0
+              },
+              decimals: 2
+            }, {
+              selector: ".text-".concat(o),
+              easing: "easeInOutCubic",
+              duration: Math.trunc(200 / this.attrs.timings.intro) * this.barCount
             });
-            this.addIncident(s, 0), this.addIncident(l, n), this.addIncident(u, n + i);
+            console.log(this.attrs.data[o].value), this.addIncident(s, 0), this.addIncident(l, n), this.addIncident(u, n + i), this.addIncident(c, n + i + r / 2);
           }
 
-          var c = new _e.Anime({
+          var h = new Je.Anime({
             animatedAttrs: {
               left: "62%",
               opacity: 1
@@ -3794,22 +3930,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             }
           }, {
             duration: a,
-            delay: Math.round(200 / this.attrs.timings.intro) * this.barCount,
+            delay: Math.trunc(200 / this.attrs.timings.intro) * this.barCount,
             selector: ".text",
-            easing: "linear"
+            easing: "easeInQuad"
           });
-          this.addIncident(c, n + i + r);
+          this.addIncident(h, n + i + r);
         }
 
-        var h = new _e.Anime({
+        var d = new Je.Anime({
           animatedAttrs: {}
         }, {
-          duration: this.attrs.timings.static ? this.attrs.timings.static : 1e3,
+          duration: this.static,
           selector: ".container-progressBar"
         });
 
-        if (this.addIncident(h, this.attrs.timings.intro), this.attrs.timings.outro) {
-          var d = new _e.Anime({
+        if (this.addIncident(d, this.attrs.timings.intro), this.attrs.timings.outro) {
+          var p = new Je.Anime({
             animatedAttrs: {
               opacity: 0
             }
@@ -3818,7 +3954,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".container-progressBar",
             easing: "linear"
           });
-          this.addIncident(d, this.attrs.timings.intro + (this.attrs.timings.static ? this.attrs.timings.static : 1e3));
+          this.addIncident(p, this.attrs.timings.intro + this.static);
         }
       }
     }, {
@@ -3826,7 +3962,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       get: function get() {
         var t = this,
             e = this.attrs.data.map(function (e, i) {
-          var r;
+          var r, a;
           return n.default.utils.createDOMElement("div", {
             class: "row row-" + i
           }, n.default.utils.createDOMElement("div", {
@@ -3834,10 +3970,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, e.name), n.default.utils.createDOMElement("div", {
             class: "container-bar container-bar-" + i
           }, n.default.utils.createDOMElement("div", {
-            class: "inner-bar inner-bar-" + i + " " + (e.value < t.criticalValue ? "extra-rounded-" + i : null)
+            class: "inner-bar inner-bar-" + i + " " + (e.value < t.criticalValue ? "extra-trunced-" + i : null)
           })), n.default.utils.createDOMElement("div", {
             class: "text text-" + i
-          }, null !== (r = t.attrs.options) && void 0 !== r && r.hidePercentage ? null : (e.value > 0 ? e.value.toFixed(2) : 0) + "%"));
+          }, null !== (r = t.attrs.options) && void 0 !== r && r.hidePercentage ? null : e.value > 0 ? e.value.toFixed(2) : 0), n.default.utils.createDOMElement("div", {
+            class: "text text-unit"
+          }, null !== (a = t.attrs.options) && void 0 !== a && a.hidePercentage ? null : "%"));
         });
         return n.default.utils.createDOMElement("div", {
           class: "container-progressBar"
@@ -3954,124 +4092,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), r;
   }(n.default.HTMLClip);
 
-  function He(t, e) {
-    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-  }
-
-  function Qe(t) {
-    return (Qe = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
-      return t.__proto__ || Object.getPrototypeOf(t);
-    })(t);
-  }
-
-  function Xe(t, e) {
-    return (Xe = Object.setPrototypeOf || function (t, e) {
-      return t.__proto__ = e, t;
-    })(t, e);
-  }
-
-  function Ye(t, e) {
-    return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
-      if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-      return t;
-    }(t) : e;
-  }
-
-  function We(t) {
-    var e = function () {
-      if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
-      if (Reflect.construct.sham) return !1;
-      if ("function" == typeof Proxy) return !0;
-
-      try {
-        return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
-      } catch (t) {
-        return !1;
-      }
-    }();
-
-    return function () {
-      var n,
-          i = Qe(t);
-
-      if (e) {
-        var r = Qe(this).constructor;
-        n = Reflect.construct(i, arguments, r);
-      } else n = i.apply(this, arguments);
-
-      return Ye(this, n);
-    };
-  }
-
-  var qe = function (t) {
-    !function (t, e) {
-      if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
-      t.prototype = Object.create(e && e.prototype, {
-        constructor: {
-          value: t,
-          writable: !0,
-          configurable: !0
-        }
-      }), e && Xe(t, e);
-    }(r, n.default.Effect);
-    var e,
-        i = We(r);
-
-    function r() {
-      return He(this, r), i.apply(this, arguments);
-    }
-
-    return (e = [{
-      key: "getScratchValue",
-      value: function value() {
-        return 0;
-      }
-    }, {
-      key: "onGetContext",
-      value: function value() {
-        this.element.innerHTML = this.initialValue;
-      }
-    }, {
-      key: "onProgress",
-      value: function value(t, e) {
-        var n = this.initialValue + (this.targetValue - this.initialValue) * t;
-        n = this.attrs.decimals ? n.toFixed(this.attrs.decimals) : Math.trunc(n), this.element.innerHTML = n;
-      }
-    }]) && function (t, e) {
-      for (var n = 0; n < e.length; n++) {
-        var i = e[n];
-        i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
-      }
-    }(r.prototype, e), r;
-  }(),
-      Ze = __webpack_require__(500),
-      Je = {
-    npm_name: Ze.name,
-    version: Ze.version,
-    incidents: [{
-      exportable: qe,
-      name: "Counter",
-      attributesValidationRules: {
-        animatedAttrs: {
-          type: "object",
-          props: {
-            count: {
-              type: "number"
-            }
-          }
-        },
-        decimals: {
-          type: "number",
-          optional: !0,
-          min: 0,
-          max: 20,
-          integer: !0
-        }
-      }
-    }]
-  };
-
-  var $e = {
+  var Ue = {
     lineGraph: {
       originalDims: {
         width: 1200,
@@ -4085,16 +4106,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }
   },
-      Ue = {
+      Ke = {
     battery: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="48px" height="48px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>',
     backup: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="48px" height="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>',
     checkMark: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="48px" height="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>',
     synch: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="48px" height="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>',
     folder: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="48px" height="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>'
   },
-      Ke = n.default.loadPlugin(wt),
-      tn = n.default.loadPlugin(Je),
-      en = function (t) {
+      tn = n.default.loadPlugin(wt),
+      en = n.default.loadPlugin(qe),
+      nn = function (t) {
     s(r, t);
     var e = h(r);
 
@@ -4109,7 +4130,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           var t = new n.default.Group(),
               e = .7 * this.introDur,
               i = .7 * this.introDur,
-              r = new Ke.Anime({
+              r = new tn.Anime({
             animatedAttrs: {
               "stroke-dashoffset": 0
             },
@@ -4122,7 +4143,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".meter-track"
           });
           t.addIncident(r, 0);
-          var a = new Ke.Anime({
+          var a = new tn.Anime({
             animatedAttrs: {
               "stroke-dashoffset": this.pathLength - this.pathLength * this.data.value / 100
             },
@@ -4135,7 +4156,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".meter-path"
           });
           t.addIncident(a, Math.trunc(.3 * this.introDur));
-          var o = new Ke.Anime({
+          var o = new tn.Anime({
             animatedAttrs: {
               "stroke-width": .05 * this.boxSize
             },
@@ -4148,7 +4169,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.04 * i)
           });
           t.addIncident(o, 0);
-          var s = new Ke.Anime({
+          var s = new tn.Anime({
             animatedAttrs: {
               "stroke-width": .05 * this.boxSize
             },
@@ -4161,7 +4182,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.04 * i)
           });
           t.addIncident(s, Math.trunc(.3 * this.introDur));
-          var l = new Ke.Anime({
+          var l = new tn.Anime({
             animatedAttrs: {
               opacity: 1
             },
@@ -4174,7 +4195,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.3 * this.introDur)
           });
           t.addIncident(l, 0);
-          var u = new tn.Counter({
+          var u = new en.Counter({
             animatedAttrs: {
               count: Math.round(this.data.value)
             }
@@ -4185,7 +4206,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           });
 
           if (t.addIncident(u, Math.trunc(.3 * this.introDur)), this.innerSVG) {
-            var c = new Ke.Anime({
+            var c = new tn.Anime({
               animatedAttrs: {
                 offset: "100%"
               },
@@ -4198,7 +4219,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               duration: Math.trunc(i)
             });
             t.addIncident(c, 0);
-            var h = new Ke.Anime({
+            var h = new tn.Anime({
               animatedAttrs: {
                 offset: "".concat(this.data.value, "%")
               },
@@ -4211,7 +4232,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               duration: Math.trunc(e)
             });
             t.addIncident(h, Math.trunc(.3 * this.introDur));
-            var d = new Ke.Anime({
+            var d = new tn.Anime({
               animatedAttrs: {
                 opacity: 1
               },
@@ -4233,7 +4254,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           var p = new n.default.Group(),
               f = .7 * this.outroDur,
               g = .7 * this.outroDur,
-              m = new Ke.Anime({
+              m = new tn.Anime({
             animatedAttrs: {
               "stroke-dashoffset": this.pathLength
             },
@@ -4246,7 +4267,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".meter-track"
           });
           p.addIncident(m, Math.trunc(.3 * this.outroDur));
-          var y = new Ke.Anime({
+          var y = new tn.Anime({
             animatedAttrs: {
               "stroke-dashoffset": this.pathLength
             },
@@ -4259,7 +4280,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".meter-path"
           });
           p.addIncident(y, 0);
-          var v = new Ke.Anime({
+          var v = new tn.Anime({
             animatedAttrs: {
               "stroke-width": 0
             },
@@ -4272,7 +4293,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.1 * g)
           });
           p.addIncident(v, Math.trunc(this.outroDur - .1 * g));
-          var b = new Ke.Anime({
+          var b = new tn.Anime({
             animatedAttrs: {
               "stroke-width": 0
             },
@@ -4285,7 +4306,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.1 * g)
           });
           p.addIncident(b, Math.trunc(.7 * this.outroDur - .1 * g));
-          var w = new Ke.Anime({
+          var w = new tn.Anime({
             animatedAttrs: {
               opacity: 0
             },
@@ -4298,7 +4319,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             duration: Math.trunc(.3 * this.outroDur)
           });
           p.addIncident(w, Math.trunc(.55 * this.outroDur));
-          var x = new tn.Counter({
+          var x = new en.Counter({
             animatedAttrs: {
               count: 0
             }
@@ -4309,7 +4330,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           });
 
           if (p.addIncident(x, 0), this.innerSVG) {
-            var M = new Ke.Anime({
+            var M = new tn.Anime({
               animatedAttrs: {
                 offset: "".concat(0, "%")
               },
@@ -4322,7 +4343,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               duration: Math.trunc(g)
             });
             p.addIncident(M, Math.trunc(.3 * this.outroDur));
-            var k = new Ke.Anime({
+            var k = new tn.Anime({
               animatedAttrs: {
                 offset: "0%"
               },
@@ -4335,7 +4356,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               duration: Math.trunc(f)
             });
             p.addIncident(k, 0);
-            var O = new Ke.Anime({
+            var O = new tn.Anime({
               animatedAttrs: {
                 opacity: 0
               },
@@ -4353,7 +4374,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           this.addIncident(p, 0 + this.introDur + this.staticDur);
         }
 
-        var D = new Ke.Anime({
+        var D = new tn.Anime({
           animatedAttrs: {}
         }, {
           selector: ".container-progressMeter",
@@ -4367,7 +4388,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         this.data = this.attrs.data, this.innerSVG = this.attrs.innerImage ? this.attrs.innerImage : null, this.innerFill = this.data.innerFill ? this.data.innerFill : {
           revert: !1,
           rotate: !1
-        }, this.originalDims = $e.progressMeter.originalDims, this.boxSize = this.originalDims.width < this.originalDims.height ? .65 * this.originalDims.width : .65 * this.originalDims.height, this.pathLength = 1e4, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : g.font, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : g.accent, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : g.background, this.attrs.font = this.attrs.font ? this.attrs.font : {}, this.fontFamily = this.attrs.font.fontFamily ? this.attrs.font.fontFamily : "'Staatliches', cursive", this.fontSize = this.attrs.font.size ? this.attrs.font.size : "1.7rem", this.url = this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap", this.attrs.timings = this.attrs.timings ? this.attrs.timings : {}, this.introDur = this.attrs.timings.intro ? this.attrs.timings.intro : 0, this.outroDur = this.attrs.timings.outro ? this.attrs.timings.outro : 0, 0 === this.attrs.timings.static ? this.staticDur = 0 : this.staticDur = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
+        }, this.originalDims = Ue.progressMeter.originalDims, this.boxSize = this.originalDims.width < this.originalDims.height ? .65 * this.originalDims.width : .65 * this.originalDims.height, this.pathLength = 1e4, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : g.font, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : g.accent, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : g.background, this.attrs.font = this.attrs.font ? this.attrs.font : {}, this.fontFamily = this.attrs.font.fontFamily ? this.attrs.font.fontFamily : "'Staatliches', cursive", this.fontSize = this.attrs.font.size ? this.attrs.font.size : "1.7rem", this.url = this.attrs.font.url ? this.attrs.font.url : "https://fonts.googleapis.com/css2?family=Staatliches&display=swap", this.attrs.timings = this.attrs.timings ? this.attrs.timings : {}, this.introDur = this.attrs.timings.intro ? this.attrs.timings.intro : 0, this.outroDur = this.attrs.timings.outro ? this.attrs.timings.outro : 0, 0 === this.attrs.timings.static ? this.staticDur = 0 : this.staticDur = this.attrs.timings.static ? this.attrs.timings.static : 1e3;
       }
     }, {
       key: "html",
@@ -4376,7 +4397,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var t = null;
 
         if (this.innerSVG) {
-          var e = Ue[this.innerSVG] ? Ue[this.innerSVG] : this.innerSVG,
+          var e = Ke[this.innerSVG] ? Ke[this.innerSVG] : this.innerSVG,
               i = {
             x1: this.innerFill.rotate && this.innerFill.revert ? 1 : 0,
             x2: this.innerFill.rotate ? this.innerFill.revert ? 0 : 1 : 0,
@@ -4569,30 +4590,30 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), r;
   }(n.default.HTMLClip);
 
-  function nn(t, e) {
+  function rn(t, e) {
     if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
   }
 
-  function rn(t) {
-    return (rn = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+  function an(t) {
+    return (an = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
       return t.__proto__ || Object.getPrototypeOf(t);
     })(t);
   }
 
-  function an(t, e) {
-    return (an = Object.setPrototypeOf || function (t, e) {
+  function on(t, e) {
+    return (on = Object.setPrototypeOf || function (t, e) {
       return t.__proto__ = e, t;
     })(t, e);
   }
 
-  function on(t, e) {
+  function sn(t, e) {
     return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
       if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
       return t;
     }(t) : e;
   }
 
-  var sn = {
+  var ln = {
     npm_name: "@kissmybutton/motorcortex-svgdraw",
     incidents: [{
       exportable: function (t) {
@@ -4604,7 +4625,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               writable: !0,
               configurable: !0
             }
-          }), e && an(t, e);
+          }), e && on(t, e);
         }(r, n.default.Effect);
 
         var e,
@@ -4623,19 +4644,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
           return function () {
             var n,
-                i = rn(t);
+                i = an(t);
 
             if (e) {
-              var r = rn(this).constructor;
+              var r = an(this).constructor;
               n = Reflect.construct(i, arguments, r);
             } else n = i.apply(this, arguments);
 
-            return on(this, n);
+            return sn(this, n);
           };
         }(r);
 
         function r() {
-          return nn(this, r), i.apply(this, arguments);
+          return rn(this, r), i.apply(this, arguments);
         }
 
         return (e = [{
@@ -4677,22 +4698,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]
   };
 
-  function ln(t, e) {
+  function un(t, e) {
     if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
   }
 
-  function un(t, e) {
+  function cn(t, e) {
     for (var n = 0; n < e.length; n++) {
       var i = e[n];
       i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
     }
   }
 
-  function cn(t, e, n) {
-    return e && un(t.prototype, e), n && un(t, n), t;
+  function hn(t, e, n) {
+    return e && cn(t.prototype, e), n && cn(t, n), t;
   }
 
-  function hn(t, e, n) {
+  function dn(t, e, n) {
     return e in t ? Object.defineProperty(t, e, {
       value: n,
       enumerable: !0,
@@ -4701,7 +4722,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }) : t[e] = n, t;
   }
 
-  function dn(t, e) {
+  function pn(t, e) {
     var n = Object.keys(t);
 
     if (Object.getOwnPropertySymbols) {
@@ -4714,12 +4735,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function pn(t) {
+  function fn(t) {
     for (var e = 1; e < arguments.length; e++) {
       var n = null != arguments[e] ? arguments[e] : {};
-      e % 2 ? dn(Object(n), !0).forEach(function (e) {
-        hn(t, e, n[e]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : dn(Object(n)).forEach(function (e) {
+      e % 2 ? pn(Object(n), !0).forEach(function (e) {
+        dn(t, e, n[e]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : pn(Object(n)).forEach(function (e) {
         Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e));
       });
     }
@@ -4727,7 +4748,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return t;
   }
 
-  function fn(t, e) {
+  function gn(t, e) {
     if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
     t.prototype = Object.create(e && e.prototype, {
       constructor: {
@@ -4735,29 +4756,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         writable: !0,
         configurable: !0
       }
-    }), e && mn(t, e);
+    }), e && yn(t, e);
   }
 
-  function gn(t) {
-    return (gn = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+  function mn(t) {
+    return (mn = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
       return t.__proto__ || Object.getPrototypeOf(t);
     })(t);
   }
 
-  function mn(t, e) {
-    return (mn = Object.setPrototypeOf || function (t, e) {
+  function yn(t, e) {
+    return (yn = Object.setPrototypeOf || function (t, e) {
       return t.__proto__ = e, t;
     })(t, e);
   }
 
-  function yn(t, e) {
+  function vn(t, e) {
     return !e || "object" != _typeof(e) && "function" != typeof e ? function (t) {
       if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
       return t;
     }(t) : e;
   }
 
-  function vn(t) {
+  function bn(t) {
     var e = function () {
       if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
       if (Reflect.construct.sham) return !1;
@@ -4772,23 +4793,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return function () {
       var n,
-          i = gn(t);
+          i = mn(t);
 
       if (e) {
-        var r = gn(this).constructor;
+        var r = mn(this).constructor;
         n = Reflect.construct(i, arguments, r);
       } else n = i.apply(this, arguments);
 
-      return yn(this, n);
+      return vn(this, n);
     };
   }
 
-  var bn = function () {
+  var wn = function () {
     function t(e) {
-      ln(this, t), this.el = e, this.matrix = this._getMatrix(e), this.viewportCenter = this._getViewPortCenter(), this.idlePosition = this._getIdlePosition();
+      un(this, t), this.el = e, this.matrix = this._getMatrix(e), this.viewportCenter = this._getViewPortCenter(), this.idlePosition = this._getIdlePosition();
     }
 
-    return cn(t, [{
+    return hn(t, [{
       key: "_getMatrix",
       value: function value(t) {
         return function (t) {
@@ -4848,7 +4869,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             n = this.viewportCenter,
             i = n.x - e.x,
             r = n.y - e.y;
-        return pn(pn({}, {
+        return fn(fn({}, {
           x: i / t.scaleX,
           y: r / t.scaleY
         }), {}, {
@@ -4926,23 +4947,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }]), t;
   }(),
-      wn = function (t) {
-    fn(i, n.default.Effect);
-    var e = vn(i);
+      xn = function (t) {
+    gn(i, n.default.Effect);
+    var e = bn(i);
 
     function i() {
-      return ln(this, i), e.apply(this, arguments);
+      return un(this, i), e.apply(this, arguments);
     }
 
-    return cn(i, [{
+    return hn(i, [{
       key: "getScratchValue",
       value: function value() {
-        return this.adaptor = new bn(this.element), this.adaptor.calcXYZoom();
+        return this.adaptor = new wn(this.element), this.adaptor.calcXYZoom();
       }
     }, {
       key: "onGetContext",
       value: function value() {
-        this.adaptor = new bn(this.element), this.progressMethod = this.adaptor.createProgressFunction({
+        this.adaptor = new wn(this.element), this.progressMethod = this.adaptor.createProgressFunction({
           start: this.initialValue,
           target: this.targetValue
         });
@@ -4955,10 +4976,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }]), i;
   }(),
-      xn = {
+      Mn = {
     npm_name: "@kissmybutton/motorcortex-2dcam",
     incidents: [{
-      exportable: wn,
+      exportable: xn,
       name: "ZoomTo",
       attributesValidationRules: {
         animatedAttrs: {
@@ -4989,14 +5010,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }, {
       exportable: function (t) {
-        fn(n, wn);
-        var e = vn(n);
+        gn(n, xn);
+        var e = bn(n);
 
         function n() {
-          return ln(this, n), e.apply(this, arguments);
+          return un(this, n), e.apply(this, arguments);
         }
 
-        return cn(n, [{
+        return hn(n, [{
           key: "onInitialise",
           value: function value() {
             var t = this.props.duration,
@@ -5020,7 +5041,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }, {
           key: "onGetContext",
           value: function value() {
-            this.adaptor = new bn(this.element), this.data.zoom = this.targetValue.zoom, this.progressMethod = this.adaptor.createPathProgressFunction(this.data, this.initialValue);
+            this.adaptor = new wn(this.element), this.data.zoom = this.targetValue.zoom, this.progressMethod = this.adaptor.createPathProgressFunction(this.data, this.initialValue);
           }
         }]), n;
       }(),
@@ -5069,10 +5090,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       position: ["x", "y", "zoom", "path"]
     }
   },
-      Mn = n.default.loadPlugin(wt),
-      kn = n.default.loadPlugin(sn),
-      On = n.default.loadPlugin(xn),
-      Dn = function () {
+      kn = n.default.loadPlugin(wt),
+      On = n.default.loadPlugin(ln),
+      Dn = n.default.loadPlugin(Mn),
+      Cn = function () {
     function t(e) {
       i(this, t), this.instance = e;
     }
@@ -5080,7 +5101,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return a(t, [{
       key: "buildStaticControl",
       value: function value() {
-        return new Mn.Anime({
+        return new kn.Anime({
           animatedAttrs: {}
         }, {
           selector: ".container-lineGraph",
@@ -5090,7 +5111,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "buildBackgroundIntro",
       value: function value() {
-        return new Mn.Anime({
+        return new kn.Anime({
           animatedAttrs: {
             height: "70%"
           },
@@ -5106,7 +5127,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "buildBackgroundOutro",
       value: function value() {
-        return new Mn.Anime({
+        return new kn.Anime({
           animatedAttrs: {
             height: "0%"
           },
@@ -5128,7 +5149,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         for (var i in this.instance.words) {
           e.push({
-            incidentClass: Mn.Anime,
+            incidentClass: kn.Anime,
             attrs: {
               animatedAttrs: {
                 top: "0px",
@@ -5163,7 +5184,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
         for (var i in this.instance.words) {
           e.push({
-            incidentClass: Mn.Anime,
+            incidentClass: kn.Anime,
             attrs: {
               animatedAttrs: {
                 top: "-50px",
@@ -5196,7 +5217,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             e = t / this.instance.dataSetsNum,
             i = 1 === this.instance.dataSetsNum ? null : "@stagger(0, ".concat(t - e, ")"),
             r = [{
-          incidentClass: Mn.Anime,
+          incidentClass: kn.Anime,
           attrs: {
             animatedAttrs: {
               height: "".concat(this.instance.legendHeight, "%")
@@ -5211,7 +5232,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           },
           position: 0
         }, {
-          incidentClass: Mn.Anime,
+          incidentClass: kn.Anime,
           attrs: {
             animatedAttrs: {
               opacity: "1"
@@ -5228,7 +5249,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           },
           position: Math.trunc(.15 * this.instance.introDur)
         }, {
-          incidentClass: Mn.Anime,
+          incidentClass: kn.Anime,
           attrs: {
             animatedAttrs: {
               opacity: "1"
@@ -5258,7 +5279,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             e = t / this.instance.dataSetsNum,
             i = 1 === this.instance.dataSetsNum ? null : "@stagger(0, ".concat(t - e, ", 0, linear, linear, true)"),
             r = [{
-          incidentClass: Mn.Anime,
+          incidentClass: kn.Anime,
           attrs: {
             animatedAttrs: {
               height: "0%"
@@ -5273,7 +5294,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           },
           position: t
         }, {
-          incidentClass: Mn.Anime,
+          incidentClass: kn.Anime,
           attrs: {
             animatedAttrs: {
               opacity: "0"
@@ -5290,7 +5311,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           },
           position: Math.trunc(t - .15 * this.instance.introDur)
         }, {
-          incidentClass: Mn.Anime,
+          incidentClass: kn.Anime,
           attrs: {
             animatedAttrs: {
               opacity: "0"
@@ -5317,7 +5338,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       key: "buildIntroLabels",
       value: function value() {
         var t = new n.default.Group();
-        t.addIncident(new Mn.Anime({
+        t.addIncident(new kn.Anime({
           animatedAttrs: {
             width: "100%"
           },
@@ -5338,7 +5359,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
           for (var s in this.instance.data[r].name) {
             o.push({
-              incidentClass: Mn.Anime,
+              incidentClass: kn.Anime,
               attrs: {
                 animatedAttrs: {
                   opacity: 1
@@ -5371,7 +5392,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       value: function value() {
         var t = new n.default.Group(),
             e = .55 * this.instance.outroDur;
-        t.addIncident(new Mn.Anime({
+        t.addIncident(new kn.Anime({
           animatedAttrs: {
             width: "0%"
           },
@@ -5392,7 +5413,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
           for (var l in this.instance.data[a].name) {
             s.push({
-              incidentClass: Mn.Anime,
+              incidentClass: kn.Anime,
               attrs: {
                 animatedAttrs: {
                   opacity: 0
@@ -5434,7 +5455,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }),
               s = new n.default.Combo({
             incidents: [{
-              incidentClass: Mn.Anime,
+              incidentClass: kn.Anime,
               attrs: {
                 animatedAttrs: {
                   opacity: 1
@@ -5471,7 +5492,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }),
               s = new n.default.Combo({
             incidents: [{
-              incidentClass: Mn.Anime,
+              incidentClass: kn.Anime,
               attrs: {
                 animatedAttrs: {
                   opacity: 0
@@ -5500,7 +5521,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         for (var e = this.instance.introDur / this.instance.data.length, i = .35 * e, r = .8 * e, a = new n.default.Group(), o = new n.default.Group(), s = 0; s < this.instance.dataSetsNum; s++) {
           for (var l = 0; l < this.instance.data.length; l++) {
             if (l !== this.instance.data.length - 1) {
-              var u = new kn.Draw({
+              var u = new On.Draw({
                 animatedAttrs: {
                   cover: 1
                 },
@@ -5515,7 +5536,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               a.addIncident(u, Math.trunc(e * l + .2 * e));
             }
 
-            var c = new Mn.Anime({
+            var c = new kn.Anime({
               animatedAttrs: {
                 opacity: 1,
                 r: this.instance.r
@@ -5536,7 +5557,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             f = f < 6 ? 6 : f;
             var g = this.instance.findPointX(l) - f * this.instance.linesWidth / 100 * .5,
                 m = g + this.instance.linesWidth * (f / 100) / 2,
-                y = new Mn.Anime({
+                y = new kn.Anime({
               animatedAttrs: {
                 opacity: .6,
                 width: "".concat(f, "%"),
@@ -5571,7 +5592,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                   O = v[5],
                   D = v[6],
                   C = v[7],
-                  S = new On.ZoomTo({
+                  S = new Dn.ZoomTo({
                 animatedAttrs: {
                   position: {
                     x: O,
@@ -5606,10 +5627,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             a,
             o = 0,
             s = 0,
-            l = this.instance.findPointX(t) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width,
-            u = this.instance.findPointY(t, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height,
+            l = this.instance.findPointX(t) + (1 - this.instance.graphScale.width) / 2 * Ue.lineGraph.originalDims.width,
+            u = this.instance.findPointY(t, 0) + (1 - this.instance.graphScale.height) / 2 * Ue.lineGraph.originalDims.height,
             c = this.instance.traceScale;
-        return 0 === t ? (i = .5 * $e.lineGraph.originalDims.width, r = .5 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, s = e - .15 * n, o = 0) : t === this.instance.data.length - 1 ? (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, l = .5 * $e.lineGraph.originalDims.width, u = .5 * $e.lineGraph.originalDims.height, c = 1, o = n * (t - 1) + e, s = n + e - .15 * n) : (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * $e.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * $e.lineGraph.originalDims.height, a = this.instance.traceScale, s = n, o = n * (t - 1) + e), [o, s, i, r, a, l, u, c];
+        return 0 === t ? (i = .5 * Ue.lineGraph.originalDims.width, r = .5 * Ue.lineGraph.originalDims.height, a = this.instance.traceScale, s = e - .15 * n, o = 0) : t === this.instance.data.length - 1 ? (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * Ue.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * Ue.lineGraph.originalDims.height, a = this.instance.traceScale, l = .5 * Ue.lineGraph.originalDims.width, u = .5 * Ue.lineGraph.originalDims.height, c = 1, o = n * (t - 1) + e, s = n + e - .15 * n) : (i = this.instance.findPointX(t - 1) + (1 - this.instance.graphScale.width) / 2 * Ue.lineGraph.originalDims.width, r = this.instance.findPointY(t - 1, 0) + (1 - this.instance.graphScale.height) / 2 * Ue.lineGraph.originalDims.height, a = this.instance.traceScale, s = n, o = n * (t - 1) + e), [o, s, i, r, a, l, u, c];
       }
     }, {
       key: "buildOutroGraph",
@@ -5617,7 +5638,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         for (var e = this.instance.outroDur / (this.instance.data.length + 1), i = .25 * e, r = .8 * e, a = this.instance.trace ? 1 : 0, o = new n.default.Group(), s = new n.default.Group(), l = 0; l < this.instance.dataSetsNum; l++) {
           for (var u = new n.default.Group(), c = 0; c < this.instance.data.length; c++) {
             if (c !== this.instance.data.length - 1) {
-              var h = new kn.Draw({
+              var h = new On.Draw({
                 animatedAttrs: {
                   cover: 0
                 },
@@ -5632,7 +5653,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               o.addIncident(h, Math.trunc(e * (this.instance.data.length + a - c - 2) + .2 * e));
             }
 
-            var d = new Mn.Anime({
+            var d = new kn.Anime({
               animatedAttrs: {
                 opacity: 0,
                 r: 0
@@ -5653,7 +5674,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             g = g < 6 ? 6 : g;
             var m = this.instance.findPointX(c) - g * this.instance.linesWidth / 100 * .5,
                 y = m + this.instance.linesWidth * (g / 100) / 2,
-                v = new Mn.Anime({
+                v = new kn.Anime({
               animatedAttrs: {
                 opacity: 0,
                 width: "0%",
@@ -5687,7 +5708,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }]), t;
   }(),
-      Cn = function (t) {
+      Sn = function (t) {
     s(r, t);
     var e = h(r);
 
@@ -5726,7 +5747,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       key: "buildVars",
       value: function value() {
         var t = this;
-        this.animConstructor = new Dn(this), this.data = this.attrs.data.data, this.colorPalette = g, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : this.colorPalette.gray, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : this.colorPalette.lightGray, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : this.colorPalette.darkGray, this.quaternaryC = this.attrs.palette.quaternary ? this.attrs.palette.quaternary : this.colorPalette.whiteBack, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : this.colorPalette.font, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : this.colorPalette.accent, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : this.colorPalette.background, this.title = this.attrs.data.title, this.words = this.title.split(" "), this.dataSets = this.attrs.data.dataSets ? this.attrs.data.dataSets : [{
+        this.animConstructor = new Cn(this), this.data = this.attrs.data.data, this.colorPalette = g, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : this.colorPalette.gray, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : this.colorPalette.lightGray, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : this.colorPalette.darkGray, this.quaternaryC = this.attrs.palette.quaternary ? this.attrs.palette.quaternary : this.colorPalette.whiteBack, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : this.colorPalette.font, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : this.colorPalette.accent, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : this.colorPalette.background, this.title = this.attrs.data.title, this.words = this.title.split(" "), this.dataSets = this.attrs.data.dataSets ? this.attrs.data.dataSets : [{
           title: "",
           color: this.accentC
         }], this.dataSetsNum = this.dataSets.length, this.dataSets.map(function (e, n) {
@@ -5800,10 +5821,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           n.f();
         }
 
-        this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint, this.hover = !!this.attrs.data.hover && this.attrs.data.hover, this.hover = 1 !== this.dataSetsNum || this.hover, this.attrs.trace = this.attrs.trace ? this.attrs.trace : {}, this.trace = !!this.attrs.trace.toggle && this.attrs.trace.toggle, this.trace = 1 === this.dataSetsNum && this.trace, this.traceScale = this.attrs.trace.scale ? this.attrs.trace.scale : 1.4, this.unit = this.attrs.data.unit ? this.attrs.data.unit : "%", this.interval = this.attrs.data.interval ? this.attrs.data.interval : 5, this.steleBlockNum = this.maxPoint / this.interval + 1, this.config = $e, this.graphScale = {
+        this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint, this.hover = !!this.attrs.data.hover && this.attrs.data.hover, this.hover = 1 !== this.dataSetsNum || this.hover, this.attrs.trace = this.attrs.trace ? this.attrs.trace : {}, this.trace = !!this.attrs.trace.toggle && this.attrs.trace.toggle, this.trace = 1 === this.dataSetsNum && this.trace, this.traceScale = this.attrs.trace.scale ? this.attrs.trace.scale : 1.4, this.unit = this.attrs.data.unit ? this.attrs.data.unit : "%", this.interval = this.attrs.data.interval ? this.attrs.data.interval : 5, this.steleBlockNum = this.maxPoint / this.interval + 1, this.config = Ue, this.graphScale = {
           width: .76,
           height: .58
-        }, this.legendHeightFactor = 1 === this.dataSetsNum ? 1 : this.dataSetsNum / 2, this.legendHeight = 4 * (this.legendHeightFactor + (this.legendHeightFactor % 1 ? 1 : 0)), this.linesWidth = $e.lineGraph.originalDims.width * this.graphScale.width, this.linesHeight = $e.lineGraph.originalDims.height * this.graphScale.height, this.steleWidth = .01 * this.linesWidth, this.spaceAround = (this.linesWidth - this.steleWidth * this.data.length) / (2 * this.data.length), this.r = .65, this.findPointX = function (e) {
+        }, this.legendHeightFactor = 1 === this.dataSetsNum ? 1 : this.dataSetsNum / 2, this.legendHeight = 4 * (this.legendHeightFactor + (this.legendHeightFactor % 1 ? 1 : 0)), this.linesWidth = Ue.lineGraph.originalDims.width * this.graphScale.width, this.linesHeight = Ue.lineGraph.originalDims.height * this.graphScale.height, this.steleWidth = .01 * this.linesWidth, this.spaceAround = (this.linesWidth - this.steleWidth * this.data.length) / (2 * this.data.length), this.r = .65, this.findPointX = function (e) {
           return t.steleWidth / 2 + t.spaceAround + e * (2 * t.spaceAround + t.steleWidth);
         }, this.findPointY = function (e, n) {
           return t.linesHeight - t.data[e].values[n] * t.linesHeight / t.maxPoint;
@@ -6175,8 +6196,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             hoverPoint: {
               position: "absolute",
-              width: "".concat(.01 * $e.lineGraph.originalDims.width, "px"),
-              height: "".concat(.01 * $e.lineGraph.originalDims.width, "px"),
+              width: "".concat(.01 * Ue.lineGraph.originalDims.width, "px"),
+              height: "".concat(.01 * Ue.lineGraph.originalDims.width, "px"),
               "border-radius": "50%",
               "z-index": "9999"
             }
@@ -6200,7 +6221,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 top: "".concat(s, "px"),
                 left: "".concat(u, "px")
               };
-              var c = l * t.linesWidth / 100 * .5 - .01 * $e.lineGraph.originalDims.width / 2,
+              var c = l * t.linesWidth / 100 * .5 - .01 * Ue.lineGraph.originalDims.width / 2,
                   h = .07 * t.linesHeight;
               n["hoverPoint-".concat(i, "-").concat(t.data[a].name)] = {
                 top: "".concat(s + h, "px"),
@@ -6229,12 +6250,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), r;
   }(n.default.HTMLClip);
 
-  function Sn(t) {
+  function Pn(t) {
     return t > g.dataColors.length - 1 ? g.dataColors[Math.floor(Math.random() * Math.floor(g.dataColors.length))] : g.dataColors[t];
   }
 
-  var Pn = n.default.loadPlugin(wt),
-      In = function (t) {
+  var In = n.default.loadPlugin(wt),
+      An = function (t) {
     s(r, t);
     var e = h(r);
 
@@ -6260,7 +6281,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               c = Math.round(.2 * (null === (s = this.attrs.timings) || void 0 === s ? void 0 : s.intro)),
               h = Math.round(.8 * (null === (l = this.attrs.timings) || void 0 === l ? void 0 : l.intro)),
               p = Math.round(.4 * (null === (u = this.attrs.timings) || void 0 === u ? void 0 : u.intro)),
-              f = new Pn.Anime({
+              f = new In.Anime({
             animatedAttrs: {
               opacity: 1
             },
@@ -6273,7 +6294,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "linear"
           });
           this.addIncident(f, 0), this.attrs.data.title && d(this.attrs.data.title).forEach(function (t, e) {
-            var n = new Pn.Anime({
+            var n = new In.Anime({
               animatedAttrs: {
                 right: "0%",
                 opacity: 1
@@ -6290,7 +6311,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             });
             o.addIncident(n, Math.round(p / o.attrs.data.title.length) * e);
           });
-          var g = new Pn.Anime({
+          var g = new In.Anime({
             animatedAttrs: {
               "background-image": "conic-gradient(".concat(this.createRadiusString(!1), ")")
             },
@@ -6303,7 +6324,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "linear"
           });
           this.addIncident(g, p);
-          var m = new Pn.Anime({
+          var m = new In.Anime({
             animatedAttrs: {
               width: "75%",
               "min-width": "50%",
@@ -6322,7 +6343,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           this.addIncident(m, p);
         }
 
-        var y = new Pn.Anime({
+        var y = new In.Anime({
           animatedAttrs: {}
         }, {
           duration: null !== (e = this.attrs.timings) && void 0 !== e && e.static ? null === (n = this.attrs.timings) || void 0 === n ? void 0 : n.static : 1e3,
@@ -6344,7 +6365,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               I,
               A,
               E = Math.round(null === (v = this.attrs.timings) || void 0 === v ? void 0 : v.outro),
-              V = new Pn.Anime({
+              V = new In.Anime({
             animatedAttrs: {
               top: "-10%"
             },
@@ -6357,7 +6378,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInOutCirc"
           });
           this.addIncident(V, (null !== (b = this.attrs.timings) && void 0 !== b && b.intro ? null === (w = this.attrs.timings) || void 0 === w ? void 0 : w.intro : 0) + (null === (x = this.attrs.timings) || void 0 === x ? void 0 : x.static));
-          var R = new Pn.Anime({
+          var R = new In.Anime({
             animatedAttrs: {
               width: "0%",
               "min-width": "0%"
@@ -6368,7 +6389,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInOutCirc"
           });
           this.addIncident(R, (null !== (M = this.attrs.timings) && void 0 !== M && M.intro ? null === (k = this.attrs.timings) || void 0 === k ? void 0 : k.intro : 0) + (null === (O = this.attrs.timings) || void 0 === O ? void 0 : O.static));
-          var j = new Pn.Anime({
+          var j = new In.Anime({
             animatedAttrs: {
               width: "0%",
               height: "0%"
@@ -6383,7 +6404,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInOutCirc"
           });
           this.addIncident(j, (null !== (D = this.attrs.timings) && void 0 !== D && D.intro ? null === (C = this.attrs.timings) || void 0 === C ? void 0 : C.intro : 0) + (null === (S = this.attrs.timings) || void 0 === S ? void 0 : S.static));
-          var z = new Pn.Anime({
+          var z = new In.Anime({
             animatedAttrs: {
               opacity: 0
             },
@@ -6549,7 +6570,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           };
           return t.data.data.forEach(function (t, e) {
             r["indicator-" + e] = {
-              background: t.color ? t.color : Sn(e),
+              background: t.color ? t.color : Pn(e),
               width: "1rem",
               height: "1rem",
               display: "block",
@@ -6583,7 +6604,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       }
     }]), r;
   }(n.default.HTMLClip),
-      An = {
+      En = {
     ProgressBar: {
       data: {
         type: "array"
@@ -7065,9 +7086,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   return {
     npm_name: "@kissmybutton/motorcortex-graph",
     incidents: [{
-      exportable: Be,
+      exportable: $e,
       name: "ProgressBar",
-      attributesValidationRules: An.ProgressBar,
+      attributesValidationRules: En.ProgressBar,
       originalDims: {
         width: "1200px",
         height: "900px"
@@ -7075,34 +7096,34 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       exportable: Fe,
       name: "BarChartSimple",
-      attributesValidationRules: An.BarChartSimple,
+      attributesValidationRules: En.BarChartSimple,
       originalDims: {
         width: "1200px",
         height: "900px"
       }
     }, {
-      exportable: Cn,
+      exportable: Sn,
       name: "LineGraph",
-      attributesValidationRules: An.LineGraph,
+      attributesValidationRules: En.LineGraph,
       originalDims: {
-        width: "".concat($e.lineGraph.originalDims.width, "px"),
-        height: "".concat($e.lineGraph.originalDims.height, "px")
+        width: "".concat(Ue.lineGraph.originalDims.width, "px"),
+        height: "".concat(Ue.lineGraph.originalDims.height, "px")
       }
     }, {
-      exportable: In,
+      exportable: An,
       name: "PieChart",
-      attributesValidationRules: An.PieChart,
+      attributesValidationRules: En.PieChart,
       originalDims: {
         width: "1200px",
         height: "900px"
       }
     }, {
-      exportable: en,
+      exportable: nn,
       name: "ProgressMeter",
-      attributesValidationRules: An.ProgressMeter,
+      attributesValidationRules: En.ProgressMeter,
       originalDims: {
-        width: "".concat($e.progressMeter.originalDims.width, "px"),
-        height: "".concat($e.progressMeter.originalDims.height, "px")
+        width: "".concat(Ue.progressMeter.originalDims.width, "px"),
+        height: "".concat(Ue.progressMeter.originalDims.height, "px")
       }
     }]
   };
@@ -8420,7 +8441,7 @@ module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"ve
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "813f850bfbfc8bec2ae8"
+/******/ 		__webpack_require__.h = () => "fb10f9ab76fc9ea99b0f"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
