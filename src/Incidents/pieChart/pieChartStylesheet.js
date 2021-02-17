@@ -84,7 +84,7 @@ export default function buildCSS(cssArgs) {
     };
     
     cssArgs.data.data.forEach((elem, i) => {
-        styles['indicator-'+i] = {
+        styles['meter-'+i] = {
             background: elem. color? elem.color : generateColor(i),
             width: '1rem',
             height: '1rem',

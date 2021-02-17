@@ -4,16 +4,15 @@ import ProgressMeter from './Incidents/progressMeter/progressMeter';
 import LineGraph from './Incidents/lineGraph/lineGraph';
 import PieChart from './Incidents/pieChart/pieChart';
 import config from './incident_config'
+import { validationRules } from "./validation";
 
 export default {
-  npm_name: "motorcortex-graphs", // !! make sure the name of your plugin is identical to the name of your package.json !!
+  npm_name: "@kissmybutton/motorcortex-graph", 
   incidents: [
     {
       exportable: ProgressBar,
       name: "ProgressBar",
-      // define your attributeValidationRules so MotorCortex can automatically validate them on instantiation 
-      // also so your Incidents are directly embedable to DonkeyClip
-    //   attributesValidationRules: {},
+      attributesValidationRules: validationRules.ProgressBar,
       originalDims: {
         width: "1200px",
         height: "900px"
@@ -22,9 +21,7 @@ export default {
     {
       exportable: BarChartSimple,
       name: "BarChartSimple",
-      // define your attributeValidationRules so MotorCortex can automatically validate them on instantiation 
-      // also so your Incidents are directly embedable to DonkeyClip
-    //   attributesValidationRules: {},
+      attributesValidationRules: validationRules.BarChartSimple,
       originalDims: {
         width: "1200px",
         height: "900px"
@@ -33,9 +30,7 @@ export default {
     {
       exportable: LineGraph,
       name: "LineGraph",
-      // define your attributeValidationRules so MotorCortex can automatically validate them on instantiation 
-      // also so your Incidents are directly embedable to DonkeyClip
-      // attributesValidationRules: {},
+      attributesValidationRules: validationRules.LineGraph,
       originalDims: {
         width: `${config.lineGraph.originalDims.width}px`,
         height: `${config.lineGraph.originalDims.height}px`
@@ -44,6 +39,7 @@ export default {
     {
       exportable: PieChart,
       name: "PieChart",
+      attributesValidationRules: validationRules.PieChart,
       originalDims: {
         width: "1200px",
         height: "900px"
@@ -52,9 +48,7 @@ export default {
     {
       exportable: ProgressMeter,
       name: "ProgressMeter",
-      // define your attributeValidationRules so MotorCortex can automatically validate them on instantiation 
-      // also so your Incidents are directly embedable to DonkeyClip
-    //   attributesValidationRules: {},
+      attributesValidationRules: validationRules.ProgressMeter,
       originalDims: {
         width: `${config.progressMeter.originalDims.width}px`,
         height: `${config.progressMeter.originalDims.height}px`

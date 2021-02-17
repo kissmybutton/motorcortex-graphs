@@ -441,7 +441,7 @@ const newGraph = new MCGraphs.BarChartSimple({
         primary: "#75706E",
         secondary: "#B2B1AE", 
         tertiary: "#434243",
-        "quaternary": "#EEEEEE",
+        quaternary: "#EEEEEE",
         font: "#100300", 
         accent: "#FFD800", 
         background: "#D3CDCD"
