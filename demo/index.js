@@ -140,12 +140,11 @@ const progressMeter = new MCGraphs.ProgressMeter({
     },
 });
 
-// clip.addIncident(barChart, 0);
-// clip.addIncident(lineGraph, 5500);
-// clip.addIncident(pieChart, 20500);
-// clip.addIncident(progressBar, 26000);
-clip.addIncident(progressBar, 0);
-// clip.addIncident(progressMeter, 31500);
+clip.addIncident(barChart, 0);
+clip.addIncident(lineGraph, 5500);
+clip.addIncident(pieChart, 20500);
+clip.addIncident(progressBar, 26000);
+clip.addIncident(progressMeter, 31500);
 
 clip.play();
 const player = new Player({clip, timeFormat: 'ms', scaleToFit: true, pointerEvents: true});
