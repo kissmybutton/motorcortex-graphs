@@ -1,5 +1,8 @@
 # MotorCortex Graphs
 
+## Demo
+https://kissmybutton.github.io/motorcortex-graphs/demo
+
 ## Installation
 
 ```bash
@@ -600,8 +603,7 @@ The `font` object is an optional parameter that contains three (3) values used f
 * `LineGraph`
 * `PieChart`
 * `ProgressBar`
-### Demo
-https://kissmybutton.github.io/motorcortex-graphs/demo
+
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
 
