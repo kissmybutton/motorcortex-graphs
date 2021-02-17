@@ -1,7 +1,7 @@
 {
 	"name": "@kissmybutton/motorcortex-graphs",
-	"version": "1.4.0",
-	"description": "A plugin for creating graphs for MotorCortex",
+	"version": "1.4.1",
+	"description": "A plugin for creating graphs using MotorCortex",
 	"main": "dist/bundle.cjs.js",
 	"module": "dist/bundle.esm.js",
 	"browser": "dist/bundle.umd.js",
