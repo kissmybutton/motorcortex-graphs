@@ -56,95 +56,95 @@ const barChart = new MCGraphs.BarChartSimple({
     }
 });
 
-const lineGraph = new MCGraphs.LineGraph({
-    data: lineGraphData, 
-    trace: { 
-        toggle: false,
-        scale: 1.45,
-    },
-    legend: true,
-    timings: {
-        intro: 7000,
-        static: 1000,
-        outro: 7000,
-    },
-    font: {
-        size: '1.7rem'
-    }
-}, {
-    selector: '#html-hoverclip',
-    containerParams: {
-        width: '1024px',
-        height: '768px'
-    }
-});
+// const lineGraph = new MCGraphs.LineGraph({
+//     data: lineGraphData, 
+//     trace: { 
+//         toggle: false,
+//         scale: 1.45,
+//     },
+//     legend: true,
+//     timings: {
+//         intro: 7000,
+//         static: 1000,
+//         outro: 7000,
+//     },
+//     font: {
+//         size: '1.7rem'
+//     }
+// }, {
+//     selector: '#html-hoverclip',
+//     containerParams: {
+//         width: '1024px',
+//         height: '768px'
+//     }
+// });
 
-const pieChart = new MCGraphs.PieChart({
-    data: pieChartData,
-    timings: {
-        intro: 2000,
-        static: 1500,
-        outro: 2000,
-    },
-    font: {
-        size: '1.6rem'
-    }
-},{
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1024px',
-        height: '768px'
-    },
-});
+// const pieChart = new MCGraphs.PieChart({
+//     data: pieChartData,
+//     timings: {
+//         intro: 2000,
+//         static: 1500,
+//         outro: 2000,
+//     },
+//     font: {
+//         size: '1.6rem'
+//     }
+// },{
+//     selector: '#htmlclip',
+//     containerParams: {
+//         width: '1024px',
+//         height: '768px'
+//     },
+// });
 
-const progressBar = new MCGraphs.ProgressBar({
-    data: require('./data/progressBarData.json'),
-    timings: {
-        intro: 2000,
-        static: 1500,
-        outro: 2000,
-    },
-    palette: {
-        background: "#D3CDCD"
-    },
-    font: {
-        size: '1.6rem'
-    },
-}, {
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1024px',
-        height: '768px'
-    },
-});
+// const progressBar = new MCGraphs.ProgressBar({
+//     data: require('./data/progressBarData.json'),
+//     timings: {
+//         intro: 2000,
+//         static: 1500,
+//         outro: 2000,
+//     },
+//     palette: {
+//         background: "#D3CDCD"
+//     },
+//     font: {
+//         size: '1.6rem'
+//     },
+// }, {
+//     selector: '#htmlclip',
+//     containerParams: {
+//         width: '1024px',
+//         height: '768px'
+//     },
+// });
 
-const progressMeter = new MCGraphs.ProgressMeter({
-    data: progressMeterData,
-	innerImage: 'battery',
-    timings: {
-        intro: 3000,
-        static: 1000,
-        outro: 3000,
-    },
-    palette: {
-        background: "#D3CDCD"
-    },
-    font: {
-        size: '8rem'
-    },
-}, {
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1024px',
-        height: '768px'
-    },
-});
+// const progressMeter = new MCGraphs.ProgressMeter({
+//     data: progressMeterData,
+// 	innerImage: 'battery',
+//     timings: {
+//         intro: 3000,
+//         static: 1000,
+//         outro: 3000,
+//     },
+//     palette: {
+//         background: "#D3CDCD"
+//     },
+//     font: {
+//         size: '8rem'
+//     },
+// }, {
+//     selector: '#htmlclip',
+//     containerParams: {
+//         width: '1024px',
+//         height: '768px'
+//     },
+// });
 
 clip.addIncident(barChart, 0);
-clip.addIncident(lineGraph, 5500);
-clip.addIncident(pieChart, 20500);
-clip.addIncident(progressBar, 26000);
-clip.addIncident(progressMeter, 31500);
+// clip.addIncident(lineGraph, 5500);
+// clip.addIncident(pieChart, 20500);
+// clip.addIncident(progressBar, 26000);
+// clip.addIncident(progressMeter, 31500);
 
 clip.play();
 const player = new Player({clip, timeFormat: 'ms', scaleToFit: true, pointerEvents: true});

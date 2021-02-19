@@ -71,12 +71,12 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
         }
 
         //  Bars html generation with data parameter as reference
-        let bars = this.data.map( (datum) => {
+        let bars = this.data.map( (datum, i) => {
             this.maxPoint = (this.maxPoint < datum.value) ? 
                 datum.value : this.maxPoint;
 
             return (
-                <div class={datum.name + "-bar"}>
+                <div class={datum.name + `-bar-${i}`}>
                     <div class="bar-fill" id={datum.name + "-bar-fill"}></div>
                 </div>
             );
@@ -91,9 +91,11 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                     <div class="subtitle-position-end">
                         <div class="subtitle-wrapper">{subtitle}</div>
                     </div>
-                </div>
-                <div class="title-back-wrapper">
-                    <div class="title-background block-background"></div>
+                    <div class="title-back-wrapper">
+                        <div class="title-back-animHelper">
+                            <div class="title-background block-background"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="graph-container">
                     <div class="graph">{bars}</div>
@@ -467,16 +469,16 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                             width: "0%"
                         },
                         initialValues: {
-                            width: "70%"
+                            width: "100%"
                         },
                     },
                     {
-                        selector: ".title-back-wrapper",
+                        selector: ".title-back-animHelper",
                         duration: Math.trunc(this.outroDur * 0.45),
                         easing: "easeInOutQuad",
                     }
                 ),
-                Math.trunc(this.outroDur * 0.4)
+                Math.trunc(this.outroDur * 0.3)
             );
             
             // Main Title Outro: letter animation control
@@ -570,7 +572,7 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
                         easing: "easeInOutCubic"
                     }
                 ),
-                this.outroDur * 0.4
+                this.outroDur * 0.3
             );
             
             // Labels (xAxis) Outro: letter animation control
@@ -618,8 +620,8 @@ export default class BarChartSimple extends MotorCortex.HTMLClip{
             outroGroup.addIncident(xLabelsoutro, Math.trunc(this.outroDur * 0.05));
 
             // Bar outro Control
-            let baroutroDur = this.outroDur * 0.7;
-            let barDur = baroutroDur * 2 / (this.data.length + 1)
+            let barOutroDur = this.outroDur * 0.7;
+            let barDur = barOutroDur * 2 / (this.data.length + 1)
             let barIncidents = [];
             for (let i in this.data) {
                 barIncidents.push(

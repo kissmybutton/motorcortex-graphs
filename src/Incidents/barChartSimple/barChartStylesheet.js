@@ -65,6 +65,20 @@ export default function buildCSS(barChart) {
             background: barChart.accentC,
             position: "relative",
         },
+        "title-back-animHelper": {
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            "flex-direction": "row-reverse",
+        },
+        "title-back-wrapper": {
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            position: "absolute",
+            "flex-direction": "row",
+            "z-index": "-1",
+        },
         "x-labels-back-wrapper": {
             width: "70%",
             height: "5%",
@@ -97,50 +111,49 @@ export default function buildCSS(barChart) {
             overflow: "hidden",
             position: "relative",
         },
-        "title-back-wrapper": {
-            width: "70%",
-            height: "5%",
-            top: "8%",
-            left: "16%",
-            position: "absolute",
-            display: "flex",
-            "flex-direction": "row-reverse",
-        },
         "title-container": {
             "font-family": barChart.fontFamily,
             background: "transparent",
             width: "70%",
-            height: "5%",
-            top: "8%",
+            height: "fit-content",
+            height: "-moz-fit-content",
+            "min-height": "5%",
+            "max-height": "7%",
+            top: "7%",
             left: "16%",
             position: "absolute",
             display: "flex",
-            "align-items": "center",
             "z-index": "1",
             "justify-content": "space-around",
         },
         "title-wrapper": {
             display: "flex",
             "flex-grow": "2",
-            "flex-wrap": "nowrap",
+            "flex-wrap": "wrap",
+            "align-items": "center",
             overflow: "hidden",
             "padding-left": "6px",
+            "z-index": "1",
         },
         "subtitle-wrapper": {
             display: "flex",
-        },
-        "label-container": {
-            display: "flex",
-            "flex-direction": "row",
-            overflow: "hidden",
+            "z-index": "1",
+            "flex-wrap": "wrap",
+            "align-items": "center",
         },
         "subtitle-position-end": {
             display: "flex",
             "flex-grow": "1",
             "padding-right": "6px",
-            "flex-wrap": "nowrap",
+            "flex-wrap": "wrap",
+            "max-width": "34%",
             overflow: "hidden",
             "justify-content": "flex-end",
+        },
+        "label-container": {
+            display: "flex",
+            "flex-direction": "row",
+            overflow: "hidden",
         },
         "container-barChart": {
             width: "100%",
@@ -169,16 +182,20 @@ export default function buildCSS(barChart) {
         }
     };
 
-    barChart.data.map( (datum) => {
-        styles[`${datum.name}-bar`] = {
+    barChart.data.map( (datum, i) => {
+        styles[`${datum.name}-bar-${i}`] = {
             "align-self": "flex-end",
             width: `${(100/barChart.data.length)}%`,
             margin: `0% ${(10/barChart.data.length)+1}%`,
             height: "100%",
             display: "flex",
         };
-        styles[`${datum.name}-bar`].height = `${(datum.value.toFixed(2)/barChart.maxPoint)*100}%`;
+        styles[`${datum.name}-bar-${i}`].height = `
+            ${ (datum.value.toFixed(2) / barChart.maxPoint) * 100 }%`;
 
+        console.log(datum.name)
+        console.log(datum.value)
+        console.log(styles[`${datum.name}-bar-${i}`].height)
         styles[`${datum.name}-bar-fill`] = {
             height: "100%",
         };
