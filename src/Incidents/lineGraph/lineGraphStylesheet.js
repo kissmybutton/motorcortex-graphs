@@ -51,7 +51,7 @@ export default function buildCSS(lineGraph) {
         },
         "legend-wrapper": {
             position: "absolute",
-            width: `${(lineGraph.dataSetsNum === 1) ? 12 : 24}%`,
+            width: `${(lineGraph.dataSetsNum === 1) ? 14 : 26}%`,
             height: `${lineGraph.legendHeight}%`,
             top: `${11 - (3 * (lineGraph.legendHeightFactor + (lineGraph.legendHeightFactor % 1 ? 1 : 0) - 1))}%`,
             left: `${68 + ((lineGraph.dataSetsNum === 1) ? 12 : 0)}%`,
@@ -60,6 +60,7 @@ export default function buildCSS(lineGraph) {
             "font-size": lineGraph.fontSizeInner,
             display: "flex",
             "flex-wrap": "wrap",
+            "align-items": "center",
             "z-index": "1",
         }, 
         "line-wrapper": {
@@ -81,7 +82,7 @@ export default function buildCSS(lineGraph) {
         },
         "line-title": {
             display: "flex",
-            "align-items": "center",
+            "align-items": "flex-start",
             "justify-content": "flex-start",
             width: '75%',
             height: '100%',
@@ -218,19 +219,23 @@ export default function buildCSS(lineGraph) {
         },
     };
 
+    let colorCounter = 2;
     for (let l = 0; l < lineGraph.dataSetsNum; l++) {
-        let dynamicColor = (lineGraph.dataSetsNum > 1) ?
-            lineGraph.colorPalette.dataColors[l+2] : 
-            lineGraph.quaternaryC;
+        let dynamicColor;
+        if (lineGraph.dataSetsNum > 1) {
+            dynamicColor = lineGraph.dataSets[l].color
+        } else {
+            dynamicColor = lineGraph.quaternaryC;
+        }
+
+        styles[`color-${l}`] = {
+            background: dynamicColor,
+        };
 
         styles[`line-${l}-label-container`] = {
             width: "100%",
             height: "100%",
             position: "absolute",
-        };
-
-        styles[`color-${l}`] = {
-            background: dynamicColor,
         };
 
         for (let i = 0; i < lineGraph.data.length; i++) {

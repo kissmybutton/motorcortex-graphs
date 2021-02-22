@@ -7,7 +7,15 @@
     "hover": false,
     "dataSets": [
         {
-            "title": "",
+            "title": "Set 1",
+            "color": "red"
+        },
+        {
+            "title": "Set 2",
+            "color": "blue"
+        },
+        {
+            "title": "Set 3",
             "color": ""
         }
     ],

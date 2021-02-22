@@ -341,13 +341,17 @@ export default class LineGraph extends MotorCortex.HTMLClip{
                 }
             ];
         this.dataSetsNum = this.dataSets.length;
+        let colorCount = 2;
         this.dataSets.map( 
             (dataSet, l) => {
                 if (dataSet.color === "" || !dataSet.color) {
-                    dataSet.color = this.colorPalette.dataColors[l + 2];
+                    dataSet.color = this.colorPalette.dataColors[colorCount],
+                    colorCount++;
                 }
                 if (dataSet.title === "" || !dataSet.title) {
                     dataSet.title = `Dataset-${l + 1}`;
+                } else if (dataSet.title.length > 10) {
+                    dataSet.title = dataSet.title.substr(0, 10);
                 }
             }
         );
