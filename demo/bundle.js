@@ -51,7 +51,7 @@ var bundle_umd_default = /*#__PURE__*/__webpack_require__.n(bundle_umd);
 const barChartData_namespaceObject = JSON.parse("{\"title\":\"Test Graph\",\"subtitle\":\"Subtitle 2021\",\"showGrid\":true,\"maxValue\":1800,\"data\":[{\"name\":\"JAN\",\"value\":100},{\"name\":\"FEB\",\"value\":200},{\"name\":\"MAR\",\"value\":300},{\"name\":\"APR\",\"value\":400},{\"name\":\"MAY\",\"value\":500},{\"name\":\"JUN\",\"value\":600},{\"name\":\"JUL\",\"value\":700},{\"name\":\"AUG\",\"value\":800},{\"name\":\"SEP\",\"value\":900},{\"name\":\"OCT\",\"value\":1000},{\"name\":\"NOV\",\"value\":1100},{\"name\":\"DEC\",\"value\":1200}]}");
 var data_barChartData_namespaceObject = /*#__PURE__*/__webpack_require__.t(barChartData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./data/lineGraphData.json
-const lineGraphData_namespaceObject = JSON.parse("{\"title\":\"EXAMPLE LINE GRAPH\",\"showGrid\":true,\"maxValue\":100,\"interval\":4,\"unit\":\"%\",\"hover\":false,\"dataSets\":[{\"title\":\"\",\"color\":\"\"}],\"data\":[{\"name\":\"2016\",\"values\":[56,45,12]},{\"name\":\"2017\",\"values\":[43,24,67]},{\"name\":\"2018\",\"values\":[61,11,98]},{\"name\":\"2019\",\"values\":[10,35,69]},{\"name\":\"2020\",\"values\":[3,81,78]},{\"name\":\"2021\",\"values\":[74,92,59]}]}");
+const lineGraphData_namespaceObject = JSON.parse("{\"title\":\"EXAMPLE LINE GRAPH\",\"maxValue\":100,\"interval\":4,\"unit\":\"%\",\"hover\":false,\"dataSets\":[{\"title\":\"Set 1\",\"color\":\"red\"},{\"title\":\"Set 2\",\"color\":\"blue\"},{\"title\":\"Set 3\",\"color\":\"\"}],\"data\":[{\"name\":\"2016\",\"values\":[56,45,12]},{\"name\":\"2017\",\"values\":[43,24,67]},{\"name\":\"2018\",\"values\":[61,11,98]},{\"name\":\"2019\",\"values\":[10,35,69]},{\"name\":\"2020\",\"values\":[3,81,78]},{\"name\":\"2021\",\"values\":[74,92,59]}]}");
 var data_lineGraphData_namespaceObject = /*#__PURE__*/__webpack_require__.t(lineGraphData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./data/pieChartData.json
 const pieChartData_namespaceObject = JSON.parse("{\"title\":\"My Pie Chart\",\"data\":[{\"name\":\"Percentage 1\",\"value\":50,\"color\":\"\"},{\"name\":\"Percentage 2\",\"value\":15,\"color\":\"\"},{\"name\":\"Percentage 3\",\"value\":10,\"color\":\"\"},{\"name\":\"Percentage 4\",\"value\":5,\"color\":\"rgb(163, 255, 200)\"},{\"name\":\"Percentage 5\",\"value\":20,\"color\":\"\"}]}");
@@ -101,6 +101,7 @@ var lineGraph = new MCGraphs.LineGraph({
     scale: 1.45
   },
   legend: true,
+  grid: false,
   timings: {
     intro: 7000,
     static: 1000,
@@ -121,6 +122,7 @@ var pieChart = new MCGraphs.PieChart({
   timings: {
     intro: 2000,
     static: 1500,
+    // static: 0,
     outro: 2000
   },
   font: {
@@ -424,11 +426,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   var S = {},
-      P = {
+      I = {
     duration: 1e3,
     round: 0
   },
-      I = ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skew", "skewX", "skewY", "perspective"],
+      P = ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skew", "skewX", "skewY", "perspective"],
       A = {
     CSS: {}
   };
@@ -482,7 +484,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return R.hex(t) || R.rgb(t) || R.hsl(t);
     },
     key: function key(t) {
-      return !S.hasOwnProperty(t) && !P.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
+      return !S.hasOwnProperty(t) && !I.hasOwnProperty(t) && "targets" !== t && "keyframes" !== t;
     }
   },
       j = {
@@ -622,7 +624,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function q(t, e) {
-    return R.dom(t) && !R.inp(t) && (X(t, e) || R.svg(t) && t[e]) ? "attribute" : R.dom(t) && L(I, e) ? "transform" : R.dom(t) && "transform" !== e && W(t, e) ? "css" : null != t[e] ? "object" : void 0;
+    return R.dom(t) && !R.inp(t) && (X(t, e) || R.svg(t) && t[e]) ? "attribute" : R.dom(t) && L(P, e) ? "transform" : R.dom(t) && "transform" !== e && W(t, e) ? "css" : null != t[e] ? "object" : void 0;
   }
 
   function Z(t) {
@@ -824,7 +826,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   function lt(t) {
     var e = F(S, t),
-        n = F(P, t),
+        n = F(I, t),
         i = function (t, e) {
       var n = [];
 
@@ -2099,7 +2101,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       Ct = "object" === ("undefined" == typeof window ? "undefined" : Dt(window)) && "object" === ("undefined" == typeof document ? "undefined" : Dt(document)) && 9 === document.nodeType,
       St = "production" === "production";
 
-  function Pt(t, e) {
+  function It(t, e) {
     if (!St) {
       if (t) return;
       var n = "Warning: " + e;
@@ -2111,7 +2113,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
   }
 
-  function It(t, e) {
+  function Pt(t, e) {
     for (var n = 0; n < e.length; n++) {
       var i = e[n];
       i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
@@ -2119,7 +2121,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function At(t, e, n) {
-    return e && It(t.prototype, e), n && It(t, n), t;
+    return e && Pt(t.prototype, e), n && Pt(t, n), t;
   }
 
   function Et(t, e) {
@@ -2151,7 +2153,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var i = n.jss,
         a = jt(e),
         r = i.plugins.onCreateRule(t, a, n);
-    return r || ("@" === t[0] && "production" !== "production" && Pt(!1, "[JSS] Unknown rule " + t), null);
+    return r || ("@" === t[0] && "production" !== "production" && It(!1, "[JSS] Unknown rule " + t), null);
   }
 
   var Gt = function Gt(t, e) {
@@ -2230,7 +2232,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       var s = r && o;
       if (s ? delete this.style[t] : this.style[t] = a, this.renderable && this.renderer) return s ? this.renderer.removeProperty(this.renderable, t) : this.renderer.setProperty(this.renderable, t, a), this;
       var l = this.options.sheet;
-      return l && l.attached && "production" !== "production" && Pt(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
+      return l && l.attached && "production" !== "production" && It(!1, '[JSS] Rule is not linked. Missing sheet option "link: true".'), this;
     }, t;
   }(),
       Ht = function (t) {
@@ -2740,7 +2742,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     void 0 === t && (t = {});
     var e = 0;
     return function (n, i) {
-      (e += 1) > 1e10 && "production" !== "production" && Pt(!1, "[JSS] You might have a memory leak. Rule counter is at " + e + ".");
+      (e += 1) > 1e10 && "production" !== "production" && It(!1, "[JSS] You might have a memory leak. Rule counter is at " + e + ".");
       var a = "",
           r = "";
       return i && (i.options.classNamePrefix && (r = i.options.classNamePrefix), null != i.options.jss.id && (a = String(i.options.jss.id))), t.minify ? "" + (r || "c") + ke + a + e : r + n.key + "-" + ke + (a ? "-" + a : "") + "-" + e;
@@ -2770,14 +2772,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     return !0;
   },
-      Pe = function Pe(t, e) {
+      Ie = function Ie(t, e) {
     try {
       t.attributeStyleMap ? t.attributeStyleMap.delete(e) : t.style.removeProperty(e);
     } catch (t) {
        false && 0;
     }
   },
-      Ie = function Ie(t, e) {
+      Pe = function Pe(t, e) {
     return t.selectorText = e, t.selectorText === e;
   },
       Ae = De(function () {
@@ -2858,7 +2860,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   },
       Ge = function () {
     function t(t) {
-      this.getPropertyValue = Ce, this.setProperty = Se, this.removeProperty = Pe, this.setSelector = Ie, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && we.add(t), this.sheet = t;
+      this.getPropertyValue = Ce, this.setProperty = Se, this.removeProperty = Ie, this.setSelector = Pe, this.element = void 0, this.sheet = void 0, this.hasInsertedRules = !1, this.cssRules = [], t && we.add(t), this.sheet = t;
       var e,
           n = this.sheet ? this.sheet.options : {},
           i = n.media,
@@ -3268,18 +3270,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               width: "0%"
             },
             initialValues: {
-              width: "70%"
+              width: "100%"
             }
           }, {
-            selector: ".title-back-wrapper",
+            selector: ".title-back-animHelper",
             duration: Math.trunc(.45 * this.outroDur),
             easing: "easeInOutQuad"
-          }), Math.trunc(.4 * this.outroDur));
+          }), Math.trunc(.3 * this.outroDur));
           var S = 2 * (.8 * this.outroDur) / (this.title.length + 1),
-              P = [];
+              I = [];
 
-          for (var I in this.title) {
-            P.push({
+          for (var P in this.title) {
+            I.push({
               incidentClass: Ne.Anime,
               attrs: {
                 animatedAttrs: {
@@ -3292,16 +3294,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
               },
               props: {
-                selector: "#letter-".concat(I),
+                selector: "#letter-".concat(P),
                 duration: Math.trunc(S),
                 easing: "easeOutQuart"
               },
-              position: Math.trunc(S * (this.title.length - I - 1) / 2)
+              position: Math.trunc(S * (this.title.length - P - 1) / 2)
             });
           }
 
           var A = new n.default.Combo({
-            incidents: P
+            incidents: I
           }, {
             selector: ".title-wrapper"
           });
@@ -3349,7 +3351,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             selector: ".x-labels-background",
             duration: Math.trunc(.45 * this.outroDur),
             easing: "easeInOutCubic"
-          }), .4 * this.outroDur);
+          }), .3 * this.outroDur);
           var G = 2 * M / (this.data.length + 1);
 
           for (var T in this.data) {
@@ -3492,9 +3494,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }, d));
         }
 
-        var f = this.data.map(function (e) {
+        var f = this.data.map(function (e, i) {
           return t.maxPoint = t.maxPoint < e.value ? e.value : t.maxPoint, n.default.utils.createDOMElement("div", {
-            class: e.name + "-bar"
+            class: e.name + "-bar-".concat(i)
           }, n.default.utils.createDOMElement("div", {
             class: "bar-fill",
             id: e.name + "-bar-fill"
@@ -3510,11 +3512,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           class: "subtitle-position-end"
         }, n.default.utils.createDOMElement("div", {
           class: "subtitle-wrapper"
-        }, r))), n.default.utils.createDOMElement("div", {
+        }, r)), n.default.utils.createDOMElement("div", {
           class: "title-back-wrapper"
         }, n.default.utils.createDOMElement("div", {
+          class: "title-back-animHelper"
+        }, n.default.utils.createDOMElement("div", {
           class: "title-background block-background"
-        })), n.default.utils.createDOMElement("div", {
+        })))), n.default.utils.createDOMElement("div", {
           class: "graph-container"
         }, n.default.utils.createDOMElement("div", {
           class: "graph"
@@ -3536,6 +3540,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       key: "css",
       get: function get() {
         return function (t) {
+          var e;
           Le.setup({
             createGenerateId: function createGenerateId() {
               return function (t) {
@@ -3543,7 +3548,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               };
             }
           });
-          var e = {
+          var n = {
             "y-axis": {
               width: "4px",
               height: "70%",
@@ -3602,6 +3607,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               background: t.accentC,
               position: "relative"
             },
+            "title-back-animHelper": {
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              "flex-direction": "row-reverse"
+            },
+            "title-back-wrapper": {
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              position: "absolute",
+              "flex-direction": "row",
+              "z-index": "-1"
+            },
             "x-labels-back-wrapper": {
               width: "70%",
               height: "5%",
@@ -3634,50 +3653,40 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               overflow: "hidden",
               position: "relative"
             },
-            "title-back-wrapper": {
-              width: "70%",
-              height: "5%",
-              top: "8%",
-              left: "16%",
-              position: "absolute",
-              display: "flex",
-              "flex-direction": "row-reverse"
-            },
-            "title-container": {
+            "title-container": (e = {
               "font-family": t.fontFamily,
               background: "transparent",
               width: "70%",
-              height: "5%",
-              top: "8%",
-              left: "16%",
-              position: "absolute",
-              display: "flex",
-              "align-items": "center",
-              "z-index": "1",
-              "justify-content": "space-around"
-            },
+              height: "fit-content"
+            }, o(e, "height", "-moz-fit-content"), o(e, "min-height", "5%"), o(e, "max-height", "7%"), o(e, "top", "7%"), o(e, "left", "16%"), o(e, "position", "absolute"), o(e, "display", "flex"), o(e, "z-index", "1"), o(e, "justify-content", "space-around"), e),
             "title-wrapper": {
               display: "flex",
               "flex-grow": "2",
-              "flex-wrap": "nowrap",
+              "flex-wrap": "wrap",
+              "align-items": "center",
               overflow: "hidden",
-              "padding-left": "6px"
+              "padding-left": "6px",
+              "z-index": "1"
             },
             "subtitle-wrapper": {
-              display: "flex"
-            },
-            "label-container": {
               display: "flex",
-              "flex-direction": "row",
-              overflow: "hidden"
+              "z-index": "1",
+              "flex-wrap": "wrap",
+              "align-items": "center"
             },
             "subtitle-position-end": {
               display: "flex",
               "flex-grow": "1",
               "padding-right": "6px",
-              "flex-wrap": "nowrap",
+              "flex-wrap": "wrap",
+              "max-width": "34%",
               overflow: "hidden",
               "justify-content": "flex-end"
+            },
+            "label-container": {
+              display: "flex",
+              "flex-direction": "row",
+              overflow: "hidden"
             },
             "container-barChart": {
               width: "100%",
@@ -3705,17 +3714,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               position: "relative"
             }
           };
-          return t.data.map(function (n) {
-            e["".concat(n.name, "-bar")] = {
+          return t.data.map(function (e, i) {
+            n["".concat(e.name, "-bar-").concat(i)] = {
               "align-self": "flex-end",
               width: "".concat(100 / t.data.length, "%"),
               margin: "0% ".concat(10 / t.data.length + 1, "%"),
               height: "100%",
               display: "flex"
-            }, e["".concat(n.name, "-bar")].height = "".concat(n.value.toFixed(2) / t.maxPoint * 100, "%"), e["".concat(n.name, "-bar-fill")] = {
+            }, n["".concat(e.name, "-bar-").concat(i)].height = "\n            ".concat(e.value.toFixed(2) / t.maxPoint * 100, "%"), n["".concat(e.name, "-bar-fill")] = {
               height: "100%"
             };
-          }), Le.createStyleSheet(e).toString();
+          }), Le.createStyleSheet(n).toString();
         }(this);
       }
     }, {
@@ -5807,12 +5816,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         this.animConstructor = new Cn(this), this.data = this.attrs.data.data, this.colorPalette = g, this.attrs.palette = this.attrs.palette ? this.attrs.palette : {}, this.primaryC = this.attrs.palette.primary ? this.attrs.palette.primary : this.colorPalette.gray, this.secondaryC = this.attrs.palette.secondary ? this.attrs.palette.secondary : this.colorPalette.lightGray, this.tertiaryC = this.attrs.palette.tertiary ? this.attrs.palette.tertiary : this.colorPalette.darkGray, this.quaternaryC = this.attrs.palette.quaternary ? this.attrs.palette.quaternary : this.colorPalette.whiteBack, this.fontC = this.attrs.palette.font ? this.attrs.palette.font : this.colorPalette.font, this.accentC = this.attrs.palette.accent ? this.attrs.palette.accent : this.colorPalette.accent, this.backgroundC = this.attrs.palette.background ? this.attrs.palette.background : this.colorPalette.background, this.title = this.attrs.data.title, this.words = this.title.split(" "), this.dataSets = this.attrs.data.dataSets ? this.attrs.data.dataSets : [{
           title: "",
           color: this.accentC
-        }], this.dataSetsNum = this.dataSets.length, this.dataSets.map(function (e, n) {
-          "" !== e.color && e.color || (e.color = t.colorPalette.dataColors[n + 2]), "" !== e.title && e.title || (e.title = "Dataset-".concat(n + 1));
+        }], this.dataSetsNum = this.dataSets.length;
+        var e = 2;
+        this.dataSets.map(function (n, i) {
+          "" !== n.color && n.color || (n.color = t.colorPalette.dataColors[e], e++), "" !== n.title && n.title ? n.title.length > 10 && (n.title = n.title.substr(0, 10)) : n.title = "Dataset-".concat(i + 1);
         }), this.legend = !!this.attrs.legend && this.attrs.legend, this.legend = this.dataSetsNum > 1 || this.legend, this.maxPoint = 0;
 
-        var e,
-            n = function (t, e) {
+        var n,
+            i = function (t, e) {
           var _n;
 
           if ("undefined" == typeof Symbol || null == t[Symbol.iterator]) {
@@ -5868,14 +5879,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }(this.data);
 
         try {
-          for (n.s(); !(e = n.n()).done;) {
-            var i = e.value;
-            Math.max.apply(Math, d(i.values)) > this.maxPoint && (this.maxPoint = Math.max.apply(Math, d(i.values)));
+          for (i.s(); !(n = i.n()).done;) {
+            var a = n.value;
+            Math.max.apply(Math, d(a.values)) > this.maxPoint && (this.maxPoint = Math.max.apply(Math, d(a.values)));
           }
         } catch (t) {
-          n.e(t);
+          i.e(t);
         } finally {
-          n.f();
+          i.f();
         }
 
         this.maxPoint = this.attrs.data.maxValue ? this.attrs.data.maxValue : this.maxPoint, this.hover = !!this.attrs.data.hover && this.attrs.data.hover, this.hover = 1 !== this.dataSetsNum || this.hover, this.attrs.trace = this.attrs.trace ? this.attrs.trace : {}, this.trace = !!this.attrs.trace.toggle && this.attrs.trace.toggle, this.trace = 1 === this.dataSetsNum && this.trace, this.traceScale = this.attrs.trace.scale ? this.attrs.trace.scale : 1.4, this.unit = this.attrs.data.unit ? this.attrs.data.unit : "%", this.interval = this.attrs.data.interval ? this.attrs.data.interval : 5, this.steleBlockNum = this.maxPoint / this.interval + 1, this.config = Ue, this.graphScale = {
@@ -6001,21 +6012,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var C = [];
 
         for (var S in this.data) {
-          var P = [];
+          var I = [];
 
-          for (var I in this.data[S].name.length > 4 && (this.data[S].name = this.data[S].name.slice(0, 4)), this.data[S].name) {
-            P.push(n.default.utils.createDOMElement("div", {
-              id: "letter-" + S + "-" + I,
+          for (var P in this.data[S].name.length > 4 && (this.data[S].name = this.data[S].name.slice(0, 4)), this.data[S].name) {
+            I.push(n.default.utils.createDOMElement("div", {
+              id: "letter-" + S + "-" + P,
               class: "letter-container"
             }, n.default.utils.createDOMElement("div", {
               class: "letter-wrapper-label fontColorOn"
-            }, this.data[S].name[I])));
+            }, this.data[S].name[P])));
           }
 
           C.push(n.default.utils.createDOMElement("div", {
             class: "label-container",
             id: "label-" + S
-          }, P));
+          }, I));
         }
 
         return n.default.utils.createDOMElement("div", {
@@ -6098,12 +6109,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             "legend-wrapper": (e = {
               position: "absolute",
-              width: "".concat(1 === t.dataSetsNum ? 12 : 24, "%"),
+              width: "".concat(1 === t.dataSetsNum ? 14 : 26, "%"),
               height: "".concat(t.legendHeight, "%"),
               top: "".concat(11 - 3 * (t.legendHeightFactor + (t.legendHeightFactor % 1 ? 1 : 0) - 1), "%"),
               left: "".concat(68 + (1 === t.dataSetsNum ? 12 : 0), "%"),
               background: t.primaryC
-            }, o(e, "background", "rgb(132, 130, 128)"), o(e, "font-size", t.fontSizeInner), o(e, "display", "flex"), o(e, "flex-wrap", "wrap"), o(e, "z-index", "1"), e),
+            }, o(e, "background", "rgb(132, 130, 128)"), o(e, "font-size", t.fontSizeInner), o(e, "display", "flex"), o(e, "flex-wrap", "wrap"), o(e, "align-items", "center"), o(e, "z-index", "1"), e),
             "line-wrapper": {
               width: "".concat(1 === t.dataSetsNum ? 100 : 50, "%"),
               height: "".concat(1 / (t.legendHeightFactor + (t.legendHeightFactor % 1 ? 1 : 0)) * 100, "%"),
@@ -6123,7 +6134,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             "line-title": {
               display: "flex",
-              "align-items": "center",
+              "align-items": "flex-start",
               "justify-content": "flex-start",
               width: "75%",
               height: "100%"
@@ -6259,13 +6270,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               "z-index": "9999"
             }
           }, i = 0; i < t.dataSetsNum; i++) {
-            var a = t.dataSetsNum > 1 ? t.colorPalette.dataColors[i + 2] : t.quaternaryC;
-            n["line-".concat(i, "-label-container")] = {
+            var a = void 0;
+            a = t.dataSetsNum > 1 ? t.dataSets[i].color : t.quaternaryC, n["color-".concat(i)] = {
+              background: a
+            }, n["line-".concat(i, "-label-container")] = {
               width: "100%",
               height: "100%",
               position: "absolute"
-            }, n["color-".concat(i)] = {
-              background: a
             };
 
             for (var r = 0; r < t.data.length; r++) {
@@ -6307,11 +6318,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), a;
   }(n.default.HTMLClip);
 
-  function Pn(t) {
+  function In(t) {
     return t > g.dataColors.length - 1 ? g.dataColors[Math.floor(Math.random() * Math.floor(g.dataColors.length))] : g.dataColors[t];
   }
 
-  var In = n.default.loadPlugin(wt),
+  var Pn = n.default.loadPlugin(wt),
       An = function (t) {
     s(a, t);
     var e = h(a);
@@ -6330,7 +6341,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           var n = Math.round(.8 * this.intro),
               i = Math.round(.4 * this.intro);
           this.attrs.data.title && d(this.attrs.data.title).forEach(function (t, n) {
-            var a = new In.Anime({
+            var a = new Pn.Anime({
               animatedAttrs: {
                 right: "0%",
                 opacity: 1
@@ -6347,7 +6358,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             });
             e.addIncident(a, Math.round(i / e.attrs.data.title.length) * n);
           });
-          var a = new In.Anime({
+          var a = new Pn.Anime({
             animatedAttrs: {
               "background-image": "conic-gradient(".concat(this.createRadiusString(), ")")
             },
@@ -6360,7 +6371,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInOutCubic"
           });
           this.addIncident(a, i - .2 * this.intro);
-          var r = new In.Anime({
+          var r = new Pn.Anime({
             animatedAttrs: {
               width: "75%",
               "min-width": "50%",
@@ -6379,7 +6390,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           this.addIncident(r, i - .2 * this.intro);
         }
 
-        var o = new In.Anime({
+        var o = new Pn.Anime({
           animatedAttrs: {}
         }, {
           duration: this.static,
@@ -6389,7 +6400,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         if (this.addIncident(o, this.intro), null !== (t = this.attrs.timings) && void 0 !== t && t.outro) {
           var s,
               l = Math.round(null === (s = this.attrs.timings) || void 0 === s ? void 0 : s.outro),
-              u = new In.Anime({
+              u = new Pn.Anime({
             animatedAttrs: {
               top: "-10%"
             },
@@ -6402,7 +6413,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInQuart"
           });
           this.addIncident(u, this.intro + this.static + .2 * this.outro);
-          var c = new In.Anime({
+          var c = new Pn.Anime({
             animatedAttrs: {
               width: "0%",
               "min-width": "0%",
@@ -6414,7 +6425,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             easing: "easeInOutCirc"
           });
           this.addIncident(c, this.intro + this.static);
-          var h = new In.Anime({
+          var h = new Pn.Anime({
             animatedAttrs: {
               "background-image": "conic-gradient(".concat(this.createNullRadiusString(), ")")
             },
@@ -6472,7 +6483,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       key: "buildLegend",
       value: function value() {
         return this.attrs.data.data.map(function (t, e) {
-          return n.default.utils.createDOMElement("div", {
+          return t.name.length > 24 && (t.name = t.name.substring(0, 21), t.name += "..."), n.default.utils.createDOMElement("div", {
             class: "legend-row"
           }, n.default.utils.createDOMElement("div", {
             class: "meter-" + e
@@ -6575,7 +6586,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             "legend-row": {
               display: "flex",
               "flex-direction": "row",
-              "align-items": "center"
+              "align-items": "center",
+              "align-self": "flex-start"
             },
             "legend-text": {
               " white-space": "nowrap"
@@ -6589,7 +6601,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           };
           return t.data.data.forEach(function (t, e) {
             a["meter-" + e] = {
-              background: t.color ? t.color : Pn(e),
+              background: t.color ? t.color : In(e),
               width: "1rem",
               height: "1rem",
               display: "block",
@@ -6826,6 +6838,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           },
           data: {
             type: "array"
+          },
+          dataSets: {
+            type: "array"
           }
         }
       },
@@ -6904,10 +6919,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }
       },
       hover: {
-        type: "boolean",
-        optional: !0
-      },
-      grid: {
         type: "boolean",
         optional: !0
       },
@@ -8452,7 +8463,7 @@ module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"ve
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "baec8657422c606fe6b8"
+/******/ 		__webpack_require__.h = () => "6aa5f9c964b23e0348c8"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
