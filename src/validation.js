@@ -140,6 +140,7 @@ exports.validationRules = {
                 unit: { type: "string", optional: true },
                 hover: { type: "boolean", optional: true},
                 data: { type: "array" },
+                dataSets: { type: "array" },
             }
         },
         timings: {
@@ -196,7 +197,6 @@ exports.validationRules = {
             }
         },
         hover: { type: "boolean", optional: true },
-        grid: { type: "boolean", optional: true },
         legend: { type: "boolean", optional: true },
         trace: { 
             type: "object", 

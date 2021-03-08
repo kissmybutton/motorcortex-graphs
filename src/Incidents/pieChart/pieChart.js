@@ -253,6 +253,10 @@ export default class PieChart extends MotorCortex.HTMLClip{
 
     buildLegend() {
         return this.attrs.data.data.map((elem, index) => {
+            if (elem.name.length > 24) {
+                elem.name = elem.name.substring(0, 21);
+                elem.name += "...";
+            }
             let legendRow = 
                 <div class="legend-row" >
                     <div class={'meter-'+index}></div>

@@ -71,6 +71,7 @@ export default function buildCSS(cssArgs) {
             display: 'flex',
             'flex-direction': 'row',
             'align-items': 'center',
+            'align-self': 'flex-start',
         },
         'legend-text': {
            " white-space": 'nowrap',

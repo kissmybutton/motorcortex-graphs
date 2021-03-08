@@ -36,6 +36,13 @@ import MotorCortexGraph from "@kissmybutton/motorcortex-graphs";
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 ```
 
+### Exposed Incidents
+* `BarChartSimple`
+* `LineGraph`
+* `PieChart`
+* `ProgressBar`
+* `ProgressMeter`
+
 ## Creating a Progress Bar Incident
 ```javascript
 const clip = new MotorCortex.HTMLClip({
@@ -215,6 +222,31 @@ If you wish to use your own SVG as the template for the animated innerSVG, you m
 
 Ideal SVG's for this type of animation can be found in the [Material Design Icon Library](https://material.io/resources/icons/?style=baseline). 
 
+#### Timings:
+The `timings` object is an optional object that contains three (3) values for setting the duration of the event. These values are:
+| Name | Description | Default | Values |
+| --- | --- | --- | --- |
+| intro |  Duration of the intro animation | 0 | ms |
+| static | Duration of the the time that the graph should stay on screen | 1000 | ms |
+| outro | Duration of the outro animation | 0 | ms |
+
+#### Palette:
+The `palette` object is an optional object used to customize the colors used in the graph. The colors that can be set are:
+| Name | Description | Default | Values |
+| --- | --- | --- | --- |
+| primary |  The bar fill color | #B2B1AE | hex or css color |
+| secondary | The bar background color | #434243 | hex or css color |
+| accent | The bar outline color | #FFD800 | hex or css color  |
+| font | The font color | #100300 | hex or css color |
+| background | The background color | transparent | hex or css color |
+
+#### Font:
+The `font` object is an optional object that contains three (3) values used for customizing the font. These values are:
+| Name | Description | Default | Values |
+| --- | --- | --- | --- |
+| url |A url pointing to a google font|https://fonts.googleapis.com/css2?family=Righteous&display=swap|string|
+| fontFamily | The font family to be used| Righteous, cursive | string|
+| size |The desired font size| 1.2rem | px/rem/em
 
 ## Creating A Bar Chart Incident
 
@@ -399,7 +431,7 @@ The Pie Chart incident can be customized via the following parameters:
 An object with two properties :
 | Name | Description | Values |
 | --- | --- | --- |
-| title? | The title displayed at the top of the screen| string
+| title | The title displayed at the top of the screen| string
 | data | An array of objects | PieChartDataEntry |
 
 Type `PieChartDataEntry`:
@@ -407,7 +439,7 @@ Type `PieChartDataEntry`:
 | --- | --- | --- |
 | name | The name displayed in the legend | string
 | value | The percentage value that the slice should take up | number (range 0-100)|
-|color?| The color to display on that slice of the pie|string (rgb)|
+|color| The color to display on that slice of the pie|string (rgb)|
 * Note: 
     The color attribute is optional but if your pie has more than five (5) values it is recommended you provide it because the pie will otherwise pick a random color from the built in palette. 
 #### Timings:
@@ -501,6 +533,7 @@ An object that contains the parameters with which to display the data in the gra
 | unit | The accompanying unit or character of the graph's labels | `string` |
 | hover | Toggle for showing the labels only on hover * | `boolean` |
 | data | The datapoint array for the graph (example below) | `Array[datapoint]` |
+| dataSets | Array that describes the colors/titles of the datasets | `Array[dataset]` |
 
 \* Ignores input and is set to true when data contains more than 1 line.
 
@@ -508,7 +541,6 @@ Example data:
 ```json
 { 
     "title": "Example Line Chart", 
-    "showGrid": true,
     "interval": 4,
     "maxValue": 100,
     "unit": "%",
@@ -530,7 +562,17 @@ Example data:
             "name": "2019",
             "values": [10, 32]
         },
-    ]
+    ],
+    "dataSets": [
+        {
+            "title": "Set 1",
+            "color": "red"
+        },
+        {
+            "title": "Set 2",
+            "color": "blue"
+        },
+    ],
 }
 ```
 
@@ -556,7 +598,30 @@ The length of the array should be equal to the number of lines in the graph. Eac
     },       
 ]
 ```
-\* To avoid cluttering it is recommended to not enter more than 16 datapoints per line.
+\* To avoid cluttering in the graph it is recommended to not enter more than 16 datapoints per line.
+
+#### DataSet:
+The dataSet array of contains `dataSet` objects. These Objects contain two (2) key-value pairs. These key value pairs are:
+
+| Key | Description | Value Type |
+| --------- |:-----------| :----: |
+| title | The title of the dataset | `string` |
+| color | The color of the dataset in the graph/legend | `hex or css color` |
+
+The number of dataSet objects in this array should be equal to the length of any `values` object in the Data attribute.
+
+```json
+"dataSets": [
+        {
+            "title": "Set 1",
+            "color": "red"
+        },
+        {
+            "title": "Set 2",
+            "color": "blue"
+        },
+    ],
+```
 
 #### Trace
 The trace configuration object controls the zoom effect of the introduction. The scale option is not required for the zoom effect to play.
@@ -566,6 +631,11 @@ The trace configuration object controls the zoom effect of the introduction. The
 | toggle | Toggles the zoom effect on or off | `boolean` |
 | scale | The scale of the zoom effect | `number` |
 
+#### Hover
+The hover option (`true`/`false`) allows the user to control if the labels of the points will be permenantly visible (and animated during intro/outtro durations), or will be hidden and shown only on hover. Note: When there are multiple datasets this option is automatically set to `true`. 
+
+#### Legend
+The grid option (`true`/`false`) allows the user to control if the legend of the graph will be permenantly visible (and animated during intro/outtro durations), or will be hidden. Note: When there are multiple datasets this option is automatically set to `true`. 
 
 #### Timings:
 The `timings` object is an *optional* attribute that contains three (3) parameters for setting the duration of the event. These parameters are: 
@@ -598,11 +668,6 @@ The `font` object is an optional parameter that contains three (3) values used f
 | fontFamily | description | `Righteous, cursive` | string |
 | size | The desired font size | `1.7rem` | px/rem/em |
 
-### Exposed Incidents
-* `BarChartSimple`
-* `LineGraph`
-* `PieChart`
-* `ProgressBar`
 
 ## License
 [MIT License](https://opensource.org/licenses/MIT)

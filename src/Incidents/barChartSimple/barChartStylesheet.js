@@ -192,10 +192,6 @@ export default function buildCSS(barChart) {
         };
         styles[`${datum.name}-bar-${i}`].height = `
             ${ (datum.value.toFixed(2) / barChart.maxPoint) * 100 }%`;
-
-        console.log(datum.name)
-        console.log(datum.value)
-        console.log(styles[`${datum.name}-bar-${i}`].height)
         styles[`${datum.name}-bar-fill`] = {
             height: "100%",
         };

@@ -1,6 +1,5 @@
 { 
     "title": "EXAMPLE LINE GRAPH", 
-    "showGrid": true,
     "maxValue": 100,
     "interval": 4,
     "unit": "%",
