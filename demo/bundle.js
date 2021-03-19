@@ -188,6 +188,7 @@ var player = new (motorcortex_player_umd_default())({
   scaleToFit: true,
   pointerEvents: true
 });
+console.log(JSON.stringify(clip.exportDefinition()));
 
 /***/ }),
 
@@ -1051,7 +1052,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       bt = "color",
       wt = {
     npm_name: "@kissmybutton/motorcortex-anime",
-    version: "2.1.11",
+    version: "2.1.12",
     incidents: [{
       exportable: function (t) {
         x(n, t);
@@ -4681,6 +4682,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   var ln = {
     npm_name: "@kissmybutton/motorcortex-svgdraw",
+    version: "0.0.5",
     incidents: [{
       exportable: function (t) {
         !function (t, e) {
@@ -7107,7 +7109,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   };
 
   return {
-    npm_name: "@kissmybutton/motorcortex-graph",
+    npm_name: "@kissmybutton/motorcortex-graphs",
+    version: "1.4.3",
     incidents: [{
       exportable: $e,
       name: "ProgressBar",
@@ -8338,7 +8341,7 @@ return Promise$1;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"version\":\"1.4.2\",\"description\":\"A plugin for creating graphs using MotorCortex\",\"main\":\"dist/bundle.cjs.js\",\"module\":\"dist/bundle.esm.js\",\"browser\":\"dist/bundle.umd.js\",\"author\":\"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/kissmybutton/motorcortex-graphs\"},\"license\":\"MIT\",\"engines\":{\"node\":\">=10\"},\"scripts\":{\"concurrently\":\"concurrently -c \\\"cyan.bold,magenta.bold\\\" --names \\\"JS,Styles\\\"\",\"lint:styles\":\"stylelint  --allow-empty-input \\\"src/**.css\\\" \\\"src/**/*.scss\\\" --config .stylelintrc.json\",\"lint:js\":\"eslint -c .eslintrc src/**/*.js\",\"lint\":\"npm run concurrently \\\"npm:lint:js\\\" \\\"npm:lint:styles\\\"\",\"lint:fix\":\"npm run concurrently  \\\"npm:lint:js -- --fix\\\" \\\"npm:lint:styles -- --fix\\\"\",\"build\":\"npm run build:lib && npm run build:demo\",\"build:lib\":\"rollup -c\",\"start\":\"npm run build:lib && concurrently -c \\\"cyan.bold,magenta.bold\\\" \\\"npm:build:lib -- -w\\\"  \\\"npm:start:demo\\\" \",\"start:demo\":\"webpack serve --mode=development --config ./demo/webpack.config.js\",\"build:demo\":\"webpack --mode=production --config ./demo/webpack.config.js\",\"test\":\"HERE GOES YOUR TEST TASK\",\"test:prod\":\"npm run lint\"},\"keywords\":[\"motorcortex\",\"animation\"],\"config\":{\"commitizen\":{\"path\":\"cz-conventional-changelog\"}},\"dependencies\":{\"@kissmybutton/motorcortex-2dcam\":\"^0.0.12\",\"@kissmybutton/motorcortex-anime\":\"^2.1.11\",\"@kissmybutton/motorcortex-counter\":\"^1.0.1\",\"@kissmybutton/motorcortex-svgdraw\":\"^0.0.2\",\"jss\":\"^10.5.1\"},\"peerDependencies\":{\"@kissmybutton/motorcortex\":\"^6.3.1\"},\"devDependencies\":{\"@babel/cli\":\"7.13.10\",\"@babel/core\":\"7.13.10\",\"@babel/plugin-syntax-jsx\":\"7.12.13\",\"@babel/plugin-transform-react-jsx\":\"7.12.17\",\"@babel/preset-env\":\"7.13.10\",\"@kissmybutton/motorcortex\":\"^6.3.1\",\"@kissmybutton/motorcortex-player\":\"^1.8.1\",\"@rollup/plugin-babel\":\"5.3.0\",\"@rollup/plugin-commonjs\":\"17.1.0\",\"@rollup/plugin-node-resolve\":\"11.2.0\",\"babel-eslint\":\"10.1.0\",\"babel-loader\":\"8.2.2\",\"concurrently\":\"6.0.0\",\"css-loader\":\"5.1.3\",\"es6-promise\":\"4.2.8\",\"eslint\":\"7.22.0\",\"eslint-config-prettier\":\"7.2.0\",\"eslint-config-standard\":\"16.0.2\",\"eslint-plugin-babel\":\"5.3.1\",\"eslint-plugin-import\":\"2.22.1\",\"eslint-plugin-node\":\"11.1.0\",\"eslint-plugin-prettier\":\"3.3.0\",\"eslint-plugin-promise\":\"4.2.1\",\"eslint-plugin-standard\":\"4.1.0\",\"exports-loader\":\"1.1.1\",\"imports-loader\":\"1.2.0\",\"npx\":\"10.2.2\",\"prettier\":\"2.2.1\",\"rimraf\":\"3.0.2\",\"rollup\":\"2.35.1\",\"rollup-plugin-terser\":\"7.0.2\",\"shelljs\":\"0.8.4\",\"stylelint\":\"13.8.0\",\"stylelint-config-prettier\":\"8.0.2\",\"stylelint-config-recommended\":\"3.0.0\",\"stylelint-config-recommended-scss\":\"4.2.0\",\"stylelint-config-sass-guidelines\":\"7.1.0\",\"stylelint-config-standard\":\"20.0.0\",\"stylelint-scss\":\"3.18.0\",\"webpack\":\"5.11.0\",\"webpack-cli\":\"4.3.0\",\"webpack-dev-server\":\"3.11.0\",\"whatwg-fetch\":\"3.5.0\"}}");
+module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"version\":\"1.4.3\",\"description\":\"A plugin for creating graphs using MotorCortex\",\"main\":\"dist/bundle.cjs.js\",\"module\":\"dist/bundle.esm.js\",\"browser\":\"dist/bundle.umd.js\",\"author\":\"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/kissmybutton/motorcortex-graphs\"},\"license\":\"MIT\",\"engines\":{\"node\":\">=10\"},\"scripts\":{\"concurrently\":\"concurrently -c \\\"cyan.bold,magenta.bold\\\" --names \\\"JS,Styles\\\"\",\"lint:styles\":\"stylelint  --allow-empty-input \\\"src/**.css\\\" \\\"src/**/*.scss\\\" --config .stylelintrc.json\",\"lint:js\":\"eslint -c .eslintrc src/**/*.js\",\"lint\":\"npm run concurrently \\\"npm:lint:js\\\" \\\"npm:lint:styles\\\"\",\"lint:fix\":\"npm run concurrently  \\\"npm:lint:js -- --fix\\\" \\\"npm:lint:styles -- --fix\\\"\",\"build\":\"npm run build:lib && npm run build:demo\",\"build:lib\":\"rollup -c\",\"start\":\"npm run build:lib && concurrently -c \\\"cyan.bold,magenta.bold\\\" \\\"npm:build:lib -- -w\\\"  \\\"npm:start:demo\\\" \",\"start:demo\":\"webpack serve --mode=development --config ./demo/webpack.config.js\",\"build:demo\":\"webpack --mode=production --config ./demo/webpack.config.js\",\"test\":\"HERE GOES YOUR TEST TASK\",\"test:prod\":\"npm run lint\"},\"keywords\":[\"motorcortex\",\"animation\"],\"config\":{\"commitizen\":{\"path\":\"cz-conventional-changelog\"}},\"dependencies\":{\"@kissmybutton/motorcortex-2dcam\":\"^0.0.12\",\"@kissmybutton/motorcortex-anime\":\"^2.1.12\",\"@kissmybutton/motorcortex-counter\":\"^1.0.1\",\"@kissmybutton/motorcortex-svgdraw\":\"^0.0.5\",\"jss\":\"^10.5.1\"},\"peerDependencies\":{\"@kissmybutton/motorcortex\":\"^6.3.1\"},\"devDependencies\":{\"@babel/cli\":\"7.13.10\",\"@babel/core\":\"7.13.10\",\"@babel/plugin-syntax-jsx\":\"7.12.13\",\"@babel/plugin-transform-react-jsx\":\"7.12.17\",\"@babel/preset-env\":\"7.13.10\",\"@kissmybutton/motorcortex\":\"^6.3.1\",\"@kissmybutton/motorcortex-player\":\"^1.8.1\",\"@rollup/plugin-babel\":\"5.3.0\",\"@rollup/plugin-commonjs\":\"17.1.0\",\"@rollup/plugin-node-resolve\":\"11.2.0\",\"babel-eslint\":\"10.1.0\",\"babel-loader\":\"8.2.2\",\"concurrently\":\"6.0.0\",\"css-loader\":\"5.1.3\",\"es6-promise\":\"4.2.8\",\"eslint\":\"7.22.0\",\"eslint-config-prettier\":\"7.2.0\",\"eslint-config-standard\":\"16.0.2\",\"eslint-plugin-babel\":\"5.3.1\",\"eslint-plugin-import\":\"2.22.1\",\"eslint-plugin-node\":\"11.1.0\",\"eslint-plugin-prettier\":\"3.3.1\",\"eslint-plugin-promise\":\"4.3.1\",\"@rollup/plugin-json\":\"4.1.0\",\"eslint-plugin-standard\":\"4.1.0\",\"exports-loader\":\"1.1.1\",\"imports-loader\":\"1.2.0\",\"npx\":\"10.2.2\",\"prettier\":\"2.2.1\",\"rimraf\":\"3.0.2\",\"rollup\":\"2.35.1\",\"rollup-plugin-terser\":\"7.0.2\",\"shelljs\":\"0.8.4\",\"stylelint\":\"13.8.0\",\"stylelint-config-prettier\":\"8.0.2\",\"stylelint-config-recommended\":\"3.0.0\",\"stylelint-config-recommended-scss\":\"4.2.0\",\"stylelint-config-sass-guidelines\":\"7.1.0\",\"stylelint-config-standard\":\"20.0.0\",\"stylelint-scss\":\"3.18.0\",\"webpack\":\"5.11.0\",\"webpack-cli\":\"4.3.0\",\"webpack-dev-server\":\"3.11.0\",\"whatwg-fetch\":\"3.5.0\"}}");
 
 /***/ }),
 
@@ -8464,7 +8467,7 @@ module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-graphs\",\"ve
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "4078832b72aee1fe3060"
+/******/ 		__webpack_require__.h = () => "0619b10baab2f678817b"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

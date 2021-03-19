@@ -150,3 +150,4 @@ clip.addIncident(progressMeter, 31500);
 
 clip.play();
 const player = new Player({clip, timeFormat: 'ms', scaleToFit: true, pointerEvents: true});
+console.log(JSON.stringify(clip.exportDefinition()))

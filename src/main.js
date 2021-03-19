@@ -5,9 +5,11 @@ import LineGraph from './Incidents/lineGraph/lineGraph';
 import PieChart from './Incidents/pieChart/pieChart';
 import config from './incident_config'
 import { validationRules } from "./validation";
+import {name,version}  from '../package.json'
 
 export default {
-  npm_name: "@kissmybutton/motorcortex-graph", 
+  npm_name: name,
+  version: version,
   incidents: [
     {
       exportable: ProgressBar,
