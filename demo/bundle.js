@@ -1,14 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 313:
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('[{"name":"Percentage 1","value":5},{"name":"Percentage 2","value":34},{"name":"Percentage 3","value":12.298374},{"name":"Percentage 4","value":100},{"name":"Percentage 5","value":45}]');
-
-/***/ }),
-
 /***/ 573:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -13035,7 +13027,7 @@ module.exports = JSON.parse('[{"name":"Percentage 1","value":5},{"name":"Percent
 
 /***/ }),
 
-/***/ 319:
+/***/ 872:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -13051,17 +13043,20 @@ var bundle_umd = __webpack_require__(34);
 var bundle_umd_default = /*#__PURE__*/__webpack_require__.n(bundle_umd);
 ;// CONCATENATED MODULE: ./data/barChartData.json
 const barChartData_namespaceObject = JSON.parse('{"title":"Test Graph","subtitle":"Subtitle 2021","showGrid":true,"maxValue":1800,"data":[{"name":"JAN","value":100},{"name":"FEB","value":200},{"name":"MAR","value":300},{"name":"APR","value":400},{"name":"MAY","value":500},{"name":"JUN","value":600},{"name":"JUL","value":700},{"name":"AUG","value":800},{"name":"SEP","value":900},{"name":"OCT","value":1000},{"name":"NOV","value":1100},{"name":"DEC","value":1200}]}');
-var data_barChartData_namespaceObject = /*#__PURE__*/__webpack_require__.t(barChartData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./data/lineGraphData.json
 const lineGraphData_namespaceObject = JSON.parse('{"title":"EXAMPLE LINE GRAPH","maxValue":100,"interval":4,"unit":"%","hover":false,"dataSets":[{"title":"Set 1","color":"red"},{"title":"Set 2","color":"blue"},{"title":"Set 3","color":""}],"data":[{"name":"2016","values":[56,45,12]},{"name":"2017","values":[43,24,67]},{"name":"2018","values":[61,11,98]},{"name":"2019","values":[10,35,69]},{"name":"2020","values":[3,81,78]},{"name":"2021","values":[74,92,59]}]}');
-var data_lineGraphData_namespaceObject = /*#__PURE__*/__webpack_require__.t(lineGraphData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./data/pieChartData.json
 const pieChartData_namespaceObject = JSON.parse('{"title":"My Pie Chart","data":[{"name":"Percentage 1","value":50,"color":""},{"name":"Percentage 2","value":15,"color":""},{"name":"Percentage 3","value":10,"color":""},{"name":"Percentage 4","value":5,"color":"rgb(163, 255, 200)"},{"name":"Percentage 5","value":20,"color":""}]}');
-var data_pieChartData_namespaceObject = /*#__PURE__*/__webpack_require__.t(pieChartData_namespaceObject, 2);
 ;// CONCATENATED MODULE: ./data/progressMeterData.json
 const progressMeterData_namespaceObject = JSON.parse('{"value":60,"unit":"%","innerFill":{"revert":false,"rotate":false}}');
-var data_progressMeterData_namespaceObject = /*#__PURE__*/__webpack_require__.t(progressMeterData_namespaceObject, 2);
+;// CONCATENATED MODULE: ./data/progressBarData.json
+const progressBarData_namespaceObject = JSON.parse('[{"name":"Percentage 1","value":5},{"name":"Percentage 2","value":34},{"name":"Percentage 3","value":12.298374},{"name":"Percentage 4","value":100},{"name":"Percentage 5","value":45}]');
 ;// CONCATENATED MODULE: ./index.js
+var _timings;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -13080,7 +13075,7 @@ var clip = new (motorcortex_umd_default()).HTMLClip({
   }
 });
 var barChart = new MCGraphs.BarChartSimple({
-  data: data_barChartData_namespaceObject,
+  data: barChartData_namespaceObject,
   timings: {
     intro: 2000,
     static: 1500,
@@ -13097,7 +13092,7 @@ var barChart = new MCGraphs.BarChartSimple({
   }
 });
 var lineGraph = new MCGraphs.LineGraph({
-  data: data_lineGraphData_namespaceObject,
+  data: lineGraphData_namespaceObject,
   trace: {
     toggle: false,
     scale: 1.45
@@ -13120,13 +13115,11 @@ var lineGraph = new MCGraphs.LineGraph({
   }
 });
 var pieChart = new MCGraphs.PieChart({
-  data: data_pieChartData_namespaceObject,
-  timings: {
+  data: pieChartData_namespaceObject,
+  timings: (_timings = {
     intro: 2000,
-    static: 1500,
-    // static: 0,
-    outro: 2000
-  },
+    static: 1500
+  }, _defineProperty(_timings, "static", 1000), _defineProperty(_timings, "outro", 2000), _timings),
   font: {
     size: "1.6rem"
   }
@@ -13138,7 +13131,7 @@ var pieChart = new MCGraphs.PieChart({
   }
 });
 var progressBar = new MCGraphs.ProgressBar({
-  data: __webpack_require__(313),
+  data: progressBarData_namespaceObject,
   timings: {
     intro: 2000,
     static: 1500,
@@ -13158,7 +13151,7 @@ var progressBar = new MCGraphs.ProgressBar({
   }
 });
 var progressMeter = new MCGraphs.ProgressMeter({
-  data: data_progressMeterData_namespaceObject,
+  data: progressMeterData_namespaceObject,
   innerImage: "battery",
   timings: {
     intro: 3000,
@@ -20121,7 +20114,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   return {
     npm_name: "@kissmybutton/motorcortex-graphs",
-    version: "1.4.4",
+    version: "1.4.5",
     incidents: [{
       exportable: Je,
       name: "ProgressBar",
@@ -21352,7 +21345,7 @@ return Promise$1;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version":"1.4.4","description":"A plugin for creating graphs using MotorCortex","main":"dist/bundle.cjs.js","module":"dist/bundle.esm.js","browser":"dist/bundle.umd.js","author":"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>","repository":{"type":"git","url":"https://github.com/kissmybutton/motorcortex-graphs"},"license":"MIT","engines":{"node":">=10"},"scripts":{"concurrently":"concurrently -c \\"cyan.bold,magenta.bold\\" --names \\"JS,Styles\\"","lint:styles":"stylelint  --allow-empty-input \\"src/**.css\\" \\"src/**/*.scss\\" --config .stylelintrc.json","lint:js":"eslint -c .eslintrc src/**/*.js","lint":"npm run concurrently \\"npm:lint:js\\" \\"npm:lint:styles\\"","lint:fix":"npm run concurrently  \\"npm:lint:js -- --fix\\" \\"npm:lint:styles -- --fix\\"","build":"npm run build:lib && npm run build:demo","build:lib":"rollup -c","start":"npm run build:lib && concurrently -c \\"cyan.bold,magenta.bold\\" \\"npm:build:lib -- -w\\"  \\"npm:start:demo\\" ","start:demo":"webpack serve --mode=development --config ./demo/webpack.config.js","build:demo":"webpack --mode=production --config ./demo/webpack.config.js","test":"HERE GOES YOUR TEST TASK","test:prod":"npm run lint"},"keywords":["motorcortex","animation"],"config":{"commitizen":{"path":"cz-conventional-changelog"}},"dependencies":{"@kissmybutton/motorcortex-2dcam":"^0.0.13","@kissmybutton/motorcortex-anime":"^2.1.13","@kissmybutton/motorcortex-counter":"^1.0.1","@kissmybutton/motorcortex-svgdraw":"^0.0.5","jss":"^10.5.1"},"peerDependencies":{"@kissmybutton/motorcortex":"^6.3.1"},"devDependencies":{"@babel/cli":"7.13.14","@babel/core":"7.13.14","@babel/plugin-syntax-jsx":"7.12.13","@babel/plugin-transform-react-jsx":"7.13.12","@babel/preset-env":"7.13.12","@kissmybutton/motorcortex":"6.3.3","@kissmybutton/motorcortex-player":"1.9.0","@rollup/plugin-babel":"5.3.0","@rollup/plugin-commonjs":"18.0.0","@rollup/plugin-json":"4.1.0","@rollup/plugin-node-resolve":"11.2.1","babel-eslint":"10.1.0","babel-loader":"8.2.2","concurrently":"6.0.0","css-loader":"5.2.0","es6-promise":"4.2.8","eslint":"7.23.0","eslint-config-prettier":"8.1.0","eslint-config-standard":"16.0.2","eslint-plugin-babel":"5.3.1","eslint-plugin-import":"2.22.1","eslint-plugin-node":"11.1.0","eslint-plugin-prettier":"3.3.1","eslint-plugin-promise":"4.3.1","eslint-plugin-standard":"5.0.0","exports-loader":"1.1.1","imports-loader":"1.2.0","npx":"10.2.2","prettier":"2.2.1","rimraf":"3.0.2","rollup":"2.44.0","rollup-plugin-terser":"7.0.2","shelljs":"0.8.4","stylelint":"13.12.0","stylelint-config-prettier":"8.0.2","stylelint-config-recommended":"4.0.0","stylelint-config-recommended-scss":"4.2.0","stylelint-config-sass-guidelines":"8.0.0","stylelint-config-standard":"21.0.0","stylelint-scss":"3.19.0","webpack":"5.30.0","webpack-cli":"4.6.0","webpack-dev-server":"3.11.2","whatwg-fetch":"3.6.2"}}');
+module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version":"1.4.5","description":"A plugin for creating graphs using MotorCortex","main":"dist/bundle.cjs.js","module":"dist/bundle.esm.js","browser":"dist/bundle.umd.js","author":"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>","repository":{"type":"git","url":"https://github.com/kissmybutton/motorcortex-graphs"},"license":"MIT","engines":{"node":">=10"},"scripts":{"concurrently":"concurrently -c \\"cyan.bold,magenta.bold\\" --names \\"JS,Styles\\"","lint:styles":"stylelint  --allow-empty-input \\"src/**.css\\" \\"src/**/*.scss\\" --config .stylelintrc.json","lint:js":"eslint -c .eslintrc src/**/*.js","lint":"npm run concurrently \\"npm:lint:js\\" \\"npm:lint:styles\\"","lint:fix":"npm run concurrently  \\"npm:lint:js -- --fix\\" \\"npm:lint:styles -- --fix\\"","build":"npm run build:lib && npm run build:demo","build:lib":"rollup -c","start":"npm run build:lib && concurrently -c \\"cyan.bold,magenta.bold\\" \\"npm:build:lib -- -w\\"  \\"npm:start:demo\\" ","start:demo":"webpack serve --mode=development --config ./demo/webpack.config.js","build:demo":"webpack --mode=production --config ./demo/webpack.config.js","test":"HERE GOES YOUR TEST TASK","test:prod":"npm run lint"},"keywords":["motorcortex","animation"],"config":{"commitizen":{"path":"cz-conventional-changelog"}},"dependencies":{"@kissmybutton/motorcortex-2dcam":"^0.0.13","@kissmybutton/motorcortex-anime":"^2.1.13","@kissmybutton/motorcortex-counter":"^1.0.1","@kissmybutton/motorcortex-svgdraw":"^0.0.5","jss":"^10.5.1"},"peerDependencies":{"@kissmybutton/motorcortex":"^6.3.1"},"devDependencies":{"@babel/cli":"7.13.14","@babel/core":"7.13.14","@babel/plugin-syntax-jsx":"7.12.13","@babel/plugin-transform-react-jsx":"7.13.12","@babel/preset-env":"7.13.12","@kissmybutton/motorcortex":"6.3.3","@kissmybutton/motorcortex-player":"1.9.0","@rollup/plugin-babel":"5.3.0","@rollup/plugin-commonjs":"18.0.0","@rollup/plugin-json":"4.1.0","@rollup/plugin-node-resolve":"11.2.1","babel-eslint":"10.1.0","babel-loader":"8.2.2","concurrently":"6.0.0","css-loader":"5.2.0","es6-promise":"4.2.8","eslint":"7.23.0","eslint-config-prettier":"8.1.0","eslint-config-standard":"16.0.2","eslint-plugin-babel":"5.3.1","eslint-plugin-import":"2.22.1","eslint-plugin-node":"11.1.0","eslint-plugin-prettier":"3.3.1","eslint-plugin-promise":"4.3.1","eslint-plugin-standard":"5.0.0","exports-loader":"1.1.1","imports-loader":"1.2.0","npx":"10.2.2","prettier":"2.2.1","rimraf":"3.0.2","rollup":"2.44.0","rollup-plugin-terser":"7.0.2","shelljs":"0.8.4","stylelint":"13.12.0","stylelint-config-prettier":"8.0.2","stylelint-config-recommended":"4.0.0","stylelint-config-recommended-scss":"4.2.0","stylelint-config-sass-guidelines":"8.0.0","stylelint-config-standard":"21.0.0","stylelint-scss":"3.19.0","webpack":"5.30.0","webpack-cli":"4.6.0","webpack-dev-server":"3.11.2","whatwg-fetch":"3.6.2"}}');
 
 /***/ }),
 
@@ -21427,36 +21420,6 @@ module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/create fake namespace object */
-/******/ 	(() => {
-/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
-/******/ 		var leafPrototypes;
-/******/ 		// create a fake namespace object
-/******/ 		// mode & 1: value is a module id, require it
-/******/ 		// mode & 2: merge all properties of value into the ns
-/******/ 		// mode & 4: return value when already ns object
-/******/ 		// mode & 16: return value when it's Promise-like
-/******/ 		// mode & 8|1: behave like require
-/******/ 		__webpack_require__.t = function(value, mode) {
-/******/ 			if(mode & 1) value = this(value);
-/******/ 			if(mode & 8) return value;
-/******/ 			if(typeof value === 'object' && value) {
-/******/ 				if((mode & 4) && value.__esModule) return value;
-/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
-/******/ 			}
-/******/ 			var ns = Object.create(null);
-/******/ 			__webpack_require__.r(ns);
-/******/ 			var def = {};
-/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
-/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
-/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
-/******/ 			}
-/******/ 			def['default'] = () => (value);
-/******/ 			__webpack_require__.d(ns, def);
-/******/ 			return ns;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -21485,7 +21448,7 @@ module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("e4021c80e8adce92b16b")
+/******/ 		__webpack_require__.h = () => ("19c6c58c2220a0197afd")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -21548,17 +21511,6 @@ module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version
 /******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
 /******/ 			script.onload = onScriptComplete.bind(null, script.onload);
 /******/ 			needAttach && document.head.appendChild(script);
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -22469,7 +22421,7 @@ module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version
 /******/ 	// module cache are used so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	var __webpack_exports__ = __webpack_require__(319);
+/******/ 	var __webpack_exports__ = __webpack_require__(872);
 /******/ 	
 /******/ })()
 ;

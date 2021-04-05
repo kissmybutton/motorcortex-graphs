@@ -1,10 +1,11 @@
 import MotorCortex from "@kissmybutton/motorcortex";
 import Player from "@kissmybutton/motorcortex-player";
 import MotorCortexGraph from "../dist/bundle.umd";
-import * as barChartData from "./data/barChartData.json";
-import * as lineGraphData from "./data/lineGraphData.json";
-import * as pieChartData from "./data/pieChartData.json";
-import * as progressMeterData from "./data/progressMeterData.json";
+import barChartData from "./data/barChartData.json";
+import lineGraphData from "./data/lineGraphData.json";
+import pieChartData from "./data/pieChartData.json";
+import progressMeterData from "./data/progressMeterData.json";
+import progressBarData from "./data/progressBarData.json";
 
 const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 
@@ -93,7 +94,7 @@ const pieChart = new MCGraphs.PieChart(
     timings: {
       intro: 2000,
       static: 1500,
-      // static: 0,
+      static: 1000,
       outro: 2000,
     },
     font: {
@@ -111,7 +112,7 @@ const pieChart = new MCGraphs.PieChart(
 
 const progressBar = new MCGraphs.ProgressBar(
   {
-    data: require("./data/progressBarData.json"),
+    data: progressBarData,
     timings: {
       intro: 2000,
       static: 1500,
