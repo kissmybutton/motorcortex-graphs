@@ -1,11 +1,11 @@
-import BarChartSimple from './Incidents/barChartSimple/barChartSimple';
-import ProgressBar from './Incidents/progressBar/progressBar';
-import ProgressMeter from './Incidents/progressMeter/progressMeter';
-import LineGraph from './Incidents/lineGraph/lineGraph';
-import PieChart from './Incidents/pieChart/pieChart';
-import config from './incident_config'
-import { validationRules } from "./validation";
-import {name,version}  from '../package.json'
+import BarChartSimple from "./Incidents/barChartSimple/barChartSimple";
+import ProgressBar from "./Incidents/progressBar/progressBar";
+import ProgressMeter from "./Incidents/progressMeter/progressMeter";
+import LineGraph from "./Incidents/lineGraph/lineGraph";
+import PieChart from "./Incidents/pieChart/pieChart";
+import config from "./incident_config";
+import validationRules from "./validation";
+import { name, version } from "../package.json";
 
 export default {
   npm_name: name,
@@ -17,8 +17,8 @@ export default {
       attributesValidationRules: validationRules.ProgressBar,
       originalDims: {
         width: "1200px",
-        height: "900px"
-      }
+        height: "900px",
+      },
     },
     {
       exportable: BarChartSimple,
@@ -26,8 +26,8 @@ export default {
       attributesValidationRules: validationRules.BarChartSimple,
       originalDims: {
         width: "1200px",
-        height: "900px"
-      }
+        height: "900px",
+      },
     },
     {
       exportable: LineGraph,
@@ -35,8 +35,8 @@ export default {
       attributesValidationRules: validationRules.LineGraph,
       originalDims: {
         width: `${config.lineGraph.originalDims.width}px`,
-        height: `${config.lineGraph.originalDims.height}px`
-      }
+        height: `${config.lineGraph.originalDims.height}px`,
+      },
     },
     {
       exportable: PieChart,
@@ -44,8 +44,8 @@ export default {
       attributesValidationRules: validationRules.PieChart,
       originalDims: {
         width: "1200px",
-        height: "900px"
-      }
+        height: "900px",
+      },
     },
     {
       exportable: ProgressMeter,
@@ -53,8 +53,8 @@ export default {
       attributesValidationRules: validationRules.ProgressMeter,
       originalDims: {
         width: `${config.progressMeter.originalDims.width}px`,
-        height: `${config.progressMeter.originalDims.height}px`
-      }
+        height: `${config.progressMeter.originalDims.height}px`,
+      },
     },
-  ]
+  ],
 };
