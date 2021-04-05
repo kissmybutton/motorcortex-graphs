@@ -46,56 +46,56 @@ const MCGraphs = MotorCortex.loadPlugin(MotorCortexGraph);
 ## Creating a Progress Bar Incident
 ```javascript
 const clip = new MotorCortex.HTMLClip({
-    html: `
-        <div class="container">
-            <div id="htmlclip"></div>
-        </div>`,
-    css: `
-        .container{
-            width: 800px,
-            height: 600px
-        }
-    `,
-    host: document.getElementById('clip'),
-    containerParams: {
-        width: '1024px',
-        height: '768px'
+  html: `
+    <div class="container">
+      <div id="htmlclip"></div>
+    </div>`,
+  css: `
+    .container{
+      width: 800px,
+      height: 600px
     }
+  `,
+  host: document.getElementById('clip'),
+  containerParams: {
+    width: '1024px',
+    height: '768px'
+  }
 });
 
 const newGraph = new MCGraphs.ProgressBar({
-    data: [
-	{
-		"name": "Percentage 1",
-		"value": 5
-	},
-	{
-		"name": "Percentage 2",
-		"value": 34
-	},
-	{
-		"name": "Percentage 3",
-		"value": 12.298374
-	},
-	{
-		"name": "Percentage 4",
-		"value": 100
-	}],
-    timings: {
-        intro: 1000,
-        static: 1000,
-        outro: 1000,
-    },
-    palette: {
-        background: "#D3CDCD", 
-    }, 
+  data: [
+  {
+    "name": "Percentage 1",
+    "value": 5
+  },
+  {
+    "name": "Percentage 2",
+    "value": 34
+  },
+  {
+    "name": "Percentage 3",
+    "value": 12.298374
+  },
+  {
+    "name": "Percentage 4",
+    "value": 100
+  }],
+  timings: {
+    intro: 1000,
+    static: 1000,
+    outro: 1000,
+  },
+  palette: {
+    background: "#D3CDCD", 
+  }, 
 },
-    {
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1024px',
-        height: '768px'
-    },
+  {
+  selector: '#htmlclip',
+  containerParams: {
+    width: '1024px',
+    height: '768px'
+  },
 });
 
 clip.addIncident(newGraph, 0);
@@ -155,27 +155,27 @@ To create a progress meter, the necessary attribute parameter is the data object
 
 ```javascript
 const progressMeter = new MCGraphs.ProgressMeter({
-    data: progressMeterData,
-	innerImage: `battery`,
-    timings: {
-        intro: 3000,
-        static: 1000,
-        outro: 3000,
-    },
-    palette: {
-        background: "#D3CDCD"
-        font: "#100300",
-        accent: "#FFD800",
-    },
-    font: {
-        size: '8rem'
-    },
+  data: progressMeterData,
+  innerImage: `battery`,
+  timings: {
+    intro: 3000,
+    static: 1000,
+    outro: 3000,
+  },
+  palette: {
+    background: "#D3CDCD"
+    font: "#100300",
+    accent: "#FFD800",
+  },
+  font: {
+    size: '8rem'
+  },
 }, {
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1024px',
-        height: '768px'
-    },
+  selector: '#htmlclip',
+  containerParams: {
+    width: '1024px',
+    height: '768px'
+  },
 });
 
 clip.addIncident(progressMeter, 0);
@@ -204,12 +204,12 @@ An object that contains the parameters with which to display the meter. The "val
 Example data:
 ```json
 {
-	"value": 60,
-	"unit": "%",
-	"innerFill": {
-		"revert": false,
-		"rotate": false
-	}
+  "value": 60,
+  "unit": "%",
+  "innerFill": {
+    "revert": false,
+    "rotate": false
+  }
 }
 ```
 
@@ -254,31 +254,31 @@ To create a bar chart, the necessary attribute parameter is the data object. The
 
 ```javascript
 const newGraph = new MCGraphs.BarChartSimple({
-    data: data,  
-    palette: {
-        primary: "#75706E",
-        secondary: "#B2B1AE", 
-        tertiary: "#434243",
-        font: "#100300", 
-        accent: "#FFD800", 
-        background: "#D3CDCD"
-    },
-    font: {
-        url: "https://fonts.googleapis.com/css2?family=Staatliches&display=swap",
-        size: "1.7rem",
-    },
-    grid: true,
-    timings: {
-        intro: 1000,
-        outro: 1000, 
-        static: 1000, 
-    },
+  data: data,  
+  palette: {
+    primary: "#75706E",
+    secondary: "#B2B1AE", 
+    tertiary: "#434243",
+    font: "#100300", 
+    accent: "#FFD800", 
+    background: "#D3CDCD"
+  },
+  font: {
+    url: "https://fonts.googleapis.com/css2?family=Staatliches&display=swap",
+    size: "1.7rem",
+  },
+  grid: true,
+  timings: {
+    intro: 1000,
+    outro: 1000, 
+    static: 1000, 
+  },
 }, {
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1200px',
-        height: '900px'
-    }
+  selector: '#htmlclip',
+  containerParams: {
+    width: '1200px',
+    height: '900px'
+  }
 });
 
 clip.addIncident(newGraph, 0);
@@ -308,24 +308,24 @@ An object that contains the parameters with which to display the data in the gra
 Example data:
 ```json
 { 
-    "title": "Example Graph", 
-    "subtitle": "Yearly data", 
-    "showGrid": true,
-    "maxValue": 100,
-    "data": [
-        {
-            "name": "2019",
-            "value": 34
-        },
-        {
-            "name": "2020",
-            "value": 15
-        },
-        {
-            "name": "2021",
-            "value": 89
-        }
-    ]
+  "title": "Example Graph", 
+  "subtitle": "Yearly data", 
+  "showGrid": true,
+  "maxValue": 100,
+  "data": [
+    {
+      "name": "2019",
+      "value": 34
+    },
+    {
+      "name": "2020",
+      "value": 15
+    },
+    {
+      "name": "2021",
+      "value": 89
+    }
+  ]
 }
 ```
 
@@ -371,50 +371,50 @@ The `font` object is an optional parameter that contains three (3) values used f
 ## Creating a Pie Chart Incident
 ```javascript
 const pieChart = new MCGraphs.PieChart({
-    data: {
-        "title": "My Pie Chart",
-        "data": [
-            {
-                "name": "Percentage 1",
-                "value": 50,
-                "color": ""
-            },
-            {
-                "name": "Percentage 2",
-                "value": 15,
-                "color": ""
-            },
-            {
-                "name": "Percentage 3",
-                "value": 10,
-                "color": ""
-            },
-            {
-                "name": "Percentage 4",
-                "value": 5,
-                "color": "rgb(163, 255, 200)"
-            },
-            {
-                "name": "Percentage 5",
-                "value": 20,
-                "color": ""
-            }
-        ]
-    },
-    timings: {
-        intro: 2000,
-        static: 1500,
-        outro: 2000
-    },
-    font: {
-        size: '1.6rem'
-    }
+  data: {
+    "title": "My Pie Chart",
+    "data": [
+      {
+        "name": "Percentage 1",
+        "value": 50,
+        "color": ""
+      },
+      {
+        "name": "Percentage 2",
+        "value": 15,
+        "color": ""
+      },
+      {
+        "name": "Percentage 3",
+        "value": 10,
+        "color": ""
+      },
+      {
+        "name": "Percentage 4",
+        "value": 5,
+        "color": "rgb(163, 255, 200)"
+      },
+      {
+        "name": "Percentage 5",
+        "value": 20,
+        "color": ""
+      }
+    ]
+  },
+  timings: {
+    intro: 2000,
+    static: 1500,
+    outro: 2000
+  },
+  font: {
+    size: '1.6rem'
+  }
 },{
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1024px',
-        height: '768px'
-    },
+  selector: '#htmlclip',
+  containerParams: {
+    width: '1024px',
+    height: '768px'
+  },
 });
 
 clip.addIncident(pieChart, 0);
@@ -441,7 +441,7 @@ Type `PieChartDataEntry`:
 | value | The percentage value that the slice should take up | number (range 0-100)|
 |color| The color to display on that slice of the pie|string (rgb)|
 * Note: 
-    The color attribute is optional but if your pie has more than five (5) values it is recommended you provide it because the pie will otherwise pick a random color from the built in palette. 
+  The color attribute is optional but if your pie has more than five (5) values it is recommended you provide it because the pie will otherwise pick a random color from the built in palette. 
 #### Timings:
 The `timings` object is an optional object that contains three (3) values for setting the duration of the event. These values are:
 | Name | Description | Default | Values |
@@ -471,36 +471,36 @@ To create a Line Graph, the necessary attribute parameter is the data object. Th
 
 ```javascript
 const newGraph = new MCGraphs.BarChartSimple({
-    data: data,  
-    palette: {
-        primary: "#75706E",
-        secondary: "#B2B1AE", 
-        tertiary: "#434243",
-        quaternary: "#EEEEEE",
-        font: "#100300", 
-        accent: "#FFD800", 
-        background: "#D3CDCD"
-    },
-    font: {
-        url: "https://fonts.googleapis.com/css2?family=Staatliches&display=swap",
-        size: "1.7rem",
-    },
-    trace: { 
-        toggle: true,
-        scale: 1.45,
-    },
-    grid: true,
-    timings: {
-        intro: 7000,
-        outro: 7000, 
-        static: 1000, 
-    },
+  data: data,  
+  palette: {
+    primary: "#75706E",
+    secondary: "#B2B1AE", 
+    tertiary: "#434243",
+    quaternary: "#EEEEEE",
+    font: "#100300", 
+    accent: "#FFD800", 
+    background: "#D3CDCD"
+  },
+  font: {
+    url: "https://fonts.googleapis.com/css2?family=Staatliches&display=swap",
+    size: "1.7rem",
+  },
+  trace: { 
+    toggle: true,
+    scale: 1.45,
+  },
+  grid: true,
+  timings: {
+    intro: 7000,
+    outro: 7000, 
+    static: 1000, 
+  },
 }, {
-    selector: '#htmlclip',
-    containerParams: {
-        width: '1244px',
-        height: '768px'
-    }
+  selector: '#htmlclip',
+  containerParams: {
+    width: '1244px',
+    height: '768px'
+  }
 });
 
 clip.addIncident(newGraph, 0);
@@ -540,39 +540,39 @@ An object that contains the parameters with which to display the data in the gra
 Example data:
 ```json
 { 
-    "title": "Example Line Chart", 
-    "interval": 4,
-    "maxValue": 100,
-    "unit": "%",
-    "hover": true,
-    "data": [
-         {
-            "name": "2016",
-            "values": [56, 4]
-        },
-        {
-            "name": "2017",
-            "values": [43, 89]
-        },
-        {
-            "name": "2018",
-            "values": [61, 75]
-        },
-        {
-            "name": "2019",
-            "values": [10, 32]
-        },
-    ],
-    "dataSets": [
-        {
-            "title": "Set 1",
-            "color": "red"
-        },
-        {
-            "title": "Set 2",
-            "color": "blue"
-        },
-    ],
+  "title": "Example Line Chart", 
+  "interval": 4,
+  "maxValue": 100,
+  "unit": "%",
+  "hover": true,
+  "data": [
+     {
+      "name": "2016",
+      "values": [56, 4]
+    },
+    {
+      "name": "2017",
+      "values": [43, 89]
+    },
+    {
+      "name": "2018",
+      "values": [61, 75]
+    },
+    {
+      "name": "2019",
+      "values": [10, 32]
+    },
+  ],
+  "dataSets": [
+    {
+      "title": "Set 1",
+      "color": "red"
+    },
+    {
+      "title": "Set 2",
+      "color": "blue"
+    },
+  ],
 }
 ```
 
@@ -588,14 +588,14 @@ The length of the array should be equal to the number of lines in the graph. Eac
 
 ```json
 "data": [
-        {
-        "name": "2016",
-        "values": [line1point1, line2point1]
-    },
     {
-        "name": "2017",
-        "values": [line1point2, line2point2]
-    },       
+    "name": "2016",
+    "values": [line1point1, line2point1]
+  },
+  {
+    "name": "2017",
+    "values": [line1point2, line2point2]
+  },       
 ]
 ```
 \* To avoid cluttering in the graph it is recommended to not enter more than 16 datapoints per line.
@@ -612,15 +612,15 @@ The number of dataSet objects in this array should be equal to the length of any
 
 ```json
 "dataSets": [
-        {
-            "title": "Set 1",
-            "color": "red"
-        },
-        {
-            "title": "Set 2",
-            "color": "blue"
-        },
-    ],
+    {
+      "title": "Set 1",
+      "color": "red"
+    },
+    {
+      "title": "Set 2",
+      "color": "blue"
+    },
+  ],
 ```
 
 #### Trace
