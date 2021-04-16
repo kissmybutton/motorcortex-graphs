@@ -552,7 +552,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function _(t, e) {
+  function B(t, e) {
     var n = N(t);
 
     for (var i in e) {
@@ -562,7 +562,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function B(t) {
+  function _(t) {
     return R.rgb(t) ? (n = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(e = t)) ? "rgba(" + n[1] + ",1)" : e : R.hex(t) ? function (t) {
       var e = t.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (t, e, n, i) {
         return e + e + n + n + i + i;
@@ -685,7 +685,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   function K(t, e) {
-    if (R.col(t)) return B(t);
+    if (R.col(t)) return _(t);
     if (/\s/g.test(t)) return t;
     var n = Q(t),
         i = n ? t.substr(0, t.length - n.length) : t;
@@ -736,7 +736,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         value: t
       };
     }).map(function (t) {
-      return _(t, n);
+      return B(t, n);
     });
   }
 
@@ -854,7 +854,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }(r, n),
         s = st;
 
-    return st++, _(e, {
+    return st++, B(e, {
       id: s,
       children: [],
       animatables: a,
@@ -2200,9 +2200,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   var Ft = /([[\].#*$><+~=|^:(),"'`\s])/g,
-      _t = "undefined" != typeof CSS && CSS.escape,
-      Bt = function Bt(t) {
-    return _t ? _t(t) : t.replace(Ft, "\\$1");
+      Bt = "undefined" != typeof CSS && CSS.escape,
+      _t = function _t(t) {
+    return Bt ? Bt(t) : t.replace(Ft, "\\$1");
   },
       Qt = function () {
     function t(t, e, n) {
@@ -2235,7 +2235,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           o = i.scoped,
           s = i.sheet,
           l = i.generateId;
-      return r ? a.selectorText = r : !1 !== o && (a.id = l(Vt(Vt(a)), s), a.selectorText = "." + Bt(a.id)), a;
+      return r ? a.selectorText = r : !1 !== o && (a.id = l(Vt(Vt(a)), s), a.selectorText = "." + _t(a.id)), a;
     }
 
     Et(e, t);
@@ -2340,7 +2340,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           r = n.sheet,
           o = n.generateId;
 
-      for (var s in this.id = !1 === a ? this.name : Bt(o(this, r)), this.rules = new ye(Ot({}, n, {
+      for (var s in this.id = !1 === a ? this.name : _t(o(this, r)), this.rules = new ye(Ot({}, n, {
         parent: this
       })), e) {
         this.rules.add(s, e[s], Ot({}, n, {
@@ -2510,7 +2510,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         selector: void 0
       }, n),
           h = t;
-      t in this.raw && (h = t + "-d" + this.counter++), this.raw[h] = e, h in this.classes && (c.selector = "." + Bt(this.classes[h]));
+      t in this.raw && (h = t + "-d" + this.counter++), this.raw[h] = e, h in this.classes && (c.selector = "." + _t(this.classes[h]));
       var d = zt(h, e, c);
       if (!d) return null;
       this.register(d);
@@ -3673,22 +3673,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
               });
             }
 
-            var _ = new n.default.Combo({
+            var B = new n.default.Combo({
               incidents: N
             }, {
               selector: ".label-container"
             });
-
-            z.addIncident(_, Math.trunc(M / (this.data.length + 1) * T));
+            z.addIncident(B, Math.trunc(M / (this.data.length + 1) * T));
           }
 
           k.addIncident(z, Math.trunc(.05 * this.outroDur));
           this.outroDur;
           this.data.length;
-          var B = [];
+          var _ = [];
 
           for (var Q in this.data) {
-            B.push({
+            _.push({
               incidentClass: Ne.Anime,
               attrs: {
                 animatedAttrs: {
@@ -3708,7 +3707,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           }
 
           var H = new n.default.Combo({
-            incidents: B
+            incidents: _
           }, {
             selector: ".graph"
           });
@@ -3731,12 +3730,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }]), a;
   }(n.default.HTMLClip);
 
-  function _e(t, e) {
+  function Be(t, e) {
     if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
   }
 
-  function Be(t) {
-    return (Be = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+  function _e(t) {
+    return (_e = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
       return t.__proto__ || Object.getPrototypeOf(t);
     })(t);
   }
@@ -3782,10 +3781,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
       return function () {
         var n,
-            i = Be(t);
+            i = _e(t);
 
         if (e) {
-          var a = Be(this).constructor;
+          var a = _e(this).constructor;
+
           n = Reflect.construct(i, arguments, a);
         } else n = i.apply(this, arguments);
 
@@ -3794,7 +3794,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }(a);
 
     function a() {
-      return _e(this, a), i.apply(this, arguments);
+      return Be(this, a), i.apply(this, arguments);
     }
 
     return (e = [{
@@ -4876,11 +4876,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   var bn = function () {
     function t(e) {
-      ln(this, t), this.el = e, this.matrix = this._getMatrix(e), this.viewportCenter = this._getViewPortCenter(), this.idlePosition = this._getIdlePosition();
+      ln(this, t), this.el = e, this.matrix = this.getMatrix(e), this.viewportCenter = this.getViewPortCenter(), this.idlePosition = this.getIdlePosition();
     }
 
     return cn(t, [{
-      key: "_getMatrix",
+      key: "getMatrix",
       value: function value(t) {
         return function (t) {
           var e,
@@ -4912,7 +4912,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }(t);
       }
     }, {
-      key: "_getViewPortCenter",
+      key: "getViewPortCenter",
       value: function value() {
         var t = this.el.parentNode;
         return {
@@ -4921,7 +4921,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         };
       }
     }, {
-      key: "_getIdlePosition",
+      key: "getIdlePosition",
       value: function value() {
         var t = this.el,
             e = t.getBoundingClientRect(),
@@ -5048,7 +5048,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }(),
       xn = {
     npm_name: "@kissmybutton/motorcortex-2dcam",
-    version: "0.0.13",
+    version: "0.0.14",
     incidents: [{
       exportable: wn,
       name: "ZoomTo",
@@ -8343,7 +8343,7 @@ return Promise$1;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version":"1.4.6","description":"A plugin for creating graphs using MotorCortex","main":"dist/bundle.cjs.js","module":"dist/bundle.esm.js","browser":"dist/bundle.umd.js","author":"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>","repository":{"type":"git","url":"https://github.com/kissmybutton/motorcortex-graphs"},"license":"MIT","engines":{"node":">=10"},"scripts":{"concurrently":"concurrently -c \\"cyan.bold,magenta.bold\\" --names \\"JS,Styles\\"","lint:styles":"stylelint  --allow-empty-input \\"src/**.css\\" \\"src/**/*.scss\\" --config .stylelintrc.json","lint:js":"eslint -c .eslintrc src/**/*.js","lint":"npm run concurrently \\"npm:lint:js\\" \\"npm:lint:styles\\"","lint:fix":"npm run concurrently  \\"npm:lint:js -- --fix\\" \\"npm:lint:styles -- --fix\\"","build":"npm run build:lib && npm run build:demo","build:lib":"rollup -c","start":"npm run build:lib && concurrently -c \\"cyan.bold,magenta.bold\\" \\"npm:build:lib -- -w\\"  \\"npm:start:demo\\" ","start:demo":"webpack serve --mode=development --config ./demo/webpack.config.js","build:demo":"webpack --mode=production --config ./demo/webpack.config.js","test":"HERE GOES YOUR TEST TASK","test:prod":"npm run lint"},"keywords":["motorcortex","animation"],"config":{"commitizen":{"path":"cz-conventional-changelog"}},"dependencies":{"@kissmybutton/motorcortex-2dcam":"^0.0.13","@kissmybutton/motorcortex-anime":"^2.1.13","@kissmybutton/motorcortex-counter":"^1.0.1","@kissmybutton/motorcortex-svgdraw":"^0.0.5","jss":"^10.5.1"},"peerDependencies":{"@kissmybutton/motorcortex":"^6.3.1"},"devDependencies":{"@babel/cli":"7.13.14","@babel/core":"7.13.15","@babel/plugin-syntax-jsx":"7.12.13","@babel/plugin-transform-react-jsx":"7.13.12","@babel/preset-env":"7.13.15","@kissmybutton/motorcortex":"6.4.1","@kissmybutton/motorcortex-player":"1.9.4","@rollup/plugin-babel":"5.3.0","@rollup/plugin-commonjs":"18.0.0","@rollup/plugin-json":"4.1.0","@rollup/plugin-node-resolve":"11.2.1","babel-eslint":"10.1.0","babel-loader":"8.2.2","concurrently":"6.0.2","css-loader":"5.2.1","es6-promise":"4.2.8","eslint":"7.24.0","eslint-config-prettier":"8.2.0","eslint-config-standard":"16.0.2","eslint-plugin-babel":"5.3.1","eslint-plugin-import":"2.22.1","eslint-plugin-node":"11.1.0","eslint-plugin-prettier":"3.4.0","eslint-plugin-promise":"4.3.1","eslint-plugin-standard":"5.0.0","exports-loader":"1.1.1","imports-loader":"1.2.0","npx":"10.2.2","prettier":"2.2.1","rimraf":"3.0.2","rollup":"2.45.2","rollup-plugin-terser":"7.0.2","shelljs":"0.8.4","stylelint":"13.12.0","stylelint-config-prettier":"8.0.2","stylelint-config-recommended":"4.0.0","stylelint-config-recommended-scss":"4.2.0","stylelint-config-sass-guidelines":"8.0.0","stylelint-config-standard":"21.0.0","stylelint-scss":"3.19.0","webpack":"5.33.2","webpack-cli":"4.6.0","webpack-dev-server":"3.11.2","whatwg-fetch":"3.6.2"}}');
+module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version":"1.4.6","description":"A plugin for creating graphs using MotorCortex","main":"dist/bundle.cjs.js","module":"dist/bundle.esm.js","browser":"dist/bundle.umd.js","author":"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>","repository":{"type":"git","url":"https://github.com/kissmybutton/motorcortex-graphs"},"license":"MIT","engines":{"node":">=10"},"scripts":{"concurrently":"concurrently -c \\"cyan.bold,magenta.bold\\" --names \\"JS,Styles\\"","lint:styles":"stylelint  --allow-empty-input \\"src/**.css\\" \\"src/**/*.scss\\" --config .stylelintrc.json","lint:js":"eslint -c .eslintrc src/**/*.js","lint":"npm run concurrently \\"npm:lint:js\\" \\"npm:lint:styles\\"","lint:fix":"npm run concurrently  \\"npm:lint:js -- --fix\\" \\"npm:lint:styles -- --fix\\"","build":"npm run build:lib && npm run build:demo","build:lib":"rollup -c","start":"npm run build:lib && concurrently -c \\"cyan.bold,magenta.bold\\" \\"npm:build:lib -- -w\\"  \\"npm:start:demo\\" ","start:demo":"webpack serve --mode=development --config ./demo/webpack.config.js","build:demo":"webpack --mode=production --config ./demo/webpack.config.js","test":"HERE GOES YOUR TEST TASK","test:prod":"npm run lint"},"keywords":["motorcortex","animation"],"config":{"commitizen":{"path":"cz-conventional-changelog"}},"dependencies":{"@kissmybutton/motorcortex-2dcam":"^0.0.14","@kissmybutton/motorcortex-anime":"^2.1.13","@kissmybutton/motorcortex-counter":"^1.0.1","@kissmybutton/motorcortex-svgdraw":"^0.0.5","jss":"^10.5.1"},"peerDependencies":{"@kissmybutton/motorcortex":"^6.3.1"},"devDependencies":{"@babel/cli":"7.13.14","@babel/core":"7.13.15","@babel/plugin-syntax-jsx":"7.12.13","@babel/plugin-transform-react-jsx":"7.13.12","@babel/preset-env":"7.13.15","@kissmybutton/motorcortex":"6.4.1","@kissmybutton/motorcortex-player":"1.9.4","@rollup/plugin-babel":"5.3.0","@rollup/plugin-commonjs":"18.0.0","@rollup/plugin-json":"4.1.0","@rollup/plugin-node-resolve":"11.2.1","babel-eslint":"10.1.0","babel-loader":"8.2.2","concurrently":"6.0.2","css-loader":"5.2.1","es6-promise":"4.2.8","eslint":"7.24.0","eslint-config-prettier":"8.2.0","eslint-config-standard":"16.0.2","eslint-plugin-babel":"5.3.1","eslint-plugin-import":"2.22.1","eslint-plugin-node":"11.1.0","eslint-plugin-prettier":"3.4.0","eslint-plugin-promise":"4.3.1","eslint-plugin-standard":"5.0.0","exports-loader":"1.1.1","imports-loader":"1.2.0","npx":"10.2.2","prettier":"2.2.1","rimraf":"3.0.2","rollup":"2.45.2","rollup-plugin-terser":"7.0.2","shelljs":"0.8.4","stylelint":"13.12.0","stylelint-config-prettier":"8.0.2","stylelint-config-recommended":"4.0.0","stylelint-config-recommended-scss":"4.2.0","stylelint-config-sass-guidelines":"8.0.0","stylelint-config-standard":"21.0.0","stylelint-scss":"3.19.0","webpack":"5.33.2","webpack-cli":"4.6.0","webpack-dev-server":"3.11.2","whatwg-fetch":"3.6.2"}}');
 
 /***/ }),
 
@@ -8446,7 +8446,7 @@ module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("1fcbd201674df9a8f7cd")
+/******/ 		__webpack_require__.h = () => ("afd4d4068dd3716872ae")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
