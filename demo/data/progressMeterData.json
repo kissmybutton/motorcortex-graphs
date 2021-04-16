@@ -1,0 +1,8 @@
+{
+  "value": 60,
+  "unit": "%",
+  "innerFill": {
+    "revert": false,
+    "rotate": false
+  }
+}
