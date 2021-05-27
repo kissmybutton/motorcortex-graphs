@@ -316,30 +316,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   };
 
   function m(t, e) {
-    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-  }
-
-  function y(t, e) {
-    for (var n = 0; n < e.length; n++) {
-      var i = e[n];
-      i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
-    }
-  }
-
-  function v(t, e, n) {
-    return e && y(t.prototype, e), n && y(t, n), t;
-  }
-
-  function b(t, e, n) {
-    return e in t ? Object.defineProperty(t, e, {
-      value: n,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) : t[e] = n, t;
-  }
-
-  function w(t, e) {
     var n = Object.keys(t);
 
     if (Object.getOwnPropertySymbols) {
@@ -352,17 +328,41 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function x(t) {
+  function y(t) {
     for (var e = 1; e < arguments.length; e++) {
       var n = null != arguments[e] ? arguments[e] : {};
-      e % 2 ? w(Object(n), !0).forEach(function (e) {
-        b(t, e, n[e]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : w(Object(n)).forEach(function (e) {
+      e % 2 ? m(Object(n), !0).forEach(function (e) {
+        x(t, e, n[e]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : m(Object(n)).forEach(function (e) {
         Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e));
       });
     }
 
     return t;
+  }
+
+  function v(t, e) {
+    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+  }
+
+  function b(t, e) {
+    for (var n = 0; n < e.length; n++) {
+      var i = e[n];
+      i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
+    }
+  }
+
+  function w(t, e, n) {
+    return e && b(t.prototype, e), n && b(t, n), t;
+  }
+
+  function x(t, e, n) {
+    return e in t ? Object.defineProperty(t, e, {
+      value: n,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : t[e] = n, t;
   }
 
   function M(t, e) {
@@ -1046,24 +1046,24 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       bt = "color",
       wt = {
     npm_name: "@kissmybutton/motorcortex-anime",
-    version: "2.1.13",
+    version: "2.1.16",
     incidents: [{
       exportable: function (t) {
         M(n, t);
         var e = C(n);
 
         function n() {
-          return m(this, n), e.apply(this, arguments);
+          return v(this, n), e.apply(this, arguments);
         }
 
-        return v(n, [{
+        return w(n, [{
           key: "onGetContext",
           value: function value() {
             var t = {};
             if (Object.prototype.hasOwnProperty.call(gt, this.attributeKey)) for (var e = gt[this.attributeKey], n = 0; n < e.length; n++) {
               Object.prototype.hasOwnProperty.call(this.targetValue, e[n]) && (t[e[n]] = [this.initialValue[e[n]], this.targetValue[e[n]]]);
             } else t[this.attributeKey] = [this.initialValue, this.targetValue];
-            this.target = ft(x(x({
+            this.target = ft(y(y({
               autoplay: !1,
               duration: this.props.duration,
               easing: "linear",
@@ -1073,35 +1073,33 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }, {
           key: "getScratchValue",
           value: function value() {
-            if ("transform" === this.attributeKey) {
-              for (var t = {}, e = gt[this.attributeKey], n = function (t, e) {
-                var n = t.getComputedStyle(e).transform;
-                return "" === n || "none" === n ? {} : function (t) {
-                  var e = Math.atan2(t[1], t[0]),
-                      n = Math.pow(t[0], 2) + Math.pow(t[1], 2),
-                      i = Math.pow(t[2], 2) + Math.pow(t[3], 2),
-                      a = Math.sqrt(n),
-                      r = (t[0] * t[3] - t[2] * t[1]) / a,
-                      o = Math.atan2(t[0] * t[2] + t[1] * t[3], n),
-                      s = Math.atan2(t[1] * t[3] + t[0] * t[2], i);
-                  return {
-                    rotate: e / (Math.PI / 180) + "deg",
-                    scaleX: a,
-                    scaleY: r,
-                    skewX: (1 === n ? o / (Math.PI / 180) : 0) + "deg",
-                    skewY: (1 === i ? s / (Math.PI / 180) : 0) + "deg",
-                    translateX: t[4] + "px",
-                    translateY: t[5] + "px"
-                  };
-                }(n.split("(")[1].split(")")[0].split(","));
-              }(this.context.window, this.element), i = 0; i < e.length; i++) {
-                Object.prototype.hasOwnProperty.call(n, e[i]) ? t[e[i]] = n[e[i]] : t[e[i]] = ft.get(this.element, e[i]);
-              }
+            if ("transform" !== this.attributeKey) return ft.get(this.element, this.attributeKey);
 
-              return t;
+            for (var t = {}, e = gt[this.attributeKey], n = function (t, e) {
+              var n = t.getComputedStyle(e).transform;
+              return "" === n || "none" === n ? {} : function (t) {
+                var e = Math.atan2(t[1], t[0]),
+                    n = Math.pow(t[0], 2) + Math.pow(t[1], 2),
+                    i = Math.pow(t[2], 2) + Math.pow(t[3], 2),
+                    a = Math.sqrt(n),
+                    r = (t[0] * t[3] - t[2] * t[1]) / a,
+                    o = Math.atan2(t[0] * t[2] + t[1] * t[3], n),
+                    s = Math.atan2(t[1] * t[3] + t[0] * t[2], i);
+                return {
+                  rotate: e / (Math.PI / 180) + "deg",
+                  scaleX: a,
+                  scaleY: r,
+                  skewX: (1 === n ? o / (Math.PI / 180) : 0) + "deg",
+                  skewY: (1 === i ? s / (Math.PI / 180) : 0) + "deg",
+                  translateX: t[4] + "px",
+                  translateY: t[5] + "px"
+                };
+              }(n.split("(")[1].split(")")[0].split(","));
+            }(this.context.window, this.element), i = 0; i < e.length; i++) {
+              t[e[i]] = Object.prototype.hasOwnProperty.call(n, e[i]) ? n[e[i]] : ft.get(this.element, e[i]);
             }
 
-            return ft.get(this.element, this.attributeKey);
+            return t;
           }
         }, {
           key: "onProgress",
@@ -1977,10 +1975,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var e = C(n);
 
         function n() {
-          return m(this, n), e.apply(this, arguments);
+          return v(this, n), e.apply(this, arguments);
         }
 
-        return v(n, [{
+        return w(n, [{
           key: "onGetContext",
           value: function value() {
             this.pixelsAccuracy = this.attrs.pixelsAccuracy || 4, this.calculatedPoints = [];
@@ -4761,30 +4759,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   };
 
   function ln(t, e) {
-    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-  }
-
-  function un(t, e) {
-    for (var n = 0; n < e.length; n++) {
-      var i = e[n];
-      i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
-    }
-  }
-
-  function cn(t, e, n) {
-    return e && un(t.prototype, e), n && un(t, n), t;
-  }
-
-  function hn(t, e, n) {
-    return e in t ? Object.defineProperty(t, e, {
-      value: n,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) : t[e] = n, t;
-  }
-
-  function dn(t, e) {
     var n = Object.keys(t);
 
     if (Object.getOwnPropertySymbols) {
@@ -4797,17 +4771,41 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return n;
   }
 
-  function pn(t) {
+  function un(t) {
     for (var e = 1; e < arguments.length; e++) {
       var n = null != arguments[e] ? arguments[e] : {};
-      e % 2 ? dn(Object(n), !0).forEach(function (e) {
-        hn(t, e, n[e]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : dn(Object(n)).forEach(function (e) {
+      e % 2 ? ln(Object(n), !0).forEach(function (e) {
+        pn(t, e, n[e]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : ln(Object(n)).forEach(function (e) {
         Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e));
       });
     }
 
     return t;
+  }
+
+  function cn(t, e) {
+    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+  }
+
+  function hn(t, e) {
+    for (var n = 0; n < e.length; n++) {
+      var i = e[n];
+      i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(t, i.key, i);
+    }
+  }
+
+  function dn(t, e, n) {
+    return e && hn(t.prototype, e), n && hn(t, n), t;
+  }
+
+  function pn(t, e, n) {
+    return e in t ? Object.defineProperty(t, e, {
+      value: n,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : t[e] = n, t;
   }
 
   function fn(t, e) {
@@ -4868,10 +4866,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   var bn = function () {
     function t(e) {
-      ln(this, t), this.el = e, this.matrix = this.getMatrix(e), this.viewportCenter = this.getViewPortCenter(), this.idlePosition = this.getIdlePosition();
+      cn(this, t), this.el = e, this.matrix = this.getMatrix(e), this.viewportCenter = this.getViewPortCenter(), this.idlePosition = this.getIdlePosition();
     }
 
-    return cn(t, [{
+    return dn(t, [{
       key: "getMatrix",
       value: function value(t) {
         return function (t) {
@@ -4931,7 +4929,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             n = this.viewportCenter,
             i = n.x - e.x,
             a = n.y - e.y;
-        return pn(pn({}, {
+        return un(un({}, {
           x: i / t.scaleX,
           y: a / t.scaleY
         }), {}, {
@@ -5014,10 +5012,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var e = vn(i);
 
     function i() {
-      return ln(this, i), e.apply(this, arguments);
+      return cn(this, i), e.apply(this, arguments);
     }
 
-    return cn(i, [{
+    return dn(i, [{
       key: "getScratchValue",
       value: function value() {
         return this.adaptor = new bn(this.element), this.adaptor.calcXYZoom();
@@ -5040,7 +5038,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }(),
       xn = {
     npm_name: "@kissmybutton/motorcortex-2dcam",
-    version: "0.0.14",
+    version: "0.0.16",
     incidents: [{
       exportable: wn,
       name: "ZoomTo",
@@ -5077,10 +5075,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var e = vn(n);
 
         function n() {
-          return ln(this, n), e.apply(this, arguments);
+          return cn(this, n), e.apply(this, arguments);
         }
 
-        return cn(n, [{
+        return dn(n, [{
           key: "onInitialise",
           value: function value() {
             var t = this.props.duration,
@@ -8335,7 +8333,7 @@ return Promise$1;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version":"1.4.6","description":"A plugin for creating graphs using MotorCortex","main":"dist/bundle.cjs.js","module":"dist/bundle.esm.js","browser":"dist/bundle.umd.js","author":"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>","repository":{"type":"git","url":"https://github.com/kissmybutton/motorcortex-graphs"},"license":"MIT","engines":{"node":">=10"},"scripts":{"concurrently":"concurrently -c \\"cyan.bold,magenta.bold\\" --names \\"JS,Styles\\"","lint:styles":"stylelint  --allow-empty-input \\"src/**.css\\" \\"src/**/*.scss\\" --config .stylelintrc.json","lint:js":"eslint -c .eslintrc src/**/*.js","lint":"npm run concurrently \\"npm:lint:js\\" \\"npm:lint:styles\\"","lint:fix":"npm run concurrently  \\"npm:lint:js -- --fix\\" \\"npm:lint:styles -- --fix\\"","build":"npm run build:lib && npm run build:demo","build:lib":"rollup -c","start":"npm run build:lib && concurrently -c \\"cyan.bold,magenta.bold\\" \\"npm:build:lib -- -w\\"  \\"npm:start:demo\\" ","start:demo":"webpack serve --mode=development --config ./demo/webpack.config.js","build:demo":"webpack --mode=production --config ./demo/webpack.config.js","test":"HERE GOES YOUR TEST TASK","test:prod":"npm run lint"},"keywords":["motorcortex","animation"],"config":{"commitizen":{"path":"cz-conventional-changelog"}},"dependencies":{"@kissmybutton/motorcortex-2dcam":"^0.0.14","@kissmybutton/motorcortex-anime":"^2.1.13","@kissmybutton/motorcortex-counter":"^1.0.1","@kissmybutton/motorcortex-svgdraw":"^0.0.5","jss":"^10.5.1"},"peerDependencies":{"@kissmybutton/motorcortex":"^6.3.1"},"release":{"verifyConditions":["@semantic-release/changelog","@semantic-release/npm","@semantic-release/github","@semantic-release/git"],"prepare":["@semantic-release/changelog","@semantic-release/npm","@semantic-release/git"]},"devDependencies":{"@babel/cli":"7.14.3","@babel/core":"7.14.3","@babel/plugin-syntax-jsx":"7.12.13","@babel/plugin-transform-react-jsx":"7.14.3","@babel/preset-env":"7.14.2","@kissmybutton/motorcortex":"6.4.3","@kissmybutton/motorcortex-player":"1.9.4","@rollup/plugin-babel":"5.3.0","@rollup/plugin-commonjs":"18.1.0","@rollup/plugin-json":"4.1.0","@rollup/plugin-node-resolve":"11.2.1","@semantic-release/changelog":"5.0.1","@semantic-release/git":"9.0.0","@semantic-release/github":"7.2.3","@semantic-release/npm":"7.1.3","babel-eslint":"10.1.0","babel-loader":"8.2.2","concurrently":"6.2.0","css-loader":"5.2.6","es6-promise":"4.2.8","eslint":"7.27.0","eslint-config-prettier":"8.3.0","eslint-config-standard":"16.0.3","eslint-plugin-babel":"5.3.1","eslint-plugin-import":"2.23.3","eslint-plugin-node":"11.1.0","eslint-plugin-prettier":"3.4.0","eslint-plugin-promise":"4.3.1","eslint-plugin-standard":"5.0.0","exports-loader":"1.1.1","imports-loader":"1.2.0","npx":"10.2.2","prettier":"2.3.0","rimraf":"3.0.2","rollup":"2.50.1","rollup-plugin-terser":"7.0.2","semantic-release":"17.4.3","shelljs":"0.8.4","stylelint":"13.13.1","stylelint-config-prettier":"8.0.2","stylelint-config-recommended":"4.0.0","stylelint-config-recommended-scss":"4.2.0","stylelint-config-sass-guidelines":"8.0.0","stylelint-config-standard":"21.0.0","stylelint-scss":"3.19.0","webpack":"5.37.1","webpack-cli":"4.7.0","webpack-dev-server":"3.11.2","whatwg-fetch":"3.6.2"}}');
+module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version":"1.4.6","description":"A plugin for creating graphs using MotorCortex","main":"dist/bundle.cjs.js","module":"dist/bundle.esm.js","browser":"dist/bundle.umd.js","author":"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>","repository":{"type":"git","url":"https://github.com/kissmybutton/motorcortex-graphs"},"license":"MIT","engines":{"node":">=10"},"scripts":{"concurrently":"concurrently -c \\"cyan.bold,magenta.bold\\" --names \\"JS,Styles\\"","lint:styles":"stylelint  --allow-empty-input \\"src/**.css\\" \\"src/**/*.scss\\" --config .stylelintrc.json","lint:js":"eslint -c .eslintrc src/**/*.js","lint":"npm run concurrently \\"npm:lint:js\\" \\"npm:lint:styles\\"","lint:fix":"npm run concurrently  \\"npm:lint:js -- --fix\\" \\"npm:lint:styles -- --fix\\"","build":"npm run build:lib && npm run build:demo","build:lib":"rollup -c","start":"npm run build:lib && concurrently -c \\"cyan.bold,magenta.bold\\" \\"npm:build:lib -- -w\\"  \\"npm:start:demo\\" ","start:demo":"webpack serve --mode=development --config ./demo/webpack.config.js","build:demo":"webpack --mode=production --config ./demo/webpack.config.js","test":"HERE GOES YOUR TEST TASK","test:prod":"npm run lint"},"keywords":["motorcortex","animation"],"config":{"commitizen":{"path":"cz-conventional-changelog"}},"dependencies":{"@kissmybutton/motorcortex-2dcam":"^0.0.16","@kissmybutton/motorcortex-anime":"^2.1.13","@kissmybutton/motorcortex-counter":"^1.0.1","@kissmybutton/motorcortex-svgdraw":"^0.0.5","jss":"^10.5.1"},"peerDependencies":{"@kissmybutton/motorcortex":"^6.3.1"},"release":{"verifyConditions":["@semantic-release/changelog","@semantic-release/npm","@semantic-release/github","@semantic-release/git"],"prepare":["@semantic-release/changelog","@semantic-release/npm","@semantic-release/git"]},"devDependencies":{"@babel/cli":"7.14.3","@babel/core":"7.14.3","@babel/plugin-syntax-jsx":"7.12.13","@babel/plugin-transform-react-jsx":"7.14.3","@babel/preset-env":"7.14.2","@kissmybutton/motorcortex":"6.4.3","@kissmybutton/motorcortex-player":"1.9.4","@rollup/plugin-babel":"5.3.0","@rollup/plugin-commonjs":"18.1.0","@rollup/plugin-json":"4.1.0","@rollup/plugin-node-resolve":"11.2.1","@semantic-release/changelog":"5.0.1","@semantic-release/git":"9.0.0","@semantic-release/github":"7.2.3","@semantic-release/npm":"7.1.3","babel-eslint":"10.1.0","babel-loader":"8.2.2","concurrently":"6.2.0","css-loader":"5.2.6","es6-promise":"4.2.8","eslint":"7.27.0","eslint-config-prettier":"8.3.0","eslint-config-standard":"16.0.3","eslint-plugin-babel":"5.3.1","eslint-plugin-import":"2.23.3","eslint-plugin-node":"11.1.0","eslint-plugin-prettier":"3.4.0","eslint-plugin-promise":"4.3.1","eslint-plugin-standard":"5.0.0","exports-loader":"1.1.1","imports-loader":"1.2.0","npx":"10.2.2","prettier":"2.3.0","rimraf":"3.0.2","rollup":"2.50.1","rollup-plugin-terser":"7.0.2","semantic-release":"17.4.3","shelljs":"0.8.4","stylelint":"13.13.1","stylelint-config-prettier":"8.0.2","stylelint-config-recommended":"4.0.0","stylelint-config-recommended-scss":"4.2.0","stylelint-config-sass-guidelines":"8.0.0","stylelint-config-standard":"21.0.0","stylelint-scss":"3.19.0","webpack":"5.37.1","webpack-cli":"4.7.0","webpack-dev-server":"3.11.2","whatwg-fetch":"3.6.2"}}');
 
 /***/ }),
 
@@ -8438,7 +8436,7 @@ module.exports = JSON.parse('{"name":"@kissmybutton/motorcortex-graphs","version
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("627da106b4200f1ce57a")
+/******/ 		__webpack_require__.h = () => ("427e01522336f367a1da")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
